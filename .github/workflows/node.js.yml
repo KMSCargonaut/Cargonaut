@@ -37,10 +37,3 @@ jobs:
     - run: npm run test:prod
     - run: npm run lint 
     
-    - name: Deploy to gh-pages
-      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
-      with:
-        github_access_token: ${{ secrets.ACCESS_TOKEN }}
-        base_href: /Cargonaut/
-        deploy_branch: gh-pages
-        angular_dist_build_folder: dist/cargonaut
