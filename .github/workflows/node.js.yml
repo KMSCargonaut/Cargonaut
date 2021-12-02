@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-
+    name: Build and Test
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,12 +20,27 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install Dependencies
+      run: npm ci
+    - name: Install AngularCLI
+      run: npm install -g @angular/cli
+    - name: Build
+      run: ng build
+    - name: Testing
+    - run: npm run test:prod
+    - run: npm run lint 
+    
+    - name: Deploy to gh-pages
+      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
+      with:
+        github_access_token: ${{ secrets.ACCESS_TOKEN }}
+        base_href: /Cargonaut/
+        deploy_branch: gh-pages
+        angular_dist_build_folder: dist/cargonaut
