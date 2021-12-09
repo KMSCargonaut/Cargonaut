@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="clip-Benutzerdefiniertes_Format_1">
+      <rect width="100" height="100"/>
+    </clipPath>
+  </defs>
+  <g id="Benutzerdefiniertes_Format_1" data-name="Benutzerdefiniertes Format – 1" clip-path="url(#clip-Benutzerdefiniertes_Format_1)">
+    <rect width="100" height="100" fill="#fff"/>
+    <path id="ic_search_24px" d="M23.011,20.61H21.747l-.448-.432A10.422,10.422,0,1,0,20.178,21.3l.432.448v1.265l8,7.989L31,28.615Zm-9.605,0a7.2,7.2,0,1,1,7.2-7.2A7.194,7.194,0,0,1,13.406,20.61Z" transform="translate(33 33)" fill="#208479"/>
+  </g>
+</svg>
