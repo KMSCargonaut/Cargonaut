@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <div class="modal-title h4">Register</div>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label for="userEmail">Email</label>
+    <input #mail type="text" class="form-control {{wrongEmailClass}}" id="userEmail" [(ngModel)]="email" (keydown)="validEmail(mail.value)">
+    <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+  </div>
+  <div class="form-group">
+    <label for="userPassword">Password</label>
+    <input #pass type="password" class="form-control {{wrongPasswordClass}}" id="userPassword" [(ngModel)]="password" (keydown)="validPassword(pass.value)">
+    <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
+  </div>
+  <div class="form-group">
+    <label for="repeatPassword">Repeat password</label>
+    <input #rpass type="password" class="form-control {{wrongRepeatPasswordClass}}" id="repeatPassword" [(ngModel)]="repeatPassword" (keydown)="validRepeatPassword(rpass.value)">
+    <div *ngIf="passwordRepeatMessage !== ''" class="text-danger">{{passwordRepeatMessage}}</div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Close</button>
+  <button type="button" class="btn btn-success" (click)="register()">Register</button>
+</div>
+
+

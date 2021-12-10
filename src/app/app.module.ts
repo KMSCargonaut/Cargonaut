@@ -8,10 +8,17 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import {FormsModule} from "@angular/forms";
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegistrationComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +27,9 @@ import {environment} from "../environments/environment";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    AngularFireStorageModule, // storage
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
