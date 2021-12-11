@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './suchleiste.component.html',
   styleUrls: ['./suchleiste.component.css']
 })
-export class SuchleisteComponent implements OnInit {
+export class SuchleisteComponent{
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }
