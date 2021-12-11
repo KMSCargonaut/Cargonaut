@@ -9,10 +9,12 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
 import { SuchleisteComponent } from './suchleiste/suchleiste.component';
+import {NavbarComponent} from "./navbar/navbar.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
     SuchleisteComponent
   ],
   imports: [
