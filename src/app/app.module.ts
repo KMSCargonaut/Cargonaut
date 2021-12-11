@@ -8,10 +8,12 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
+import { SuchleisteComponent } from './suchleiste/suchleiste.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SuchleisteComponent
   ],
   imports: [
     BrowserModule,
