@@ -1,0 +1,9 @@
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../../assets/img/Zeichenflache_4.svg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
