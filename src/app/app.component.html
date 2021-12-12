@@ -1,3 +1,14 @@
-<app-login *ngIf="!(auth.user | async)"></app-login>
-<p *ngIf="(auth.user | async)">Du bist angemeldet mit {{this.authData.email}}</p>
-<button class="btn btn-outline-success" (click)="logout()" *ngIf="auth.user | async">Logout</button>
+<div class="container">
+  <div class="row">
+    <div class="col">Äquivalent zur Navbar</div>
+    <div class="col">
+      <button routerLink="/">Startseite</button>
+    </div>
+    <div class="col">
+      <button (click)="navigateUser()">Profil</button>
+    </div>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>

@@ -1,23 +1,49 @@
-<div class="container w-auto" style="max-width: 500px">
-<form class="rounded shadow container mt-5 bg-white" >
-  <div class="form-row">
-    <div class="h4 mt-2">Login</div>
-    <div class="form-group col-md-12">
-      <label for="inputEmail">Email</label>
-      <input #mail type="email" class="form-control {{wrongEmail}}" id="inputEmail" placeholder="name@example.com"
-             (keydown)="validEmail(mail.value)">
-      <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+<!-- Card -->
+<div class="card rounded shadow container mt-5 bg-white border-0" style="max-width: 500px">
+
+  <div class="card-body">
+    <!--  Form  -->
+    <form>
+      <div class="form-row">
+        <div class="h4 mt-2 logoGreenDark mx-auto">Login</div>
+        <div class="form-group col-md-12">
+          <label for="inputEmail" class="logoGreenDark">Email</label>
+          <input #mail type="email" class="form-control {{wrongEmail}}" id="inputEmail" placeholder="name@example.com"
+                 (keydown)="validEmail(mail.value)">
+          <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="inputPassword" class="logoGreenDark">Password</label>
+          <input #password type="password" class="form-control {{wrongPassword}}" id="inputPassword"
+                 (keypress)="validPassword(password.value)"
+                 (keydown.enter)="inputCheck(mail.value, password.value)" >
+          <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
+        </div>
+      </div>
+    </form>
+
+    <!--  Buttons -->
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-6 ">
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                  (click)="inputCheck(mail.value, password.value)">Anmelden
+          </button>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <button type="button" class="btn btn-dark mx-auto btn-block"
+                  (click)="openModal()">Registrieren
+          </button>
+        </div>
+      </div>
+
     </div>
-    <div class="form-group col-md-12">
-      <label for="inputPassword">Password</label>
-      <input #password type="password" class="form-control {{wrongPassword}}" id="inputPassword" (keypress)="validPassword(password.value)">
-      <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
-      <div class="">Dont have an account yet? Register <span class="register" (click)="openModal()">here</span>!</div>
-    </div>
-    <button type="submit" class="btn btn-primary m-2" (click)="inputCheck(mail.value, password.value)">Log in</button>
-    <button type="button" class="btn btn-light m-2" (click)="loginWithGoogle()">Log in with Google <span class="fa fa-google"></span></button>
   </div>
-</form>
+
 </div>
+
 
 

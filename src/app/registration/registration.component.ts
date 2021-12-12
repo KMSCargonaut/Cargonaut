@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {Car} from "../models/Car";
+import {Gender} from "../models/Gender";
+import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
+import {getAuth} from "firebase/auth";
+import {AuthenticationService} from "../services/authentication.service";
+import {UserCargo} from "../models/UserCargo";
 
 @Component({
   selector: 'app-registration',
@@ -9,27 +16,64 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 })
 export class RegistrationComponent implements OnInit {
 
+  // ModelBinding
   public email: string;
+  public firstname: string;
+  public lastname: string;
+  public username: string;
+  public birthday: Date;
   public password: string;
   public repeatPassword: string;
+  public gender: Gender;
 
+  // PropertyBinding for outline color for wrong/no inputs
   public wrongEmailClass = '';
+  public wrongFirstname = '';
+  public wrongLastname = '';
+  public wrongUsername = '';
+  public wrongBirthday = '';
   public wrongPasswordClass = '';
   public wrongRepeatPasswordClass = '';
+
+  // Message for wrong/no inputs
   public emailMessage = '';
+  public firstnameMessage = '';
+  public lastnameMessage = '';
+  public usernameMessage = '';
+  public birthdayMessage = '';
   public passwordMessage = '';
   public passwordRepeatMessage = '';
 
-  constructor(public activeModal: NgbActiveModal, private auth: AngularFireAuth) {
+  //enum
+
+
+  constructor(public activeModal: NgbActiveModal, private auth: AngularFireAuth, private router: Router,
+              private userService: UserService, private authData: AuthenticationService) {
     this.email = '';
     this.password = '';
     this.repeatPassword = '';
+    this.firstname = '';
+    this.lastname = '';
+    this.username = '';
+    this.birthday = new Date();
+    this.gender = -1;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  register(): void {
+  testRegister() {
+    console.log(
+      "Vorname: " + this.firstname,
+      "Nachname: " + this.lastname,
+      "Username: " + this.username,
+      "Geburtstag: " + this.birthday,
+      "gender: " + this.gender,
+      "email: " + this.email,
+    )
+  }
+
+  async register() {
     if (this.email.trim().length === 0) {
       this.emailMessage = 'Please fill out your email';
       this.wrongEmailClass = 'border-danger';
@@ -48,9 +92,19 @@ export class RegistrationComponent implements OnInit {
     }
 
     if (this.email.trim().length > 0 && this.password.trim().length > 0 && this.password === this.repeatPassword) {
-      this.auth.createUserWithEmailAndPassword(this.email, this.password).then(() => {
+      try {
+        await this.authData.register(this.email, this.password);
+        const tempAuth = getAuth();
+        const tempUser = tempAuth.currentUser;
         this.activeModal.close();
-      }).catch((err) => {
+        this.router.navigate(['/profil'])
+        if (tempUser) {
+          await this.userService.addUser(
+            new UserCargo(tempUser.uid, this.firstname, this.lastname, this.username, this.birthday, this.gender)
+          );
+        }
+
+      } catch (err) {
         if (err.code === 'auth/invalid-email') {
           this.emailMessage = err.message;
           this.wrongEmailClass = 'border-danger';
@@ -58,27 +112,70 @@ export class RegistrationComponent implements OnInit {
           this.passwordMessage = err.message;
           this.wrongPasswordClass = 'border-danger';
         }
-      });
-
+      }
     }
   }
 
-  validEmail(input: string): void {
-    if (input.trim().length >= 0) {
+  validEmail(input
+               :
+               string
+  ):
+    void {
+    if (input.trim().length >= 0
+    ) {
       this.emailMessage = '';
       this.wrongEmailClass = '';
     }
   }
 
-  validPassword(input: string): void {
-    if (input.trim().length >= 0) {
+
+  validFirstname(inputs
+                   :
+                   string
+  ):
+    void {
+  }
+
+  validLastname(inputs
+                  :
+                  string
+  ):
+    void {
+  }
+
+  validUsername(inputs
+                  :
+                  string
+  ):
+    void {
+  }
+
+  validBirthday(inputs
+                  :
+                  string
+  ):
+    void {
+  }
+
+  validPassword(input
+                  :
+                  string
+  ):
+    void {
+    if (input.trim().length >= 0
+    ) {
       this.passwordMessage = '';
       this.wrongPasswordClass = '';
     }
   }
 
-  validRepeatPassword(input: string): void {
-    if (input.trim().length >= 0) {
+  validRepeatPassword(input
+                        :
+                        string
+  ):
+    void {
+    if (input.trim().length >= 0
+    ) {
       this.passwordRepeatMessage = '';
       this.wrongRepeatPasswordClass = '';
     }

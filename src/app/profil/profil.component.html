@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="h3">Hi "{{authData.email}}", hier ist dein Profil</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-light m-2">Fahrzeuge verwalten</button>
+      <button class="btn btn-outline-success m-2" (click)="logout()">Logout</button>
+      <button class="btn btn-danger m-2" (click)="deleteAccount()">Account löschen</button>
+    </div>
+  </div>
+</div>
