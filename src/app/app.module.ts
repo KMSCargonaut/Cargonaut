@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
@@ -15,6 +16,8 @@ import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
+    AppComponent,
+    NavbarComponent
     AppComponent,
     LoginComponent,
     RegistrationComponent,
