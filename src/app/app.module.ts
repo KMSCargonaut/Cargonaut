@@ -13,15 +13,17 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule} from "@angular/forms";
 import { ProfilComponent } from './profil/profil.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfilComponent
+    ProfilComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
