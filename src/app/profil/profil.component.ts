@@ -10,7 +10,11 @@ import {Router} from "@angular/router";
 })
 export class ProfilComponent {
 
-  constructor(public authData: AuthenticationService, public auth: AngularFireAuth, private router: Router) { }
+  constructor(public authData: AuthenticationService, private router: Router) {
+    /*if(!this.authData.user) {
+      this.router.navigate(['/login']);
+    }*/
+  }
 
   async logout(): Promise<void> {
     await this.authData.logout();

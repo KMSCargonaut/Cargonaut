@@ -15,14 +15,13 @@ export class UserService {
   }
 
   async addUser(user: UserCargo) {
-    console.log("Der User in addUser(user: UserCargo): " + user)
-    const user1 = this.copyAndPrepareUser(user);
-    console.log("Der User nach copyAndPrepareUser(): " + user1)
-    await this.userCollection.add(user1).then().catch((err)=>{console.log(err)});
+    const tempUser = this.copyAndPrepareUser(user);
+    await this.userCollection.add(tempUser).then().catch((err)=>{console.log(err)});
   }
 
   async updateUser(user: UserCargo) {
-    await this.userCollection.doc(user.id).update(user)
+    const tempUser = this.copyAndPrepareUser(user);
+    await this.userCollection.doc(user.id).update(tempUser);
   }
 
   async deleteUser(user: UserCargo) {

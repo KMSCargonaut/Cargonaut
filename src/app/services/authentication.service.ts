@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import firebase from "firebase/compat/app";
 import User = firebase.User;
 import {AngularFireAuth} from "@angular/fire/compat/auth";
@@ -16,25 +16,31 @@ export class AuthenticationService {
       if (user) {
         this.user = user;
         this.email = user.email;
-        console.log("Ich bin jetzt da: " + user)
+        console.log('user still logged in')
       } else {
         this.user = null;
       }
     })
   }
 
-  async logout(): Promise<void> {
-    this.auth.signOut().then(() => {
-      console.log('logged out');
-    });
+  async login(email: string, password: string) {
+    await this.auth.signInWithEmailAndPassword(email, password);
+      console.log('logged in');
   }
 
-  async deleteAccount(): Promise<void> {
-    firebase.auth().currentUser?.delete();
+  async logout() {
+    await this.auth.signOut();
+    console.log('logged out');
+  }
+
+  async deleteAccount() {
+    await firebase.auth().currentUser?.delete();
+    console.log('deleted account');
   }
 
   async register(email: string, password: string) {
     await this.auth.createUserWithEmailAndPassword(email, password);
+    console.log('created account')
   }
 
 }
