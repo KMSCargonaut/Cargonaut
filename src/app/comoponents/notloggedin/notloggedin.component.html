@@ -1,0 +1,61 @@
+<!-- Card -->
+<div class="card rounded shadow container mt-5 bg-white border-0" style="max-width: 500px">
+
+  <div class="card-body">
+    <!--  Form  -->
+    <div class="container">
+      <div class="row">
+        <div class="h4 mt-2 logoGreenDark mx-auto">Login</div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="inputEmail" class="logoGreenDark">Email</label>
+          <input #mail
+                 type="email"
+                 class="form-control {{wrongEmail}}"
+                 id="inputEmail"
+                 placeholder="name@example.com"
+                 (keydown)="validEmail(mail.value)"
+                 (keydown.enter)="inputCheck()"
+                 [(ngModel)]="email">
+          <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="inputPassword" class="logoGreenDark">Password</label>
+          <input #passw
+                 type="password"
+                 class="form-control {{wrongPassword}}"
+                 id="inputPassword"
+                 (keypress)="validPassword(passw.value)"
+                 (keydown.enter)="inputCheck()"
+                 [(ngModel)]="password">
+          <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
+        </div>
+      </div>
+
+
+      <!--  Buttons -->
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                  (click)="inputCheck()">Anmelden
+          </button>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <button type="button" class="btn btn-dark mx-auto btn-block"
+                  (click)="openRegistrationModal()">Registrieren
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
