@@ -79,7 +79,6 @@ export class RegistrationComponent {
       this.gender.trim().length > 0 &&
       this.username.trim().length > 0 &&
       this.birthday != undefined &&
-      this.birthday.toISOString().trim().length > 0 &&
       this.password === this.repeatPassword) {
       await this.register()
     } else {

@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-carlist',
   templateUrl: './carlist.component.html',
   styleUrls: ['./carlist.component.css']
 })
-export class CarlistComponent implements OnInit {
+export class CarlistComponent {
+
+  form = new FormGroup({
+    fahrzeugModel: new FormControl(),
+    fahrzeugKennzeichen: new FormControl(),
+    fahrzeugSitzplaetze: new FormControl(),
+    fahrzeugStauraum: new FormControl()
+  });
 
   constructor() { }
 
-  ngOnInit(): void {
+  onSubmit(){
+    return 1+1
   }
-
 }

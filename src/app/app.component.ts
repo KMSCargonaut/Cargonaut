@@ -15,6 +15,9 @@ export class AppComponent {
     if (this.router.url === '/profil') {
       this.router.navigate(['/profil'])
     }
+    if (this.router.url === '/carList'){
+      this.router.navigate(['/carList'])
+    }
   }
 
 }
