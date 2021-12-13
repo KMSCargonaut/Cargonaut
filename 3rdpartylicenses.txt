@@ -153,8 +153,6 @@ firebase/app
 
 firebase/app-check
 
-firebase/auth
-
 firebase/compat/app
 
 firebase/compat/auth
