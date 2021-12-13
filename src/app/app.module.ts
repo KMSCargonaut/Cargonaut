@@ -3,18 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './comoponents/navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './comoponents/registration/registration.component';
 import {FormsModule} from "@angular/forms";
-import { ProfilComponent } from './profil/profil.component';
-import { FooterComponent } from './footer/footer.component';
-import { NotloggedinComponent } from './notloggedin/notloggedin.component';
-import { LoggedinComponent } from './loggedin/loggedin.component';
+import { ProfilComponent } from './comoponents/profil/profil.component';
+import { FooterComponent } from './comoponents/footer/footer.component';
+import { NotloggedinComponent } from './comoponents/notloggedin/notloggedin.component';
+import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
 
 @NgModule({
   declarations: [

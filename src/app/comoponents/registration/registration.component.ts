@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from "@angular/router";
-import {UserService} from "../services/user.service";
+import {UserService} from "../../services/user.service";
 import {getAuth} from "firebase/auth";
-import {UserCargo} from "../models/UserCargo";
+import {UserCargo} from "../../models/UserCargo";
 
 @Component({
   selector: 'app-registration',
