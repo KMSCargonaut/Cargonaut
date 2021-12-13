@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {RegistrationComponent} from "../registration/registration.component";
+import {RegistrationComponent} from "../../registration/registration.component";
 
 @Component({
   selector: 'app-notloggedin',

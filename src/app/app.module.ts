@@ -3,18 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './comoponents/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
-import { RegistrationComponent } from './comoponents/registration/registration.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import {FormsModule} from "@angular/forms";
-import { ProfilComponent } from './comoponents/profil/profil.component';
-import { FooterComponent } from './comoponents/footer/footer.component';
-import { NotloggedinComponent } from './comoponents/notloggedin/notloggedin.component';
-import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NotloggedinComponent } from './components/profil/notloggedin/notloggedin.component';
+import { LoggedinComponent } from './components/profil/loggedin/loggedin.component';
+import { CarlistComponent } from './components/carlist/carlist.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
     ProfilComponent,
     FooterComponent,
     NotloggedinComponent,
-    LoggedinComponent
+    LoggedinComponent,
+    CarlistComponent
   ],
   imports: [
     BrowserModule,
