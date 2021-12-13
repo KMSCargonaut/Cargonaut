@@ -17,7 +17,7 @@ export class RegistrationComponent {
   public firstname = '';
   public lastname = '';
   public username = '';
-  public birthday = new Date();
+  public birthday: Date | null | undefined;
   public password = '';
   public repeatPassword = '';
   public gender = '';
@@ -28,6 +28,7 @@ export class RegistrationComponent {
   public wrongLastname = '';
   public wrongUsername = '';
   public wrongBirthday = '';
+  public wrongGender = '';
   public wrongPasswordClass = '';
   public wrongRepeatPasswordClass = '';
 
@@ -37,6 +38,7 @@ export class RegistrationComponent {
   public lastnameMessage = '';
   public usernameMessage = '';
   public birthdayMessage = '';
+  public genderMessage = '';
   public passwordMessage = '';
   public passwordRepeatMessage = '';
 
@@ -45,7 +47,7 @@ export class RegistrationComponent {
               private userData: UserService) {}
 
 
-  async register() {
+  private async register() {
     try {
       await this.userData.register(this.email, this.password);
       const tempAuth = getAuth();
@@ -60,41 +62,67 @@ export class RegistrationComponent {
 
     } catch (err) {
       if (err.code === 'auth/invalid-email') {
-        this.emailMessage = err.message;
+        this.emailMessage = 'E-Mail ist nicht richtig formatiert';
         this.wrongEmailClass = 'border-danger';
       } else if (err.code === 'auth/weak-password') {
-        this.passwordMessage = err.message;
+        this.passwordMessage = 'Das Passwort ist nicht korrekt';
         this.wrongPasswordClass = 'border-danger';
       }
     }
   }
 
-  async inputCheck() {
+  public async inputCheck() {
     if (this.email.trim().length > 0 &&
       this.password.trim().length > 0 &&
+      this.firstname.trim().length > 0 &&
+      this.lastname.trim().length > 0 &&
+      this.gender.trim().length > 0 &&
+      this.username.trim().length > 0 &&
+      this.birthday != undefined &&
+      this.birthday.toISOString().trim().length > 0 &&
       this.password === this.repeatPassword) {
       await this.register()
     } else {
       if (this.email.trim().length === 0) {
-        this.emailMessage = 'Please fill out your email';
+        this.emailMessage = 'Geben Sie Ihre E-Mail an';
         this.wrongEmailClass = 'border-danger';
       }
       if (this.password.trim().length === 0) {
-        this.passwordMessage = 'Please fill out your password';
+        this.passwordMessage = 'Geben Sie ein Passwort an';
         this.wrongPasswordClass = 'border-danger';
       }
       if (this.repeatPassword.trim().length === 0) {
-        this.passwordRepeatMessage = 'Please repeat your password';
+        this.passwordRepeatMessage = 'Wiederholen Sie Ihr Passwort';
         this.wrongRepeatPasswordClass = 'border-danger';
       }
       if (this.repeatPassword !== this.password) {
-        this.passwordRepeatMessage = 'The password is not the same';
+        this.passwordRepeatMessage = 'Die Passwörter sind nicht identisch';
         this.wrongRepeatPasswordClass = 'border-danger';
+      }
+      if (this.firstname.trim().length === 0) {
+        this.firstnameMessage = 'Geben Sie Ihren Vornamen an';
+        this.wrongFirstname = 'border-danger';
+      }
+      if (this.lastname.trim().length === 0) {
+        this.lastnameMessage = 'Geben Sie Ihren Nachnamen an';
+        this.wrongLastname = 'border-danger';
+      }
+      if (this.username.trim().length === 0) {
+        this.usernameMessage = 'Geben Sie einen Nutzername an';
+        this.wrongUsername = 'border-danger';
+      }
+      if (this.gender.trim().length === 0) {
+        this.genderMessage = 'Geben Sie Ihr Geschlecht an';
+        this.wrongGender = 'border-danger';
+      }
+      if (this.birthday === undefined) {
+        this.birthdayMessage = 'Geben Sie Ihren Geburtstag an';
+        this.wrongBirthday = 'border-danger';
       }
     }
   }
 
-  validEmail(input: string): void {
+  public validEmail(input: string): void {
     if (input.trim().length >= 0) {
       this.emailMessage = '';
       this.wrongEmailClass = '';
@@ -102,26 +130,51 @@ export class RegistrationComponent {
   }
 
 
-  validFirstname(inputs: string): void {
+  public validFirstname(input: string): void {
+    if (input.trim().length >= 0) {
+      this.firstnameMessage = '';
+      this.wrongFirstname = '';
+    }
   }
 
-  validLastname(inputs: string): void {
+  public validLastname(input: string): void {
+    if (input.trim().length >= 0) {
+      this.lastnameMessage = '';
+      this.wrongLastname = '';
+    }
   }
 
-  validUsername(inputs: string): void {
+  public validUsername(input: string): void {
+    if (input.trim().length >= 0) {
+      this.usernameMessage = '';
+      this.wrongUsername = '';
+    }
   }
 
-  validBirthday(inputs: string): void {
+  public validBirthday(input: string): void {
+    console.log(input)
+    if (input.trim().length >= 0) {
+      this.birthdayMessage = '';
+      this.wrongBirthday = '';
+    }
   }
 
-  validPassword(input: string): void {
+  public validPassword(input: string): void {
     if (input.trim().length >= 0) {
       this.passwordMessage = '';
       this.wrongPasswordClass = '';
     }
   }
 
-  validRepeatPassword(input: string): void {
+  public validGender(input: string) {
+    console.log(input)
+    if (input.trim().length >= 0) {
+      this.genderMessage = '';
+      this.wrongGender = '';
+    }
+  }
+
+  public validRepeatPassword(input: string): void {
     if (input.trim().length >= 0) {
       this.passwordRepeatMessage = '';
       this.wrongRepeatPasswordClass = '';

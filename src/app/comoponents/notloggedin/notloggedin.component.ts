@@ -29,6 +29,7 @@ export class NotloggedinComponent {
   openRegistrationModal(): void {
     this.modalService.open(RegistrationComponent, {
       animation: true,
+      centered: true
     });
   }
 

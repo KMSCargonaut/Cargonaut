@@ -33,7 +33,7 @@ export class UserService {
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
-      this.userNotExist()
+      await this.userNotExist()
     }
   }
 
