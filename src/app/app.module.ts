@@ -9,21 +9,23 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
-import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule} from "@angular/forms";
 import { ProfilComponent } from './profil/profil.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotloggedinComponent } from './notloggedin/notloggedin.component';
+import { LoggedinComponent } from './loggedin/loggedin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AppComponent,
-    LoginComponent,
     RegistrationComponent,
     ProfilComponent,
-    FooterComponent
+    FooterComponent,
+    NotloggedinComponent,
+    LoggedinComponent
   ],
   imports: [
     BrowserModule,

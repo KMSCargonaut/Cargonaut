@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Gender} from "../models/Gender";
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {getAuth} from "firebase/auth";
-import {AuthenticationService} from "../services/authentication.service";
 import {UserCargo} from "../models/UserCargo";
 
 @Component({
@@ -15,14 +13,14 @@ import {UserCargo} from "../models/UserCargo";
 export class RegistrationComponent {
 
   // ModelBinding
-  public email: string;
-  public firstname: string;
-  public lastname: string;
-  public username: string;
-  public birthday: Date;
-  public password: string;
-  public repeatPassword: string;
-  public gender: Gender;
+  public email = '';
+  public firstname = '';
+  public lastname = '';
+  public username = '';
+  public birthday = new Date();
+  public password = '';
+  public repeatPassword = '';
+  public gender = '';
 
   // PropertyBinding for outline color for wrong/no inputs
   public wrongEmailClass = '';
@@ -44,37 +42,18 @@ export class RegistrationComponent {
 
 
   constructor(public activeModal: NgbActiveModal, private router: Router,
-              private userService: UserService, private authData: AuthenticationService) {
-    this.email = '';
-    this.password = '';
-    this.repeatPassword = '';
-    this.firstname = '';
-    this.lastname = '';
-    this.username = '';
-    this.birthday = new Date();
-    this.gender = -1;
-  }
+              private userData: UserService) {}
 
-  testRegister() {
-    console.log(
-      "Vorname: " + this.firstname,
-      "Nachname: " + this.lastname,
-      "Username: " + this.username,
-      "Geburtstag: " + this.birthday,
-      "gender: " + this.gender,
-      "email: " + this.email,
-    )
-  }
 
   async register() {
     try {
-      await this.authData.register(this.email, this.password);
+      await this.userData.register(this.email, this.password);
       const tempAuth = getAuth();
       const tempUser = tempAuth.currentUser;
       this.activeModal.close();
       this.router.navigate(['/profil'])
       if (tempUser) {
-        await this.userService.addUser(
+        await this.userData.addUser(
           new UserCargo(tempUser.uid, this.firstname, this.lastname, this.username, this.birthday, this.gender)
         );
       }

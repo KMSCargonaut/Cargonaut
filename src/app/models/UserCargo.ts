@@ -1,19 +1,18 @@
 import {Car} from "./Car";
-import {Gender} from "./Gender";
 
 export class UserCargo {
-  id: string;
-  firstname: string;
-  lastname: string;
-  username: string;
-  birthday: Date;
+  id: string | undefined;
+  firstname: string | undefined;
+  lastname: string | undefined;
+  username: string | undefined;
+  birthday: Date | undefined;
   evaluation: number | null | undefined;
-  car: Car | undefined;
+  car: Car[] | undefined;
   money: number | null | undefined;
-  gender: Gender;
+  gender: string | undefined;
 
 
-  constructor(id: string, firstname: string, lastname: string, username: string, birthday: Date, gender: Gender) {
+  constructor(id?: string, firstname?: string, lastname?: string, username?: string, birthday?: Date, gender?: string) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;

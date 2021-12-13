@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../services/authentication.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-profil',
@@ -10,21 +8,8 @@ import {Router} from "@angular/router";
 })
 export class ProfilComponent {
 
-  constructor(public authData: AuthenticationService, private router: Router) {
-    /*if(!this.authData.user) {
-      this.router.navigate(['/login']);
-    }*/
-  }
+  constructor(public userData: UserService) {}
 
-  async logout(): Promise<void> {
-    await this.authData.logout();
-    await this.router.navigate(['/']);
-  }
 
-  async deleteAccount(): Promise<void> {
-    await this.authData.deleteAccount();
-    await this.router.navigate(['/']);
-    console.log('User deleted');
-  }
 
 }

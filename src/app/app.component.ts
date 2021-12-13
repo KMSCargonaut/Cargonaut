@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 
 
@@ -12,9 +12,7 @@ export class AppComponent {
 
 
   constructor(private router: Router) {
-    if (this.router.url === '/login') {
-      this.router.navigate(['/login'])
-    } else if (this.router.url === '/profil') {
+    if (this.router.url === '/profil') {
       this.router.navigate(['/profil'])
     }
   }

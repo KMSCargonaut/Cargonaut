@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {RegistrationComponent} from '../registration/registration.component';
-import {AuthenticationService} from "../services/authentication.service";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {RegistrationComponent} from "../registration/registration.component";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-notloggedin',
+  templateUrl: './notloggedin.component.html',
+  styleUrls: ['./notloggedin.component.css']
 })
-export class LoginComponent {
+export class NotloggedinComponent {
 
   // ModelBinding
   public email = '';
@@ -23,11 +23,7 @@ export class LoginComponent {
   public emailMessage = '';
   public passwordMessage = '';
 
-  constructor(private modalService: NgbModal, public authData: AuthenticationService,
-              private router: Router) {
-    if (this.authData.user) {
-      this.router.navigate(['/profil']);
-    }
+  constructor(private modalService: NgbModal, public userData: UserService) {
   }
 
   openRegistrationModal(): void {
@@ -55,8 +51,7 @@ export class LoginComponent {
   }
 
   async login() {
-    this.authData.login(this.email, this.password).then(() => {
-      this.router.navigate(['/profil']);
+    this.userData.login(this.email, this.password).then(() => {
     }).catch((err) => {
       console.log(err);
       if (err.code === 'auth/invalid-email') {

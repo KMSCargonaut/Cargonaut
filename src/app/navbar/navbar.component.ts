@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthenticationService} from "../services/authentication.service";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,15 +9,11 @@ import {AuthenticationService} from "../services/authentication.service";
 })
 export class NavbarComponent {
 
-  constructor(private router: Router, private authData: AuthenticationService) {
+  constructor(private router: Router, private authData: UserService) {
   }
 
   navigateToUser() {
-    if (this.authData.user) {
       this.router.navigate(['/profil'])
-    } else {
-      this.router.navigate(['/login'])
-    }
   }
 
   navigateToMainPage() {
