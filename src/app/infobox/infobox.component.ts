@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-infobox',
@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoboxComponent{
 
+  @Input() boxTitle = '';
+  @Input() infoText = '';
+  @Input() imagePath = '';
   constructor() { }
-
-
 
 }

@@ -2,8 +2,8 @@
 <app-suchleiste></app-suchleiste>
 <div class="container">
   <div class="row">
-    <app-infobox></app-infobox>
-    <app-infobox></app-infobox>
-    <app-infobox></app-infobox>
+    <div class="col-4" *ngFor="let title of boxTitles; let i = index">
+      <app-infobox [boxTitle]="boxTitles[i]" [infoText]="infoTexts[i]"></app-infobox>
+    </div>
   </div>
 </div>
