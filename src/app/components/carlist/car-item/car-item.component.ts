@@ -11,7 +11,7 @@ export class CarItemComponent{
 
   @Input() car: Car = ({} as any) as Car;
   @Output() deleteEvent: EventEmitter<void> = new EventEmitter<void>();
-  @Output() editEvent: EventEmitter<void> = new EventEmitter<void>();
+  // @Output() editEvent: EventEmitter<void> = new EventEmitter<void>();
 
 
   constructor(public userService: UserService) { }

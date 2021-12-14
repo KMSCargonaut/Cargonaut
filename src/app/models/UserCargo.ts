@@ -20,8 +20,9 @@ export class UserCargo {
     this.username = username;
     this.birthday = birthday;
     this.gender = gender;
-    this.evaluation = -1;
-    this.money = 0;
     this.car = [];
+    this.money = 0;
+    this.evaluation = -1; //nicht vorhanden
+
   }
 }

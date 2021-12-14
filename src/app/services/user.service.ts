@@ -29,11 +29,14 @@ export class UserService {
   async userExist(user: User) {
     this.user = user;
     const tempUser = await this.getUser(user.uid);
+
     if (tempUser) {
+      // authenticated user was found in the database 'Users'
       this.currUser = tempUser;
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
+      // authenticated user was not found in the database 'Users'
       await this.userNotExist()
     }
   }

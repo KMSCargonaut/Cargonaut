@@ -33,7 +33,4 @@ export class CarlistComponent {
     (document.getElementById('add-car-form') as HTMLFormElement).reset();
   }
 
-  editCar(mark: string){
-
-  }
 }
