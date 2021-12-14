@@ -18,40 +18,11 @@ export class AppComponent {
       this.router.navigate(['/profil'])
     }
 
-
-    this.test().then((tour) => {
-      console.log('test 1: ', tour);
-
-    })
-
-    this.test2().then(tour => {
-      console.log('test 2: ', tour)
-    })
-
-    this.test3().then(tour => console.log(tour));
-
-    this.test4().then(tour => console.log(tour));
+    this.test()
   }
 
-  async test(): Promise<Tour[]>{
-    /*await this.tourTest.addTour(new Tour('hihi'))
-    await this.tourTest.addTour(new Tour('test lol'))*/
-    let pre: Predicate<Tour> = () => true;
-    return await this.tourTest.getFiltleredTours(pre);
+  async test() {
+    await this.tourTest.searchTours(true, 'Frankfurt', 'Köln', 'egal', 1, 1).then(tour => console.log(tour))
   }
-
-  async test2(): Promise<Tour[]>{
-    return await this.tourTest.getAllTours();
-  }
-
-  async test3() {
-    return await this.tourTest.test('hihi');
-  }
-
-  async test4() {
-    return await this.tourTest.test1('hihi', 'PEQG58A0fXi1OJ5XlSNW')
-  }
-
-
 
 }

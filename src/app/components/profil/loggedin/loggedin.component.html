@@ -19,7 +19,7 @@
 <div class="container">
   <div class="row">
     <div class="col text-center">
-      <div class="h3">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil</div>
+      <div class="h3" *ngIf="userData.currUser">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil</div>
     </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ export class RegistrationComponent {
   public firstname = '';
   public lastname = '';
   public username = '';
-  public birthday: Date | null | undefined;
+  public birthday: Date = new Date();
   public password = '';
   public repeatPassword = '';
   public gender = '';
