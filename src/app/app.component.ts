@@ -1,7 +1,6 @@
-import {Component, Predicate} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {TourService} from "./services/tour.service";
-import {Tour} from "./models/Tour";
 
 
 @Component({
@@ -22,7 +21,7 @@ export class AppComponent {
   }
 
   async test() {
-    await this.tourTest.searchTours(true, 'Frankfurt', 'Köln', 'egal', 1, 1).then(tour => console.log(tour))
+    await this.tourTest.searchTours(false, 'München', 'Berlin', '1996-06-14', 1, 1).then(tour => console.log(tour))
   }
 
 }

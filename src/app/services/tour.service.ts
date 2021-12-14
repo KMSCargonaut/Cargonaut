@@ -1,7 +1,7 @@
 import {Injectable, Predicate} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {Tour} from "../models/Tour";
-import {Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +36,14 @@ export class TourService {
       .catch((err) => console.log(err))
   }
 
-// Angebote
+
+// Suchen von Tours
   async searchTours(offer: boolean, startCity: string, endCity: string, date: string, storage: number, seats: number): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
       ref
         .where('offer', '==', offer)
         .where('booked', '==', false)
+        .where('date', '==', date)
         .where('startCity', '==', startCity)
         .where('endCity', '==', endCity)
         .where('storage', '>=', storage)
@@ -77,10 +79,6 @@ export class TourService {
     return (a == b) ? 0 : (a > b) ?  1 :  -1;
   }
 
-  /*
-  meherere wheres usw gehen nicht. Man kann damit die queries limitieren (am besten tatsächlich ein Limit setzten) und dann im client filtern
-   außerdem kann man ein button hinzufügen, der dann weitere 10, 20, 30, .. tours lädt in abhängigkeit von dem letzen natürlich
-*/
 
 
   /* async getFiltleredTours(predicate: Predicate<Tour>): Promise<Tour[]> {
