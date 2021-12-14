@@ -11,6 +11,10 @@ import {Router} from "@angular/router";
 })
 
 export class CarlistComponent {
+  public fahrzeugModel?: string;
+  public fahrzeugKennzeichen?: string;
+  public fahrzeugSitzplaetze?: number;
+  public fahrzeugStauraum?: number;
 
   form = new FormGroup({
     fahrzeugModel: new FormControl(),
@@ -26,12 +30,22 @@ export class CarlistComponent {
   }
 
   onSubmit(){
-    let newCar = new Car(this.form.value.fahrzeugModel, this.form.value.fahrzeugKennzeichen, this.form.value.fahrzeugSitzplaetze, this.form.value.fahrzeugStauraum);
-    if(this.userService.currUser){
-      this.userService.currUser.car.push(newCar);
-      this.userService.updateUser(this.userService.currUser).then();
-    }
-    (document.getElementById('add-car-form') as HTMLFormElement).reset();
+     this.fahrzeugModel = this.form.controls['fahrzeugModel'].value;
+     this.fahrzeugKennzeichen = this.form.controls['fahrzeugKennzeichen'].value;
+     this.fahrzeugSitzplaetze = this.form.controls['fahrzeugSitzplaetze'].value;
+     this.fahrzeugStauraum = this.form.controls['fahrzeugStauraum'].value;
+
+     if (this.fahrzeugModel && this.fahrzeugKennzeichen && this.fahrzeugSitzplaetze && this.fahrzeugStauraum) {
+
+       let newCar = new Car(this.fahrzeugModel, this.fahrzeugKennzeichen, this.fahrzeugSitzplaetze, this.fahrzeugStauraum);
+
+       if(this.userService.currUser){
+         this.userService.currUser.car.push(newCar);
+         this.userService.updateUser(this.userService.currUser).then();
+       }
+       (document.getElementById('add-car-form') as HTMLFormElement).reset();
+     }
+
   }
 
   editCar(mark: string){

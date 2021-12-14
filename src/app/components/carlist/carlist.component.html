@@ -4,28 +4,53 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="add-car-model">Fahrzeug-Model</span>
       </div>
+
       <input type="text" class="form-control" placeholder="VW Touran, Porsche 911, ..." aria-label="Fahrzeug-Model"
-             aria-describedby="add-fahrzeug-model" id="add-fahrzeug-model-input" formControlName="fahrzeugModel">
+             aria-describedby="add-fahrzeug-model" id="add-fahrzeug-model-input" formControlName="fahrzeugModel" required>
+      <div *ngIf="this.form.controls['fahrzeugModel'].invalid && (this.form.controls['fahrzeugModel'].dirty || this.form.controls['fahrzeugModel'].touched)"
+           class="alert-danger">
+        <div *ngIf="this.form.controls['fahrzeugModel'].errors?.required">
+          Name is required.
+        </div>
+      </div>
       <div class="input-group-prepend">
         <span class="input-group-text" id="add-fahrzeug-kennzeichen">Kennzeichen</span>
       </div>
       <input type="text" class="form-control" placeholder="Kennzeichen" aria-label="Kennzeichen"
-             aria-describedby="add-fahrzeug-kennzeichen" id="add-fahrzeug-kennzeichen-input" formControlName="fahrzeugKennzeichen">
+             aria-describedby="add-fahrzeug-kennzeichen" id="add-fahrzeug-kennzeichen-input" formControlName="fahrzeugKennzeichen" required>
+      <div *ngIf="this.form.controls['fahrzeugKennzeichen'].invalid && (this.form.controls['fahrzeugKennzeichen'].dirty || this.form.controls['fahrzeugKennzeichen'].touched)"
+           class="alert-danger">
+        <div *ngIf="this.form.controls['fahrzeugKennzeichen'].errors?.required">
+          Name is required.
+        </div>
+      </div>
     </div>
     <div class="input-group mb-3" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
       <div class="input-group-prepend">
         <span class="input-group-text" id="add-fahrzeug-Sitzplaetze">Username</span>
       </div>
       <input type="number" class="form-control" placeholder="Sitzplätze" aria-label="Sitzplaetze"
-             aria-describedby="add-fahrzeug-sitzplaetze" id="add-fahrzeug-sitzplaetze-input" formControlName="fahrzeugSitzplaetze">
+             aria-describedby="add-fahrzeug-sitzplaetze" id="add-fahrzeug-sitzplaetze-input" formControlName="fahrzeugSitzplaetze" required>
+      <div *ngIf="this.form.controls['fahrzeugSitzplaetze'].invalid && (this.form.controls['fahrzeugSitzplaetze'].dirty || this.form.controls['fahrzeugSitzplaetze'].touched)"
+           class="alert-danger">
+        <div *ngIf="this.form.controls['fahrzeugSitzplaetze'].errors?.required">
+          Name is required.
+        </div>
+      </div>
       <div class="input-group-prepend">
         <span class="input-group-text" id="add-Stauraum">Password</span>
       </div>
       <input type="number" class="form-control" placeholder="Stauraum in ㎥" aria-label="Stauraum"
-             aria-describedby="add-stauraum" id="add-stauraum-input" formControlName="fahrzeugStauraum">
+             aria-describedby="add-stauraum" id="add-stauraum-input" formControlName="fahrzeugStauraum" required>
+      <div *ngIf="this.form.controls['fahrzeugStauraum'].invalid && (this.form.controls['fahrzeugStauraum'].dirty || this.form.controls['fahrzeugStauraum'].touched)"
+           class="alert-danger">
+        <div *ngIf="this.form.controls['fahrzeugStauraum'].errors?.required">
+          Name is required.
+        </div>
+      </div>
     </div>
     <div class="input-group mb-3" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
-      <button type="submit" class="btn btn-info" style="background-color: #005B51">Fahrzeug hinzufügen</button>
+      <button type="submit" class="btn btn-info" style="background-color: #005B51" [disabled]="this.form.invalid || this.form.pristine">Fahrzeug hinzufügen</button>
     </div>
   </form>
 
