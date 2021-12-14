@@ -2,7 +2,7 @@
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("../../assets/img/SVG/Zeichenflache_4.svg") no-repeat center center;
+  background: url("../../../../assets/img/SVG/Zeichenflache_4.svg") no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -52,5 +52,17 @@ display: none;
   margin: 0;
   padding: 0;
   /*height: 10em; !*hier so 5em*!*/
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 

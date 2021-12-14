@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-root',
@@ -8,21 +10,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Cargonaut';
 
-  boxTitles = [
-    "Lass dich fahren für weniger Geld",
-    "Dein Transport: Einfach und unkompliziert",
-    "Sorglos fahren, dank Nutzerbewertungen"
-  ]
 
-  infoTexts = [
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es relativ günstig ist, mit uns zu fahren!",
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es einfach und unkompliziert ist, mit uns zu fahren!",
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es sorglos, durch Nutzerbewertung, ist, mit uns zu fahren!"
-  ]
+  constructor(private router: Router) {
+    if (this.router.url === '/profil') {
+      this.router.navigate(['/profil'])
+    }
+    if (this.router.url === '/carList'){
+      this.router.navigate(['/carList'])
+    }
+  }
 
-  imagePaths = [
-    "../../assets/img/Icons/money_icon.png",
-    "../../assets/img/Icons/transporter_icon.png",
-    "../../assets/img/Icons/thumbs_icon.png"
-  ]
 }

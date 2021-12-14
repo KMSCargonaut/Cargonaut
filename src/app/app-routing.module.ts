@@ -1,10 +1,30 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {ProfilComponent} from "./components/profil/profil.component";
+import {CarlistComponent} from "./components/carlist/carlist.component";
+import {SuchleisteComponent} from "./components/main-page/suchleiste/suchleiste.component";
+import {MainPageComponent} from "./components/main-page/main-page.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+
+  {
+    path: 'profil',
+    component: ProfilComponent
+  },
+  {
+    path: 'carList',
+    component: CarlistComponent
+
+  },
+  {
+    path: '',
+    component: MainPageComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

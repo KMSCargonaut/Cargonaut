@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-light py-2">
+  <div class="container-fluid" style="margin-left: 15em; margin-right:15em">
+    <button style="border: none;  background-color: Transparent;" (click)="navigateToMainPage()">
+      <img src ="../../../assets/img/SVG/LKW.svg" width="180" height="75"/>
+    </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse mr-auto" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" style="color: #005B51; font-size: 20px; font-style: italic; font-family: Arial">Mitfahrgelegenheit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" style="color: #005B51; font-size: 20px; font-style: italic; font-family: Arial">Meine Angebote & Anfragen</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto my-2 my-lg-0">
+        <li class="nav-item" style="margin-right: 14px" href="#">
+          <button style="border: none;  background-color: Transparent;">
+            <img src="../../../assets/img/Icons/search_icon.png" width="30" height="30" style="float: left; margin-top: 7px">
+            <a class="nav-link active" style="color: #005B51;float: left; font-size: 20px; font-style: italic; font-family: Arial">Suchen</a>
+          </button>
+        </li>
+        <li class="nav-item" style="margin-right: 12px">
+          <button style="border: none;  background-color: Transparent;">
+            <img src="../../../assets/img/Icons/add_icon.png" width="30" height="30" style="float: left; margin-top: 7px">
+            <a class="nav-link active" href="#" style="color: #005B51;float: left; font-size: 20px; font-style: italic; font-family: Arial">Angebot & Anfrage erstellen</a>
+          </button>
+        </li>
+        <li>
+          <button style="border: none;  background-color: Transparent;" (click)="navigateToUser()">
+            <img src="../../../assets/img/Icons/user_icon.png" width="43" height="43" style="float: left;">
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
