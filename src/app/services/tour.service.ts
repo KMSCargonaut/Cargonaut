@@ -47,4 +47,35 @@ export class TourService {
     console.log('Tours[]: ', tempTours);
     return tempTours.filter(predicate);
   }
+
+  async getAllTours(): Promise<Tour[]> {
+    return this.tourCollection.get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        let temp = doc.data();
+        temp.id = doc.id;
+        return temp;
+      }))
+  }
+
+  async test(desc: string) {
+    return this.afs.collection<Tour>('Tours', ref => ref.where('descr', '==', desc))
+      .get().toPromise().then(snapshot =>
+        snapshot.docs.map(doc => {
+          let temp = doc.data();
+          temp.id = doc.id;
+          return temp;
+        }))
+  }
+
+  async test1(desc: string, id: string) {
+    return this.afs.collection<Tour>('Tours', ref => ref.where('descr', '==', desc))
+      .doc(id).get().toPromise().then(doc => {
+        let temp = doc.data();
+        if (temp) {
+          temp.id = doc.id;
+        }
+        return temp;
+      })
+  }
+
 }

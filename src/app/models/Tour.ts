@@ -4,12 +4,19 @@ import {Car} from "./Car";
 import {Status} from "./Status";
 
 export class Tour {
-id?: string;
+  id?: string;
+  descr: string;
+
+  constructor(descr: string) {
+    this.descr = descr;
+  }
+
+  /*id?: string;
 offer?: boolean;
 startCity?: string;
 endCity?: string;
-startTime?: Time;
-EndTime?: Time;
+startTime?: number;
+EndTime?: number;
 date?: Date;
 price?: number;
 storage?: number;
@@ -23,7 +30,7 @@ car?: Car;
 evaluation?: number;
 
 
-  constructor(id?: string, offer?: boolean, startCity?: string, endCity?: string, startTime?: Time, EndTime?: Time, date?: Date, price?: number, storage?: number, seats?: number, description?: string, driver?: UserCargo, passengers?: UserCargo[], booked?: boolean, status?: Status, car?: Car, evaluation?: number) {
+  constructor(id?: string, offer?: boolean, startCity?: string, endCity?: string, startTime?: number, EndTime?: number, date?: Date, price?: number, storage?: number, seats?: number, description?: string, driver?: UserCargo, passengers?: UserCargo[], booked?: boolean, status?: Status, car?: Car, evaluation?: number) {
     this.id = id;
     this.offer = offer;
     this.startCity = startCity;
@@ -41,5 +48,5 @@ evaluation?: number;
     this.status = status;
     this.car = car;
     this.evaluation = evaluation;
-  }
+  }*/
 }
