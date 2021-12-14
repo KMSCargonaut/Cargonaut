@@ -17,7 +17,7 @@ export class RegistrationComponent {
   public firstname = '';
   public lastname = '';
   public username = '';
-  public birthday: Date | null | undefined;
+  public birthday: Date = new Date();
   public password = '';
   public repeatPassword = '';
   public gender = '';
@@ -79,7 +79,6 @@ export class RegistrationComponent {
       this.gender.trim().length > 0 &&
       this.username.trim().length > 0 &&
       this.birthday != undefined &&
-      this.birthday.toISOString().trim().length > 0 &&
       this.password === this.repeatPassword) {
       await this.register()
     } else {

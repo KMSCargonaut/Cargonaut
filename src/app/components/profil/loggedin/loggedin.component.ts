@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-loggedin',
@@ -9,7 +10,7 @@ import {UserService} from "../../services/user.service";
 export class LoggedinComponent {
 
 
-  constructor(public userData: UserService) {
+  constructor(public userData: UserService, private router: Router) {
   }
 
   async logout(): Promise<void> {
@@ -20,5 +21,9 @@ export class LoggedinComponent {
     await this.userData.deleteUser();
     await this.userData.deleteAccount();
     console.log('User deleted');
+  }
+
+  navigateToCarList() {
+    this.router.navigate(['/carList'])
   }
 }
