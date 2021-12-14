@@ -4,9 +4,9 @@ header.masthead {
   background-color: #343a40;
   background: url("../../assets/img/SVG/Zeichenflache_4.svg") no-repeat center center;
   background-size: cover;
-  min-height: 380px;
   padding-top: 8rem;
   padding-bottom: 8rem;
+  height: 40em; /*55em für qhdBildschirm*/
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -24,5 +24,33 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
 display: none;
 -webkit-appearance: none;
+}
+
+.colpad {
+  padding: 0;
+  margin: 0;
+  width: 2em;
+}
+
+.input-opaque{
+  background-color: rgba(0, 0, 0, 0.0);
+  border-color: rgba(0, 0, 0, 0.0);
+}
+
+.text-opaque{
+  background-color: rgba(0, 0, 0, 0.0);
+  color: white;
+  border-color: rgba(0, 0, 0, 0.0);
+  outline: none /*das hier noch auskommentieren -Serag*/
+}
+
+.form-row-style {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 35px;
+  position: center;
+  margin: 0;
+  padding: 0;
+  /*height: 10em; !*hier so 5em*!*/
 }
 

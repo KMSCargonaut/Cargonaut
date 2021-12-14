@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-4" *ngFor="let title of boxTitles; let i = index">
-      <app-infobox [boxTitle]="boxTitles[i]" [infoText]="infoTexts[i]"></app-infobox>
+      <app-infobox [boxTitle]="boxTitles[i]" [infoText]="infoTexts[i]" [imagePath]="imagePaths[i]"></app-infobox>
     </div>
   </div>
 </div>

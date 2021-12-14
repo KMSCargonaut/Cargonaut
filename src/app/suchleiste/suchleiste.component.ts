@@ -9,5 +9,8 @@ export class SuchleisteComponent{
 
   constructor() { }
 
+  searchbarheigth = "5em";
+  iconsize = "25px";
+
 
 }

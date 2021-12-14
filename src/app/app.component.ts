@@ -19,4 +19,10 @@ export class AppComponent {
     "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es einfach und unkompliziert ist, mit uns zu fahren!",
     "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es sorglos, durch Nutzerbewertung, ist, mit uns zu fahren!"
   ]
+
+  imagePaths = [
+    "../../assets/img/Icons/money_icon.png",
+    "../../assets/img/Icons/transporter_icon.png",
+    "../../assets/img/Icons/thumbs_icon.png"
+  ]
 }
