@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NotloggedinComponent } from './components/profil/notloggedin/notloggedin.component';
 import { LoggedinComponent } from './components/profil/loggedin/loggedin.component';
 import { CarlistComponent } from './components/carlist/carlist.component';
+import { CarItemComponent } from './components/carlist/car-item/car-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CarlistComponent } from './components/carlist/carlist.component';
     FooterComponent,
     NotloggedinComponent,
     LoggedinComponent,
-    CarlistComponent
+    CarlistComponent,
+    CarItemComponent
   ],
     imports: [
         BrowserModule,
