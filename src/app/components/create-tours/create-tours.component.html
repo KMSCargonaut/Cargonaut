@@ -1,0 +1,91 @@
+<!--  Title -->
+<div class="container title-background mw-100">
+  <div class="row ">
+    <div class="col text-center">
+      <div class="h1 logoGreenDark m-3" *ngIf="this.on">Erstelle eine Anfrage</div>
+      <div class="h1 logoGreenDark m-3" *ngIf="!this.on">Erstelle ein Angebot</div>
+    </div>
+  </div>
+  <div class="row m-3">
+    <div class="col-5">
+      <h5 class="float-right logoGreenDark">Angebot</h5>
+    </div>
+    <div class="col-2 text-center">
+      <div class="custom-control custom-switch">
+        <input (click)="valueInput()" type="checkbox" class="custom-control-input" id="customSwitch1">
+        <label for="customSwitch1" class="custom-control-label"></label>
+      </div>
+    </div>
+    <div class="col-5 ">
+      <h5 class="logoGreenDark">Anfrage</h5>
+    </div>
+  </div>
+</div>
+
+<!-- Create-Form -->
+<div class="container rounded shadow container mt-5 bg-white border-0">
+  <div class="row">
+    <div class="col text-center h4 logoGreenDark m-3" *ngIf="on">Anfrage erstellen</div>
+    <div class="col text-center h4 logoGreenDark m-3" *ngIf="!on">Angebot erstellen</div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="cityStart">Von</label>
+        <input type="text" class="form-control" id="cityStart" [(ngModel)]="startCity">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="date">Datum</label>
+        <input type="datetime-local" class="form-control" id="date" [(ngModel)]="date" (keydown)="showDate()">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
+        <input type="time" class="form-control" id="endTime" [(ngModel)]="endTime" (keydown)="durationCalc()">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="endCity">Nach</label>
+        <input type="text" class="form-control" id="endCity" [(ngModel)]="endCity" (keydown)="durationCalc()">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
+        <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
+      </div>
+    </div>
+    <div class="col">
+      <div class="">
+        <label class="logoGreenDark" for="date">Dauer ca</label>
+        <div  class="" >{{duration}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-3 m-3">
+      <button class="btn btn-success btn-block">Erstellen</button>
+    </div>
+  </div>
+</div>
