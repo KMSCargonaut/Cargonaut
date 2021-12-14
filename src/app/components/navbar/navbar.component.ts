@@ -13,7 +13,7 @@ export class NavbarComponent {
   }
 
   navigateToUser() {
-      this.router.navigate(['/profil'])
+    this.router.navigate(['/profil'])
   }
 
   navigateToMainPage() {

@@ -1,0 +1,13 @@
+.infoicon{
+  width: 20%;
+  position: relative;
+  top: -45px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infoheight{
+  height: 20em;
+
+}

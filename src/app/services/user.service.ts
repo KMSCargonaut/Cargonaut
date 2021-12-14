@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
 import User = firebase.User;
+import {Car} from "../models/Car";
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,11 @@ export class UserService {
 
   async updateUser(user: UserCargo) {
     const tempUser = this.copyAndPrepareUser(user);
+    let tempCar = [];
+    for(let car of tempUser.car){
+      tempCar.push(this.copyAndPrepareCar(car))
+    }
+    tempUser.car = tempCar;
     await this.userCollection.doc(user.dId).update(tempUser);
   }
 
@@ -82,6 +88,10 @@ export class UserService {
 
   copyAndPrepareUser(user: UserCargo): UserCargo {
     return {...user};
+  }
+
+  copyAndPrepareCar(car: Car): Car {
+    return {...car}
   }
 
 
@@ -100,6 +110,16 @@ export class UserService {
   async deleteAccount() {
     await firebase.auth().currentUser?.delete();
     console.log('deleted account');
+  }
+
+  async deleteCar(mark: string){
+    if(this.currUser) {
+      this.currUser.car = this.currUser.car.filter((item) => {
+        console.log(item.mark !== mark);
+        return item.mark !== mark
+      });
+      this.updateUser(this.currUser).then();
+    }
   }
 
   async register(email: string, password: string) {

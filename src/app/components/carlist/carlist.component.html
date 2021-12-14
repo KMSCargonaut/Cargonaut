@@ -1,1 +1,39 @@
-<p>carlist works!</p>
+<div *ngIf="this.userService.currUser">
+  <form id="add-car-form" [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 100px">
+    <div class="input-group mb-3" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="add-car-model">Fahrzeug-Model</span>
+      </div>
+      <input type="text" class="form-control" placeholder="VW Touran, Porsche 911, ..." aria-label="Fahrzeug-Model"
+             aria-describedby="add-fahrzeug-model" id="add-fahrzeug-model-input" formControlName="fahrzeugModel">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="add-fahrzeug-kennzeichen">Kennzeichen</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Kennzeichen" aria-label="Kennzeichen"
+             aria-describedby="add-fahrzeug-kennzeichen" id="add-fahrzeug-kennzeichen-input" formControlName="fahrzeugKennzeichen">
+    </div>
+    <div class="input-group mb-3" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="add-fahrzeug-Sitzplaetze">Username</span>
+      </div>
+      <input type="number" class="form-control" placeholder="Sitzplätze" aria-label="Sitzplaetze"
+             aria-describedby="add-fahrzeug-sitzplaetze" id="add-fahrzeug-sitzplaetze-input" formControlName="fahrzeugSitzplaetze">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="add-Stauraum">Password</span>
+      </div>
+      <input type="number" class="form-control" placeholder="Stauraum in ㎥" aria-label="Stauraum"
+             aria-describedby="add-stauraum" id="add-stauraum-input" formControlName="fahrzeugStauraum">
+    </div>
+    <div class="input-group mb-3" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
+      <button type="submit" class="btn btn-info" style="background-color: #005B51">Fahrzeug hinzufügen</button>
+    </div>
+  </form>
+
+  <div style="display: flex; flex-direction: row; justify-content: center">
+    <div *ngFor="let car of userService.currUser.car; let i = index">
+      <div class="ml-3 mr-3">
+        <app-car-item [car]="car" (editEvent)="editCar(car.mark)" (deleteEvent)="userService.deleteCar(car.mark).then()"></app-car-item>
+      </div>
+    </div>
+  </div>
+</div>
