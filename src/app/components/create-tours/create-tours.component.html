@@ -1,32 +1,35 @@
+<div class="test"></div>
+
 <!--  Title -->
 <div class="container title-background mw-100">
   <div class="row ">
     <div class="col text-center">
-      <div class="h1 logoGreenDark m-3" *ngIf="this.on">Erstelle eine Anfrage</div>
-      <div class="h1 logoGreenDark m-3" *ngIf="!this.on">Erstelle ein Angebot</div>
+      <div class="h2 logoGreenDark m-3" *ngIf="this.on">Erstelle eine Anfrage</div>
+      <div class="h2 logoGreenDark m-3" *ngIf="!this.on">Erstelle ein Angebot</div>
     </div>
   </div>
-  <div class="row m-3">
-    <div class="col-5">
-      <h5 class="float-right logoGreenDark">Angebot</h5>
-    </div>
-    <div class="col-2 text-center">
-      <div class="custom-control custom-switch">
-        <input (click)="valueInput()" type="checkbox" class="custom-control-input" id="customSwitch1">
-        <label for="customSwitch1" class="custom-control-label"></label>
+  <div class="row m-3 justify-content-center">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <div class="logoGreenDark mr-3"><h5>Angebot</h5></div>
+        <div>
+          <label class="switch">
+            <input type="checkbox" (click)="offerOnOff()">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="logoGreenDark ml-3"><h5>Anfrage</h5></div>
       </div>
-    </div>
-    <div class="col-5 ">
-      <h5 class="logoGreenDark">Anfrage</h5>
+
     </div>
   </div>
 </div>
 
 <!-- Create-Form -->
 <div class="container rounded shadow container mt-5 bg-white border-0">
-  <div class="row">
-    <div class="col text-center h4 logoGreenDark m-3" *ngIf="on">Anfrage erstellen</div>
-    <div class="col text-center h4 logoGreenDark m-3" *ngIf="!on">Angebot erstellen</div>
+  <div class="row m-4">
+    <!--    <div class="col text-center h4 logoGreenDark m-3" *ngIf="on">Anfrage erstellen</div>-->
+    <!--    <div class="col text-center h4 logoGreenDark m-3" *ngIf="!on">Angebot erstellen</div>-->
   </div>
   <div class="row">
     <div class="col">
@@ -35,57 +38,111 @@
         <input type="text" class="form-control" id="cityStart" [(ngModel)]="startCity">
       </div>
     </div>
-    <div class="col">
-      <div class="form-group">
-        <label class="logoGreenDark" for="date">Datum</label>
-        <input type="datetime-local" class="form-control" id="date" [(ngModel)]="date" (keydown)="showDate()">
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
-        <input type="time" class="form-control" id="endTime" [(ngModel)]="endTime" (keydown)="durationCalc()">
-      </div>
-    </div>
-  </div>
-  <div class="row">
+
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="endCity">Nach</label>
-        <input type="text" class="form-control" id="endCity" [(ngModel)]="endCity" (keydown)="durationCalc()">
+        <input type="text" class="form-control" id="endCity" [(ngModel)]="endCity">
       </div>
     </div>
+
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="date">Datum</label>
+        <input type="datetime-local" class="form-control" id="date" [(ngModel)]="date">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
-        <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
+        <input #time type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
       </div>
     </div>
+
     <div class="col">
-      <div class="">
-        <label class="logoGreenDark" for="date">Dauer ca</label>
-        <div  class="" >{{duration}}</div>
+      <div class="form-group">
+        <label for="duration" class="logoGreenDark">Dauer</label>
+        <select name="" id="duration" class="form-control" [(ngModel)]="duration">
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="8">9</option>
+          <option value="8">10</option>
+          <option value="8">11</option>
+          <option value="8">12</option>
+        </select>
       </div>
     </div>
+
+    <div class="col">
+      <div class="form-group">
+        <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
+        <input type="time" readonly class="form-control" id="endTime" [(ngModel)]="endTime">
+      </div>
+    </div>
+
   </div>
+
+
   <div class="row">
-    <div class="col">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-          Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="seats" class="logoGreenDark">Sitzplätze</label>
+        <select name="" id="seats" class="form-control" [(ngModel)]="seats">
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="storage" class="logoGreenDark">Stauraum</label>
+        <select name="" id="storage" class="form-control" [(ngModel)]="storage">
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
       </div>
 
     </div>
+    <div class="col-4">
+      <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
+      <div class="">
+        <!--        null komma null responsiv -->
+        <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
+               style="width: 25vw">
+      </div>
+    </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-3 m-3">
+    <div class="col-5 m-4">
       <button class="btn btn-success btn-block">Erstellen</button>
     </div>
   </div>
 </div>
+

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Time} from "@angular/common";
 
 @Component({
   selector: 'app-create-tours',
@@ -11,25 +10,32 @@ export class CreateToursComponent {
   on: boolean = false;
   startCity = '';
   endCity = '';
-  startTime: Time = {hours: 12, minutes: 11};
-  endTime: Time = {hours: 18, minutes: 39};
-  date = new Date();
-  duration = 0;
+  startTime = '';
+  duration = '';
+  endTime = '';
+  date = '';
+  seats = '';
+  storage = '';
+  price = '';
 
 
-  constructor() { }
+  constructor() {
 
-  durationCalc() {
-    // this.duration = Number.valueOf() - this.startTime.hours.valueOf()
-    console.log(this.duration)
   }
 
-  valueInput() {
+
+  offerOnOff() {
     this.on = !this.on;
     console.log(this.on);
   }
 
-  showDate() {
-    console.log(this.date)
+
+  showTime(time: string) {
+    console.log("Time: " , time, "Type of: ", typeof time);
+    let hours: number = Number.parseInt(time.substr(0,2));
+    let minutes: number = Number.parseInt(time.substr(3,2));
+    console.log("hours: ", hours, "minutes: ", minutes, "type of: ", typeof hours, typeof minutes)
+    const temptime = Number.parseInt(time);
+    console.log("Time as number: ", temptime, "Type of:  ", typeof temptime)
   }
 }

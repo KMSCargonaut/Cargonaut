@@ -6,8 +6,8 @@ export class Tour {
   offer: boolean;
   startCity: string;
   endCity: string;
-  startTime: number;
-  EndTime: number;
+  startTime: string;
+  duration: number;
   date: Date;
   price: number;
   storage: number;
@@ -20,14 +20,14 @@ export class Tour {
   car: Car | null;
   evaluation: number;
 
-  constructor(offer: boolean, startCity: string, endCity: string, startTime: number, EndTime: number, date: Date,
+  constructor(offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: Date,
               price: number, storage: number, seats: number, description: string,
               driver?: string, passengers?: string[], car?: Car) {
     this.offer = offer;
     this.startCity = startCity;
     this.endCity = endCity;
     this.startTime = startTime;
-    this.EndTime = EndTime;
+    this.duration = duration;
     this.date = date;
     this.price = price;
     this.storage = storage;
