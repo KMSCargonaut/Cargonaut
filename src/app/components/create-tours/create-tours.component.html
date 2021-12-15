@@ -4,8 +4,8 @@
 <div class="container title-background mw-100">
   <div class="row ">
     <div class="col text-center">
-      <div class="h2 logoGreenDark m-3" *ngIf="this.on">Erstelle eine Anfrage</div>
-      <div class="h2 logoGreenDark m-3" *ngIf="!this.on">Erstelle ein Angebot</div>
+      <div class="h2 logoGreenDark m-3" *ngIf="this.offer">Erstelle eine Anfrage</div>
+      <div class="h2 logoGreenDark m-3" *ngIf="!this.offer">Erstelle ein Angebot</div>
     </div>
   </div>
   <div class="row m-3 justify-content-center">
@@ -61,7 +61,7 @@
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
-        <input #time type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
+        <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
       </div>
     </div>
 
@@ -70,18 +70,18 @@
         <label for="duration" class="logoGreenDark">Dauer</label>
         <select name="" id="duration" class="form-control" [(ngModel)]="duration">
           <option value=""></option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="8">9</option>
-          <option value="8">10</option>
-          <option value="8">11</option>
-          <option value="8">12</option>
+          <option value="1">1h</option>
+          <option value="2">2h</option>
+          <option value="3">3h</option>
+          <option value="4">4h</option>
+          <option value="5">5h</option>
+          <option value="6">6h</option>
+          <option value="7">7h</option>
+          <option value="8">8h</option>
+          <option value="8">9h</option>
+          <option value="8">10h</option>
+          <option value="8">11h</option>
+          <option value="8">12h</option>
         </select>
       </div>
     </div>
@@ -89,7 +89,7 @@
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
-        <input type="time" readonly class="form-control" id="endTime" [(ngModel)]="endTime">
+        <input type="datetime-local" readonly class="form-control" id="endTime" [(ngModel)]="endTime">
       </div>
     </div>
 
@@ -139,9 +139,15 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description" ></textarea>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-5 m-4">
-      <button class="btn btn-success btn-block">Erstellen</button>
+      <button class="btn btn-success btn-block" (click)="addTour()">Erstellen</button>
     </div>
   </div>
 </div>
