@@ -44,7 +44,7 @@ export class CreateToursComponent {
   }
 
   calculateEndTime() {
-    if (this.startTime.trim().length > 0 && this.duration.trim().length > 0) {
+    if (this.startTime.trim().length > 0 && this.duration.trim().length > 0 && this.date.trim().length > 0) {
       let hours: number = Number.parseInt(this.startTime.substr(0, 2));
       let duration: number = Number.parseInt(this.duration);
       let endHours = hours + duration;
@@ -52,6 +52,9 @@ export class CreateToursComponent {
 
       if (endHours >= 24) {
         endDay = (Number.parseInt(endDay) + 1).toString()
+        if (endDay.trim().length < 2) { //Falls Datum in einer der ersten 9 Tage im Monat ist
+          endDay = "0" + endDay;
+        }
         endHours = endHours%24;
       }
 
