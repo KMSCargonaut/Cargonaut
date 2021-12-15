@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
-import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-create-tours',
@@ -42,6 +42,33 @@ export class CreateToursComponent {
     const temptime = Number.parseInt(time);
     console.log("Time as number: ", temptime, "Type of:  ", typeof temptime)
   }
+
+  calculateEndTime() {
+    if (this.startTime.trim().length > 0 && this.duration.trim().length > 0) {
+      let hours: number = Number.parseInt(this.startTime.substr(0, 2));
+      let duration: number = Number.parseInt(this.duration);
+      let endHours = hours + duration;
+      let endDay = this.date.substr(8,2);
+
+      if (endHours >= 24) {
+        endDay = (Number.parseInt(endDay) + 1).toString()
+        endHours = endHours%24;
+      }
+
+      if (endHours < 10) {
+        this.endTime = this.date.substr(0,8) + endDay + "T0" + endHours.toString();
+      } else {
+        this.endTime = this.date.substr(0,8) + endDay + "T" +endHours.toString();
+      }
+      console.log(this.date);
+      //021-12-02T18:47 so muss endTime aussehen
+      //021-12-02
+      this.endTime += this.startTime.substr(2, 3);
+      console.log("Enduhrzeit: " + this.endTime);
+    }
+  }
+
+
 
   async addTour() {
     let tempTour = new Tour(

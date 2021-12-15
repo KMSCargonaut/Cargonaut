@@ -49,7 +49,7 @@
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="date">Datum</label>
-        <input type="datetime-local" class="form-control" id="date" [(ngModel)]="date">
+        <input type="date" class="form-control" id="date" [(ngModel)]="date">
       </div>
     </div>
 
@@ -61,14 +61,14 @@
     <div class="col">
       <div class="form-group">
         <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
-        <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime">
+        <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime" (keydown)="calculateEndTime()">
       </div>
     </div>
 
     <div class="col">
       <div class="form-group">
         <label for="duration" class="logoGreenDark">Dauer</label>
-        <select name="" id="duration" class="form-control" [(ngModel)]="duration">
+        <select name="" id="duration" class="form-control" [(ngModel)]="duration" (click)="calculateEndTime()">
           <option value=""></option>
           <option value="1">1h</option>
           <option value="2">2h</option>
@@ -78,10 +78,10 @@
           <option value="6">6h</option>
           <option value="7">7h</option>
           <option value="8">8h</option>
-          <option value="8">9h</option>
-          <option value="8">10h</option>
-          <option value="8">11h</option>
-          <option value="8">12h</option>
+          <option value="9">9h</option>
+          <option value="10">10h</option>
+          <option value="11">11h</option>
+          <option value="12">12h</option>
         </select>
       </div>
     </div>
