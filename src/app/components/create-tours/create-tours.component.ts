@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
+import {UserService} from "../../services/user.service";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-create-tours',
@@ -23,7 +24,7 @@ export class CreateToursComponent {
   description = '';
 
 
-  constructor(public tourData: TourService, public userData: UserService) {
+  constructor(public tourData: TourService, public userData: UserService, public alert: AlertService) {
 
   }
 
@@ -92,7 +93,7 @@ export class CreateToursComponent {
       : tempTour.passengers[0] = this.userData.currUser.uid;
       await this.tourData.addTour(tempTour);
     } else {
-
+      this.alert.showAlert({type: 'danger', message: 'Melde dich erst an!'})
     }
   }
 
