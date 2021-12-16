@@ -37,6 +37,7 @@ export class TourService {
   }
 
 
+
 // Suchen von Tours
   async searchTours(offer: boolean, startCity: string, endCity: string, date: string, storage: number, seats: number): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
