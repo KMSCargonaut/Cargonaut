@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProfilComponent} from "./components/profil/profil.component";
 import {CarlistComponent} from "./components/carlist/carlist.component";
-import {SuchleisteComponent} from "./components/main-page/suchleiste/suchleiste.component";
 import {MainPageComponent} from "./components/main-page/main-page.component";
+import {CreateToursComponent} from "./components/create-tours/create-tours.component";
 
 const routes: Routes = [
 
@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: '',
     component: MainPageComponent
+  },
+  {
+    path: 'createTours',
+    component: CreateToursComponent
   }
 ];
 

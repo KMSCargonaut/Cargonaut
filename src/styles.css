@@ -2,3 +2,16 @@
 .logoGreenDark {
   color: #005B51;
 }
+
+.logoGreenLight {
+  color: #F3FBED;
+}
+
+.logoGreenMedium {
+  color: #208479;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+}
