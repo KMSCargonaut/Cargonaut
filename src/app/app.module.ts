@@ -20,6 +20,7 @@ import { LoggedinComponent } from './components/profil/loggedin/loggedin.compone
 import { CarlistComponent } from './components/carlist/carlist.component';
 import { CarItemComponent } from './components/carlist/car-item/car-item.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { TourListComponent } from './components/tour-list/tour-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     CarItemComponent,
     InfoboxComponent,
     SuchleisteComponent,
-    MainPageComponent
+    MainPageComponent,
+    TourListComponent
   ],
     imports: [
         BrowserModule,
