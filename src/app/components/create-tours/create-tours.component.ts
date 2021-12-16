@@ -68,6 +68,10 @@ export class CreateToursComponent {
     }
   }
 
+  value(val: any) {
+    console.log('prica: ', val, ', ', typeof val);
+  }
+
   async checkInput() {
     if (
       this.startTime.trim().length > 0 &&
@@ -77,7 +81,7 @@ export class CreateToursComponent {
       this.date.trim().length > 0 &&
       this.seats.trim().length > 0 &&
       this.storage.trim().length > 0 &&
-      this.price.trim().length > 0
+      Number.parseInt(this.price) > 0
     ) {
       await this.addTour();
     } else {
@@ -104,7 +108,20 @@ export class CreateToursComponent {
         ? tempTour.driver = this.userData.currUser.uid
         : tempTour.passengers[0] = this.userData.currUser.uid;
       await this.tourData.addTour(tempTour);
+      this.clearInputs();
     }
+  }
+
+  clearInputs() {
+    this.startCity = '';
+    this.endCity = '';
+    this.startTime = '';
+    this.duration = '';
+    this.date = '';
+    this.price = '';
+    this.storage = '';
+    this.seats = '';
+    this.description = '';
   }
 
 }

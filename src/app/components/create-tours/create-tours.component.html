@@ -60,14 +60,14 @@
       <div class="col">
         <div class="form-group">
           <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
-          <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime" (keydown)="calculateEndTime()">
+          <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime" (change)="calculateEndTime()">
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
           <label for="duration" class="logoGreenDark">Dauer</label>
-          <select name="" id="duration" class="form-control" [(ngModel)]="duration" (click)="calculateEndTime()">
+          <select name="" id="duration" class="form-control" [(ngModel)]="duration" (change)="calculateEndTime()">
             <option value=""></option>
             <option value="1">1h</option>
             <option value="2">2h</option>
@@ -133,8 +133,8 @@
         <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
         <div class="">
           <!--        null komma null responsiv -->
-          <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
-                 style="min-width: 100%; max-width: 100%">
+          <input #pri type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
+                 style="min-width: 100%; max-width: 100%" (keydown.enter)="value(pri.value)">
         </div>
       </div>
     </div>
