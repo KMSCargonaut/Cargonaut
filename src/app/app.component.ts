@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {Tour} from "./models/Tour";
+import {TourService} from "./services/tour.service";
 
 
 @Component({
@@ -10,8 +12,7 @@ import {Router} from "@angular/router";
 export class AppComponent {
   title = 'Cargonaut';
 
-
-  constructor(private router: Router) {
+  constructor(private router: Router,private tour: TourService) {
     if (this.router.url === '/profil') {
       this.router.navigate(['/profil'])
     }
@@ -22,5 +23,6 @@ export class AppComponent {
       this.router.navigate(['/createTours'])
     }
   }
+
 
 }

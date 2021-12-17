@@ -40,4 +40,5 @@ export class Tour {
     this.car = (car) ? car : null;
     this.evaluation = -1;
   }
+
 }

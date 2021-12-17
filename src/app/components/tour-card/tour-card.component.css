@@ -1,0 +1,9 @@
+.profil {
+  position: relative;
+  bottom: +8px;
+  left: +10px;
+}
+
+.card-body:hover {
+  cursor: pointer;
+}
