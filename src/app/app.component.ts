@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {Tour} from "./models/Tour";
+import {TourService} from "./services/tour.service";
 
 
 @Component({
@@ -9,9 +11,10 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'Cargonaut';
+  tours: Tour[] = [];
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private tour: TourService) {
     if (this.router.url === '/profil') {
       this.router.navigate(['/profil'])
     }
@@ -21,6 +24,14 @@ export class AppComponent {
     if(this.router.url === '/createTours') {
       this.router.navigate(['/createTours'])
     }
+
+    this.test()
+  }
+
+  async test(){
+    await this.tour.getAllTours().then((tours) => {
+      this.tours = [...tours]
+    })
   }
 
 }

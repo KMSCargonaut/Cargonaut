@@ -22,6 +22,7 @@ import { CarItemComponent } from './components/carlist/car-item/car-item.compone
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
+import { TourCardComponent } from './components/tour-card/tour-card.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
     SuchleisteComponent,
     MainPageComponent,
     CreateToursComponent,
-    AlertsComponent
+    AlertsComponent,
+    TourCardComponent
   ],
     imports: [
         BrowserModule,
