@@ -36,6 +36,15 @@ export class TourService {
       .catch((err) => console.log(err))
   }
 
+  async getAllTours(): Promise<Tour[]> {
+    return this.afs.collection<Tour>('Tours').get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        const tour: Tour = doc.data();
+        tour.dID = doc.id;
+        return tour
+      }))
+  }
+
 
 // Suchen von Tours
   async searchTours(offer: boolean, startCity: string, endCity: string, date: string, storage: number, seats: number): Promise<Tour[]> {

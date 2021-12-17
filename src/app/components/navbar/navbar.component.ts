@@ -16,6 +16,10 @@ export class NavbarComponent {
     this.router.navigate(['/profil'])
   }
 
+  navigateToTours(){
+    this.router.navigate(['/tours'])
+  }
+
   navigateToMainPage() {
     this.router.navigate(['/'])
   }

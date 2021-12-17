@@ -21,6 +21,7 @@ import { CarlistComponent } from './components/carlist/carlist.component';
 import { CarItemComponent } from './components/carlist/car-item/car-item.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { TourListComponent } from './components/tour-list/tour-list.component';
+import { TourSiteComponent } from './components/tour-site/tour-site.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TourListComponent } from './components/tour-list/tour-list.component';
     InfoboxComponent,
     SuchleisteComponent,
     MainPageComponent,
-    TourListComponent
+    TourListComponent,
+    TourSiteComponent
   ],
     imports: [
         BrowserModule,
