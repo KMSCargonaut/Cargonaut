@@ -19,10 +19,11 @@ export class AppComponent {
     if (this.router.url === '/carList'){
       this.router.navigate(['/carList'])
     }
+    if(this.router.url === '/tours') {
+      this.router.navigate(['/tours'])
+    }
     if(this.router.url === '/createTours') {
       this.router.navigate(['/createTours'])
     }
   }
-
-
 }

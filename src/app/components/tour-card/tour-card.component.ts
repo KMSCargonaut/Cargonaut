@@ -6,14 +6,18 @@ import {Tour} from "../../models/Tour";
   templateUrl: './tour-card.component.html',
   styleUrls: ['./tour-card.component.css']
 })
-export class TourCardComponent {
+export class TourCardComponent implements OnInit{
 
   @Input()
-  tour: Tour = new Tour(false, '','','19:20',0,'2021-12-07',0,0,0,'',);
+  tour: Tour = new Tour(false, '','','',0,'',0,0,0,'',);
   mergeDateAndTime = ''
 
   constructor() {
+  }
+
+  ngOnInit(){
     this.mergeDateAndTime = this.tour.date + 'T' + this.tour.startTime;
+    console.log(this.mergeDateAndTime)
   }
 
   navigateToDetails() {

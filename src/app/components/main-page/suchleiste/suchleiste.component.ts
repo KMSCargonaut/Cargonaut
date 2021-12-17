@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-suchleiste',
@@ -11,6 +11,10 @@ export class SuchleisteComponent{
 
   searchbarheigth = "5em";
   iconsize = "25px";
+
+  scroll(el: HTMLElement){
+    el.scrollIntoView({behavior: "smooth"});
+  }
 
 
 }

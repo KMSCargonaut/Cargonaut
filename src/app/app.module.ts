@@ -20,6 +20,8 @@ import { LoggedinComponent } from './components/profil/loggedin/loggedin.compone
 import { CarlistComponent } from './components/carlist/carlist.component';
 import { CarItemComponent } from './components/carlist/car-item/car-item.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { TourListComponent } from './components/tour-list/tour-list.component';
+import { TourSiteComponent } from './components/tour-site/tour-site.component';
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
@@ -39,6 +41,8 @@ import { TourCardComponent } from './components/tour-card/tour-card.component';
     InfoboxComponent,
     SuchleisteComponent,
     MainPageComponent,
+    TourListComponent,
+    TourSiteComponent,
     CreateToursComponent,
     AlertsComponent,
     TourCardComponent
