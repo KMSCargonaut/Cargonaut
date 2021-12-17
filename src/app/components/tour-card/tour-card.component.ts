@@ -9,12 +9,16 @@ import {Tour} from "../../models/Tour";
 export class TourCardComponent {
 
   @Input()
-  tours: Tour[] = [];
+  tour: Tour = new Tour(false, '','','19:20',0,'2021-12-07',0,0,0,'',);
+  mergeDateAndTime = ''
 
-  constructor() { }
+  constructor() {
+    this.mergeDateAndTime = this.tour.date + 'T' + this.tour.startTime;
+  }
 
   navigateToDetails() {
-console.log(this.tours)
+    console.log(this.tour)
   }
+
 
 }

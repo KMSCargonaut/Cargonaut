@@ -11,8 +11,6 @@ import {TourService} from "./services/tour.service";
 })
 export class AppComponent {
   title = 'Cargonaut';
-  tours: Tour[] = [];
-
 
   constructor(private router: Router,private tour: TourService) {
     if (this.router.url === '/profil') {
@@ -24,14 +22,7 @@ export class AppComponent {
     if(this.router.url === '/createTours') {
       this.router.navigate(['/createTours'])
     }
-
-    this.test()
   }
 
-  async test(){
-    await this.tour.getAllTours().then((tours) => {
-      this.tours = [...tours]
-    })
-  }
 
 }
