@@ -25,5 +25,8 @@ export class AppComponent {
     if(this.router.url === '/createTours') {
       this.router.navigate(['/createTours'])
     }
+    if (this.router.url === '/exprofile') {
+      this.router.navigate(['/exprofile']);
+    }
   }
 }
