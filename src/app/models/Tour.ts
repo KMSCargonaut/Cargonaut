@@ -6,9 +6,9 @@ export class Tour {
   offer: boolean;
   startCity: string;
   endCity: string;
-  startTime: number;
-  EndTime: number;
-  date: Date;
+  startTime: string;
+  duration: number;
+  date: string;
   price: number;
   storage: number;
   seats: number;
@@ -20,19 +20,19 @@ export class Tour {
   car: Car | null;
   evaluation: number;
 
-  constructor(offer: boolean, startCity: string, endCity: string, startTime: number, EndTime: number, date: Date,
-              price: number, storage: number, seats: number, description: string,
+  constructor(offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
+              price: number, storage: number, seats: number, description?: string,
               driver?: string, passengers?: string[], car?: Car) {
     this.offer = offer;
     this.startCity = startCity;
     this.endCity = endCity;
     this.startTime = startTime;
-    this.EndTime = EndTime;
+    this.duration = duration;
     this.date = date;
     this.price = price;
     this.storage = storage;
     this.seats = seats;
-    this.description = description;
+    this.description = (description) ? description: '';
     this.driver = (driver) ? driver : '';
     this.passengers = (passengers) ? passengers: [];
     this.booked = false;
@@ -40,4 +40,5 @@ export class Tour {
     this.car = (car) ? car : null;
     this.evaluation = -1;
   }
+
 }

@@ -24,4 +24,8 @@ export class NavbarComponent {
     this.router.navigate(['/'])
   }
 
+  navigateToCreateTourPage() {
+    this.router.navigate(['/createTours']);
+  }
+
 }

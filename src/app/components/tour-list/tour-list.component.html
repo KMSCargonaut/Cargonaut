@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="row">
-    <div class="col" *ngFor="let tour of tours; let i = index">
-      <h1>{{tour.price}}</h1>
+  <div class="row justify-content-center" *ngFor="let tour of tours; let i = index">
+    <div class="col-6">
+      <app-tour-card *ngIf="tour.offer" [tour]="tour"></app-tour-card>
     </div>
   </div>
 </div>
+<div style="height: 50px"></div>

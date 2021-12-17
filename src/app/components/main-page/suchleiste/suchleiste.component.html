@@ -43,9 +43,11 @@
               </div>
             </div>
             <div class="col colpad">
-              <button type="button" class="btn btn-primary btn-block " style="margin-top: -1em; background-color: #005B51;  height: {{searchbarheigth}}; border-radius: 0px 35px 35px 0px"><h3>Suchen</h3></button>
+              <button type="button" class="btn btn-primary btn-block " style="margin-top: -1em; background-color: #005B51;  height: {{searchbarheigth}}; border-radius: 0px 35px 35px 0px" (click)="scroll(target)"><h3>Suchen</h3></button>
             </div>
           </div>
 
     </div>
+  <div style="height: 200px"></div>
+  <div #target></div>
 </header>
