@@ -1,4 +1,3 @@
-import {Car} from "./Car";
 import {Status} from "./Status";
 
 export class Tour {

@@ -25,17 +25,16 @@ export class UserService {
     })
   }
 
+  // User-Handler
+
   async userExist(user: User) {
     this.user = user;
     const tempUser = await this.getUser(user.uid);
-
     if (tempUser) {
-      // authenticated user was found in the database 'Users'
       this.currUser = tempUser;
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
-      // authenticated user was not found in the database 'Users'
       await this.userNotExist()
     }
   }
@@ -46,8 +45,6 @@ export class UserService {
     console.log('no User')
   }
 
-
-  // User
   async getUser(uid: string): Promise<UserCargo | undefined> {
     return this.getAllUser().then(users => users.find(user => user.uid === uid))
   }
@@ -61,7 +58,6 @@ export class UserService {
       })
     );
   }
-
 
   async addUser(user: UserCargo) {
     const tempUser = this.copyAndPrepareUser(user);
@@ -99,6 +95,12 @@ export class UserService {
     await firebase.auth().currentUser?.delete();
   }
 
+  async register(email: string, password: string) {
+    await this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  // Car-Handler for User
+
   async deleteCar(id: string){
     if(this.currUser) {
       const index = this.currUser.car.indexOf(id,0);
@@ -114,7 +116,4 @@ export class UserService {
     }
   }
 
-  async register(email: string, password: string) {
-    await this.auth.createUserWithEmailAndPassword(email, password);
-  }
 }
