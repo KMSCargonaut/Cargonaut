@@ -31,15 +31,14 @@ export class CreateToursComponent {
   }
 
 
-  offerOnOff() {
-    this.isOffer = !this.isOffer;
-    console.log(this.isOffer);
-  }
-
   navigateToProfil() {
     this.router.navigate(['/profil']);
   }
 
+  offerOnOff() {
+    this.isOffer = !this.isOffer;
+    console.log(this.isOffer);
+  }
 
   calculateEndTime() {
     if (this.startTime.trim().length > 0 && this.duration.trim().length > 0 && this.date.trim().length > 0) {
