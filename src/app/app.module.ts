@@ -25,6 +25,7 @@ import { TourSiteComponent } from './components/tour-site/tour-site.component';
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
+import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
 import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
 
 @NgModule({
@@ -47,6 +48,7 @@ import { StrangerProfileComponent } from './components/stranger-profile/stranger
     CreateToursComponent,
     AlertsComponent,
     TourCardComponent,
+    SlideCheckerComponent,
     StrangerProfileComponent
   ],
     imports: [

@@ -1,4 +1,5 @@
 export class Car {
+  id?: string;
   model: string;
   mark: string;
   seats: number;
