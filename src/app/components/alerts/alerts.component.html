@@ -1,6 +1,6 @@
 
 <div class="d-flex justify-content-center w-100 test">
   <p *ngFor="let alert of alert.alerts">
-    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{alert.message}}</ngb-alert>
+    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{alert.message}} </ngb-alert>
   </p>
 </div>
