@@ -71,16 +71,9 @@ export class UserService {
   }
 
   async updateUser(user: UserCargo) {
-    // const tempUser = this.copyAndPrepareUser(user);
-    /*let tempCar = [];
-    for(let car of tempUser.car){
-      tempCar.push(this.copyAndPrepareCar(car))
-    }
-    tempUser.car = tempCar;*/
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
-  // Alle seine Tours müssen auch gelöscht werden!
   async deleteUser() {
     if (this.currUser) {
       await this.userCollection.doc(this.currUser.dId).delete();
@@ -91,27 +84,19 @@ export class UserService {
     return {...user};
   }
 
-  // Brauchen wir nicht mehr, da es ein string[] ist
-  /*copyAndPrepareCar(car: Car): Car {
-    return {...car}
-  }*/
-
 
   // Authentication
 
   async login(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password);
-    console.log('logged in');
   }
 
   async logout() {
     await this.auth.signOut();
-    console.log('logged out');
   }
 
   async deleteAccount() {
     await firebase.auth().currentUser?.delete();
-    console.log('deleted account');
   }
 
   async deleteCar(id: string){
@@ -131,6 +116,5 @@ export class UserService {
 
   async register(email: string, password: string) {
     await this.auth.createUserWithEmailAndPassword(email, password);
-    console.log('created account')
   }
 }

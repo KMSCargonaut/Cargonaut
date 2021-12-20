@@ -20,38 +20,14 @@ export class CarsService {
   async addCar(car: Car): Promise<string> {
     return this.carCollection.add(this.copyAndPrepareCar(car))
       .then((doc) => {
-        console.log('car added: ', doc.id)
         return doc.id;
       })
   }
 
   async deleteCar(id: string) {
     this.carCollection.doc(id).delete()
-      .then(() => console.log('car deleted'))
       .catch((e) => console.log(e));
   }
-
-  private async getAllCars(): Promise<Car[]> {
-    return this.afs.collection<Car>('Cars').get().toPromise().then(snapshot =>
-      snapshot.docs.map(doc => {
-        const car: Car = doc.data();
-        car.id = doc.id;
-        return car;
-      }))
-  }
-
- /* public async getCarsFromUser(uid: string) {
-    const cars = [];
-    const user = await this.userData.getUser(uid);
-    if (user) {
-      if (user.car.length > 0) {
-        for (const tempCar of user.car) {
-          cars.push(this.getCarById(tempCar))
-        }
-      }
-    }
-    return cars;
-  }*/
 
   async getCarById(id: string) {
     return this.carCollection.doc(id).get().toPromise()
@@ -67,7 +43,6 @@ export class CarsService {
         } else {
           return null;
         }
-
       })
   }
 
