@@ -129,6 +129,18 @@
         <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
       </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="cars" class="logoGreenDark">Fahrzeug</label>
+          <select name="" id="cars" class="form-control" [(ngModel)]="cars">
+            <option value="{{car.id}}" *ngFor="let car of this.userData.currUser.car; let i = index">
+              {{car.model}} {{car.mark}},
+              Sitze: {{car.seats}}
+              Stauraum: {{car.storage}}qm
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-5 m-4">
@@ -140,9 +152,9 @@
 </div>
 
 
-<ng-template #notloggedin >
+<ng-template #notloggedin>
 
-   <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
+  <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
     <div class="row">
       <div class="col text-center mt-3 h2 logoGreenDark">
         Melde dich an, um eine Tour zu erstellen!
@@ -154,5 +166,5 @@
         <button class="btn btn-outline-success btn-lg m-3" (click)="navigateToProfil()">Anmelden</button>
       </div>
     </div>
-    </div>
+  </div>
 </ng-template>

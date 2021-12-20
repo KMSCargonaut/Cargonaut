@@ -23,6 +23,7 @@ export class CreateToursComponent {
   storage = '';
   price = '';
   description = '';
+  cars = ''
 
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
