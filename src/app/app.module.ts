@@ -27,6 +27,7 @@ import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
 import { AddMoneyComponent } from './components/add-money/add-money.component';
+import { LoadMoneyButtonComponent } from './components/add-money/load-money-button/load-money-button.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AddMoneyComponent } from './components/add-money/add-money.component';
     AlertsComponent,
     TourCardComponent,
     SlideCheckerComponent,
-    AddMoneyComponent
+    AddMoneyComponent,
+    LoadMoneyButtonComponent
   ],
     imports: [
         BrowserModule,

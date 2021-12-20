@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
+import {RegistrationComponent} from "../../registration/registration.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddMoneyComponent} from "../../add-money/add-money.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -10,7 +13,7 @@ import {Router} from "@angular/router";
 export class LoggedinComponent {
 
 
-  constructor(public userData: UserService, private router: Router) {
+  constructor(public userData: UserService, private router: Router, public modalService: NgbModal) {
   }
 
   async logout(): Promise<void> {
@@ -25,5 +28,12 @@ export class LoggedinComponent {
 
   navigateToCarList() {
     this.router.navigate(['/carList'])
+  }
+
+  openRegistrationModal(): void {
+    this.modalService.open(AddMoneyComponent, {
+      animation: true,
+      centered: true
+    });
   }
 }

@@ -1,1 +1,54 @@
-<p>add-money works!</p>
+<!--  Modal Header -->
+<div class="modal-header border-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-6"></div>
+      <div class="col-12 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Geld aufladen</div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--  Modal Body  -->
+<div class="modal-body border-0">
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-2">
+          <button>
+            <app-load-money-button [amount]="smallAmount"></app-load-money-button>
+          </button>
+        </div>
+
+        <div class="col-2">
+          <button>
+            <app-load-money-button [amount]="midAmount"></app-load-money-button>
+          </button>
+        </div>
+
+        <div class="col-2">
+          <button>
+            <app-load-money-button [amount]="bigAmount"></app-load-money-button>
+          </button>
+        </div>
+
+        <div class="col-2">
+          <button>
+            <app-load-money-button [amount]="hugeAmount"></app-load-money-button>
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
