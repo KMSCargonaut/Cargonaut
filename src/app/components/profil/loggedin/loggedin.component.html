@@ -8,7 +8,8 @@
         <button class="btn success btn-light ">Profilbild bearbeiten</button>
         <button class="btn success btn-light" (click)="navigateToCarList()">Fahrzeuge verwalten</button>
         <button class="btn success btn-light " (click)="logout()">Logout</button>
-        <button class="btn danger btn-danger " (click)="deleteAccount()">Account löschen</button><br>
+        <button class="btn danger btn-danger " (click)="deleteAccount()">Account löschen</button>
+        <br>
       </div>
     </div>
   </div>
@@ -19,7 +20,17 @@
 <div class="container">
   <div class="row">
     <div class="col text-center">
-      <div class="h3" *ngIf="this.userData.currUser">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil</div>
+      <div class="h3" *ngIf="this.userData.currUser">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button (click)="test()">Test</button>
     </div>
   </div>
 </div>
