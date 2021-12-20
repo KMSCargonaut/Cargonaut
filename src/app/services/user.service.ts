@@ -25,17 +25,16 @@ export class UserService {
     })
   }
 
+  // User-Handler
+
   async userExist(user: User) {
     this.user = user;
     const tempUser = await this.getUser(user.uid);
-
     if (tempUser) {
-      // authenticated user was found in the database 'Users'
       this.currUser = tempUser;
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
-      // authenticated user was not found in the database 'Users'
       await this.userNotExist()
     }
   }
@@ -46,8 +45,6 @@ export class UserService {
     console.log('no User')
   }
 
-
-  // User
   async getUser(uid: string): Promise<UserCargo | undefined> {
     return this.getAllUser().then(users => users.find(user => user.uid === uid))
   }
@@ -62,7 +59,6 @@ export class UserService {
     );
   }
 
-
   async addUser(user: UserCargo) {
     const tempUser = this.copyAndPrepareUser(user);
     await this.userCollection.add(tempUser).then().catch((err) => {
@@ -71,16 +67,9 @@ export class UserService {
   }
 
   async updateUser(user: UserCargo) {
-    // const tempUser = this.copyAndPrepareUser(user);
-    /*let tempCar = [];
-    for(let car of tempUser.car){
-      tempCar.push(this.copyAndPrepareCar(car))
-    }
-    tempUser.car = tempCar;*/
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
-  // Alle seine Tours müssen auch gelöscht werden!
   async deleteUser() {
     if (this.currUser) {
       await this.userCollection.doc(this.currUser.dId).delete();
@@ -91,28 +80,26 @@ export class UserService {
     return {...user};
   }
 
-  // Brauchen wir nicht mehr, da es ein string[] ist
-  /*copyAndPrepareCar(car: Car): Car {
-    return {...car}
-  }*/
-
 
   // Authentication
 
   async login(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password);
-    console.log('logged in');
   }
 
   async logout() {
     await this.auth.signOut();
-    console.log('logged out');
   }
 
   async deleteAccount() {
     await firebase.auth().currentUser?.delete();
-    console.log('deleted account');
   }
+
+  async register(email: string, password: string) {
+    await this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  // Car-Handler for User
 
   async deleteCar(id: string){
     if(this.currUser) {
@@ -129,8 +116,4 @@ export class UserService {
     }
   }
 
-  async register(email: string, password: string) {
-    await this.auth.createUserWithEmailAndPassword(email, password);
-    console.log('created account')
-  }
 }
