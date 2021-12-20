@@ -14,11 +14,9 @@ export class UserService {
   private userCollection: AngularFirestoreCollection<UserCargo>;
   public user: User | null = null;
   public currUser: UserCargo | null = null;
-  public userObserv: Observable<firebase.User | null>;
 
   constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
     this.userCollection = afs.collection<UserCargo>('Users');
-    this.userObserv = this.auth.user;
     this.auth.user.subscribe(async (user) => {
       if (user) {
         await this.userExist(user);

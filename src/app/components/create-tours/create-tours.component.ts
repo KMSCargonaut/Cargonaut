@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, DoCheck, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
