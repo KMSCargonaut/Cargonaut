@@ -1,2 +1,5 @@
 <app-suchleiste></app-suchleiste>
-<app-tour-list></app-tour-list>
+
+<app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
+
+<app-tour-list [isOffer]="isOffer"></app-tour-list>

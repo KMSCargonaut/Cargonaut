@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class TourSiteComponent{
 
   searchbarheigth = "5em";
-  iconsize = "25px";
+  isOffer: boolean = false;
 
   constructor() { }
 
+  offerOnOff() {
+    this.isOffer = !this.isOffer;
+    console.log(this.isOffer);
+  }
 
 }

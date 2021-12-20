@@ -25,6 +25,7 @@ import { TourSiteComponent } from './components/tour-site/tour-site.component';
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
+import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TourCardComponent } from './components/tour-card/tour-card.component';
     TourSiteComponent,
     CreateToursComponent,
     AlertsComponent,
-    TourCardComponent
+    TourCardComponent,
+    SlideCheckerComponent
   ],
     imports: [
         BrowserModule,

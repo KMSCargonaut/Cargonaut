@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
 
@@ -10,6 +10,7 @@ import {Tour} from "../../models/Tour";
 export class TourListComponent{
 
   tours: Tour[] = []
+  @Input() isOffer: boolean = false;
 
   constructor(public tourService: TourService) {
     this.setTours().then();
