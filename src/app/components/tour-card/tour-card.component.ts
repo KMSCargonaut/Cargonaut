@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
-import {UserCargo} from "../../models/UserCargo";
 
 @Component({
   selector: 'app-tour-card',

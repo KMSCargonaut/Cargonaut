@@ -4,7 +4,6 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
 import User = firebase.User;
-import {Car} from "../models/Car";
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +48,8 @@ export class UserService {
 
 
   // User
-  async getUser(id: string): Promise<UserCargo | undefined> {
-    return this.getAllUser().then(users => users.find(user => user.uid === id))
+  async getUser(uid: string): Promise<UserCargo | undefined> {
+    return this.getAllUser().then(users => users.find(user => user.uid === uid))
   }
 
   async getAllUser(): Promise<UserCargo[]> {
@@ -72,15 +71,16 @@ export class UserService {
   }
 
   async updateUser(user: UserCargo) {
-    const tempUser = this.copyAndPrepareUser(user);
-    let tempCar = [];
+    // const tempUser = this.copyAndPrepareUser(user);
+    /*let tempCar = [];
     for(let car of tempUser.car){
       tempCar.push(this.copyAndPrepareCar(car))
     }
-    tempUser.car = tempCar;
-    await this.userCollection.doc(user.dId).update(tempUser);
+    tempUser.car = tempCar;*/
+    await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
+  // Alle seine Tours müssen auch gelöscht werden!
   async deleteUser() {
     if (this.currUser) {
       await this.userCollection.doc(this.currUser.dId).delete();
@@ -91,9 +91,10 @@ export class UserService {
     return {...user};
   }
 
-  copyAndPrepareCar(car: Car): Car {
+  // Brauchen wir nicht mehr, da es ein string[] ist
+  /*copyAndPrepareCar(car: Car): Car {
     return {...car}
-  }
+  }*/
 
 
   // Authentication
@@ -113,13 +114,18 @@ export class UserService {
     console.log('deleted account');
   }
 
-  async deleteCar(mark: string){
+  async deleteCar(id: string){
     if(this.currUser) {
-      this.currUser.car = this.currUser.car.filter((item) => {
-        console.log(item.mark !== mark);
-        return item.mark !== mark
-      });
-      this.updateUser(this.currUser).then();
+      const index = this.currUser.car.indexOf(id,0);
+      this.currUser.car.splice(index,1);
+      await this.updateUser(this.currUser);
+    }
+  }
+
+  async addCar(id: string) {
+    if (this.currUser) {
+      this.currUser.car.push(id);
+      await this.updateUser(this.currUser)
     }
   }
 
