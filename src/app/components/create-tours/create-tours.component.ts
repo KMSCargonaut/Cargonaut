@@ -1,9 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, Component, DoCheck, OnChanges, OnInit} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
 import {AlertService} from "../../services/alert.service";
 import {Router} from "@angular/router";
+import {Car} from "../../models/Car";
+import {CarsService} from "../../services/cars.service";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {UserCargo} from "../../models/UserCargo";
 
 @Component({
   selector: 'app-create-tours',
@@ -11,6 +15,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./create-tours.component.css']
 })
 export class CreateToursComponent {
+
+  userCars: Car[] = [];
 
   isOffer: boolean = true;
   startCity = '';
@@ -23,11 +29,31 @@ export class CreateToursComponent {
   storage = '';
   price = '';
   description = '';
-  cars = ''
+  chosenCar = '';
 
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
-              private router: Router) {
+              private router: Router, public carData: CarsService, public auth: AngularFireAuth) {
+    this.auth.user.subscribe((user) => {
+      if(user) {
+        this.fillUserCars(user.uid).then()
+      }
+    })
+  }
+
+  //nicht schön, bearbeitungsbedarf
+  async fillUserCars(uid: string) {
+    const currUser: UserCargo | undefined = await this.userData.getUser(uid);
+    if (currUser && currUser.car.length > 0) {
+      for (const tempCarId of currUser.car) {
+        const tempCar = await this.carData.getCarById(tempCarId);
+        if (tempCar) {
+          this.userCars.push(tempCar)
+        }
+      }
+    } else {
+      console.log('currUser nicht gefunden! Funktion wurde früher gezündet als currUser gestzt wird')
+    }
   }
 
 
@@ -73,6 +99,7 @@ export class CreateToursComponent {
   }
 
   async checkInput() {
+    console.log(this.chosenCar)
     if (
       this.startTime.trim().length > 0 &&
       this.endCity.trim().length > 0 &&
@@ -91,6 +118,7 @@ export class CreateToursComponent {
 
 
   async addTour() {
+    const currUser = this.userData.currUser;
     let tempTour = new Tour(
       this.isOffer,
       this.startCity,
@@ -103,10 +131,13 @@ export class CreateToursComponent {
       Number.parseInt(this.seats),
       this.description
     );
-    if (this.userData.currUser) {
-      (this.isOffer)
-        ? tempTour.driver = this.userData.currUser.uid
-        : tempTour.passengers[0] = this.userData.currUser.uid;
+    if (currUser) {
+      if (this.isOffer) {
+        tempTour.driver = currUser.uid;
+        tempTour.car = this.chosenCar;
+      } else {
+        tempTour.passengers[0] = currUser.uid;
+      }
       await this.tourData.addTour(tempTour);
       this.clearInputs();
     }

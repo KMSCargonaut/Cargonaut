@@ -132,8 +132,8 @@
       <div class="col">
         <div class="form-group">
           <label for="cars" class="logoGreenDark">Fahrzeug</label>
-          <select name="" id="cars" class="form-control" [(ngModel)]="cars">
-            <option value="{{car.id}}" *ngFor="let car of this.userData.currUser.car; let i = index">
+          <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
+            <option value="{{car.id}}" *ngFor="let car of this.userCars; let i = index">
               {{car.model}} {{car.mark}},
               Sitze: {{car.seats}}
               Stauraum: {{car.storage}}qm
