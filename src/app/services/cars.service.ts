@@ -35,7 +35,7 @@ export class CarsService {
     return this.afs.collection<Car>('Cars').get().toPromise().then(snapshot =>
       snapshot.docs.map(doc => {
         const car: Car = doc.data();
-        car.id = doc.id;
+        car.dId = doc.id;
         return car;
       }))
   }
@@ -59,7 +59,7 @@ export class CarsService {
         if (doc.exists) {
           const car: Car | undefined = doc.data();
           if (car != undefined) {
-            car.id = doc.id;
+            car.dId = doc.id;
             return car;
           } else {
             return null;

@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
 import User = firebase.User;
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,11 @@ export class UserService {
   private userCollection: AngularFirestoreCollection<UserCargo>;
   public user: User | null = null;
   public currUser: UserCargo | null = null;
+  public userObserv: Observable<firebase.User | null>;
 
   constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
     this.userCollection = afs.collection<UserCargo>('Users');
+    this.userObserv = this.auth.user;
     this.auth.user.subscribe(async (user) => {
       if (user) {
         await this.userExist(user);
@@ -28,14 +31,11 @@ export class UserService {
   async userExist(user: User) {
     this.user = user;
     const tempUser = await this.getUser(user.uid);
-
     if (tempUser) {
-      // authenticated user was found in the database 'Users'
       this.currUser = tempUser;
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
-      // authenticated user was not found in the database 'Users'
       await this.userNotExist()
     }
   }

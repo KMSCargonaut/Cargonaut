@@ -118,9 +118,8 @@
       <div class="col-4">
         <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
         <div class="">
-          <!--        null komma null responsiv -->
-          <input #pri type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
-                 style="min-width: 100%; max-width: 100%" (keydown.enter)="value(pri.value)">
+          <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
+                 style="min-width: 100%; max-width: 100%">
         </div>
       </div>
     </div>
@@ -129,11 +128,11 @@
         <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
       </div>
-      <div class="col">
+      <div class="col" *ngIf="this.isOffer">
         <div class="form-group">
           <label for="cars" class="logoGreenDark">Fahrzeug</label>
           <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
-            <option value="{{car.id}}" *ngFor="let car of this.userCars; let i = index">
+            <option value="{{car.dId}}" *ngFor="let car of this.userCars; let i = index">
               {{car.model}} {{car.mark}},
               Sitze: {{car.seats}}
               Stauraum: {{car.storage}}qm

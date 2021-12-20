@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, DoCheck, OnChanges, OnInit} from '@angular/core';
+import {AfterContentInit, Component, DoCheck, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
@@ -34,25 +34,27 @@ export class CreateToursComponent {
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
               private router: Router, public carData: CarsService, public auth: AngularFireAuth) {
-    this.auth.user.subscribe((user) => {
-      if(user) {
-        this.fillUserCars(user.uid).then()
+    this.auth.user.subscribe(async (user) => {
+      if (user) {
+        const tempCargoUser = await this.userData.getUser(user.uid);
+        if(tempCargoUser != undefined) {
+          await this.fillCars(tempCargoUser);
+        }
       }
     })
   }
 
-  //nicht schön, bearbeitungsbedarf
-  async fillUserCars(uid: string) {
-    const currUser: UserCargo | undefined = await this.userData.getUser(uid);
-    if (currUser && currUser.car.length > 0) {
-      for (const tempCarId of currUser.car) {
-        const tempCar = await this.carData.getCarById(tempCarId);
-        if (tempCar) {
-          this.userCars.push(tempCar)
+
+  async fillCars(user: UserCargo) {
+    if (user) {
+      const cars = [];
+      for (const carId of user.car) {
+        const car = await this.carData.getCarById(carId);
+        if (car) {
+          cars.push(car)
         }
       }
-    } else {
-      console.log('currUser nicht gefunden! Funktion wurde früher gezündet als currUser gestzt wird')
+      this.userCars = [...cars]
     }
   }
 
@@ -63,7 +65,6 @@ export class CreateToursComponent {
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
-    console.log(this.isOffer);
   }
 
   calculateEndTime() {
@@ -86,40 +87,57 @@ export class CreateToursComponent {
       } else {
         this.endTime = this.date.substr(0, 8) + endDay + "T" + endHours.toString();
       }
-      console.log(this.date);
-      //021-12-02T18:47 so muss endTime aussehen
-      //021-12-02
       this.endTime += this.startTime.substr(2, 3);
-      console.log("Enduhrzeit: " + this.endTime);
+
     }
   }
 
-  value(val: any) {
-    console.log('prica: ', val, ', ', typeof val);
-  }
-
-  async checkInput() {
-    console.log(this.chosenCar)
-    if (
-      this.startTime.trim().length > 0 &&
+  checkUniqueInputs(): boolean {
+    return this.startTime.trim().length > 0 &&
       this.endCity.trim().length > 0 &&
       this.startTime.trim().length > 0 &&
       this.duration.trim().length > 0 &&
       this.date.trim().length > 0 &&
       this.seats.trim().length > 0 &&
       this.storage.trim().length > 0 &&
-      Number.parseInt(this.price) > 0
-    ) {
-      await this.addTour();
-    } else {
-      this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'})
-    }
+      Number.parseInt(this.price) > 0;
   }
 
 
-  async addTour() {
+  async checkInput() {
     const currUser = this.userData.currUser;
-    let tempTour = new Tour(
+    let tempTour = this.newTour();
+    if (currUser) {
+      if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
+        await this.addOffer(tempTour, currUser);
+      } else if (this.checkUniqueInputs()) {
+        await this.addNoOffer(tempTour, currUser);
+      } else {
+        this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
+      }
+    }
+
+  }
+
+  async addOffer(tour: Tour, user: UserCargo) {
+    tour.driver = user.uid;
+    tour.car = this.chosenCar;
+    await this.addTour(tour);
+  }
+
+
+  async addNoOffer(tour: Tour, user: UserCargo) {
+    tour.passengers[0] = user.uid;
+    await this.addTour(tour);
+  }
+
+  async addTour(tour: Tour) {
+    await this.tourData.addTour(tour);
+    this.clearInputs();
+  }
+
+  newTour() {
+    return new Tour(
       this.isOffer,
       this.startCity,
       this.endCity,
@@ -131,16 +149,6 @@ export class CreateToursComponent {
       Number.parseInt(this.seats),
       this.description
     );
-    if (currUser) {
-      if (this.isOffer) {
-        tempTour.driver = currUser.uid;
-        tempTour.car = this.chosenCar;
-      } else {
-        tempTour.passengers[0] = currUser.uid;
-      }
-      await this.tourData.addTour(tempTour);
-      this.clearInputs();
-    }
   }
 
   clearInputs() {
@@ -153,6 +161,8 @@ export class CreateToursComponent {
     this.storage = '';
     this.seats = '';
     this.description = '';
+    this.chosenCar = '';
+    this.endTime = '';
   }
 
 }
