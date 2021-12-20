@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center" *ngFor="let tour of tours; let i = index">
     <div class="col-6">
-      <app-tour-card *ngIf="tour.offer" [tour]="tour"></app-tour-card>
+      <app-tour-card *ngIf="tour.offer !== isOffer" [tour]="tour"></app-tour-card>
     </div>
   </div>
 </div>
