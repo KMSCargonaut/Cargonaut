@@ -63,6 +63,7 @@ export class UserService {
     );
   }
 
+
   async addUser(user: UserCargo) {
     const tempUser = this.copyAndPrepareUser(user);
     await this.userCollection.add(tempUser).then().catch((err) => {

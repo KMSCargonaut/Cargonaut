@@ -3,25 +3,11 @@
   <div class="container title-background mw-100">
     <div class="row ">
       <div class="col text-center">
-        <div class="h2 logoGreenDark m-3" *ngIf="this.offer">Erstelle eine Anfrage</div>
-        <div class="h2 logoGreenDark m-3" *ngIf="!this.offer">Erstelle ein Angebot</div>
+        <div class="h2 logoGreenDark m-3" *ngIf="this.isOffer">Erstelle eine Angebot</div>
+        <div class="h2 logoGreenDark m-3" *ngIf="!this.isOffer">Erstelle ein Anfrage</div>
       </div>
     </div>
-    <div class="row m-3 justify-content-center">
-      <div class="col">
-        <div class="d-flex justify-content-center">
-          <div class="logoGreenDark mr-3"><h5>Angebot</h5></div>
-          <div>
-            <label class="switch">
-              <input type="checkbox" (click)="offerOnOff()">
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="logoGreenDark ml-3"><h5>Anfrage</h5></div>
-        </div>
-
-      </div>
-    </div>
+    <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
   </div>
 
   <!-- Create-Form -->
