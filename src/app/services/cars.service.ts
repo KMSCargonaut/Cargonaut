@@ -21,7 +21,6 @@ export class CarsService {
   async addCar(car: Car): Promise<string> {
     return this.carCollection.add(this.copyAndPrepareCar(car))
       .then((doc) => {
-        console.log('car added: ', doc.id)
         return doc.id;
       })
   }
@@ -32,7 +31,6 @@ export class CarsService {
 
   async deleteCar(id: string) {
     this.carCollection.doc(id).delete()
-      .then(() => console.log('car deleted'))
       .catch((e) => console.log(e));
   }
 

@@ -70,7 +70,6 @@ export class UserService {
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
-  // Alle seine Tours müssen auch gelöscht werden!
   async deleteUser() {
     if (this.currUser) {
       await this.userCollection.doc(this.currUser.dId).delete();
@@ -86,22 +85,18 @@ export class UserService {
 
   async login(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password);
-    console.log('logged in');
   }
 
   async logout() {
     await this.auth.signOut();
-    console.log('logged out');
   }
 
   async deleteAccount() {
     await firebase.auth().currentUser?.delete();
-    console.log('deleted account');
   }
 
   async register(email: string, password: string) {
     await this.auth.createUserWithEmailAndPassword(email, password);
-    console.log('created account')
   }
 
   // Car-Handler for User
