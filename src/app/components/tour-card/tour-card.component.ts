@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
+import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {UserCargo} from "../../models/UserCargo";
+import {TourService} from "../../services/tour.service";
 
 @Component({
   selector: 'app-tour-card',
@@ -15,7 +17,7 @@ export class TourCardComponent implements OnInit{
   mergeDateAndTime = ''
   userName = '';
 
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService, private router: Router, public tourService: TourService) {
   }
 
   ngOnInit(){
@@ -24,7 +26,8 @@ export class TourCardComponent implements OnInit{
   }
 
   navigateToDetails() {
-    console.log(this.tour)
+    this.tourService.tourDetails = this.tour
+    this.router.navigate(["/tour-details"])
   }
 
   changeUserName(){

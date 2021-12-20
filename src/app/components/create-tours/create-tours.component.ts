@@ -4,6 +4,7 @@ import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
 import {AlertService} from "../../services/alert.service";
 import {Router} from "@angular/router";
+import {CalculateService} from "../../services/calculate.service";
 
 @Component({
   selector: 'app-create-tours',
@@ -26,7 +27,7 @@ export class CreateToursComponent {
 
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
-              private router: Router) {
+              private router: Router, private calcService: CalculateService) {
   }
 
 
@@ -40,31 +41,7 @@ export class CreateToursComponent {
   }
 
   calculateEndTime() {
-    if (this.startTime.trim().length > 0 && this.duration.trim().length > 0 && this.date.trim().length > 0) {
-      let hours: number = Number.parseInt(this.startTime.substr(0, 2));
-      let duration: number = Number.parseInt(this.duration);
-      let endHours = hours + duration;
-      let endDay = this.date.substr(8, 2);
-
-      if (endHours >= 24) {
-        endDay = (Number.parseInt(endDay) + 1).toString()
-        if (endDay.trim().length < 2) { //Falls Datum in einer der ersten 9 Tage im Monat ist
-          endDay = "0" + endDay;
-        }
-        endHours = endHours % 24;
-      }
-
-      if (endHours < 10) {
-        this.endTime = this.date.substr(0, 8) + endDay + "T0" + endHours.toString();
-      } else {
-        this.endTime = this.date.substr(0, 8) + endDay + "T" + endHours.toString();
-      }
-      console.log(this.date);
-      //021-12-02T18:47 so muss endTime aussehen
-      //021-12-02
-      this.endTime += this.startTime.substr(2, 3);
-      console.log("Enduhrzeit: " + this.endTime);
-    }
+    this.endTime = this.calcService.arrivalTime(this.startTime, this.duration, this.date)
   }
 
   value(val: any) {

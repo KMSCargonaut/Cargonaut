@@ -5,6 +5,7 @@ import {CarlistComponent} from "./components/carlist/carlist.component";
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {TourSiteComponent} from "./components/tour-site/tour-site.component";
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
+import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
 
 const routes: Routes = [
 
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'createTours',
     component: CreateToursComponent
+  },
+  {
+    path: 'tour-details',
+    component: TourDetailsComponent
   }
 ];
 
