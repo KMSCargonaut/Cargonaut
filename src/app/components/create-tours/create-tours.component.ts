@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class CreateToursComponent {
 
-  isOffer: boolean = false;
+  isOffer: boolean = true;
   startCity = '';
   endCity = '';
   startTime = '';
