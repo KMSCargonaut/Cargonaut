@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class CreateToursComponent {
 
-  offer: boolean = false;
+  isOffer: boolean = true;
   startCity = '';
   endCity = '';
   startTime = '';
@@ -23,6 +23,7 @@ export class CreateToursComponent {
   storage = '';
   price = '';
   description = '';
+  cars = ''
 
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
@@ -31,8 +32,8 @@ export class CreateToursComponent {
 
 
   offerOnOff() {
-    this.offer = !this.offer;
-    console.log(this.offer);
+    this.isOffer = !this.isOffer;
+    console.log(this.isOffer);
   }
 
   navigateToProfil() {
@@ -92,7 +93,7 @@ export class CreateToursComponent {
 
   async addTour() {
     let tempTour = new Tour(
-      this.offer,
+      this.isOffer,
       this.startCity,
       this.endCity,
       this.startTime,
@@ -104,7 +105,7 @@ export class CreateToursComponent {
       this.description
     );
     if (this.userData.currUser) {
-      (this.offer)
+      (this.isOffer)
         ? tempTour.driver = this.userData.currUser.uid
         : tempTour.passengers[0] = this.userData.currUser.uid;
       await this.tourData.addTour(tempTour);
