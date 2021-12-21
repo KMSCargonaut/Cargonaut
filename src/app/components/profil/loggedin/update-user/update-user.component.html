@@ -20,7 +20,7 @@
 
 
 <!--  Modal Body  -->
-<div class="modal-body border-0">
+<div class="modal-body border-0" *ngIf="this.userData.currUser">
 
   <div class="container">
 
@@ -28,7 +28,7 @@
       <div class="col">
         <div class="form-group">
           <label for="userLastname">Nachname</label>
-          <input #ln type="text" class="form-control {{wrongLastname}}" id="userLastname" [(ngModel)]="lastname"
+          <input #ln type="text" class="form-control {{wrongLastname}}" id="userLastname" [(ngModel)]="this.userData.currUser.lastname"
                  (keydown)="validLastname(ln.value)"
                  (keydown.enter)="inputCheck()">
           <div *ngIf="lastnameMessage !== ''" class="text-danger">{{lastnameMessage}}</div>
@@ -38,7 +38,7 @@
       <div class="col">
         <div class="form-group">
           <label for="userFirstname">Vorname</label>
-          <input #fn type="text" class="form-control {{wrongFirstname}}" id="userFirstname" [(ngModel)]="firstname"
+          <input #fn type="text" class="form-control {{wrongFirstname}}" id="userFirstname" [(ngModel)]="this.userData.currUser.firstname"
                  (keydown)="validFirstname(fn.value)"
                  (keydown.enter)="inputCheck()">
           <div *ngIf="firstnameMessage !== ''" class="text-danger">{{firstnameMessage}}</div>
@@ -51,7 +51,7 @@
       <div class="col">
         <div class="form-group">
           <label for="">Geschlecht</label>
-          <select #gd name="" id="" class="form-control {{wrongGender}}" [(ngModel)]="gender"
+          <select #gd name="" id="" class="form-control {{wrongGender}}" [(ngModel)]="this.userData.currUser.gender"
                   (change)="validGender(gd.value)"
                   (keydown.enter)="inputCheck()">
             <option value=""></option>
@@ -66,7 +66,7 @@
       <div class="col">
         <div class="form-group">
           <label for="userBirthday">Geburtstag</label>
-          <input #bd type="date" class="form-control {{wrongBirthday}}" id="userBirthday" [(ngModel)]="birthday"
+          <input #bd type="date" class="form-control {{wrongBirthday}}" id="userBirthday" [(ngModel)]="this.userData.currUser.birthday"
                  (change)="validBirthday(bd.value)"
                  (keydown.enter)="inputCheck()">
           <div *ngIf="birthdayMessage !== ''" class="text-danger">{{birthdayMessage}}</div>
@@ -80,7 +80,7 @@
       <div class="col">
         <div class="form-group">
           <label for="userUsername">Nutzername</label>
-          <input #un type="text" class="form-control {{wrongUsername}}" id="userUsername" [(ngModel)]="username"
+          <input #un type="text" class="form-control {{wrongUsername}}" id="userUsername" [(ngModel)]="this.userData.currUser.username"
                  (keydown)="validUsername(un.value)"
                  (keydown.enter)="inputCheck()">
           <div *ngIf="usernameMessage !== ''" class="text-danger">{{usernameMessage}}</div>
@@ -98,7 +98,7 @@
     <div class="row justify-content-center">
       <div class="col-6 ">
         <button type="button" class="btn btn-success mx-auto m-3 btn-block"
-                (click)="inputCheck()">
+                (click)="inputCheck()" (click)="updateUser()" (click)="activeModal.dismiss()">
           Speichern
         </button>
       </div>

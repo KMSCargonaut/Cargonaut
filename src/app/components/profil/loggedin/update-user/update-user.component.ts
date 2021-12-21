@@ -14,40 +14,35 @@ import { time } from 'console';
 })
 export class UpdateUserComponent{
 
-  // ModelBinding
-  public email = '';
+  //Checking Input
   public firstname = this.userData.currUser?.firstname ? this.userData.currUser.firstname: '';
   public lastname = this.userData.currUser?.lastname ? this.userData.currUser.lastname : '';
   public username = this.userData.currUser?.username ? this.userData.currUser.username : '';
   public birthday: Date | null | undefined = this.userData.currUser?.birthday ? this.userData.currUser.birthday : undefined;
-  public password = '';
-  public repeatPassword = '';
   public gender = this.userData.currUser?.gender ? this.userData.currUser.gender : '';
 
   // PropertyBinding for outline color for wrong/no inputs
-  public wrongEmailClass = '';
   public wrongFirstname = '';
   public wrongLastname = '';
   public wrongUsername = '';
   public wrongBirthday = '';
   public wrongGender = '';
-  public wrongPasswordClass = '';
   public wrongRepeatPasswordClass = '';
 
   // Message for wrong/no inputs
-  public emailMessage = '';
   public firstnameMessage = '';
   public lastnameMessage = '';
   public usernameMessage = '';
   public birthdayMessage = '';
   public genderMessage = '';
-  public passwordMessage = '';
   public passwordRepeatMessage = '';
 
   constructor(public activeModal: NgbActiveModal, private router: Router, public userData: UserService) { }
 
   public async updateUser(){
-    console.log("Still need to be done!")
+    if(this.userData.currUser){
+      await this.userData.updateUser(this.userData.currUser);
+    }
   }
 
   public async inputCheck() {
