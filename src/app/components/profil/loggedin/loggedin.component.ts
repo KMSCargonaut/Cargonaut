@@ -11,11 +11,21 @@ import {UpdateUserComponent} from "./update-user/update-user.component";
   templateUrl: './loggedin.component.html',
   styleUrls: ['./loggedin.component.css']
 })
-export class LoggedinComponent {
+export class LoggedinComponent implements OnInit {
 
   currentRate: number = 3;
+  ownOffers: Tour[] = []
 
   constructor(public userData: UserService, private router: Router, public tourData: TourService,  private modalService: NgbModal) {
+  }
+
+  ngOnInit() {
+    this.setTours().then();
+  }
+
+  async setTours(){
+    this.ownOffers = await this.tourData.getAllTours().then();
+    this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid)
   }
 
   async logout(): Promise<void> {
