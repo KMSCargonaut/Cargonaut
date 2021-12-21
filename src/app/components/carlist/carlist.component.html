@@ -57,7 +57,7 @@
   <div style="display: flex; flex-direction: row; justify-content: center">
     <div *ngFor="let car of userService.currUser.car; let i = index">
       <div class="ml-3 mr-3">
-        <app-car-item [car]="car"  (deleteEvent)="userService.deleteCar(car.mark).then()"></app-car-item>
+        <app-car-item [carId]="car" (deleteEvent)="this.deleteCar(car)"></app-car-item>
       </div>
     </div>
   </div>

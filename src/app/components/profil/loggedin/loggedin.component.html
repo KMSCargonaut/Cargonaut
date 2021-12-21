@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!--Top menu -->
-  <div class="sidebar">
+  <div class="container">
     <!--profile image & text-->
     <div class="row">
       <div class="col text-center">
@@ -9,7 +9,7 @@
         <button class="btn success btn-light" (click)="navigateToCarList()">Fahrzeuge verwalten</button>
         <button class="btn success btn-light " (click)="logout()">Logout</button>
         <button class="btn danger btn-danger " (click)="deleteAccount()">Account löschen</button><br>
-        <button class="btn danger btn-success " (click)="openRegistrationModal()">Geld aufladen</button><br>
+        <button class="btn danger btn-success " (click)="openRegistrationModal()">Geld aufladen</button>
       </div>
     </div>
   </div>
@@ -20,7 +20,17 @@
 <div class="container">
   <div class="row">
     <div class="col text-center">
-      <div class="h3" *ngIf="this.userData.currUser">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil</div>
+      <div class="h3" *ngIf="this.userData.currUser">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button (click)="test()">Test</button>
     </div>
   </div>
 </div>

@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {RegistrationComponent} from "../../registration/registration.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddMoneyComponent} from "../../add-money/add-money.component";
+import {TourService} from "../../../services/tour.service";
+import {Tour} from "../../../models/Tour";
 
 @Component({
   selector: 'app-loggedin',
@@ -12,8 +14,7 @@ import {AddMoneyComponent} from "../../add-money/add-money.component";
 })
 export class LoggedinComponent {
 
-
-  constructor(public userData: UserService, private router: Router, public modalService: NgbModal) {
+  constructor(public userData: UserService, private router: Router, public tourData: TourService, public modalService: NgbModal) {
   }
 
   async logout(): Promise<void> {
@@ -23,18 +24,32 @@ export class LoggedinComponent {
   async deleteAccount(): Promise<void> {
     await this.userData.deleteUser();
     await this.userData.deleteAccount();
-    console.log('User deleted');
+    if (this.userData.currUser) {
+      const userTours = await this.tourData.getAllOpenToursFromUser(this.userData.currUser.uid);
+      for (const tour of userTours) {
+        await this.tourData.deleteTour(tour);
+      }
+    }
+  }
+  
+  async test() {
+    const user = this.userData.currUser;
+    if (user) {
+      console.log('Open Tours: ', await this.tourData.getAllOpenToursFromUser(user.uid));
+      console.log('Booked Tours: ', await this.tourData.getAllBookedToursFromUser(user.uid))
+    }
   }
 
   navigateToCarList() {
     this.router.navigate(['/carList'])
   }
 
-  openRegistrationModal(): void {
+  openMoneyModal(): void {
     this.modalService.open(AddMoneyComponent, {
       animation: true,
       centered: true,
       size: "xl"
     });
   }
+  
 }

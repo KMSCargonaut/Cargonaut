@@ -1,4 +1,3 @@
-import {Car} from "./Car";
 import {Status} from "./Status";
 
 export class Tour {
@@ -17,12 +16,12 @@ export class Tour {
   passengers: string[]; // id of the passengers
   booked: boolean;
   status: Status;
-  car: Car | null;
+  car: string;
   evaluation: number;
 
   constructor(offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
               price: number, storage: number, seats: number, description?: string,
-              driver?: string, passengers?: string[], car?: Car) {
+              driver?: string, passengers?: string[], car?: string) {
     this.offer = offer;
     this.startCity = startCity;
     this.endCity = endCity;
@@ -37,7 +36,7 @@ export class Tour {
     this.passengers = (passengers) ? passengers: [];
     this.booked = false;
     this.status = Status.NOSTARTEDYET;
-    this.car = (car) ? car : null;
+    this.car = (car) ? car : '';
     this.evaluation = -1;
   }
 

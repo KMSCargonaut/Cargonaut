@@ -1,5 +1,3 @@
-import {Car} from "./Car";
-
 export class UserCargo {
   dId?: string;
   uid: string;
@@ -8,7 +6,7 @@ export class UserCargo {
   username: string;
   birthday: Date;
   evaluation: number;
-  car: Car[];
+  car: string[];
   money: number;
   gender: string;
 

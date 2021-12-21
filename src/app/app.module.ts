@@ -28,6 +28,7 @@ import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
 import { AddMoneyComponent } from './components/add-money/add-money.component';
 import { LoadMoneyButtonComponent } from './components/add-money/load-money-button/load-money-button.component';
+import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LoadMoneyButtonComponent } from './components/add-money/load-money-butt
     TourCardComponent,
     SlideCheckerComponent,
     AddMoneyComponent,
-    LoadMoneyButtonComponent
+    LoadMoneyButtonComponent,
+    StrangerProfileComponent
   ],
     imports: [
         BrowserModule,
