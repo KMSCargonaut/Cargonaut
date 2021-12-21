@@ -3,6 +3,8 @@ import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {TourService} from "../../../services/tour.service";
 import {Tour} from "../../../models/Tour";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateUserComponent} from "./update-user/update-user.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -13,7 +15,7 @@ export class LoggedinComponent {
 
   currentRate: number = 3;
 
-  constructor(public userData: UserService, private router: Router, public tourData: TourService) {
+  constructor(public userData: UserService, private router: Router, public tourData: TourService,  private modalService: NgbModal) {
   }
 
   async logout(): Promise<void> {
@@ -29,6 +31,13 @@ export class LoggedinComponent {
         await this.tourData.deleteTour(tour);
       }
     }
+  }
+
+  openUpdateModal(): void {
+    this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
   }
 
   navigateToCarList() {
