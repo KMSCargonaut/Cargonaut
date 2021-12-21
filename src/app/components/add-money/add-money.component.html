@@ -1,5 +1,5 @@
 <!--  Modal Header -->
-<div class="modal-header border-0">
+<div class="modal-header modal-lg border-0">
   <div class="container">
     <div class="row">
       <div class="col-6"></div>
@@ -22,33 +22,22 @@
 <!--  Modal Body  -->
 <div class="modal-body border-0">
 
-    <div class="container">
+    <div class="d-flex justify-content-between">
 
-      <div class="row">
-
-        <div class="col-2">
           <button>
             <app-load-money-button [amount]="smallAmount"></app-load-money-button>
           </button>
-        </div>
 
-        <div class="col-2">
           <button>
             <app-load-money-button [amount]="midAmount"></app-load-money-button>
           </button>
-        </div>
 
-        <div class="col-2">
           <button>
             <app-load-money-button [amount]="bigAmount"></app-load-money-button>
           </button>
-        </div>
 
-        <div class="col-2">
           <button>
             <app-load-money-button [amount]="hugeAmount"></app-load-money-button>
           </button>
-        </div>
       </div>
-  </div>
 </div>

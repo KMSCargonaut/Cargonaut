@@ -33,7 +33,8 @@ export class LoggedinComponent {
   openRegistrationModal(): void {
     this.modalService.open(AddMoneyComponent, {
       animation: true,
-      centered: true
+      centered: true,
+      size: "xl"
     });
   }
 }
