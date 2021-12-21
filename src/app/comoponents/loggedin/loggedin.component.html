@@ -1,25 +1,40 @@
-<div class="wrapper">
-  <!--Top menu -->
-  <div class="sidebar">
-    <!--profile image & text-->
-    <div class="row">
-      <div class="col text-center">
-        <img src="../../../assets/img/Export/Icons/user_icon.png" width="120" height="120">
-        <button class="btn success btn-light ">Profilbild bearbeiten</button>
-        <button class="btn success btn-light ">Fahrzeuge verwalten</button>
-        <button class="btn success btn-light " (click)="logout()">Logout</button>
-        <button class="btn danger btn-danger " (click)="deleteAccount()">Account löschen</button><br>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col text-center">
+<!--Top menu -->
+<div class="contain">
+  <div class="row h-100">
+    <div class="col-4 h-100 text-center" style="height: 100%;">
+      <!--profile image & text-->
       <div class="h3">Hi "{{this.userData.currUser.firstname}}", hier ist dein Profil</div>
+      <ngb-rating style="float: right;" [readonly]="true" [(rate)]="currentRate" [max]="4"></ngb-rating><br>
+      <img src="../../../assets/img/Export/Icons/user_icon.png" width="120" height="120"><br>
+      <a class="a" (click)="openUpdateModal()">Profilbild bearbeiten</a><br>
+      <a class="a"> Fahrzeuge verwalten</a><br>
+      <a class="al" (click)="open(content)">Account löschen</a><br>
+      <a class="a" (click)="logout()">Logout</a>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Hi "{{this.userData.currUser.firstname}}"!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bist du sicher dein Account löschen zu wollen ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAccount(); c('Save click')">Save</button>
+      </div>
+    </ng-template>
+
+    <div class="container col-8" style="height: 100%">
+      <div class="row h-50 ">
+        <h2>Du färhst</h2>
+      </div>
+      <div class="row h-50 align-items-start" style="height: 50%">
+        <h2>Du wirst mitgenommen</h2>
+      </div>
     </div>
   </div>
 </div>

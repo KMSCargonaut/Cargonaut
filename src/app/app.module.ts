@@ -15,6 +15,13 @@ import { ProfilComponent } from './comoponents/profil/profil.component';
 import { FooterComponent } from './comoponents/footer/footer.component';
 import { NotloggedinComponent } from './comoponents/notloggedin/notloggedin.component';
 import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
+import { UpdateUserComponent } from './comoponents/loggedin/update-user/update-user.component';
+
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,8 @@ import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
     ProfilComponent,
     FooterComponent,
     NotloggedinComponent,
-    LoggedinComponent
+    LoggedinComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +44,14 @@ import { LoggedinComponent } from './comoponents/loggedin/loggedin.component';
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     FormsModule,
+    FontAwesomeModule
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(library: FaIconLibrary){
+    library.addIcons(fasStar, farStar);
+  }
+}

@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
+import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateUserComponent} from "./update-user/update-user.component";
+import { updateCurrentUser } from 'firebase/auth';
 
 @Component({
   selector: 'app-loggedin',
@@ -8,8 +11,22 @@ import {UserService} from "../../services/user.service";
 })
 export class LoggedinComponent {
 
+  currentRate = 3;
 
-  constructor(public userData: UserService) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal, public userData: UserService) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+
+  openUpdateModal(): void {
+    this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
+  }
+
+  open(content: any) {
+    this.modalService.open(content);
   }
 
   async logout(): Promise<void> {

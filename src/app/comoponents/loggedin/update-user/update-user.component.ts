@@ -1,26 +1,28 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../../services/user.service";
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
+import {UserCargo} from "../../../models/UserCargo";
 import {getAuth} from "firebase/auth";
-import {UserCargo} from "../../models/UserCargo";
+import { time } from 'console';
+
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  selector: 'app-update-user',
+  templateUrl: './update-user.component.html',
+  styleUrls: ['./update-user.component.css']
 })
-export class RegistrationComponent {
+export class UpdateUserComponent implements OnInit {
 
   // ModelBinding
   public email = '';
-  public firstname = '';
-  public lastname = '';
-  public username = '';
-  public birthday: Date | null | undefined;
+  public firstname = this.userData.currUser.firstname ? this.userData.currUser.firstname: '';
+  public lastname = this.userData.currUser.lastname ? this.userData.currUser.lastname : '';
+  public username = this.userData.currUser.username ? this.userData.currUser.username : '';
+  public birthday: Date | null | undefined = this.userData.currUser.birthday ? this.userData.currUser.birthday : undefined;
   public password = '';
   public repeatPassword = '';
-  public gender = '';
+  public gender = this.userData.currUser.gender ? this.userData.currUser.gender : '';
 
   // PropertyBinding for outline color for wrong/no inputs
   public wrongEmailClass = '';
@@ -43,19 +45,19 @@ export class RegistrationComponent {
   public passwordRepeatMessage = '';
 
 
-  constructor(public activeModal: NgbActiveModal, private router: Router,
-              private userData: UserService) {}
+  constructor(public activeModal: NgbActiveModal, private router: Router, public userData: UserService) { }
 
+  ngOnInit(): void {
+  }
 
   private async register() {
     try {
-      await this.userData.register(this.email, this.password);
       const tempAuth = getAuth();
       const tempUser = tempAuth.currentUser;
       this.activeModal.close();
       this.router.navigate(['/profil'])
       if (tempUser) {
-        await this.userData.addUser(
+        await this.userData.updateUser(
           new UserCargo(tempUser.uid, this.firstname, this.lastname, this.username, this.birthday, this.gender)
         );
       }
@@ -72,32 +74,12 @@ export class RegistrationComponent {
   }
 
   public async inputCheck() {
-    if (this.email.trim().length > 0 &&
-      this.password.trim().length > 0 &&
-      this.firstname.trim().length > 0 &&
-      this.lastname.trim().length > 0 &&
+    if (this.lastname.trim().length > 0 &&
       this.gender.trim().length > 0 &&
       this.username.trim().length > 0 &&
-      this.birthday != undefined &&
-      this.password === this.repeatPassword) {
-      await this.register()
+      this.birthday != undefined) {
+        await this.register()
     } else {
-      if (this.email.trim().length === 0) {
-        this.emailMessage = 'Geben Sie Ihre E-Mail an';
-        this.wrongEmailClass = 'border-danger';
-      }
-      if (this.password.trim().length === 0) {
-        this.passwordMessage = 'Geben Sie ein Passwort an';
-        this.wrongPasswordClass = 'border-danger';
-      }
-      if (this.repeatPassword.trim().length === 0) {
-        this.passwordRepeatMessage = 'Wiederholen Sie Ihr Passwort';
-        this.wrongRepeatPasswordClass = 'border-danger';
-      }
-      if (this.repeatPassword !== this.password) {
-        this.passwordRepeatMessage = 'Die Passwörter sind nicht identisch';
-        this.wrongRepeatPasswordClass = 'border-danger';
-      }
       if (this.firstname.trim().length === 0) {
         this.firstnameMessage = 'Geben Sie Ihren Vornamen an';
         this.wrongFirstname = 'border-danger';
@@ -118,13 +100,6 @@ export class RegistrationComponent {
         this.birthdayMessage = 'Geben Sie Ihren Geburtstag an';
         this.wrongBirthday = 'border-danger';
       }
-    }
-  }
-
-  public validEmail(input: string): void {
-    if (input.trim().length >= 0) {
-      this.emailMessage = '';
-      this.wrongEmailClass = '';
     }
   }
 
@@ -158,25 +133,11 @@ export class RegistrationComponent {
     }
   }
 
-  public validPassword(input: string): void {
-    if (input.trim().length >= 0) {
-      this.passwordMessage = '';
-      this.wrongPasswordClass = '';
-    }
-  }
-
   public validGender(input: string) {
     console.log(input)
     if (input.trim().length >= 0) {
       this.genderMessage = '';
       this.wrongGender = '';
-    }
-  }
-
-  public validRepeatPassword(input: string): void {
-    if (input.trim().length >= 0) {
-      this.passwordRepeatMessage = '';
-      this.wrongRepeatPasswordClass = '';
     }
   }
 
