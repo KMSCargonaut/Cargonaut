@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
+import {TourService} from "../../../services/tour.service";
+import {Tour} from "../../../models/Tour";
 
 @Component({
   selector: 'app-loggedin',
@@ -10,7 +12,7 @@ import {Router} from "@angular/router";
 export class LoggedinComponent {
 
 
-  constructor(public userData: UserService, private router: Router) {
+  constructor(public userData: UserService, private router: Router, public tourData: TourService) {
   }
 
   async logout(): Promise<void> {
@@ -20,10 +22,23 @@ export class LoggedinComponent {
   async deleteAccount(): Promise<void> {
     await this.userData.deleteUser();
     await this.userData.deleteAccount();
-    console.log('User deleted');
+    if (this.userData.currUser) {
+      const userTours = await this.tourData.getAllOpenToursFromUser(this.userData.currUser.uid);
+      for (const tour of userTours) {
+        await this.tourData.deleteTour(tour);
+      }
+    }
   }
 
   navigateToCarList() {
     this.router.navigate(['/carList'])
+  }
+
+  async test() {
+    const user = this.userData.currUser;
+    if (user) {
+      console.log('Open Tours: ', await this.tourData.getAllOpenToursFromUser(user.uid));
+      console.log('Booked Tours: ', await this.tourData.getAllBookedToursFromUser(user.uid))
+    }
   }
 }

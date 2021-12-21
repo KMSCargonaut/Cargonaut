@@ -4,7 +4,6 @@ import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
 import User = firebase.User;
-import {Car} from "../models/Car";
 
 @Injectable({
   providedIn: 'root'
@@ -26,17 +25,16 @@ export class UserService {
     })
   }
 
+  // User-Handler
+
   async userExist(user: User) {
     this.user = user;
     const tempUser = await this.getUser(user.uid);
-
     if (tempUser) {
-      // authenticated user was found in the database 'Users'
       this.currUser = tempUser;
       console.log("Cargo User: ", this.currUser)
       console.log('user still logged in')
     } else {
-      // authenticated user was not found in the database 'Users'
       await this.userNotExist()
     }
   }
@@ -47,10 +45,8 @@ export class UserService {
     console.log('no User')
   }
 
-
-  // User
-  async getUser(id: string): Promise<UserCargo | undefined> {
-    return this.getAllUser().then(users => users.find(user => user.uid === id))
+  async getUser(uid: string): Promise<UserCargo | undefined> {
+    return this.getAllUser().then(users => users.find(user => user.uid === uid))
   }
 
   async getAllUser(): Promise<UserCargo[]> {
@@ -71,13 +67,7 @@ export class UserService {
   }
 
   async updateUser(user: UserCargo) {
-    const tempUser = this.copyAndPrepareUser(user);
-    let tempCar = [];
-    for(let car of tempUser.car){
-      tempCar.push(this.copyAndPrepareCar(car))
-    }
-    tempUser.car = tempCar;
-    await this.userCollection.doc(user.dId).update(tempUser);
+    await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
   async deleteUser() {
@@ -90,40 +80,40 @@ export class UserService {
     return {...user};
   }
 
-  copyAndPrepareCar(car: Car): Car {
-    return {...car}
-  }
-
 
   // Authentication
 
   async login(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password);
-    console.log('logged in');
   }
 
   async logout() {
     await this.auth.signOut();
-    console.log('logged out');
   }
 
   async deleteAccount() {
     await firebase.auth().currentUser?.delete();
-    console.log('deleted account');
-  }
-
-  async deleteCar(mark: string){
-    if(this.currUser) {
-      this.currUser.car = this.currUser.car.filter((item) => {
-        console.log(item.mark !== mark);
-        return item.mark !== mark
-      });
-      this.updateUser(this.currUser).then();
-    }
   }
 
   async register(email: string, password: string) {
     await this.auth.createUserWithEmailAndPassword(email, password);
-    console.log('created account')
   }
+
+  // Car-Handler for User
+
+  async deleteCar(id: string){
+    if(this.currUser) {
+      const index = this.currUser.car.indexOf(id,0);
+      this.currUser.car.splice(index,1);
+      await this.updateUser(this.currUser);
+    }
+  }
+
+  async addCar(id: string) {
+    if (this.currUser) {
+      this.currUser.car.push(id);
+      await this.updateUser(this.currUser)
+    }
+  }
+
 }

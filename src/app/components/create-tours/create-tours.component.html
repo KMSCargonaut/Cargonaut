@@ -3,32 +3,16 @@
   <div class="container title-background mw-100">
     <div class="row ">
       <div class="col text-center">
-        <div class="h2 logoGreenDark m-3" *ngIf="this.offer">Erstelle eine Anfrage</div>
-        <div class="h2 logoGreenDark m-3" *ngIf="!this.offer">Erstelle ein Angebot</div>
+        <div class="h2 logoGreenDark m-3" *ngIf="this.isOffer">Erstelle eine Angebot</div>
+        <div class="h2 logoGreenDark m-3" *ngIf="!this.isOffer">Erstelle ein Anfrage</div>
       </div>
     </div>
-    <div class="row m-3 justify-content-center">
-      <div class="col">
-        <div class="d-flex justify-content-center">
-          <div class="logoGreenDark mr-3"><h5>Angebot</h5></div>
-          <div>
-            <label class="switch">
-              <input type="checkbox" (click)="offerOnOff()">
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="logoGreenDark ml-3"><h5>Anfrage</h5></div>
-        </div>
-
-      </div>
-    </div>
+    <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
   </div>
 
   <!-- Create-Form -->
   <div class="container rounded shadow mt-4 bg-white border-0">
     <div class="row m-4">
-      <!--    <div class="col text-center h4 logoGreenDark m-3" *ngIf="on">Anfrage erstellen</div>-->
-      <!--    <div class="col text-center h4 logoGreenDark m-3" *ngIf="!on">Angebot erstellen</div>-->
     </div>
     <div class="row">
       <div class="col">
@@ -132,9 +116,8 @@
       <div class="col-4">
         <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
         <div class="">
-          <!--        null komma null responsiv -->
-          <input #pri type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
-                 style="min-width: 100%; max-width: 100%" (keydown.enter)="value(pri.value)">
+          <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
+                 style="min-width: 100%; max-width: 100%">
         </div>
       </div>
     </div>
@@ -142,6 +125,18 @@
       <div class="col">
         <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
+      </div>
+      <div class="col" *ngIf="this.isOffer">
+        <div class="form-group">
+          <label for="cars" class="logoGreenDark">Fahrzeug</label>
+          <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
+            <option value="{{car.dId}}" *ngFor="let car of this.userCars; let i = index">
+              {{car.model}} {{car.mark}},
+              Sitze: {{car.seats}}
+              Stauraum: {{car.storage}}qm
+            </option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -154,9 +149,9 @@
 </div>
 
 
-<ng-template #notloggedin >
+<ng-template #notloggedin>
 
-   <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
+  <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
     <div class="row">
       <div class="col text-center mt-3 h2 logoGreenDark">
         Melde dich an, um eine Tour zu erstellen!
@@ -168,5 +163,5 @@
         <button class="btn btn-outline-success btn-lg m-3" (click)="navigateToProfil()">Anmelden</button>
       </div>
     </div>
-    </div>
+  </div>
 </ng-template>
