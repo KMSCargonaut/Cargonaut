@@ -11,6 +11,7 @@ import {Tour} from "../../../models/Tour";
 })
 export class LoggedinComponent {
 
+  currentRate: number = 3;
 
   constructor(public userData: UserService, private router: Router, public tourData: TourService) {
   }
