@@ -8,14 +8,17 @@ button {
   background-color: transparent;
 }
 
-
-:root {
-  --gap: 1rem;
+.buttons {
+  color: #ffffff;
 }
 
-.flex {
+.navbarTest {
+
+}
+
+.flexi {
   display: flex;
-  gap: var(--gap, 1rem)
+  gap: 3rem;
 }
 
 nav {
@@ -23,28 +26,27 @@ nav {
   box-shadow: 0 5px 10px lightgray;
 }
 
-/*header*/
+/* header on default */
 .primary-header {
   align-items: center;
   justify-content: space-between;
-  display: block;
-}
-
-.primary-header {
+  display: none;
   z-index: 1000;
   box-shadow: 0 5px 10px lightgray;
 }
 
+/* button on default */
 .mobile-nav-toggle {
   display: none;
 }
 
+/* logo on default */
 .logo {
   margin: 2rem;
-  width: 30%;
-  max-width: 15em;
+  width: 15em;
 }
 
+/* Navigation on default */
 .primary-navigation {
   list-style: none;
   padding: 0;
@@ -52,29 +54,30 @@ nav {
   background: hsl(0, 0%, 0%, 0.75);
 }
 
-@supports (backdrop-filter: blur(1rem)) {
-  .primary-navigation {
-    background: hsl(0, 0%, 0%, 0.6);
-    backdrop-filter: blur(1rem);
-  }
-}
-
 .primary-navigation a {
   text-decoration: none;
 }
 
-.primary-navigation a > span {
-  font-weight: 700;
-  margin-inline-end: .5em;
+/* if blur is supported */
+@supports (backdrop-filter: blur(1rem)) {
+  .primary-navigation {
+    background: hsl(0, 0%, 100%, 0.6);
+    backdrop-filter: blur(1rem);
+  }
+
+  .buttons {
+    color: #005B51;
+  }
 }
 
-@media(max-width: 75em) {
+
+@media (max-width: 75em) {
   .primary-header {
     display: block;
   }
 
-  .primary-navigation {
-    display: block;
+  a:hover {
+    cursor: pointer;
   }
 
   .navbarTest {
@@ -84,10 +87,9 @@ nav {
   .primary-navigation {
     z-index: 1000;
     position: fixed;
-    inset: 0 0 0 30%;
+    inset: 0 0 0 60%;
     flex-direction: column;
     padding: min(30vh, 8rem) 2rem;
-    --gap: 2em;
     transform: translateX(100%);
     transition: transform 350ms ease-out;
   }
@@ -99,14 +101,15 @@ nav {
   .mobile-nav-toggle {
     display: block;
     position: absolute;
-    width: 1rem;
+    width: 5vw;
     border: 0;
     aspect-ratio: 1;
-    top: 5%;
-    right: 2rem;
+    top: 4em;
+    right: 1em;
     z-index: 10000;
     background: transparent url("src/assets/img/SVG/ic_menu_24px.svg") no-repeat;
   }
+
 
   .mobile-nav-toggle[aria-expanded="true"] {
     background-image: url("src/assets/img/SVG/ic_close_24px.svg");
@@ -114,16 +117,3 @@ nav {
 
 }
 
-
-/*@media (min-width: 35em) {
-  .primary-header {
-    display: none;
-  }
-  .primary-navigation {
-    --gap: 3rem;
-    padding-block: 1rem;
-    padding-inline: clamp(3rem, 10vw ,10rem);
-
-  }
-}
- */

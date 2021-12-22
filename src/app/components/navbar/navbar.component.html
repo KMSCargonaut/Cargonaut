@@ -3,7 +3,7 @@
 
 <nav class="d-flex justify-content-between navbar-light bg-light">
     <div class="d-inline-flex align-items-center">
-      <button (click)="navigateToMainPage()" style="max-width: 15em; padding: 0">
+      <button (click)="navigateToMainPage()" class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink"
              viewBox="0 0 309 90">
           <defs>
@@ -67,7 +67,7 @@
       <button class="" (click)="navigateToCreateTourPage()">
         <span class="h5 logoGreenDark">Angebote & Anfragen erstellen</span>
       </button>
-      <button class="ml-3" (click)="navigateToUser()" style="max-width: 3em">
+      <button class="ml-3 mr-5" (click)="navigateToUser()" style="max-width: 3em">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40">
           <path id="ic_account_circle_24px"
                 d="M22,2A20,20,0,1,0,42,22,20.007,20.007,0,0,0,22,2Zm0,6a6,6,0,1,1-6,6A5.992,5.992,0,0,1,22,8Zm0,28.4a14.4,14.4,0,0,1-12-6.44c.06-3.98,8-6.16,12-6.16,3.98,0,11.94,2.18,12,6.16A14.4,14.4,0,0,1,22,36.4Z"
@@ -80,7 +80,8 @@
 </div>
 
 
-  <div class="primary-header flex">
+  <div class="primary-header flexi bg-light">
+
     <div>
       <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
            xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -132,27 +133,32 @@
       </svg>
     </div>
 
-    <button #mobile (click)="mobileToggle(primaryNavigation, mobile)" class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+
+    <button #mobile (click)="mobileToggle(primaryNavigation, mobile)"
+            class="mobile-nav-toggle"
+            aria-controls="primary-navigation"
+            aria-expanded="false">
       <span class="sr-only">Menu</span>
     </button>
 
+
     <nav>
-      <ul #primaryNavigation id="primary-navigation" class="primary-navigation flex"
+      <ul #primaryNavigation id="primary-navigation" class="primary-navigation flexi"
       data-visible="false">
         <li>
-          <a href="">Mitfahrgelegenheiten</a>
+          <a class="buttons" (click)="navigateToMainPage()">Startseite</a>
         </li>
         <li>
-          <a href="">Meine Angebote und Anfragen</a>
+          <a class="buttons" (click)="navigateToTours()">Mitfahrgelegenheiten</a>
         </li>
         <li>
-          <a href="">
-            Angebote und Anfragen erstellen</a>
+          <a  class="buttons" href="">Meine Angebote und Anfragen</a>
         </li>
         <li>
-          <a href="">
-            Profil
-          </a>
+          <a  class="buttons" (click)="navigateToCreateTourPage()">Angebote und Anfragen erstellen</a>
+        </li>
+        <li>
+          <a class="buttons" (click)="navigateToUser()">Profil</a>
         </li>
       </ul>
     </nav>
