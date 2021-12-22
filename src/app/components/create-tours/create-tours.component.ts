@@ -8,6 +8,7 @@ import {Car} from "../../models/Car";
 import {CarsService} from "../../services/cars.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserCargo} from "../../models/UserCargo";
+import {CalculateService} from "../../services/calculate.service";
 
 @Component({
   selector: 'app-create-tours',
@@ -33,7 +34,7 @@ export class CreateToursComponent {
 
 
   constructor(public tourData: TourService, public userData: UserService, public alert: AlertService,
-              private router: Router, public carData: CarsService, public auth: AngularFireAuth) {
+              private router: Router, public carData: CarsService, public auth: AngularFireAuth, private calcService: CalculateService) {
     this.auth.user.subscribe(async (user) => {
       if (user) {
         const tempCargoUser = await this.userData.getUser(user.uid);
@@ -68,28 +69,7 @@ export class CreateToursComponent {
   }
 
   calculateEndTime() {
-    if (this.startTime.trim().length > 0 && this.duration.trim().length > 0 && this.date.trim().length > 0) {
-      let hours: number = Number.parseInt(this.startTime.substr(0, 2));
-      let duration: number = Number.parseInt(this.duration);
-      let endHours = hours + duration;
-      let endDay = this.date.substr(8, 2);
-
-      if (endHours >= 24) {
-        endDay = (Number.parseInt(endDay) + 1).toString()
-        if (endDay.trim().length < 2) { //Falls Datum in einer der ersten 9 Tage im Monat ist
-          endDay = "0" + endDay;
-        }
-        endHours = endHours % 24;
-      }
-
-      if (endHours < 10) {
-        this.endTime = this.date.substr(0, 8) + endDay + "T0" + endHours.toString();
-      } else {
-        this.endTime = this.date.substr(0, 8) + endDay + "T" + endHours.toString();
-      }
-      this.endTime += this.startTime.substr(2, 3);
-
-    }
+    this.endTime = this.calcService.arrivalTime(this.startTime, this.duration, this.date)
   }
 
   checkUniqueInputs(): boolean {
