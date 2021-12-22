@@ -44,7 +44,15 @@
     <h3 class="h3 font-weight-bold logoGreenDark">Du fährst</h3>
     <div>
       <app-tour-list [usedList]="ownOffers"></app-tour-list>
-      <h4 *ngIf="ownOffers.length === 0" class="h4 font-weight-bold logoGreenDark">Du bietest bisher keine Fahrten an!</h4>
+      <div class="container">
+        <div class="row">
+          <div *ngIf="ownOffers.length === 0" class="card col-7 border-0 mb-3" style="max-width: 600px; height: 25vh">
+            <div class="card-body rounded shadow mt-4 bg-white border-0">
+              <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -52,7 +60,15 @@
     <h3 class="h3 font-weight-bold logoGreenDark">Du wirst mitgenommen</h3>
     <div>
       <app-tour-list [usedList]="passengerTours"></app-tour-list>
-      <h4 *ngIf="passengerTours.length === 0" class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
+      <div class="container">
+        <div class="row">
+          <div *ngIf="passengerTours.length === 0" class="card col-7 border-0 mb-3" style="max-width: 600px; height: 25vh">
+            <div class="card-body rounded shadow mt-4 bg-white border-0">
+              <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
