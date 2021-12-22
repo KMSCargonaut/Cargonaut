@@ -1,0 +1,12 @@
+.profilePic {
+  background: transparent url("src/assets/img/Icons/user_icon.svg") no-repeat;
+  width: 10em;
+}
+
+.d-flex {
+  gap: 3rem;
+}
+
+.d-inline-flex {
+  gap: .3rem;
+}

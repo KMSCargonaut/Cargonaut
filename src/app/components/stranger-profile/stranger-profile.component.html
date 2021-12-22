@@ -1,1 +1,16 @@
-<p>stranger-profile works!</p>
+<div class="d-flex justify-content-center m-5">
+
+  <div class="d-inline-flex flex-wrap">
+    <svg class="profilePic"></svg>
+  </div>
+
+  <div class="d-inline-flex flex-column">
+    <div class="h5">{{this.username}}</div>
+    <div class=""><span>{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
+    <div class="">{{this.age}}</div>
+    <div class="">{{this.gender}}</div>
+    <div class="" *ngIf="this.evaluation !== -1; else noEval">{{this.evaluation}}</div>
+    <ng-template #noEval class="">Not evaluated yet</ng-template>
+  </div>
+
+</div>

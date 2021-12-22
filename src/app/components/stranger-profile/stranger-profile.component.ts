@@ -15,6 +15,7 @@ export class StrangerProfileComponent {
   username = '';
   age = -1;
   evaluation = -1;
+  gender = ''
 
 
   constructor(public userData: UserService) {
@@ -27,6 +28,7 @@ export class StrangerProfileComponent {
       this.firstname = this.user.firstname;
       this.lastname = this.user.lastname;
       this.username = this.user.username
+      this.gender = this.user.gender;
       this.age = this.calcAge(new Date(this.user.birthday));
       console.log(this.age);
       this.evaluation = this.user.evaluation;
