@@ -9,8 +9,28 @@
 
 .profile-header {
   gap: 10rem;
+  background-color: #F3FBED;
 }
 
 .d-inline-flex {
   gap: .3rem;
 }
+
+
+.scrolling-wrapper{
+  overflow-x: auto;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.tours {
+  margin-left: 20%;
+}
+
