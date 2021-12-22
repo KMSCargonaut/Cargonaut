@@ -42,7 +42,7 @@ display: none;
   background-color: rgba(0, 0, 0, 0.0);
   color: white;
   border-color: rgba(0, 0, 0, 0.0);
-  outline: none /*das hier noch auskommentieren -Serag*/
+  /*outline: none*/ /*das hier noch auskommentieren -Serag*/
 }
 
 .form-row-style {

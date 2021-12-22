@@ -1,7 +1,7 @@
 <header class="masthead">
     <div class="center">
        <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren, du sparst!</h1>
-          <div class="form-row form-row-style align-items-center" style="height: {{searchbarheigth}}">
+          <!--<div class="form-row form-row-style align-items-center" style="height: {{searchbarheigth}}">
             <div class="col colpad">
               <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
                 <div class="row">
@@ -45,8 +45,29 @@
             <div class="col colpad">
               <button type="button" class="btn btn-primary btn-block " style="margin-top: -1em; background-color: #005B51;  height: {{searchbarheigth}}; border-radius: 0px 35px 35px 0px" (click)="scroll(target)"><h3>Suchen</h3></button>
             </div>
+          </div>-->
+      <form>
+        <div class="form-row form-row-style">
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Von...">
           </div>
-
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Nach...">
+          </div>
+          <div class="col">
+            <input type="date" class="form-control" placeholder="Datum">
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" placeholder="Mitfahrer">
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" placeholder="Gepäck">
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary btn-block" placeholder="Gepäck"><span class="h6">Suchen</span></button>
+          </div>
+        </div>
+      </form>
     </div>
   <div style="height: 200px"></div>
   <div #target></div>
