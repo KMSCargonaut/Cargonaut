@@ -1,0 +1,115 @@
+<!--  Modal Header -->
+<div class="modal-header border-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Update</div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--  Modal Body  -->
+<div class="modal-body border-0" *ngIf="this.userData.currUser">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="userLastname">Nachname</label>
+          <input #ln type="text" class="form-control {{wrongLastname}}" id="userLastname" [(ngModel)]="this.userData.currUser.lastname"
+                 (keydown)="validLastname(ln.value)"
+                 (keydown.enter)="inputCheck()">
+          <div *ngIf="lastnameMessage !== ''" class="text-danger">{{lastnameMessage}}</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="userFirstname">Vorname</label>
+          <input #fn type="text" class="form-control {{wrongFirstname}}" id="userFirstname" [(ngModel)]="this.userData.currUser.firstname"
+                 (keydown)="validFirstname(fn.value)"
+                 (keydown.enter)="inputCheck()">
+          <div *ngIf="firstnameMessage !== ''" class="text-danger">{{firstnameMessage}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <label for="">Geschlecht</label>
+          <select #gd name="" id="" class="form-control {{wrongGender}}" [(ngModel)]="this.userData.currUser.gender"
+                  (change)="validGender(gd.value)"
+                  (keydown.enter)="inputCheck()">
+            <option value=""></option>
+            <option value="FEMALE">Weiblich</option>
+            <option value="MALE">Männlich</option>
+            <option value="DIVERSE">Divers</option>
+          </select>
+          <div *ngIf="genderMessage !== ''" class="text-danger">{{genderMessage}}</div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="userBirthday">Geburtstag</label>
+          <input #bd type="date" class="form-control {{wrongBirthday}}" id="userBirthday" [(ngModel)]="this.userData.currUser.birthday"
+                 (change)="validBirthday(bd.value)"
+                 (keydown.enter)="inputCheck()">
+          <div *ngIf="birthdayMessage !== ''" class="text-danger">{{birthdayMessage}}</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <label for="userUsername">Nutzername</label>
+          <input #un type="text" class="form-control {{wrongUsername}}" id="userUsername" [(ngModel)]="this.userData.currUser.username"
+                 (keydown)="validUsername(un.value)"
+                 (keydown.enter)="inputCheck()">
+          <div *ngIf="usernameMessage !== ''" class="text-danger">{{usernameMessage}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+
+  <div class="container ">
+    <div class="row justify-content-center">
+      <div class="col-6 ">
+        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                (click)="inputCheck()" (click)="updateUser()" (click)="activeModal.dismiss()">
+          Speichern
+        </button>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <button type="button" class="btn btn-danger mx-auto btn-block"
+                (click)="activeModal.dismiss()">Abbrechen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
