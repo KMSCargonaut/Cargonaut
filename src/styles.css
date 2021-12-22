@@ -11,7 +11,10 @@
   color: #208479;
 }
 
-body {
+html {
   height: 100%;
+}
+body {
   min-height: 100%;
+  overflow-x: hidden;
 }

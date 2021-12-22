@@ -27,6 +27,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
 import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
+import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
+import { UpdateUserComponent } from './components/profil/loggedin/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,10 @@ import {TourDetailsComponent} from "./components/tour-details/tour-details.compo
     AlertsComponent,
     TourCardComponent,
     SlideCheckerComponent,
-    TourDetailsComponent
+    TourDetailsComponent,
+    SlideCheckerComponent,
+    StrangerProfileComponent,
+    UpdateUserComponent
   ],
     imports: [
         BrowserModule,
