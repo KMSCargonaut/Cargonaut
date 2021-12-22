@@ -15,6 +15,7 @@ export class LoggedinComponent implements OnInit {
 
   currentRate: number = 3;
   ownOffers: Tour[] = []
+  passengerTours: Tour[] = []
 
   constructor(public userData: UserService, private router: Router, public tourData: TourService,  private modalService: NgbModal) {
   }
@@ -25,6 +26,7 @@ export class LoggedinComponent implements OnInit {
 
   async setTours(){
     this.ownOffers = await this.tourData.getAllTours().then();
+    this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
     this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid)
   }
 
@@ -60,5 +62,12 @@ export class LoggedinComponent implements OnInit {
       console.log('Open Tours: ', await this.tourData.getAllOpenToursFromUser(user.uid));
       console.log('Booked Tours: ', await this.tourData.getAllBookedToursFromUser(user.uid))
     }
+  }
+
+  isPassenger(tour:Tour, uID: string | undefined) {
+    if (uID) {
+      return tour.passengers.includes(uID);
+    }
+    return false;
   }
 }

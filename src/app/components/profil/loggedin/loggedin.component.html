@@ -40,17 +40,21 @@
 
 
 <div class="d-inline-flex flex-column">
-  <div class="" style="height: 40vh; width: 60vh">
+  <div class="" style="height: 40vh">
     <h3 class="h3 font-weight-bold logoGreenDark">Du fährst</h3>
     <div>
       <app-tour-list [usedList]="ownOffers"></app-tour-list>
+      <h4 *ngIf="ownOffers.length === 0" class="h4 font-weight-bold logoGreenDark">Du bietest bisher keine Fahrten an!</h4>
     </div>
   </div>
 
   <div class="" style="height: 40vh">
     <h3 class="h3 font-weight-bold logoGreenDark">Du wirst mitgenommen</h3>
+    <div>
+      <app-tour-list [usedList]="passengerTours"></app-tour-list>
+      <h4 *ngIf="passengerTours.length === 0" class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
+    </div>
   </div>
 </div>
-
 
 <div class="resp"></div>
