@@ -3,8 +3,12 @@
   width: 10em;
 }
 
-.d-flex {
+.profile-info {
   gap: 3rem;
+}
+
+.profile-header {
+  gap: 10rem;
 }
 
 .d-inline-flex {
