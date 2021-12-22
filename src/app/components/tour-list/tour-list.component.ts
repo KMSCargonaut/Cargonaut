@@ -7,21 +7,14 @@ import {Tour} from "../../models/Tour";
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.css']
 })
-export class TourListComponent implements OnInit{
+export class TourListComponent{
 
-  tours: Tour[] = []
-  @Input() isOffer: boolean = false;
+  @Input() usedList: Tour[] = [];
 
   constructor(public tourService: TourService) {
 
   }
 
-  ngOnInit() {
-    this.setTours().then();
-  }
 
-  async setTours(){
-    this.tours = await this.tourService.getAllTours().then();
-  }
 
 }

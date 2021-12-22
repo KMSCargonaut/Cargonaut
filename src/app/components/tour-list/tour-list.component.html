@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="row justify-content-center" *ngFor="let tour of tours; let i = index">
-    <div class="col-6">
-      <app-tour-card *ngIf="tour.offer !== isOffer" [tour]="tour"></app-tour-card>
+<div class="container-fluid d-flex">
+  <div class="row flex-row flex-nowrap scrolling-wrapper">
+    <div class="col-7" *ngFor="let tour of usedList; let i = index">
+      <app-tour-card [tour]="tour"></app-tour-card>
     </div>
   </div>
 </div>
