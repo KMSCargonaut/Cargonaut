@@ -1,0 +1,30 @@
+.infoicon{
+  width: 20%;
+  position: relative;
+  top: -10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.infoheight{
+  height: 8em;
+  width:  9em;
+}
+
+
+.cursor:hover {
+  cursor: pointer;
+}
+
+.container {
+  height: 10em;
+}
+
+.flex {
+  display: flex;
+}
+
+h3 {
+  margin-top: 1.5rem;
+}

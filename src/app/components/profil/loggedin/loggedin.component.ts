@@ -6,6 +6,7 @@ import {Tour} from "../../../models/Tour";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "./update-user/update-user.component";
 import {AlertService} from "../../../services/alert.service";
+import {AddMoneyComponent} from "../../add-money/add-money.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -28,7 +29,7 @@ export class LoggedinComponent implements OnInit {
     this.setTours().then();
   }
 
-  async setTours() {
+  async setTours(){
     this.ownOffers = await this.tourData.getAllTours().then();
     this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
     this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid)
@@ -86,6 +87,13 @@ export class LoggedinComponent implements OnInit {
 
   openUpdateModal(): void {
     this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
+  }
+
+  openMoneyModal(): void {
+    this.modalService.open(AddMoneyComponent, {
       animation: true,
       centered: true
     });
