@@ -29,6 +29,8 @@ import { SlideCheckerComponent } from './components/slide-checker/slide-checker.
 import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
 import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
 import { UpdateUserComponent } from './components/profil/loggedin/update-user/update-user.component';
+import {AddMoneyComponent} from "./components/add-money/add-money.component";
+import {LoadMoneyButtonComponent} from "./components/add-money/load-money-button/load-money-button.component";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { UpdateUserComponent } from './components/profil/loggedin/update-user/up
     TourDetailsComponent,
     SlideCheckerComponent,
     StrangerProfileComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AddMoneyComponent,
+    LoadMoneyButtonComponent
   ],
     imports: [
         BrowserModule,
