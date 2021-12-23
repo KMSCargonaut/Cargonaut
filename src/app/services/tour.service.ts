@@ -67,6 +67,30 @@ export class TourService {
       }))
   }
 
+  async getAllOffers(): Promise<Tour[]>{
+    return this.afs.collection<Tour>('Tours', ref =>
+      ref
+        .where('offer', '==', true)
+    ).get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        const tour: Tour = doc.data();
+        tour.dID = doc.id;
+        return tour;
+      }))
+  }
+
+  async getAllRequests(): Promise<Tour[]>{
+    return this.afs.collection<Tour>('Tours', ref =>
+      ref
+        .where('offer', '==', false)
+    ).get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        const tour: Tour = doc.data();
+        tour.dID = doc.id;
+        return tour;
+      }))
+  }
+
  /* async getAllOpenToursFromUser(uid: string): Promise<Tour[]> {
     let driverTours = await this.getAllToursAsDriverFromUser(uid, false);
     let passengerTours = await this.getAllToursAsPassengerFromUser(uid, false);

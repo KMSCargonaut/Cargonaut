@@ -29,8 +29,7 @@ export class TourSiteComponent implements OnInit{
   }
 
   async setTours(){
-    this.offerTours = await this.tourService.getAllTours().then();
-    this.requestTours = this.offerTours.filter(tour => !tour.isOffer);
-    this.offerTours = this.offerTours.filter(tour => tour.isOffer);
+    this.offerTours = await this.tourService.getAllOffers().then();
+    this.requestTours = await this.tourService.getAllRequests().then();
   }
 }
