@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 
@@ -10,6 +10,18 @@ import {UserService} from "../../services/user.service";
 export class NavbarComponent {
 
   constructor(private router: Router, private authData: UserService) {
+  }
+
+
+  mobileToggle(nav: any, mobile: any) {
+    const visi = nav.getAttribute('data-visible')
+    if (visi === 'false') {
+      nav.setAttribute('data-visible', true);
+      mobile.setAttribute('aria-expanded', true)
+    } else {
+      nav.setAttribute('data-visible', false)
+      mobile.setAttribute('aria-expanded', false)
+    }
   }
 
   navigateToUser() {

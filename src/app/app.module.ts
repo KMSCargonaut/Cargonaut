@@ -26,9 +26,9 @@ import { CreateToursComponent } from './components/create-tours/create-tours.com
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { SlideCheckerComponent } from './components/slide-checker/slide-checker.component';
-import { AddMoneyComponent } from './components/add-money/add-money.component';
-import { LoadMoneyButtonComponent } from './components/add-money/load-money-button/load-money-button.component';
+import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
 import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
+import { UpdateUserComponent } from './components/profil/loggedin/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -51,9 +51,10 @@ import { StrangerProfileComponent } from './components/stranger-profile/stranger
     AlertsComponent,
     TourCardComponent,
     SlideCheckerComponent,
-    AddMoneyComponent,
-    LoadMoneyButtonComponent,
-    StrangerProfileComponent
+    TourDetailsComponent,
+    SlideCheckerComponent,
+    StrangerProfileComponent,
+    UpdateUserComponent
   ],
     imports: [
         BrowserModule,

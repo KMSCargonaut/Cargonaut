@@ -1,1 +1,128 @@
-<p>stranger-profile works!</p>
+<div class="d-flex justify-content-center profile-header">
+
+
+  <div class="d-flex justify-content-center m-5 profile-info">
+
+    <div class="d-inline-flex">
+      <svg class="profilePic"></svg>
+    </div>
+
+    <div class="d-inline-flex flex-column">
+      <div class="h5">{{this.username}}</div>
+      <div class=""><span>{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
+      <div class="">{{this.age}}</div>
+      <div class="">{{this.gender}}</div>
+      <div class="" *ngIf="this.evaluation !== -1; else noEval">{{this.evaluation}}</div>
+      <ng-template #noEval class="">Not evaluated yet</ng-template>
+    </div>
+
+  </div>
+
+  <div class="d-inline-flex flex-column m-5">
+    <div class="h5">Statistik</div>
+    <div class="">Ausgeführte Fahrten: 2</div>
+    <div class="">Mitgefahren: 3</div>
+    <div class="">Offene Fahrten: 4</div>
+    <div class="">Offene Anfragen: 5</div>
+  </div>
+</div>
+
+
+
+
+<div class="tours">
+
+
+  <div class="">
+    <h2 class="logoGreenDark">Seine Angebote</h2>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row flex-row flex-nowrap scrolling-wrapper">
+      <div class="col-4">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="tours">
+
+
+  <div class="">
+    <h2 class="logoGreenDark">Seine Anfragen</h2>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row flex-row flex-nowrap scrolling-wrapper">
+      <div class="col-4">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+      <div class="col-6">
+        <app-tour-card></app-tour-card>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

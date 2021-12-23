@@ -9,6 +9,7 @@ import {Tour} from "../models/Tour";
 export class TourService {
 
   private tourCollection: AngularFirestoreCollection<Tour>;
+  public tourDetails: Tour|null = null;
 
   constructor(private afs: AngularFirestore) {
     this.tourCollection = afs.collection<Tour>('Tours');

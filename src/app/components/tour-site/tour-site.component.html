@@ -2,4 +2,5 @@
 
 <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
 
-<app-tour-list [isOffer]="isOffer"></app-tour-list>
+<app-tour-list *ngIf="!isOffer" [usedList]="offerTours" [isHorizontal]="isHorizontal"></app-tour-list>
+<app-tour-list *ngIf="isOffer" [usedList]="requestTours" [isHorizontal]="isHorizontal"></app-tour-list>

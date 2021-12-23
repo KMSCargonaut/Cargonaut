@@ -1,0 +1,27 @@
+.logoGreenMedium:hover {
+  color: #005B51;
+}
+
+.red {
+  color: #DC3545;
+}
+
+.red:hover {
+  color: #C82333;
+}
+
+button{
+  border: none;
+  background-color: transparent;
+}
+
+.resp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 25%;
+  background-color: #F3FBED;
+  z-index: -1;
+}
+

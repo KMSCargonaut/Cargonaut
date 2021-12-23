@@ -1,20 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
-import {RegistrationComponent} from "../../registration/registration.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AddMoneyComponent} from "../../add-money/add-money.component";
 import {TourService} from "../../../services/tour.service";
 import {Tour} from "../../../models/Tour";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UpdateUserComponent} from "./update-user/update-user.component";
 
 @Component({
   selector: 'app-loggedin',
   templateUrl: './loggedin.component.html',
   styleUrls: ['./loggedin.component.css']
 })
-export class LoggedinComponent {
+export class LoggedinComponent implements OnInit {
 
-  constructor(public userData: UserService, private router: Router, public tourData: TourService, public modalService: NgbModal) {
+  currentRate: number = 3;
+  ownOffers: Tour[] = []
+  passengerTours: Tour[] = []
+  isHorizontal: boolean = true;
+
+  constructor(public userData: UserService, private router: Router, public tourData: TourService,  private modalService: NgbModal) {
+  }
+
+  ngOnInit() {
+    this.setTours().then();
+  }
+
+  async setTours(){
+    this.ownOffers = await this.tourData.getAllTours().then();
+    this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
+    this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid)
   }
 
   async logout(): Promise<void> {
@@ -31,7 +45,18 @@ export class LoggedinComponent {
       }
     }
   }
-  
+
+  openUpdateModal(): void {
+    this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
+  }
+
+  navigateToCarList() {
+    this.router.navigate(['/carList'])
+  }
+
   async test() {
     const user = this.userData.currUser;
     if (user) {
@@ -40,16 +65,10 @@ export class LoggedinComponent {
     }
   }
 
-  navigateToCarList() {
-    this.router.navigate(['/carList'])
+  isPassenger(tour:Tour, uID: string | undefined) {
+    if (uID) {
+      return tour.passengers.includes(uID);
+    }
+    return false;
   }
-
-  openMoneyModal(): void {
-    this.modalService.open(AddMoneyComponent, {
-      animation: true,
-      centered: true,
-      size: "xl"
-    });
-  }
-  
 }
