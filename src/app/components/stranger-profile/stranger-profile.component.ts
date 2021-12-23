@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserCargo} from "../../models/UserCargo";
 import {UserService} from "../../services/user.service";
+import {Tour} from "../../models/Tour";
+import {TourService} from "../../services/tour.service";
 
 @Component({
   selector: 'app-stranger-profile',
@@ -16,9 +18,11 @@ export class StrangerProfileComponent {
   age = -1;
   evaluation = -1;
   gender = ''
+  offerTours: Tour[] = []
+  noOfferTours: Tour[] = []
 
 
-  constructor(public userData: UserService) {
+  constructor(public userData: UserService, public tourData: TourService) {
     this.test();
   }
 
@@ -32,6 +36,11 @@ export class StrangerProfileComponent {
       this.age = this.calcAge(new Date(this.user.birthday));
       console.log(this.age);
       this.evaluation = this.user.evaluation;
+      const tours = await this.tourData.getAllOpenToursFromUser(this.user.uid)
+      this.offerTours = tours.filter(tour => tour.offer);
+      this.noOfferTours = tours.filter(tour => !tour.offer);
+      console.log(this.offerTours)
+      console.log(this.noOfferTours)
     }
   }
 
