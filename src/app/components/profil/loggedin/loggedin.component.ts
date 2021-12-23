@@ -5,6 +5,7 @@ import {TourService} from "../../../services/tour.service";
 import {Tour} from "../../../models/Tour";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "./update-user/update-user.component";
+import {AddMoneyComponent} from "../../add-money/add-money.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -48,6 +49,13 @@ export class LoggedinComponent implements OnInit {
 
   openUpdateModal(): void {
     this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
+  }
+
+  openMoneyModal(): void {
+    this.modalService.open(AddMoneyComponent, {
       animation: true,
       centered: true
     });

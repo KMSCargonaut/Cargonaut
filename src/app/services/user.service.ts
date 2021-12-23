@@ -116,6 +116,7 @@ export class UserService {
     }
   }
 
+
   // Money Handling
 
   async addMoney(amount: number){
@@ -124,6 +125,7 @@ export class UserService {
       await this.updateUser(this.currUser)
     }
   }
+
 
   async subMoney(amount: number){
     if(this.currUser) {
