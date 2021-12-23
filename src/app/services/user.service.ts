@@ -116,4 +116,19 @@ export class UserService {
     }
   }
 
+  // Money Handling
+
+  async addMoney(amount: number){
+    if(this.currUser) {
+      this.currUser.money += amount;
+      await this.updateUser(this.currUser)
+    }
+  }
+
+  async subMoney(amount: number){
+    if(this.currUser) {
+      this.currUser.money -= amount;
+      await this.updateUser(this.currUser)
+    }
+  }
 }
