@@ -1,8 +1,7 @@
 .form-controll{
 
-  padding: 50px 60px;
-  margin-top: 20vh;
-  -webkit-box-shadow: -2px 0px 71px 25px rgba(148,53,148,1);
-  -moz-box-shadow: -2px 0px 71px 25px rgba(148,53,148,1);
-  box-shadow: -2px 0px 71px 25px rgba(148,53,148,1);
+
+  -webkit-box-shadow: -2px 0px 71px 25px rgba(29,66,26,1);
+  -moz-box-shadow: -2px 0px 71px 25px rgba(29,66,26,1);
+  box-shadow: -2px 0px 71px 25px rgba(29,66,26,1);
 }
