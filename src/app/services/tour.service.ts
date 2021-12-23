@@ -43,20 +43,44 @@ export class TourService {
       }))
   }
 
-  async getAllOpenToursFromUser(uid: string): Promise<Tour[]> {
+  async getAllBookedTours() {
+    return this.afs.collection<Tour>('Tours', ref =>
+      ref
+        .where('isBooked', '==', true)
+    ).get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        const tour: Tour = doc.data();
+        tour.dID = doc.id;
+        return tour;
+      }))
+  }
+
+  async getAllToursFromUser(uid: string): Promise<Tour[]> {
+    return this.afs.collection<Tour>('Tours', ref =>
+      ref
+        .where('creatorID', '==', uid)
+    ).get().toPromise().then(snapshot =>
+      snapshot.docs.map(doc => {
+        const tour: Tour = doc.data();
+        tour.dID = doc.id;
+        return tour;
+      }))
+  }
+
+ /* async getAllOpenToursFromUser(uid: string): Promise<Tour[]> {
     let driverTours = await this.getAllToursAsDriverFromUser(uid, false);
     let passengerTours = await this.getAllToursAsPassengerFromUser(uid, false);
     return driverTours.concat(passengerTours);
-  }
+  }*/
 
-  async getAllBookedToursFromUser(uid: string): Promise<Tour[]> {
+  /*async getAllBookedToursFromUser(uid: string): Promise<Tour[]> {
     let driverTours = await this.getAllToursAsDriverFromUser(uid, true);
     let passengerTours = await this.getAllToursAsPassengerFromUser(uid, true);
     return driverTours.concat(passengerTours);
-  }
+  }*/
 
 
-  private async getAllToursAsDriverFromUser(uid: string, isBooked: boolean): Promise<Tour[]> {
+  /*private async getAllToursAsDriverFromUser(uid: string, isBooked: boolean): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
       ref
         .where('driver', '==', uid)
@@ -67,11 +91,11 @@ export class TourService {
         tour.dID = doc.id;
         return tour;
       }))
-  }
+  }*/
 
    /**  ACHTUNG! Eventuell wird das so nicht funktionieren, da passenger ein Array ist! **/
 
-  private async getAllToursAsPassengerFromUser(uid: string, isBooked: boolean): Promise<Tour[]> {
+  /*private async getAllToursAsPassengerFromUser(uid: string, isBooked: boolean): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
       ref
         .where('passengers', '==', [uid])
@@ -82,7 +106,7 @@ export class TourService {
         tour.dID = doc.id;
         return tour;
       }))
-  }
+  }*/
 
 
 // Suchen von Tours

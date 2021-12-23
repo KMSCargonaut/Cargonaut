@@ -5,6 +5,7 @@ import {TourService} from "../../../services/tour.service";
 import {Tour} from "../../../models/Tour";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "./update-user/update-user.component";
+import {AlertService} from "../../../services/alert.service";
 
 @Component({
   selector: 'app-loggedin',
@@ -18,7 +19,9 @@ export class LoggedinComponent implements OnInit {
   passengerTours: Tour[] = []
   isHorizontal: boolean = true;
 
-  constructor(public userData: UserService, private router: Router, public tourData: TourService,  private modalService: NgbModal) {
+  constructor(
+    public userData: UserService, private router: Router, public tourData: TourService, private modalService: NgbModal,
+    public alertData: AlertService) {
   }
 
   ngOnInit() {
@@ -36,14 +39,34 @@ export class LoggedinComponent implements OnInit {
   }
 
   async deleteAccount(): Promise<void> {
-    await this.userData.deleteUser();
-    await this.userData.deleteAccount();
-    if (this.userData.currUser) {
-      const userTours = await this.tourData.getAllOpenToursFromUser(this.userData.currUser.uid);
-      for (const tour of userTours) {
-        await this.tourData.deleteTour(tour);
+    let userTours;
+    const user = this.userData.currUser;
+    if (user) {
+      const futureTours = await this.tourData.getAllBookedTours();
+      futureTours
+        .filter(tour => this.bookedToursInFuture(new Date(tour.date)))
+        .filter(tour => tour.driver === user.uid || this.isPassenger(tour, user.uid));
+      console.log(futureTours);
+      if (futureTours.length <= 0) {
+        await this.userData.deleteUser();
+        await this.userData.deleteAccount();
+        userTours = await this.tourData.getAllToursFromUser(user.uid);
+        userTours.filter(tour => !tour.isBooked)
+        for (const tour of userTours) {
+          await this.tourData.deleteTour(tour);
+        }
+      } else {
+        this.alertData.showAlert({type: 'danger', message: 'Du hast noch offene gebuchte Fahrten!'})
       }
+
+
+
+
     }
+  }
+
+  bookedToursInFuture(date: Date): boolean {
+    return (new Date().getTime() - date.getTime()) < 0;
   }
 
   openUpdateModal(): void {
@@ -55,14 +78,6 @@ export class LoggedinComponent implements OnInit {
 
   navigateToCarList() {
     this.router.navigate(['/carList'])
-  }
-
-  async test() {
-    const user = this.userData.currUser;
-    if (user) {
-      console.log('Open Tours: ', await this.tourData.getAllOpenToursFromUser(user.uid));
-      console.log('Booked Tours: ', await this.tourData.getAllBookedToursFromUser(user.uid))
-    }
   }
 
   isPassenger(tour:Tour, uID: string | undefined) {
