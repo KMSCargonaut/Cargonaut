@@ -15,6 +15,7 @@ export class TourSiteComponent implements OnInit{
   isOffer: boolean = false;
   offerTours: Tour[] = [];
   requestTours: Tour[] = []
+  isHorizontal: boolean = false;
 
   constructor(public tourService: TourService) { }
 

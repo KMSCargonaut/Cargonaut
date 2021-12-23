@@ -29,7 +29,6 @@ import { SlideCheckerComponent } from './components/slide-checker/slide-checker.
 import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
 import { StrangerProfileComponent } from './components/stranger-profile/stranger-profile.component';
 import { UpdateUserComponent } from './components/profil/loggedin/update-user/update-user.component';
-import { HorizontalListComponent } from './components/tour-list/horizontal-list/horizontal-list.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +54,7 @@ import { HorizontalListComponent } from './components/tour-list/horizontal-list/
     TourDetailsComponent,
     SlideCheckerComponent,
     StrangerProfileComponent,
-    UpdateUserComponent,
-    HorizontalListComponent
+    UpdateUserComponent
   ],
     imports: [
         BrowserModule,
