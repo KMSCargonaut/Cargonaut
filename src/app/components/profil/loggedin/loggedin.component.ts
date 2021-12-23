@@ -65,8 +65,10 @@ export class LoggedinComponent implements OnInit {
               message: 'Sie müssen sich erneut anmelden, um diese Aktion durchzuführen'
             })
             await this.logout()
+          } else {
+            this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
+            console.log(e);
           }
-          this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
         }
       } else {
         this.alertData.showAlert({type: 'danger', message: 'Du hast noch offene gebuchte Fahrten!'})
