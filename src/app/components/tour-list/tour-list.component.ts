@@ -10,6 +10,7 @@ import {Tour} from "../../models/Tour";
 export class TourListComponent{
 
   @Input() usedList: Tour[] = [];
+  @Input() isHorizontal: boolean = false;
 
   constructor(public tourService: TourService) {
 
