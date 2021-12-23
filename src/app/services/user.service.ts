@@ -116,4 +116,10 @@ export class UserService {
     }
   }
 
+  // Money Handling
+
+  async addMoney(){
+    // Skeleton for this function
+  }
+
 }
