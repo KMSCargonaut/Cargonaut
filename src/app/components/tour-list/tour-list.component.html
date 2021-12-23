@@ -1,12 +1,15 @@
+<!--Horizontal Scroll-List -->
 <div *ngIf="isHorizontal" class="container-fluid d-flex">
   <div class="row flex-row flex-nowrap scrolling-wrapper">
-    <div class="col-7" *ngFor="let tour of usedList; let i = index">
+    <div class="col-4" *ngFor="let tour of usedList; let i = index">
       <app-tour-card [tour]="tour"></app-tour-card>
     </div>
   </div>
 </div>
 <div style="height: 50px"></div>
 
+
+<!--Vertical Scroll-List -->
 <div *ngIf="!isHorizontal" class="container-fluid">
   <div class="row">
     <div class="col-12" *ngFor="let tour of usedList; let i = index">
