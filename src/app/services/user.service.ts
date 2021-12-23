@@ -116,14 +116,19 @@ export class UserService {
     }
   }
 
+  // Money Handling
 
-  //  Money-Handler for User
-
-  async addMoney(money: number) {
-    if (this.currUser) {
-    this.currUser.money += money;
+  async addMoney(amount: number){
+    if(this.currUser) {
+      this.currUser.money += amount;
       await this.updateUser(this.currUser)
     }
   }
 
+  async subMoney(amount: number){
+    if(this.currUser) {
+      this.currUser.money -= amount;
+      await this.updateUser(this.currUser)
+    }
+  }
 }
