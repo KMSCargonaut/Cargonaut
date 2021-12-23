@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-load-money-button',
@@ -10,5 +10,9 @@ export class LoadMoneyButtonComponent{
   constructor() { }
 
   @Input() amount: number = 0;
+  @Output() chosedAmount = new EventEmitter<number>();
 
+  chosedMe(amount: number) {
+    this.chosedAmount.emit(amount)
+  }
 }

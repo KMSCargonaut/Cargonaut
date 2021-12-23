@@ -1,7 +1,7 @@
 .infoicon{
   width: 20%;
   position: relative;
-  top: -45px;
+  top: -10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -12,7 +12,19 @@
   width:  9em;
 }
 
-.buttonSize{
+
+.cursor:hover {
+  cursor: pointer;
+}
+
+.container {
   height: 10em;
-  width: 12em;
+}
+
+.flex {
+  display: flex;
+}
+
+h3 {
+  margin-top: 1.5rem;
 }
