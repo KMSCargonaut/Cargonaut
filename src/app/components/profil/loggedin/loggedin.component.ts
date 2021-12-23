@@ -28,7 +28,7 @@ export class LoggedinComponent implements OnInit {
     this.setTours().then();
   }
 
-  async setTours(){
+  async setTours() {
     this.ownOffers = await this.tourData.getAllTours().then();
     this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
     this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid)
@@ -39,34 +39,47 @@ export class LoggedinComponent implements OnInit {
   }
 
   async deleteAccount(): Promise<void> {
-    let userTours;
+    let userTours: Tour[];
     const user = this.userData.currUser;
     if (user) {
-      const futureTours = await this.tourData.getAllBookedTours();
-      futureTours
+      let futureTours = await this.tourData.getAllBookedTours();
+      futureTours = futureTours
         .filter(tour => this.bookedToursInFuture(new Date(tour.date)))
         .filter(tour => tour.driver === user.uid || this.isPassenger(tour, user.uid));
-      console.log(futureTours);
+      console.log('Future Tours: ', futureTours);
       if (futureTours.length <= 0) {
-        await this.userData.deleteUser();
-        await this.userData.deleteAccount();
-        userTours = await this.tourData.getAllToursFromUser(user.uid);
-        userTours.filter(tour => !tour.isBooked)
-        for (const tour of userTours) {
-          await this.tourData.deleteTour(tour);
+        try {
+          await this.userData.deleteAccount();
+          await this.userData.deleteUser(user);
+          userTours = await this.tourData.getAllToursFromUser(user.uid);
+          userTours = userTours.filter(tour => !tour.isBooked);
+          console.log('user tours: ', userTours)
+          for (const tour of userTours) {
+            await this.tourData.deleteTour(tour);
+          }
+          this.alertData.showAlert({type: 'success', message: 'Du hast erfolgreich deinen Account gelöscht!'})
+        } catch (e) {
+          if (e.code === 'auth/requires-recent-login') {
+            this.alertData.showAlert({
+              type: 'danger',
+              message: 'Sie müssen sich erneut anmelden, um diese Aktion durchzuführen'
+            })
+            await this.logout()
+          }
+          this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
         }
       } else {
         this.alertData.showAlert({type: 'danger', message: 'Du hast noch offene gebuchte Fahrten!'})
       }
 
 
-
-
     }
   }
 
   bookedToursInFuture(date: Date): boolean {
-    return (new Date().getTime() - date.getTime()) < 0;
+    const tempBol = (new Date().getTime() - date.getTime()) < 0;
+    console.log(tempBol)
+    return tempBol;
   }
 
   openUpdateModal(): void {
@@ -80,7 +93,7 @@ export class LoggedinComponent implements OnInit {
     this.router.navigate(['/carList'])
   }
 
-  isPassenger(tour:Tour, uID: string | undefined) {
+  isPassenger(tour: Tour, uID: string | undefined) {
     if (uID) {
       return tour.passengers.includes(uID);
     }

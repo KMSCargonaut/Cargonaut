@@ -70,10 +70,8 @@ export class UserService {
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
-  async deleteUser() {
-    if (this.currUser) {
-      await this.userCollection.doc(this.currUser.dId).delete();
-    } else console.log('User not logged in')
+  async deleteUser(user: UserCargo) {
+      await this.userCollection.doc(user.dId).delete();
   }
 
   copyAndPrepareUser(user: UserCargo): UserCargo {

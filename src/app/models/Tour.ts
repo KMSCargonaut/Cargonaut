@@ -2,7 +2,7 @@ import {Status} from "./Status";
 
 export class Tour {
   dID?: string;
-  createrID: string
+  creatorID: string
   isOffer: boolean;
   startCity: string;
   endCity: string;
@@ -22,10 +22,10 @@ export class Tour {
   car: string;
   evaluation: number;
 
-  constructor(createrID:string, offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
+  constructor(creatorID:string, offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
               price: number, storage: number, seats: number, description?: string,
               driver?: string, passengers?: string[], car?: string) {
-    this.createrID = createrID;
+    this.creatorID = creatorID;
     this.isOffer = offer;
     this.startCity = startCity;
     this.endCity = endCity;
