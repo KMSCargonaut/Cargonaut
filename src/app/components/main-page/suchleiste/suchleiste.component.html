@@ -1,70 +1,109 @@
 <header class="masthead">
     <div class="center">
-       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren, du sparst!</h1>
-          <!--<div class="form-row form-row-style align-items-center" style="height: {{searchbarheigth}}">
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                  <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/von_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="text" placeholder="Von...">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque"><img src="../../../../assets/img/Icons/nach_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="text" placeholder="Nach...">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/kalender_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="date" placeholder="Datum">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad" >
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque"><img src="../../../../assets/img/Icons/koffer_icon_white.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="number" placeholder="m³">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                  <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/mitfahrer_icon_white.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                  <input class="text-opaque" type="number" placeholder="1">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <button type="button" class="btn btn-primary btn-block " style="margin-top: -1em; background-color: #005B51;  height: {{searchbarheigth}}; border-radius: 0px 35px 35px 0px" (click)="scroll(target)"><h3>Suchen</h3></button>
-            </div>
-          </div>-->
-      <form>
-        <div class="form-row form-row-style">
-          <div class="col-3">
-            <input type="text" class="form-control" placeholder="Von...">
+       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren,<br class="smallscreen"> du sparst!</h1>
+
+      <form class="defaultscreen">
+        <div class="form-row form-row-style form-control-lg">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von...">
           </div>
-          <div class="col-3">
-            <input type="text" class="form-control" placeholder="Nach...">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach...">
           </div>
-          <div class="col">
-            <input type="date" class="form-control" placeholder="Datum">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum">
           </div>
-          <div class="col">
-            <input type="number" class="form-control" placeholder="Mitfahrer">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
+            <select name="" id="mitfahrer" class="form-control text-opaque form-control-lg">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
           </div>
-          <div class="col">
-            <input type="number" class="form-control" placeholder="Gepäck">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
+            <select name="" id="koffer" class="form-control text-opaque form-control-lg">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
           </div>
-          <div class="col">
-            <button type="button" class="btn btn-primary btn-block" placeholder="Gepäck"><span class="h6">Suchen</span></button>
+          <div class="col colpad">
+            <button type="button" class="btn  btn-block suchbutton" placeholder="Gepäck"><span class="h6">Suchen</span></button>
+          </div>
+        </div>
+      </form>
+      <form class="smallscreen">
+        <div class="col form-row-style">
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
+            <div class="col colpad">
+              <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von...">
+            </div>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+            <div class="col colpad">
+              <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach...">
+            </div>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+            <div class="col colpad">
+              <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum">
+            </div>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
+            <select name="" id="mitfahre" class="form-control text-opaque form-control-lg"> //MITFAHRER ID PROBLEM
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
+            <select name="" id="koffer2" class="form-control text-opaque form-control-lg"> //KOFFER ID PROBLEM
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          </div>
+          <div class="col colpad">
+            <button type="button" class="btn  btn-block suchbutton" placeholder="Gepäck"><span class="h5">Suchen</span></button>
           </div>
         </div>
       </form>
