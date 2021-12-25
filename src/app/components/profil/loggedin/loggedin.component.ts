@@ -14,7 +14,7 @@ import {AddMoneyComponent} from "../../add-money/add-money.component";
 })
 export class LoggedinComponent implements OnInit {
 
-  currentRate: number = 3;
+  currentRate: number = 3.65;
   ownOffers: Tour[] = []
   passengerTours: Tour[] = []
   isHorizontal: boolean = true;

@@ -24,3 +24,18 @@ button{
   background-color: #F3FBED;
   z-index: -1;
 }
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #d38c2f;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #d38c2f;
+}
