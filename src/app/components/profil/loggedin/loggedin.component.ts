@@ -7,6 +7,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UpdateUserComponent} from "./update-user/update-user.component";
 import {AlertService} from "../../../services/alert.service";
 import {AddMoneyComponent} from "../../add-money/add-money.component";
+import {CarsService} from "../../../services/cars.service";
 
 @Component({
   selector: 'app-loggedin',
@@ -22,7 +23,7 @@ export class LoggedinComponent implements OnInit {
 
   constructor(
     public userData: UserService, private router: Router, public tourData: TourService, private modalService: NgbModal,
-    public alertData: AlertService) {
+    public alertData: AlertService, public carData: CarsService) {
   }
 
   ngOnInit() {
@@ -57,6 +58,9 @@ export class LoggedinComponent implements OnInit {
           console.log('user tours: ', userTours)
           for (const tour of userTours) {
             await this.tourData.deleteTour(tour);
+          }
+          for (const carID of user.car) {
+            await this.carData.deleteCar(carID);
           }
           this.alertData.showAlert({type: 'success', message: 'Du hast erfolgreich deinen Account gelöscht!'})
         } catch (e) {
