@@ -36,8 +36,8 @@ export class TourDetailsComponent implements OnInit{
   }
 
   changeUserName(){
-    if (this.tourService.tourDetails?.passengers[0] || this.tourService.tourDetails?.driver && this.tourService.tourDetails?.offer) {
-      this.userService.getUser(this.tourService.tourDetails?.offer ? this.tourService.tourDetails.driver : this.tourService.tourDetails?.passengers[0]).then(
+    if (this.tourService.tourDetails?.passengers[0] || this.tourService.tourDetails?.driver && this.tourService.tourDetails?.isOffer) {
+      this.userService.getUser(this.tourService.tourDetails?.isOffer ? this.tourService.tourDetails.driver : this.tourService.tourDetails?.passengers[0]).then(
         (user) => {
           if (user) {
             this.userName = user.username

@@ -36,16 +36,6 @@ export class LoggedinComponent implements OnInit {
     await this.userData.logout();
   }
 
-  async deleteAccount(): Promise<void> {
-    await this.userData.deleteUser();
-    await this.userData.deleteAccount();
-    if (this.userData.currUser) {
-      const userTours = await this.tourData.getAllOpenToursFromUser(this.userData.currUser.uid);
-      for (const tour of userTours) {
-        await this.tourData.deleteTour(tour);
-      }
-    }
-  }
 
   openUpdateModal(): void {
     this.modalService.open(UpdateUserComponent, {
@@ -65,13 +55,7 @@ export class LoggedinComponent implements OnInit {
     this.router.navigate(['/carList'])
   }
 
-  async test() {
-    const user = this.userData.currUser;
-    if (user) {
-      console.log('Open Tours: ', await this.tourData.getAllOpenToursFromUser(user.uid));
-      console.log('Booked Tours: ', await this.tourData.getAllBookedToursFromUser(user.uid))
-    }
-  }
+  
 
   isPassenger(tour:Tour, uID: string | undefined) {
     if (uID) {

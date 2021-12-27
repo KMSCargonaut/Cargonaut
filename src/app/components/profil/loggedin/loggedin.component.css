@@ -24,18 +24,18 @@ button{
   background-color: #F3FBED;
   z-index: -1;
 }
-.star {
-  position: relative;
-  display: inline-block;
-  font-size: 1.5rem;
-  color: #d3d3d3;
+
+.flex {
+  display: flex;
 }
-.full {
-  color: #d38c2f;
+
+.column {
+  flex-flow: column;
 }
-.half {
-  position: absolute;
-  display: inline-block;
-  overflow: hidden;
-  color: #d38c2f;
+
+.profile {
+  min-width: 25%;
+  max-width: 25%;
+  background-color: #F3FBED;
 }
+
