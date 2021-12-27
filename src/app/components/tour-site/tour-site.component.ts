@@ -24,20 +24,25 @@ export class TourSiteComponent implements OnInit {
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
-    if (this.isOffer) {
-      this.splitList(this.offerTours);
-    } else {
-      this.splitList(this.requestTours);
-    }
+    this.fillList().then();
   }
 
-  ngOnInit() {
-    this.setTours().then();
+ async ngOnInit() {
+    await this.setTours();
+    await this.fillList();
   }
 
   async setTours(){
     this.offerTours = await this.tourService.getAllOffers().then();
     this.requestTours = await this.tourService.getAllRequests().then();
+  }
+
+  async fillList() {
+    if (this.isOffer) {
+      this.splitList(this.offerTours);
+    } else {
+      this.splitList(this.requestTours);
+    }
   }
 
   splitList(tours: Tour[]) {
