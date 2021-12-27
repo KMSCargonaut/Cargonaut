@@ -3,6 +3,7 @@ import {UserCargo} from "../../models/UserCargo";
 import {UserService} from "../../services/user.service";
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
+import {ShareDataService} from "../../services/share-data.service";
 
 @Component({
   selector: 'app-stranger-profile',
@@ -11,7 +12,7 @@ import {TourService} from "../../services/tour.service";
 })
 export class StrangerProfileComponent {
 
-  user: UserCargo | undefined;
+  user: UserCargo | null;
   firstname = '';
   lastname = '';
   username = '';
@@ -22,13 +23,13 @@ export class StrangerProfileComponent {
   noOfferTours: Tour[] = []
 
 
-  constructor(public userData: UserService, public tourData: TourService) {
-    this.test();
+  constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService) {
+    this.user = this.shareData.detailUser;
+    this.test().then();
   }
 
   async test() {
-    this.user = await this.userData.getUser('dObSN5uiq6RIPExAhIOMCgMVD8p2');
-    if (this.user != undefined) {
+    if (this.user != null) {
       this.firstname = this.user.firstname;
       this.lastname = this.user.lastname;
       this.username = this.user.username
@@ -36,7 +37,7 @@ export class StrangerProfileComponent {
       this.age = this.calcAge(new Date(this.user.birthday));
       console.log(this.age);
       this.evaluation = this.user.evaluation;
-      const tours = await this.tourData.getAllOpenToursFromUser(this.user.uid)
+      const tours = await this.tourData.getAllToursFromUser(this.user.uid)
       this.offerTours = tours.filter(tour => tour.isOffer);
       this.noOfferTours = tours.filter(tour => !tour.isOffer);
       console.log(this.offerTours)
