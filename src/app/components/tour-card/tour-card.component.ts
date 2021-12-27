@@ -13,7 +13,7 @@ import {TourService} from "../../services/tour.service";
 export class TourCardComponent implements OnInit{
 
   @Input()
-  tour: Tour = new Tour(false, '','','',0,'',0,0,0,'',);
+  tour: Tour = new Tour('',false, '','','',0,'',0,0,0,'',);
   mergeDateAndTime = ''
   userName = '';
 
@@ -31,7 +31,7 @@ export class TourCardComponent implements OnInit{
   }
 
   changeUserName(){
-    this.userService.getUser(this.tour.offer? this.tour.driver: this.tour.passengers[0]).then(
+    this.userService.getUser(this.tour.isOffer? this.tour.driver: this.tour.passengers[0]).then(
       (user) => {
         if (user) {
           this.userName = user.username

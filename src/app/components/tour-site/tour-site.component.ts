@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
-import {elementAt} from "rxjs/operators";
 
 @Component({
   selector: 'app-tour-site',
@@ -36,10 +35,9 @@ export class TourSiteComponent implements OnInit {
     this.setTours().then();
   }
 
-  async setTours() {
-    this.offerTours = await this.tourService.getAllTours().then();
-    this.requestTours = this.offerTours.filter(tour => !tour.offer);
-    this.offerTours = this.offerTours.filter(tour => tour.offer);
+  async setTours(){
+    this.offerTours = await this.tourService.getAllOffers().then();
+    this.requestTours = await this.tourService.getAllRequests().then();
   }
 
   splitList(tours: Tour[]) {
