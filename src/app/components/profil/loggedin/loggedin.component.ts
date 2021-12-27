@@ -113,4 +113,14 @@ export class LoggedinComponent implements OnInit {
     }
     return false;
   }
+
+  // Test
+  /*onWheel(event: WheelEvent) {
+    console.log(event.deltaY)
+    if(event.deltaY > 0) {
+      // @ts-ignore
+      (<Element>event.target).parentElement.scrollLeft += event.deltaY;
+      event.preventDefault();
+    }
+  }*/
 }
