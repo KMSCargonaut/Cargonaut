@@ -70,10 +70,8 @@ export class UserService {
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 
-  async deleteUser() {
-    if (this.currUser) {
-      await this.userCollection.doc(this.currUser.dId).delete();
-    } else console.log('User not logged in')
+  async deleteUser(user: UserCargo) {
+      await this.userCollection.doc(user.dId).delete();
   }
 
   copyAndPrepareUser(user: UserCargo): UserCargo {
@@ -116,6 +114,7 @@ export class UserService {
     }
   }
 
+
   // Money Handling
 
   async addMoney(amount: number){
@@ -124,6 +123,7 @@ export class UserService {
       await this.updateUser(this.currUser)
     }
   }
+
 
   async subMoney(amount: number){
     if(this.currUser) {

@@ -37,8 +37,8 @@ export class StrangerProfileComponent {
       console.log(this.age);
       this.evaluation = this.user.evaluation;
       const tours = await this.tourData.getAllOpenToursFromUser(this.user.uid)
-      this.offerTours = tours.filter(tour => tour.offer);
-      this.noOfferTours = tours.filter(tour => !tour.offer);
+      this.offerTours = tours.filter(tour => tour.isOffer);
+      this.noOfferTours = tours.filter(tour => !tour.isOffer);
       console.log(this.offerTours)
       console.log(this.noOfferTours)
     }
