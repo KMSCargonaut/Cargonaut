@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserCargo} from "../../models/UserCargo";
 import {UserService} from "../../services/user.service";
 import {Tour} from "../../models/Tour";
@@ -18,9 +18,11 @@ export class StrangerProfileComponent {
   username = '';
   age = -1;
   evaluation = -1;
-  gender = ''
-  offerTours: Tour[] = []
-  noOfferTours: Tour[] = []
+  gender = '';
+  tours: Tour[] = [];
+  offerTours: Tour[] = [];
+  noOfferTours: Tour[] = [];
+  goneWithNumber = 0;
 
 
   constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService) {
@@ -37,16 +39,56 @@ export class StrangerProfileComponent {
       this.age = this.calcAge(new Date(this.user.birthday));
       console.log(this.age);
       this.evaluation = this.user.evaluation;
-      const tours = await this.tourData.getAllToursFromUser(this.user.uid)
-      this.offerTours = tours.filter(tour => tour.isOffer);
-      this.noOfferTours = tours.filter(tour => !tour.isOffer);
-      console.log(this.offerTours)
-      console.log(this.noOfferTours)
+      this.tours = await this.tourData.getAllToursFromUser(this.user.uid)
+      this.offerTours = this.tours.filter(tour => tour.isOffer)
+        .filter(tour => !tour.areSeatsOccupied)
+        .filter(tour => !tour.isStorageFullyLoaded)
+        .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) < 0);
+      this.noOfferTours = this.tours.filter(tour => !tour.isOffer)
+        .filter(tour => !tour.areSeatsOccupied)
+        .filter(tour => !tour.isStorageFullyLoaded)
+        .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) < 0);
+      await this.goneWith();
     }
   }
 
   calcAge(birthday: Date): number {
-      return Math.floor((new Date().getTime() - birthday.getTime()) / (1000 * 60 * 60 * 24 * 365));
+    return Math.floor((new Date().getTime() - birthday.getTime()) / (1000 * 60 * 60 * 24 * 365));
   }
+
+  executedTours(): number {
+    return this.tours
+      .filter(tour => tour.isOffer)
+      .filter(tour => tour.isBooked)
+      .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) > 0).length
+  }
+
+  async goneWith() {
+    let user = this.user;
+    let length = 0;
+    if (user != null) {
+      const id = user.uid
+      let bookedTours: Tour[] = await this.tourData.getAllBookedTours()
+      if (bookedTours.length != 0) {
+        for (const tour of bookedTours) {
+          for (const passengers of tour.passengers) {
+            if (passengers === id) {
+              length += 1;
+            }
+          }
+        }
+      }
+    }
+    this.goneWithNumber = length;
+  }
+
+  openOfferTours(): number {
+    return this.offerTours.length
+  }
+
+  openNoOfferTours(): number {
+    return this.noOfferTours.length
+  }
+
 
 }
