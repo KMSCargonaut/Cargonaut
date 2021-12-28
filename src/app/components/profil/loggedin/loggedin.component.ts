@@ -29,6 +29,7 @@ export class LoggedinComponent implements OnInit {
     this.setTours().then();
   }
 
+
   async setTours(){
     this.ownOffers = await this.tourData.getAllTours().then();
     this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
