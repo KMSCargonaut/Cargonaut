@@ -1,0 +1,54 @@
+<!--  Modal Header -->
+<div class="modal-header modal-lg border-0">
+  <div class="container">
+    <div class="row ">
+      <div class="col-3"></div>
+      <div class="col-6 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Geld aufladen</div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close"
+                style="position: absolute; padding-top: 5px; padding-right: 20px"
+                (click)="activeModal.dismiss()">
+          <span class="btn btn-primary btn-danger justify-content-center" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--  Modal Body  -->
+<div class="modal-body border-0">
+
+  <div class="container form-controll">
+    <div class="row m-2">
+      <div class="col-6">
+        <app-load-money-button [amount]="smallAmount" (chosedAmount)="newAmountValue($event)"></app-load-money-button>
+      </div>
+      <div class="col-6">
+        <app-load-money-button [amount]="midAmount" (chosedAmount)="newAmountValue($event)"></app-load-money-button>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col-6">
+        <app-load-money-button [amount]="bigAmount" (chosedAmount)="newAmountValue($event)"></app-load-money-button>
+      </div>
+      <div class="col-6">
+        <app-load-money-button [amount]="hugeAmount" (chosedAmount)="newAmountValue($event)" ></app-load-money-button>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row" style="padding-inline: 15px; margin: 15px">
+    <div class="col text-center">
+      <h5 class="logoGreenDark" style="margin-top: 8px">{{chosenAmount}}€ ausgewählt</h5>
+    </div>
+    <div class="col">
+      <button class="btn btn-success btn-block" (click)="addMoney()">Aufladen</button>
+    </div>
+  </div>
+</div>
