@@ -71,7 +71,7 @@ nav {
 }
 
 
-@media (max-width: 75em) {
+@media (max-width: 1310px) {
   .primary-header {
     display: block;
   }

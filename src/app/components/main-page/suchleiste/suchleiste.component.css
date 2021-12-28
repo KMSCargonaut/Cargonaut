@@ -57,7 +57,7 @@ display: none;
 }
 
 .form-row-style {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   border-radius: 35px;
   position: center;
@@ -103,7 +103,7 @@ input[type=number] {
   display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1310px) {
   .defaultscreen {
     display: none;
   }
