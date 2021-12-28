@@ -1,4 +1,5 @@
 import {Status} from "./Status";
+import {Passenger} from "./Passenger";
 
 export class Tour {
   dID?: string;
@@ -14,7 +15,7 @@ export class Tour {
   seats: number;
   description: string;
   driver: string; //id of the driver (Die Frage ist nur welche. did oder uid??)
-  passengers: string[]; // id of the passengers
+  passengers: Passenger[]; // id of the passengers
   isBooked: boolean; // es gibt mindestesn eine Buchung
   areSeatsOccupied: boolean; // Sitze belegt
   isStorageFullyLoaded: boolean; // Stauraum voll
@@ -24,7 +25,7 @@ export class Tour {
 
   constructor(creatorID:string, offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
               price: number, storage: number, seats: number, description?: string,
-              driver?: string, passengers?: string[], car?: string) {
+              driver?: string, passengers?: Passenger[], car?: string) {
     this.creatorID = creatorID;
     this.isOffer = offer;
     this.startCity = startCity;

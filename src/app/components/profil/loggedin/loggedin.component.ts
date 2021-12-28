@@ -108,7 +108,7 @@ export class LoggedinComponent implements OnInit {
 
   isPassenger(tour: Tour, uID: string | undefined) {
     if (uID) {
-      return tour.passengers.includes(uID);
+      return tour.passengers.filter(passenger => passenger.id === uID).length > 0;
     }
     return false;
   }

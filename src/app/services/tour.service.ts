@@ -1,6 +1,7 @@
-import {Injectable, Predicate} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {Tour} from "../models/Tour";
+import {Passenger} from "../models/Passenger";
 
 
 @Injectable({
@@ -18,7 +19,14 @@ export class TourService {
     return {...tour};
   }
 
+  copyAndPreparePassenger(passenger: Passenger): Passenger {
+    return {...passenger};
+  }
+
   async addTour(tour: Tour) {
+    for (let i = 0; i < tour.passengers.length; i++) {
+      tour.passengers[i] = this.copyAndPreparePassenger(tour.passengers[i]);
+    }
     this.tourCollection.add(this.copyAndPrepareTour(tour))
       .catch((err) => console.log(err));
   }
