@@ -89,9 +89,9 @@ export class CreateToursComponent {
     const currUser = this.userData.currUser;
     let tempTour = this.newTour();
     if (currUser) {
-      if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
+      if (this.isOffer && this.checkUniqueInputs() && this.userCars.length < 1 && this.chosenCar.trim().length > 0) {
         await this.addOffer(tempTour, currUser);
-      } else if (this.checkUniqueInputs()) {
+      } else if (this.checkUniqueInputs() && !this.isOffer) {
         await this.addNoOffer(tempTour, currUser);
       } else {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
