@@ -32,6 +32,7 @@ import { UpdateUserComponent } from './components/profil/loggedin/update-user/up
 import {AddMoneyComponent} from "./components/add-money/add-money.component";
 import {LoadMoneyButtonComponent} from "./components/add-money/load-money-button/load-money-button.component";
 import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.component';
+import { TourEditComponent } from './components/tour-edit/tour-edit.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.co
     UpdateUserComponent,
     AddMoneyComponent,
     LoadMoneyButtonComponent,
-    VoteStarsComponent
+    VoteStarsComponent,
+    TourEditComponent
   ],
     imports: [
         BrowserModule,
