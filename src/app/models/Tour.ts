@@ -15,9 +15,9 @@ export class Tour {
   description: string;
   driver: string; //id of the driver (Die Frage ist nur welche. did oder uid??)
   passengers: string[]; // id of the passengers
-  isBooked: boolean;
-  areSeatsOccupied: boolean;
-  isStorageFullyLoaded: boolean;
+  isBooked: boolean; // es gibt mindestesn eine Buchung
+  areSeatsOccupied: boolean; // Sitze belegt
+  isStorageFullyLoaded: boolean; // Stauraum voll
   status: Status;
   car: string;
   evaluation: number;
@@ -45,5 +45,4 @@ export class Tour {
     this.car = (car) ? car : '';
     this.evaluation = -1;
   }
-
 }
