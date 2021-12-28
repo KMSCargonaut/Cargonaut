@@ -8,6 +8,7 @@ import {UpdateUserComponent} from "./update-user/update-user.component";
 import {AlertService} from "../../../services/alert.service";
 import {AddMoneyComponent} from "../../add-money/add-money.component";
 import {CarsService} from "../../../services/cars.service";
+import {EditAccountComponent} from "../../edit-account/edit-account.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -90,6 +91,13 @@ export class LoggedinComponent implements OnInit {
 
   openUpdateModal(): void {
     this.modalService.open(UpdateUserComponent, {
+      animation: true,
+      centered: true
+    });
+  }
+
+  openAccountModal(): void {
+    this.modalService.open(EditAccountComponent, {
       animation: true,
       centered: true
     });

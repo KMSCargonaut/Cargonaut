@@ -1,1 +1,49 @@
-<p>edit-account works!</p>
+<!--  Modal Header -->
+<div class="modal-header border-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Account</div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="inputEmail" class="logoGreenDark">Email</label>
+    <input #mail
+           type="email"
+           class="form-control {{wrongEmailClass}}"
+           id="inputEmail"
+           placeholder="name@example.com"
+           (keydown)="validEmail(mail.value)"
+           (keydown.enter)="inputCheck()"
+           [(ngModel)]="email">
+    <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="inputPassword" class="logoGreenDark">Password</label>
+    <input #passw
+           type="password"
+           class="form-control {{wrongPasswordClass}}"
+           id="inputPassword"
+           (keypress)="validPassword(passw.value)"
+           (keydown.enter)="inputCheck()"
+           [(ngModel)]="password">
+    <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
+  </div>
+</div>
