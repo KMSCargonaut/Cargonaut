@@ -32,7 +32,8 @@ import { UpdateUserComponent } from './components/profil/loggedin/update-user/up
 import {AddMoneyComponent} from "./components/add-money/add-money.component";
 import {LoadMoneyButtonComponent} from "./components/add-money/load-money-button/load-money-button.component";
 import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.component';
-import { AccountVerwaltenComponent } from './account-verwalten/account-verwalten.component';
+
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { AccountVerwaltenComponent } from './account-verwalten/account-verwalten
     AddMoneyComponent,
     LoadMoneyButtonComponent,
     VoteStarsComponent,
-    AccountVerwaltenComponent
+    EditAccountComponent
   ],
     imports: [
         BrowserModule,
