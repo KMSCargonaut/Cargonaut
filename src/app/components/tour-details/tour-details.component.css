@@ -3,3 +3,7 @@
   width: 100vw;
   background-color: #F3FBED;
 }
+
+.hover:hover {
+  cursor: pointer;
+}
