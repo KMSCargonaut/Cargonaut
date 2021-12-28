@@ -18,6 +18,7 @@ export class StrangerProfileComponent {
   username = '';
   age = -1;
   evaluation = -1;
+  evaluationCounter = 0;
   gender = '';
   tours: Tour[] = [];
   offerTours: Tour[] = [];
@@ -39,6 +40,7 @@ export class StrangerProfileComponent {
       this.age = this.calcAge(new Date(this.user.birthday));
       console.log(this.age);
       this.evaluation = this.user.evaluation;
+      this.evaluationCounter = this.user.evaluationCounter;
       this.tours = await this.tourData.getAllToursFromUser(this.user.uid)
       this.offerTours = this.tours.filter(tour => tour.isOffer)
         .filter(tour => !tour.areSeatsOccupied)

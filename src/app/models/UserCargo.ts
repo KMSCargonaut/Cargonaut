@@ -6,6 +6,7 @@ export class UserCargo {
   username: string;
   birthday: Date;
   evaluation: number;
+  evaluationCounter: number;
   car: string[];
   money: number;
   gender: string;
@@ -21,6 +22,7 @@ export class UserCargo {
     this.car = [];
     this.money = 0;
     this.evaluation = -1; //nicht vorhanden
+    this.evaluationCounter = 0;
 
   }
 }
