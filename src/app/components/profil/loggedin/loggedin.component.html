@@ -23,9 +23,7 @@
       {{this.userData.currUser.money}}€
     </div>
 
-    <div class="mt-3">
-      <ngb-rating [(rate)]="currentRate" [readonly]="true" [max]="5"></ngb-rating>
-    </div>
+  <app-vote-stars [currentRate]="currentRate"></app-vote-stars>
 
     <div class="mt-3">
       <button class=" logoGreenMedium" (click)="openUpdateModal()">Profil bearbeiten</button>
