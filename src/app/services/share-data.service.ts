@@ -9,6 +9,7 @@ export class ShareDataService {
 
   detailUser: UserCargo | null = null
   detailTour: Tour | null = null;
+  tourSearch: Tour[] | null = null;
 
   constructor() { }
 }
