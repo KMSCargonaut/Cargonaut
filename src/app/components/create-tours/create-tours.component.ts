@@ -115,6 +115,7 @@ export class CreateToursComponent {
   async addTour(tour: Tour) {
     await this.tourData.addTour(tour);
     this.clearInputs();
+    this.alert.showAlert({type: 'success', message: 'Erfolgreich eine Tour erstellt'});
   }
 
   newTour() {
