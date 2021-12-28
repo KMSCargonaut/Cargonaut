@@ -9,6 +9,7 @@ import {CarsService} from "../../services/cars.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserCargo} from "../../models/UserCargo";
 import {CalculateService} from "../../services/calculate.service";
+import {Passenger} from "../../models/Passenger";
 
 @Component({
   selector: 'app-create-tours',
@@ -107,13 +108,14 @@ export class CreateToursComponent {
 
 
   async addNoOffer(tour: Tour, user: UserCargo) {
-    tour.passengers[0] = user.uid;
+    tour.passengers[0] = new Passenger(user.uid, Number.parseInt(this.seats), Number.parseInt(this.storage));
     await this.addTour(tour);
   }
 
   async addTour(tour: Tour) {
     await this.tourData.addTour(tour);
     this.clearInputs();
+    this.alert.showAlert({type: 'success', message: 'Erfolgreich eine Tour erstellt'});
   }
 
   newTour() {

@@ -26,17 +26,27 @@ export class TourCardComponent implements OnInit{
     this.changeUserName()
   }
 
-  async navigateToDetails() {
+  async navigateToDetailsOrEdit() {
     this.shareData.detailTour = this.tour;
     const user = await this.userService.getUser(this.tour.creatorID);
     if (user) {
       this.shareData.detailUser = user;
     }
-    this.router.navigate(["/tour-details"])
+
+    if (this.userService.currUser) {
+      if (this.userService.currUser.uid === this.tour.creatorID){
+        this.router.navigate(["/editTour"])
+      } else {
+        this.router.navigate(["/tour-details"])
+      }
+    } else {
+      this.router.navigate(["/tour-details"])
+    }
+
   }
 
   changeUserName(){
-    this.userService.getUser(this.tour.isOffer? this.tour.driver: this.tour.passengers[0]).then(
+    this.userService.getUser(this.tour.creatorID).then(
       (user) => {
         if (user) {
           this.userName = user.username
