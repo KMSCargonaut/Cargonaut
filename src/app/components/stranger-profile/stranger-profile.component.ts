@@ -74,7 +74,7 @@ export class StrangerProfileComponent {
       if (bookedTours.length != 0) {
         for (const tour of bookedTours) {
           for (const passengers of tour.passengers) {
-            if (passengers === id) {
+            if (passengers.id === id) {
               length += 1;
             }
           }

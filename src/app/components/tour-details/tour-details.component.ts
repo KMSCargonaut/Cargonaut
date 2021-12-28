@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CalculateService} from "../../services/calculate.service";
 import {UserService} from "../../services/user.service";
 import {ShareDataService} from "../../services/share-data.service";
@@ -37,7 +37,7 @@ export class TourDetailsComponent implements OnInit{
 
   changeUserName(){
     if (this.shareData.detailTour?.passengers[0] || this.shareData.detailTour?.driver && this.shareData.detailTour?.isOffer) {
-      this.userService.getUser(this.shareData.detailTour?.isOffer ? this.shareData.detailTour.driver : this.shareData.detailTour?.passengers[0]).then(
+      this.userService.getUser(this.shareData.detailTour?.creatorID).then(
         (user) => {
           if (user) {
             this.userName = user.username

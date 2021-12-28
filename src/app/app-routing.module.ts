@@ -7,6 +7,7 @@ import {TourSiteComponent} from "./components/tour-site/tour-site.component";
 import { CreateToursComponent } from './components/create-tours/create-tours.component';
 import {TourDetailsComponent} from "./components/tour-details/tour-details.component";
 import {StrangerProfileComponent} from "./components/stranger-profile/stranger-profile.component";
+import {TourEditComponent} from "./components/tour-edit/tour-edit.component";
 
 const routes: Routes = [
 
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'exprofile',
     component: StrangerProfileComponent,
+  },
+  {
+    path: 'editTour',
+    component: TourEditComponent,
   }
 ];
 
