@@ -47,3 +47,40 @@
     <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
   </div>
 </div>
+<div class="row">
+  <div class="form-group col-md-12">
+    <label for="inputPassword" class="logoGreenDark">
+      Passwort wiederholen</label>
+    <input #rpassw
+           type="password"
+           class="form-control {{wrongRepeatPasswordClass}}"
+           id="repeatPassword"
+           (keypress)="validRepeatPassword(rpassw.value)"
+           (keydown.enter)="inputCheck()"
+           [(ngModel)]="repeatPassword">
+    <div *ngIf="passwordRepeatMessage !== ''" class="text-danger">{{passwordRepeatMessage}}</div>
+  </div>
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+
+  <div class="container ">
+    <div class="row justify-content-center">
+      <div class="col-6 ">
+        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                (click)="inputCheck()"  (click)="activeModal.dismiss()">
+          Speichern
+        </button>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <button type="button" class="btn btn-danger mx-auto btn-block"
+                (click)="activeModal.dismiss()">Abbrechen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
