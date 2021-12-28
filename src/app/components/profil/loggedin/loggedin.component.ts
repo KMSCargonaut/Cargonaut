@@ -16,7 +16,7 @@ import {CarsService} from "../../../services/cars.service";
 })
 export class LoggedinComponent implements OnInit {
 
-  currentRate: number = 3.65;
+  currentRate: number = 1.65;
   ownOffers: Tour[] = []
   passengerTours: Tour[] = []
   isHorizontal: boolean = true;
