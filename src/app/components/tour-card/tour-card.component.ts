@@ -36,7 +36,7 @@ export class TourCardComponent implements OnInit{
   }
 
   changeUserName(){
-    this.userService.getUser(this.tour.isOffer? this.tour.driver: this.tour.passengers[0]).then(
+    this.userService.getUser(this.tour.creatorID).then(
       (user) => {
         if (user) {
           this.userName = user.username

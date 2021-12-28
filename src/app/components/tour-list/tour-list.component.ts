@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {Tour} from "../../models/Tour";
 
@@ -13,7 +13,6 @@ export class TourListComponent{
   @Input() isHorizontal: boolean = false;
 
   constructor(public tourService: TourService) {
-
   }
 
 
