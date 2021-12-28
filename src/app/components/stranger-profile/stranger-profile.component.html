@@ -9,20 +9,25 @@
 
     <div class="d-inline-flex flex-column">
       <div class="h5 logoGreenDark">{{this.username}}</div>
-      <div class="logoGreenDark"><span>{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
+      <div class="logoGreenDark"><span class="mr-1">{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
       <div class="logoGreenDark">{{this.age}}</div>
       <div class="logoGreenDark">{{this.gender}}</div>
-      <div class="logoGreenDark" *ngIf="this.evaluation !== -1; else noEval">{{this.evaluation}}</div>
-      <ng-template #noEval class="logoGreenDark">Not evaluated yet</ng-template>
+      <app-vote-stars [currentRate]="this.evaluation"></app-vote-stars>
+      <div class="logoGreenDark">
+        <span *ngIf="this.evaluation !== -1">{{this.evaluation}} </span>
+        <span *ngIf="this.evaluation === -1">0 </span>
+        von {{this.evaluationCounter}} Nutzern
+      </div>
     </div>
+
   </div>
 
   <div class="d-inline-flex flex-column m-5">
     <div class="h5 logoGreenDark">Statistik</div>
-    <div class="logoGreenDark">Ausgeführte Fahrten: 2</div>
-    <div class="logoGreenDark">Mitgefahren: 3</div>
-    <div class="logoGreenDark">Offene Fahrten: 4</div>
-    <div class="logoGreenDark">Offene Anfragen: 5</div>
+    <div class="logoGreenDark">Ausgeführte Fahrten: {{this.executedTours()}}</div>
+    <div class="logoGreenDark">Mitgefahren: {{this.goneWithNumber}}</div>
+    <div class="logoGreenDark">Offene Fahrten: {{this.openOfferTours()}}</div>
+    <div class="logoGreenDark">Offene Anfragen: {{this.openNoOfferTours()}}</div>
   </div>
 </div>
 
@@ -31,23 +36,43 @@
 
 
   <div class="">
-    <h2 class="logoGreenDark">Seine Angebote</h2>
+    <h2 class="logoGreenDark">{{this.username}}'s Angebote</h2>
   </div>
 
-  <app-tour-list [isHorizontal]="true" [usedList]="offerTours"></app-tour-list>
+  <app-tour-list *ngIf="this.offerTours.length > 0; else noOffers" [isHorizontal]="true"
+                 [usedList]="offerTours"></app-tour-list>
+
+  <ng-template #noOffers>
+    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
+      <div class="row">
+        <div class="col text-center mt-3 h2 logoGreenDark">
+          Melde dich an, um eine Tour zu erstellen!
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
 </div>
-
 
 
 <div class="tours">
 
 
   <div class="">
-    <h2 class="logoGreenDark">Seine Anfragen</h2>
+    <h2 class="logoGreenDark">{{this.username}}'s Anfragen</h2>
   </div>
 
-  <app-tour-list [isHorizontal]="true" [usedList]="noOfferTours"></app-tour-list>
+  <app-tour-list *ngIf="this.noOfferTours.length > 0; else noNoOffers" [isHorizontal]="true"
+                 [usedList]="noOfferTours"></app-tour-list>
+  <ng-template #noNoOffers>
+    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
+      <div class="row">
+        <div class="col text-center mt-3 h2 logoGreenDark">
+          Melde dich an, um eine Tour zu erstellen!
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
 </div>
 

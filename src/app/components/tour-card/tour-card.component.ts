@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {UserCargo} from "../../models/UserCargo";
 import {TourService} from "../../services/tour.service";
+import {ShareDataService} from "../../services/share-data.service";
 
 @Component({
   selector: 'app-tour-card',
@@ -17,7 +17,8 @@ export class TourCardComponent implements OnInit{
   mergeDateAndTime = ''
   userName = '';
 
-  constructor(public userService: UserService, private router: Router, public tourService: TourService) {
+  constructor(public userService: UserService, private router: Router, public tourService: TourService,
+              public shareData: ShareDataService) {
   }
 
   ngOnInit(){
@@ -25,8 +26,12 @@ export class TourCardComponent implements OnInit{
     this.changeUserName()
   }
 
-  navigateToDetails() {
-    this.tourService.tourDetails = this.tour
+  async navigateToDetails() {
+    this.shareData.detailTour = this.tour;
+    const user = await this.userService.getUser(this.tour.creatorID);
+    if (user) {
+      this.shareData.detailUser = user;
+    }
     this.router.navigate(["/tour-details"])
   }
 
