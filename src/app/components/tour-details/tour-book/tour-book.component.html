@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Buchen</div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <label for="seats">Sitzplätze</label>
+        <select #seatSelect name="" id="seats" class="form-control">
+          <option value="{{seat}}" *ngFor="let seat of this.seats; let i = index">{{seat}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="storage">Stauraum</label>
+        <select #storSelect name="" id="storage" class="form-control">
+          <option value="{{storage}}" *ngFor="let storage of this.storage; let i = index">{{storage}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-footer">
+
+  <div class="container ">
+    <div class="row justify-content-center">
+      <div class="col-6 ">
+        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                (click)="checkInputs(storSelect.value, seatSelect.value)">Buchen</button>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
