@@ -36,6 +36,8 @@ import { TourEditComponent } from './components/tour-edit/tour-edit.component';
 import { ProfileTourListComponent } from './components/profil/loggedin/profile-tour-list/profile-tour-list.component';
 import { TourBookComponent } from './components/tour-details/tour-book/tour-book.component';
 
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,8 +67,10 @@ import { TourBookComponent } from './components/tour-details/tour-book/tour-book
     LoadMoneyButtonComponent,
     VoteStarsComponent,
     TourEditComponent,
-    ProfileTourListComponent
-  ],
+    ProfileTourListComponent,
+    TourBookComponent,
+    EditAccountComponent
+   ],
     imports: [
         BrowserModule,
         AppRoutingModule,

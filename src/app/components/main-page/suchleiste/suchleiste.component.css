@@ -30,29 +30,44 @@ display: none;
 .colpad {
   padding: 0;
   margin: 0;
-  width: 2em;
 }
 
 .input-opaque{
   background-color: rgba(0, 0, 0, 0.0);
-  border-color: rgba(0, 0, 0, 0.0);
+/*  border-color: rgba(0, 0, 0, 0.0);*/
+  border: none;
 }
 
 .text-opaque{
   background-color: rgba(0, 0, 0, 0.0);
   color: white;
-  border-color: rgba(0, 0, 0, 0.0);
-  outline: none /*das hier noch auskommentieren -Serag*/
+/*  border-color: rgba(0, 0, 0, 0.0);*/
+  border: none;
+}
+
+.form-control:focus{
+  border-color: rgba(0,0,0,0.0);
+  box-shadow:0 0 0 .2rem rgba(0,0,0,.0)
+}
+
+.iconsize {
+   height: 30px;
+  margin: 0;
+  padding: 0;
 }
 
 .form-row-style {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   border-radius: 35px;
   position: center;
   margin: 0;
   padding: 0;
   /*height: 10em; !*hier so 5em*!*/
+}
+
+.leistenheight{
+  height: 200px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -67,3 +82,49 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.suchbutton {
+  background-color: #005B51;
+  border-radius: 0px 35px 35px 0px;
+  height: 100%;
+  color: white;
+}
+
+.suchbutton:focus {
+  background-color: #005B51;
+}
+
+
+
+.defaultscreen {
+  display: block;
+}
+
+.smallscreen {
+  display: none;
+}
+
+@media (max-width: 1310px) {
+  .defaultscreen {
+    display: none;
+  }
+
+  .smallscreen {
+    display: block;
+  }
+
+  .suchbutton {
+    background-color: #005B51;
+    border-radius: 0px 0px 35px 35px;
+    height: 100%;
+    color: white;
+  }
+
+  .row-margin{
+    margin: 0px;
+  }
+
+  .border-bottom{
+    margin: 0px 10px 0px 10px;
+  }
+
+}
