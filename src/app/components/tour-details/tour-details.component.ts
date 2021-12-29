@@ -3,6 +3,8 @@ import {CalculateService} from "../../services/calculate.service";
 import {UserService} from "../../services/user.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {TourBookComponent} from "./tour-book/tour-book.component";
 
 @Component({
   selector: 'app-tour-details',
@@ -17,7 +19,7 @@ export class TourDetailsComponent implements OnInit{
   userName = '';
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
-              public router: Router) {
+              public router: Router, public modalService: NgbModal) {
     console.log(this.shareData.detailTour?.date)
   }
 
@@ -47,6 +49,15 @@ export class TourDetailsComponent implements OnInit{
         }
       )
     }
+  }
+
+  openTourBook() {
+    const modalRef = this.modalService.open(TourBookComponent, {
+      animation: true,
+      centered: true,
+    });
+
+    modalRef.componentInstance.passedData = this.shareData.detailTour;
   }
 
   navigateToUser() {
