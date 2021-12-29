@@ -84,13 +84,7 @@ export class TourBookComponent implements OnInit {
         this.tour.isBooked = true;
         this.tour.areSeatsOccupied = true;
         this.tour.isStorageFullyLoaded = true;
-        await this.tourData.updateTour(this.tour);
-        if (this.tour.dID) {
-        let tempTour = await this.tourData.getTour(this.tour.dID);
-        if (tempTour != undefined) {
-          this.shareData.detailTour = tempTour;
-        }
-        }
+        await this.updateTour();
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
         this.activeModal.dismiss();
       } else {
@@ -115,13 +109,26 @@ export class TourBookComponent implements OnInit {
         if (this.tour.storage === this.passengerStorage()) {
           this.tour.isStorageFullyLoaded = true;
         }
-        await this.tourData.updateTour(this.tour);
+        await this.updateTour()
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
         this.activeModal.dismiss();
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
     }
+  }
+
+  async updateTour() {
+    if (this.tour) {
+      await this.tourData.updateTour(this.tour);
+      if (this.tour.dID) {
+        let tempTour = await this.tourData.getTour(this.tour.dID);
+        if (tempTour != undefined) {
+          this.shareData.detailTour = tempTour;
+        }
+      }
+    }
+
   }
 
   passengerSeats(): number {
