@@ -34,6 +34,7 @@ import {LoadMoneyButtonComponent} from "./components/add-money/load-money-button
 import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.component';
 import { TourEditComponent } from './components/tour-edit/tour-edit.component';
 import { ProfileTourListComponent } from './components/profil/loggedin/profile-tour-list/profile-tour-list.component';
+import { TourBookComponent } from './components/tour-details/tour-book/tour-book.component';
 
 @NgModule({
   declarations: [
@@ -63,8 +64,7 @@ import { ProfileTourListComponent } from './components/profil/loggedin/profile-t
     AddMoneyComponent,
     LoadMoneyButtonComponent,
     VoteStarsComponent,
-    TourEditComponent,
-    ProfileTourListComponent
+    TourEditComponent
   ],
     imports: [
         BrowserModule,
