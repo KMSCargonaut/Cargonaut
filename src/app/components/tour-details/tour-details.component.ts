@@ -81,9 +81,6 @@ export class TourDetailsComponent implements OnInit{
     let tour = this.shareData.detailTour;
     let user = this.userService.currUser;
     if (tour && user) {
-      console.log('alreadyDriver: ', (tour.driver === user.uid) )
-      console.log('driver:', tour.driver);
-      console.log('uid: ', user.uid);
       return tour.driver === user.uid;
     }
     return false;
