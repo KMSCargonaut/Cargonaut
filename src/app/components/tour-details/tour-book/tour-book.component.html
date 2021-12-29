@@ -22,14 +22,18 @@
     <div class="row">
       <div class="col">
         <label for="seats">Sitzplätze</label>
-        <input type="number" class="form-control" id="seats">
+        <select #seatSelect name="" id="seats" class="form-control">
+          <option value="{{seat}}" *ngFor="let seat of this.seats; let i = index">{{seat}}</option>
+        </select>
       </div>
     </div>
 
     <div class="row">
       <div class="col">
         <label for="storage">Stauraum</label>
-        <input type="number" class="form-control" id="storage">
+        <select #storSelect name="" id="storage" class="form-control">
+          <option value="{{storage}}" *ngFor="let storage of this.storage; let i = index">{{storage}}</option>
+        </select>
       </div>
     </div>
 
@@ -41,13 +45,15 @@
   <div class="container ">
     <div class="row justify-content-center">
       <div class="col-6 ">
-        <button type="button" class="btn btn-success mx-auto m-3 btn-block">Registrieren</button>
+        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                (click)="checkInputs(storSelect.value, seatSelect.value)">Buchen</button>
       </div>
     </div>
 
     <div class="row justify-content-center">
       <div class="col-6">
-        <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen</button>
+        <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen
+        </button>
       </div>
     </div>
 
