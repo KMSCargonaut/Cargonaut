@@ -35,6 +35,8 @@ import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.co
 import { TourEditComponent } from './components/tour-edit/tour-edit.component';
 import { TourBookComponent } from './components/tour-details/tour-book/tour-book.component';
 
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,8 +66,9 @@ import { TourBookComponent } from './components/tour-details/tour-book/tour-book
     LoadMoneyButtonComponent,
     VoteStarsComponent,
     TourEditComponent,
-    TourBookComponent
-  ],
+    TourBookComponent,
+    EditAccountComponent
+   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
