@@ -1,1 +1,169 @@
-<p>tour-edit works!</p>
+<div *ngIf="this.userData.currUser; else notloggedin ">
+  <!--  Title -->
+  <div class="container title-background mw-100">
+    <div class="row ">
+      <div class="col text-center">
+        <div class="h2 logoGreenDark m-3" *ngIf="this.isOffer">Bearbeite dein Angebot</div>
+        <div class="h2 logoGreenDark m-3" *ngIf="!this.isOffer">Bearbeite deine Anfrage</div>
+      </div>
+    </div>
+    <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
+  </div>
+
+  <!-- Create-Form -->
+  <div class="container rounded shadow mt-4 bg-white border-0">
+    <div class="row m-4">
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="logoGreenDark" for="cityStart">Von</label>
+          <input type="text" class="form-control" id="cityStart" [(ngModel)]="startCity">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label class="logoGreenDark" for="endCity">Nach</label>
+          <input type="text" class="form-control" id="endCity" [(ngModel)]="endCity">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label class="logoGreenDark" for="date">Datum</label>
+          <input type="date" class="form-control" id="date" [(ngModel)]="date" (change)="calculateEndTime()">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <label class="logoGreenDark" for="startTime">Abfahrtszeit</label>
+          <input type="time" class="form-control" id="startTime" [(ngModel)]="startTime" (change)="calculateEndTime()">
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="duration" class="logoGreenDark">Dauer</label>
+          <select name="" id="duration" class="form-control" [(ngModel)]="duration" (change)="calculateEndTime()">
+            <option value=""></option>
+            <option value="1">1h</option>
+            <option value="2">2h</option>
+            <option value="3">3h</option>
+            <option value="4">4h</option>
+            <option value="5">5h</option>
+            <option value="6">6h</option>
+            <option value="7">7h</option>
+            <option value="8">8h</option>
+            <option value="9">9h</option>
+            <option value="10">10h</option>
+            <option value="11">11h</option>
+            <option value="12">12h</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
+          <input type="datetime-local" readonly class="form-control" id="endTime" [(ngModel)]="endTime">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="seats" class="logoGreenDark">Sitzplätze</label>
+          <select name="" id="seats" class="form-control" [(ngModel)]="seats">
+            <option value=""></option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label for="storage" class="logoGreenDark">Stauraum</label>
+          <select name="" id="storage" class="form-control" [(ngModel)]="storage">
+            <option value=""></option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="col-4">
+        <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
+        <div class="">
+          <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
+                 style="min-width: 100%; max-width: 100%">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
+      </div>
+      <div class="col" *ngIf="this.isOffer">
+        <div class="form-group">
+          <label for="cars" class="logoGreenDark">Fahrzeug</label>
+          <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
+            <option value="{{car.dId}}" *ngFor="let car of this.userCars; let i = index">
+              {{car.model}} {{car.mark}},
+              Sitze: {{car.seats}}
+              Stauraum: {{car.storage}}qm
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-5 m-4">
+        <button class="btn btn-success btn-block" (click)="checkInput()">Erstellen</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template #notloggedin>
+
+  <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
+    <div class="row">
+      <div class="col text-center mt-3 h2 logoGreenDark">
+        Melde dich an, um eine Tour zu erstellen!
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="col text-center">
+        <button class="btn btn-outline-success btn-lg m-3" (click)="navigateToProfil()">Anmelden</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
