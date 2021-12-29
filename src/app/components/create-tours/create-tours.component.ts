@@ -81,7 +81,8 @@ export class CreateToursComponent {
       this.date.trim().length > 0 &&
       this.seats.trim().length > 0 &&
       this.storage.trim().length > 0 &&
-      Number.parseInt(this.price) > 0;
+      Number.parseInt(this.price) > 0 &&
+      Number.parseInt(this.seats) > 0 || Number.parseInt(this.storage) > 0;
   }
 
 
@@ -91,7 +92,7 @@ export class CreateToursComponent {
     if (currUser) {
       if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
         await this.addOffer(tempTour, currUser);
-      } else if (this.checkUniqueInputs()) {
+      } else if (this.checkUniqueInputs() && !this.isOffer) {
         await this.addNoOffer(tempTour, currUser);
       } else {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
