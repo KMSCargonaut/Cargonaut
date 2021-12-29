@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
+import {ShareDataService} from "../../services/share-data.service";
 
 @Component({
   selector: 'app-tour-site',
@@ -19,8 +20,10 @@ export class TourSiteComponent implements OnInit {
   rightTours: Tour[] = []
   leftTours: Tour[] = [];
 
-  constructor(public tourService: TourService) {
+  constructor(public tourService: TourService, public shareData: ShareDataService) {
+
   }
+
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
@@ -32,9 +35,17 @@ export class TourSiteComponent implements OnInit {
     await this.fillList();
   }
 
+  async resetSearch() {
+    await this.setTours();
+    await this.fillList();
+  }
+
+
   async setTours(){
-    this.offerTours = await this.tourService.getAllOffers().then();
-    this.requestTours = await this.tourService.getAllRequests().then();
+    if (this.shareData.tourSearch !== null) {
+      this.offerTours = this.shareData.tourSearch.filter(tour => tour.isOffer);
+      this.requestTours = this.shareData.tourSearch.filter(tour => !tour.isOffer);
+    }
   }
 
   async fillList() {
