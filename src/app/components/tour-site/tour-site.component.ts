@@ -35,6 +35,11 @@ export class TourSiteComponent implements OnInit {
     await this.fillList();
   }
 
+  async resetSearch() {
+    await this.setTours();
+    await this.fillList();
+  }
+
 
   async setTours(){
     if (this.shareData.tourSearch !== null) {

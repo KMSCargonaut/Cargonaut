@@ -3,6 +3,7 @@ import {TourService} from "../../../services/tour.service";
 import {ShareDataService} from "../../../services/share-data.service";
 import {Router} from "@angular/router";
 import {AlertService} from "../../../services/alert.service";
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-suchleiste',
@@ -16,6 +17,11 @@ export class SuchleisteComponent{
   date = '';
   passengers = '';
   storage = '';
+  @Output() newSearchEvent = new EventEmitter<null>();
+
+  addNewSearch() {
+    this.newSearchEvent.emit();
+  }
 
   constructor(public tourData: TourService, public shareData: ShareDataService, public alert: AlertService, private router: Router) { }
 
@@ -30,10 +36,21 @@ export class SuchleisteComponent{
     console.log(this.tourData.searchTours(/*true,*/ this.startCity, this.endCity, this.date, Number.parseInt(this.storage), Number.parseInt(this.passengers)));
     if (this.checkInput()) {
       this.shareData.tourSearch = await this.tourData.searchTours(/*true,*/ this.startCity, this.endCity, this.date, Number.parseInt(this.storage), Number.parseInt(this.passengers));
+      if (this.router.url === '/tours') {
+        /*this.redirectTo('/tours')*/
+        //Event von Child zu Parent pushen
+        this.addNewSearch()
+      }
       this.router.navigate(["/tours"])
     } else {
       this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
     }
+  }
+
+  //Helper method
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/tours', {skipLocationChange: false}).then(()=>
+      this.router.navigate([uri]));
   }
 
   checkInput(): boolean {
