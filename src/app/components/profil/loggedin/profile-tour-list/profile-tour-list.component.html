@@ -1,1 +1,27 @@
-<p>profile-tour-list works!</p>
+<table class="table table-striped p-4">
+  <thead class="thead-light">
+  <tr>
+    <th>Von</th>
+    <th>Nach</th>
+    <th>Wann?</th>
+    <th>Um?</th>
+    <th>Dauer</th>
+    <th>Stauraum</th>
+    <th>Sitze</th>
+    <th>Preis</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entry of usedList">
+    <td>{{entry.startCity}}</td>
+    <td>{{entry.endCity}}</td>
+    <td>{{entry.date}}</td>
+    <td>{{entry.startTime}}</td>
+    <td>{{entry.duration}}h</td>
+    <td>{{entry.storage}}</td>
+    <td>{{entry.seats}}</td>
+    <td>{{entry.price}}</td>
+  </tr>
+  </tbody>
+</table>
+

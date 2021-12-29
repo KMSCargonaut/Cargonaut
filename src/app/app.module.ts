@@ -64,7 +64,8 @@ import { TourBookComponent } from './components/tour-details/tour-book/tour-book
     AddMoneyComponent,
     LoadMoneyButtonComponent,
     VoteStarsComponent,
-    TourEditComponent
+    TourEditComponent,
+    ProfileTourListComponent
   ],
     imports: [
         BrowserModule,
