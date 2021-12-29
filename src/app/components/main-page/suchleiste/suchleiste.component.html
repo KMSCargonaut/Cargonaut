@@ -1,52 +1,116 @@
 <header class="masthead">
     <div class="center">
-       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren, du sparst!</h1>
-          <div class="form-row form-row-style align-items-center" style="height: {{searchbarheigth}}">
+       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren,<br class="smallscreen"> du sparst!</h1>
+
+      <form class="defaultscreen">
+        <div class="form-row form-row-style form-control-lg">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+          <div class="col-2 colpad">
+            <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum" name="date" [(ngModel)]="date">
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
+            <select class="form-control text-opaque form-control-lg" name="passengers" [(ngModel)]="passengers">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
+            <select class="form-control text-opaque form-control-lg" name="storage" [(ngModel)]="storage">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          <div class="col colpad">
+            <button type="button" class="btn  btn-block suchbutton" placeholder="" (click)="searchButton()"><span class="h6">Suchen</span></button>
+          </div>
+        </div>
+      </form>
+
+
+
+
+      <form class="smallscreen">
+        <div class="col form-row-style">
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
             <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                  <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/von_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="text" placeholder="Von...">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque"><img src="../../../../assets/img/Icons/nach_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="text" placeholder="Nach...">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/kalender_icon.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="date" placeholder="Datum">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad" >
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                <span class="input-group-text input-opaque"><img src="../../../../assets/img/Icons/koffer_icon_white.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                <input class="text-opaque" type="number" placeholder="m³">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <div class="input-group mb-3 border-right" style="height: {{searchbarheigth}}">
-                <div class="row">
-                  <span class="input-group-text input-opaque" ><img src="../../../../assets/img/Icons/mitfahrer_icon_white.png" style="width: {{iconsize}}; margin-left: 10px"/> </span>
-                  <input class="text-opaque" type="number" placeholder="1">
-                </div>
-              </div>
-            </div>
-            <div class="col colpad">
-              <button type="button" class="btn btn-primary btn-block " style="margin-top: -1em; background-color: #005B51;  height: {{searchbarheigth}}; border-radius: 0px 35px 35px 0px" (click)="scroll(target)"><h3>Suchen</h3></button>
+              <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
             </div>
           </div>
-
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+            <div class="col colpad">
+              <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
+            </div>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+            <div class="col colpad">
+              <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum" name="date" [(ngModel)]="date">
+            </div>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="row row-margin">
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
+            <select class="form-control text-opaque form-control-lg" name="passengers" [(ngModel)]="passengers">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <div class="col colpad">
+            <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
+            <select class="form-control text-opaque form-control-lg" name="storage" [(ngModel)]="storage">
+              <option value="1" style="color: black">1</option>
+              <option value="2" style="color: black">2</option>
+              <option value="3" style="color: black">3</option>
+              <option value="4" style="color: black">4</option>
+              <option value="5" style="color: black">5</option>
+              <option value="6" style="color: black">6</option>
+              <option value="7" style="color: black">7</option>
+              <option value="8" style="color: black">8</option>
+            </select>
+          </div>
+          </div>
+          <div class="col colpad">
+            <button type="button" class="btn  btn-block suchbutton" (click)="searchButton()"><span class="h5">Suchen</span></button>
+          </div>
+        </div>
+      </form>
     </div>
   <div style="height: 200px"></div>
   <div #target></div>

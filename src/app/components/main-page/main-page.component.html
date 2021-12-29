@@ -1,8 +1,10 @@
 <app-suchleiste></app-suchleiste>
-<div class="container">
-  <div class="row">
-    <div class="col-4" *ngFor="let title of boxTitles; let i = index">
+<div class="container d-flex justify-content-center">
+  <div class="row align-self-center">
+    <div class="col" *ngFor="let title of boxTitles; let i = index">
       <app-infobox [boxTitle]="boxTitles[i]" [infoText]="infoTexts[i]" [imagePath]="imagePaths[i]"></app-infobox>
     </div>
   </div>
 </div>
+
+
