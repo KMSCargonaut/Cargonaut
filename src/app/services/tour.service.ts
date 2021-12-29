@@ -37,6 +37,9 @@ export class TourService {
   }
 
   async updateTour(tour: Tour) {
+    for (let i = 0; i < tour.passengers.length; i++) {
+      tour.passengers[i] = this.copyAndPreparePassenger(tour.passengers[i]);
+    }
     this.tourCollection.doc(tour.dID).update(tour)
       .catch((err) => console.log(err))
   }
