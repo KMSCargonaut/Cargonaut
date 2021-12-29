@@ -3,11 +3,11 @@
 <div class="modal-header border-0">
   <div class="container">
     <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6 justify-content-center">
-        <div class="modal-title text-center h4 mx-auto logoGreenDark">Account</div>
-      </div>
       <div class="col-2"></div>
+      <div class="col-8 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Account verwalten</div>
+      </div>
+      <div class="col-1"></div>
       <div class="col-1 p-0">
         <button type="button" class="close logoGreenDark" aria-label="Close"
                 style="position: absolute; padding-top: 5px; padding-right: 20px"
@@ -15,7 +15,6 @@
           <span class="btn btn-primary btn-danger justify-content-center" aria-hidden="true">&times;</span>
         </button>
       </div>
-
     </div>
   </div>
 </div>
@@ -30,24 +29,31 @@
            id="inputEmail"
            placeholder="name@example.com"
            (keydown)="validEmail(mail.value)"
-           (keydown.enter)="inputCheck()"
+           (keydown.enter)="inputEmail()"
            [(ngModel)]="email">
-    <div *ngIf="emailMessage !== ''" class="text-danger">{{emailMessage}}</div>
+    <div *ngIf="emailMessage !== ''" class="{{emailColor}}">{{emailMessage}}</div>
   </div>
 </div>
 
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-success" (click)="this.inputEmail()">E-Mail ändern</button>
+    </div>
+  </div>
+
 <div class="row">
-  <div class="form-group col-md-12">
+  <div class="form-group col-12">
     <label for="inputPassword" class="logoGreenDark">Password</label>
     <input #passw
            type="password"
            class="form-control {{wrongPasswordClass}}"
            id="inputPassword"
            (keypress)="validPassword(passw.value)"
-           (keydown.enter)="inputCheck()"
+           (keydown.enter)="inputPassword()"
            [(ngModel)]="password">
-    <div *ngIf="passwordMessage !== ''" class="text-danger">{{passwordMessage}}</div>
+    <div *ngIf="passwordMessage !== ''" class="{{passwordColor}}">{{passwordMessage}}</div>
   </div>
+
 </div>
 <div class="row">
   <div class="form-group col-md-12">
@@ -58,32 +64,17 @@
            class="form-control {{wrongRepeatPasswordClass}}"
            id="repeatPassword"
            (keypress)="validRepeatPassword(rpassw.value)"
-           (keydown.enter)="inputCheck()"
+           (keydown.enter)="inputPassword()"
            [(ngModel)]="repeatPassword">
-    <div *ngIf="passwordRepeatMessage !== ''" class="text-danger">{{passwordRepeatMessage}}</div>
+    <div *ngIf="passwordRepeatMessage !== ''" class="{{passwordColor}}">{{passwordRepeatMessage}}</div>
   </div>
 </div>
 
-<!-- Modal Footer -->
-<div class="modal-footer">
-
-  <div class="container ">
-    <div class="row justify-content-center">
-      <div class="col-6 ">
-        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
-                (click)="inputCheck()"  (click)="activeModal.dismiss()">
-          Speichern
-        </button>
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-6">
-        <button type="button" class="btn btn-danger mx-auto btn-block"
-                (click)="activeModal.dismiss()">Abbrechen
-        </button>
-      </div>
+  <div class="row mb-3">
+    <div class="col text-center">
+      <button class="btn btn-success" (click)="this.inputPassword()">Passwort ändern</button>
     </div>
   </div>
-</div>
+
+
 </div>

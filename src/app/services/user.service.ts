@@ -3,6 +3,7 @@ import {UserCargo} from "../models/UserCargo";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
+import {updateEmail, updatePassword } from "firebase/auth";
 import User = firebase.User;
 
 @Injectable({
@@ -95,6 +96,22 @@ export class UserService {
 
   async register(email: string, password: string) {
     await this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  async updateEmail(email: string) {
+    if (this.user) {
+     await updateEmail(this.user, email);
+    } else {
+      console.log('user not logged in')
+    }
+  }
+
+  async updatePassword(password: string) {
+    if (this.user) {
+      await updatePassword(this.user, password);
+    } else {
+      console.log('user not logged in')
+    }
   }
 
   // Car-Handler for User
