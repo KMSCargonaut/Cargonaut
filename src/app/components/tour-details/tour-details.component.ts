@@ -5,6 +5,9 @@ import {ShareDataService} from "../../services/share-data.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TourBookComponent} from "./tour-book/tour-book.component";
+import {Tour} from "../../models/Tour";
+import {TourService} from "../../services/tour.service";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-tour-details',
@@ -19,7 +22,7 @@ export class TourDetailsComponent implements OnInit{
   userName = '';
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
-              public router: Router, public modalService: NgbModal) {
+              public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService) {
     console.log(this.shareData.detailTour?.date)
   }
 
@@ -49,6 +52,98 @@ export class TourDetailsComponent implements OnInit{
         }
       )
     }
+  }
+
+  bookedUp(): boolean {
+    let tour = this.shareData.detailTour;
+    if (tour) {
+      return tour.isStorageFullyLoaded && tour.areSeatsOccupied;
+    } else {
+      return true;
+    }
+  }
+
+  alreadyPassenger(): boolean {
+    let tour = this.shareData.detailTour;
+    let user = this.userService.currUser;
+    let alreadyPass = false;
+    if (tour && user) {
+      for (let passenger of tour.passengers) {
+        if (passenger.id === user.uid) {
+          alreadyPass = true;
+        }
+      }
+    }
+    return alreadyPass;
+  }
+
+  alreadyDriver(): boolean  {
+    let tour = this.shareData.detailTour;
+    let user = this.userService.currUser;
+    if (tour && user) {
+      return tour.driver === user.uid;
+    }
+    return false;
+  }
+
+  cancelTour() {
+    let tour = this.shareData.detailTour;
+    if (tour) {
+      if (tour.isOffer) {
+        this.cancelIfOffer(tour);
+      } else {
+        this.cancelIfNoOffer(tour)
+      }
+    }
+  }
+
+  async cancelIfOffer(tour: Tour) {
+    let uid = (this.userService.currUser) ? this.userService.currUser.uid : '';
+    for (let i = 0; i < tour.passengers.length; i++) {
+      if (tour.passengers[i].id === uid) {
+        tour.passengers.splice(i,1);
+        break;
+      }
+    }
+
+    if (tour.passengers.length === 0) {
+      tour.isBooked = false;
+      tour.isStorageFullyLoaded = false;
+      tour.areSeatsOccupied = false;
+    } else {
+      let seats:number = 0;
+      for (const passenger of tour.passengers) {
+        seats += passenger.seats
+      }
+      if (seats < tour.seats) {
+        tour.areSeatsOccupied = false;
+      }
+
+      let storage: number = 0;
+      for (const passenger of tour.passengers) {
+        storage += passenger.storage
+      }
+
+      if (storage < tour.storage) {
+        tour.isStorageFullyLoaded = false;
+      }
+    }
+
+    await this.tourData.updateTour(tour);
+    console.log('canceled offer tour')
+    this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
+  }
+
+  async cancelIfNoOffer(tour: Tour) {
+    tour.car = '';
+    tour.driver = '';
+    tour.isBooked = false;
+    tour.areSeatsOccupied = false;
+    tour.isStorageFullyLoaded = false;
+    await this.tourData.updateTour(tour);
+    console.log('canceled no offer tour')
+    this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
+
   }
 
   openTourBook() {

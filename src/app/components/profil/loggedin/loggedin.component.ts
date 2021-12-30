@@ -40,6 +40,7 @@ export class LoggedinComponent implements OnInit {
     await this.userData.logout();
   }
 
+
   async deleteAccount(): Promise<void> {
     let userTours: Tour[];
     const user = this.userData.currUser;
