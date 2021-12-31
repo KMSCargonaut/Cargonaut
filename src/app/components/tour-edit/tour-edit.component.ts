@@ -62,7 +62,17 @@ export class TourEditComponent implements OnInit {
 
   ngOnInit() {
     if(this.shareData.detailTour) {
+      this.fillFields()
+      this.tour = this.shareData.detailTour
+    }
+
+    this.endTime = this.calcService.arrivalTime(this.startTime, this.duration, this.date)
+  }
+
+  fillFields() {
+    if(this.shareData.detailTour) {
       this.isOffer = this.shareData.detailTour.isOffer
+      console.log("Ist es ein Angebot: " + this.isOffer)
       this.startCity = this.shareData.detailTour.startCity
       this.endCity = this.shareData.detailTour.endCity
       this.startTime = this.shareData.detailTour.startTime
@@ -73,10 +83,7 @@ export class TourEditComponent implements OnInit {
       this.price = this.shareData.detailTour.price.toString()
       this.description = this.shareData.detailTour.description
       this.chosenCar = this.shareData.detailTour.car
-      this.tour = this.shareData.detailTour
     }
-
-    this.endTime = this.calcService.arrivalTime(this.startTime, this.duration, this.date)
   }
 
   navigateToProfil() {
@@ -134,6 +141,14 @@ export class TourEditComponent implements OnInit {
     await this.tourData.updateTour(tour);
     this.alert.showAlert({type: 'success', message: 'Tour bearbeitet!'});
   }
+
+  async deleteTour() {
+    if (this.shareData.detailTour)
+    await this.tourData.deleteTour(this.shareData.detailTour);
+    this.router.navigate(["/profil"])
+    this.alert.showAlert({type: 'danger', message: 'Tour gelöscht!'});
+  }
+
 
   newTourParams() {
     if(this.shareData.detailTour) {

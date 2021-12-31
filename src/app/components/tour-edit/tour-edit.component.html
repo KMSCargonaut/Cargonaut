@@ -7,7 +7,7 @@
         <div class="h2 logoGreenDark m-3" *ngIf="!this.isOffer">Bearbeite deine Anfrage</div>
       </div>
     </div>
-    <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
+    <app-slide-checker [checkedChecker]="!isOffer" (changeState)="offerOnOff()"></app-slide-checker>
   </div>
 
   <!-- Create-Form -->
@@ -142,8 +142,14 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-5 m-4">
-        <button class="btn btn-success btn-block" (click)="checkInput()">Erstellen</button>
+      <div class="col-4 mt-4 mb-4">
+        <button class="btn btn-danger btn-block" (click)="deleteTour()">Fahrt Löschen</button>
+      </div>
+      <div class="col-4 mt-4 mb-4">
+        <button class="btn btn-block" style="background-color: lightgrey" (click)="fillFields(); calculateEndTime()">Änderungen verwerfen</button>
+      </div>
+      <div class="col-4 mt-4 mb-4">
+        <button class="btn btn-success btn-block" (click)="checkInput()">Bearbeiten</button>
       </div>
     </div>
   </div>
