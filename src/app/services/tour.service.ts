@@ -101,17 +101,25 @@ export class TourService {
       }))
   }
 
+  async getTour(dId: string): Promise<Tour | undefined> {
+    return this.tourCollection.doc(dId).get().toPromise().then((doc) => {
+        const tour: Tour | undefined = doc.data();
+        if (tour != undefined) {
+          tour.dID = doc.id;
+        }
+        return tour;
+    })
+  }
+
 
 /**
  *  Eventuell veraltelt
  **/
 
 // Suchen von Tours
-  async searchTours(/*offer: boolean,*/ startCity: string, endCity: string, date: string, storage: number, seats: number): Promise<Tour[]> {
+  async searchTours(startCity: string, endCity: string, date: string, storage: number, seats: number): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
       ref
-        /*.where('isOffer', '==', offer)*/
-        .where('isBooked', '==', false)
         .where('date', '==', date)
         .where('startCity', '==', startCity)
         .where('endCity', '==', endCity)

@@ -16,50 +16,91 @@
   </div>
 </div>
 
+<div *ngIf="tour">
+  <div *ngIf="tour.isOffer; else noOffer">
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <label for="seats">Sitzplätze</label>
+            <select #seatSelect name="" id="seats" class="form-control">
+              <option value="{{seat}}" *ngFor="let seat of this.seats; let i = index">{{seat}}</option>
+            </select>
+          </div>
+        </div>
 
-<div class="modal-body">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <label for="seats">Sitzplätze</label>
-        <select #seatSelect name="" id="seats" class="form-control">
-          <option value="{{seat}}" *ngFor="let seat of this.seats; let i = index">{{seat}}</option>
-        </select>
+        <div class="row">
+          <div class="col">
+            <label for="storage">Stauraum</label>
+            <select #storSelect name="" id="storage" class="form-control">
+              <option value="{{storage}}" *ngFor="let storage of this.storage; let i = index">{{storage}}</option>
+            </select>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <label for="storage">Stauraum</label>
-        <select #storSelect name="" id="storage" class="form-control">
-          <option value="{{storage}}" *ngFor="let storage of this.storage; let i = index">{{storage}}</option>
-        </select>
-      </div>
-    </div>
+    <div class="modal-footer">
 
+      <div class="container ">
+        <div class="row justify-content-center">
+          <div class="col-6 ">
+            <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                    (click)="bookIfOffer(storSelect.value, seatSelect.value)">Buchen
+            </button>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 </div>
 
-<div class="modal-footer">
-
-  <div class="container ">
-    <div class="row justify-content-center">
-      <div class="col-6 ">
-        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
-                (click)="checkInputs(storSelect.value, seatSelect.value)">Buchen</button>
+<ng-template #noOffer>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <label for="car">Fahrzeug auswählen</label>
+          <select #chosenCar name="" id="car" class="form-control" [(ngModel)]="tempCar">
+            <option value="{{car.dId}}" *ngFor="let car of this.cars; let i = index">
+              {{car.model}} {{car.mark}},
+              Sitze: {{car.seats}}
+              Stauraum: {{car.storage}}qm
+            </option>
+          </select>
+        </div>
       </div>
     </div>
-
-    <div class="row justify-content-center">
-      <div class="col-6">
-        <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen
-        </button>
-      </div>
-    </div>
-
   </div>
 
-</div>
+  <div class="modal-footer">
 
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-6 ">
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                  (click)="bookIfNoOffer(chosenCar.value)">Buchen
+          </button>
+        </div>
+      </div>
 
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <button type="button" class="btn btn-danger mx-auto btn-block" (click)="activeModal.dismiss()">Abbrechen
+          </button>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</ng-template>
