@@ -1,5 +1,8 @@
-.test {
-  z-index: +1;
-  padding-top: 20px;
+p {
   position: absolute;
+  width: 20%;
+  top: 1%;
+  left: 40%;
+  margin-bottom: 0;
 }
+
