@@ -83,7 +83,7 @@
   <div class="primary-header flexi bg-light">
 
     <div>
-      <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+      <svg (click)="navigateToMainPage()" class="logo" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
            xmlns:xlink="http://www.w3.org/1999/xlink"
            viewBox="0 0 309 90">
         <defs>
@@ -146,19 +146,19 @@
       <ul #primaryNavigation id="primary-navigation" class="primary-navigation flexi"
       data-visible="false">
         <li>
-          <a class="buttons" (click)="navigateToMainPage()">Startseite</a>
+          <a class="buttons" (click)="navigateToMainPage(); mobileToggle(primaryNavigation, mobile)">Startseite</a>
         </li>
         <li>
-          <a class="buttons" (click)="navigateToTours()">Mitfahrgelegenheiten</a>
+          <a class="buttons" (click)="navigateToTours(); mobileToggle(primaryNavigation, mobile)">Mitfahrgelegenheiten</a>
         </li>
         <li>
           <a  class="buttons" href="">Meine Angebote und Anfragen</a>
         </li>
         <li>
-          <a  class="buttons" (click)="navigateToCreateTourPage()">Angebote und Anfragen erstellen</a>
+          <a  class="buttons" (click)="navigateToCreateTourPage(); mobileToggle(primaryNavigation, mobile)">Angebote und Anfragen erstellen</a>
         </li>
         <li>
-          <a class="buttons" (click)="navigateToUser()">Profil</a>
+          <a class="buttons" (click)="navigateToUser(); mobileToggle(primaryNavigation, mobile)">Profil</a>
         </li>
       </ul>
     </nav>
