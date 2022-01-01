@@ -1,7 +1,11 @@
-<div class="container d-flex title-background mw-100 justify-content-center" >
+<div class="container d-flex title-background mw-100 justify-content-center">
   <div class="row align-self-center" *ngIf="this.shareData.detailTour">
-    <div class="col h2 logoGreenDark text-center" *ngIf="this.shareData.detailTour.isOffer">Das ist ein Angebot - Sie würden mitfahren</div>
-    <div class="col h2 logoGreenDark text-center" *ngIf="!this.shareData.detailTour.isOffer">Das ist eine Anfrage - Sie wären der Fahrer</div>
+    <div class="col h2 logoGreenDark text-center" *ngIf="this.shareData.detailTour.isOffer">Das ist ein Angebot - Sie
+      würden mitfahren
+    </div>
+    <div class="col h2 logoGreenDark text-center" *ngIf="!this.shareData.detailTour.isOffer">Das ist eine Anfrage - Sie
+      wären der Fahrer
+    </div>
   </div>
 </div>
 <div class="container rounded mt-4 shadow bg-white border-0 p-4">
@@ -18,11 +22,14 @@
     </div>
 
 
-    <div class="col-4" >
-      <div class="text-right" >
+    <div class="col-4">
+      <div class="text-right">
         <span class="mr-2 logoGreenDark hover" (click)="navigateToUser()">{{this.shareData.detailUser?.username}}</span>
-        <svg class="profil hover" xmlns="http://www.w3.org/2000/svg" width="3em" viewBox="0 0 65 65" (click)="navigateToUser()">
-          <path id="ic_account_circle_24px" d="M34.5,2A32.5,32.5,0,1,0,67,34.5,32.512,32.512,0,0,0,34.5,2Zm0,9.75a9.75,9.75,0,1,1-9.75,9.75A9.737,9.737,0,0,1,34.5,11.75Zm0,46.15A23.4,23.4,0,0,1,15,47.435c.1-6.468,13-10.01,19.5-10.01,6.467,0,19.4,3.542,19.5,10.01A23.4,23.4,0,0,1,34.5,57.9Z" transform="translate(-2 -2)" fill="#208479"/>
+        <svg class="profil hover" xmlns="http://www.w3.org/2000/svg" width="3em" viewBox="0 0 65 65"
+             (click)="navigateToUser()">
+          <path id="ic_account_circle_24px"
+                d="M34.5,2A32.5,32.5,0,1,0,67,34.5,32.512,32.512,0,0,0,34.5,2Zm0,9.75a9.75,9.75,0,1,1-9.75,9.75A9.737,9.737,0,0,1,34.5,11.75Zm0,46.15A23.4,23.4,0,0,1,15,47.435c.1-6.468,13-10.01,19.5-10.01,6.467,0,19.4,3.542,19.5,10.01A23.4,23.4,0,0,1,34.5,57.9Z"
+                transform="translate(-2 -2)" fill="#208479"/>
         </svg>
       </div>
     </div>
@@ -37,15 +44,15 @@
   <div class="row justify-content-between">
     <div class="col-3">
       <div class="container m-0 p-0">
-      <div class="form-group">
-        <label class="logoGreenDark" for="startTime">Abahrtszeit</label>
-        <input type="datetime-local" class="form-control" id="startTime" value="{{this.mergeDateAndTime}}" readonly>
-      </div>
+        <div class="form-group">
+          <label class="logoGreenDark" for="startTime">Abahrtszeit</label>
+          <input type="datetime-local" class="form-control" id="startTime" value="{{this.mergeDateAndTime}}" readonly>
+        </div>
 
-          <div class="form-group">
-            <label class="logoGreenDark" for="duration">Dauer</label>
-            <div id="duration">{{this.shareData.detailTour?.duration}} Stunden</div>
-          </div>
+        <div class="form-group">
+          <label class="logoGreenDark" for="duration">Dauer</label>
+          <div id="duration">{{this.shareData.detailTour?.duration}} Stunden</div>
+        </div>
 
         <div class="form-group">
           <label class="logoGreenDark" for="endTime">Ankunftszeit</label>
@@ -55,18 +62,85 @@
     </div>
 
 
+    <div class="col-8 mr-3">
+      <div class="container">
 
-    <div class="col-8 mr-3" style="background-color: #F3FBED">
-        <label class="logoGreenDark">Beschreibung</label>
-        <div>{{this.shareData.detailTour?.description}}</div>
-
+        <div class="row mb-3">
+          <div class="col font-weight-bold">Fahrzeug:  {{this.car?.model}}, {{this.car?.mark}}</div>
         </div>
 
+
+        <div class="row" style="height: 11rem">
+          <div class="col" style="background-color: #F3FBED">
+            <label class="logoGreenDark">Beschreibung</label>
+            <div>{{this.shareData.detailTour?.description}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
 
   </div>
 
 
+  <div class="row m-4">
+    <div class="col text-center">
+
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}" viewBox="0 0 35 33.25">
+            <path id="ic_work_24px"
+                  d="M33.5,9h-7V5.5A3.488,3.488,0,0,0,23,2H16a3.488,3.488,0,0,0-3.5,3.5V9h-7a3.473,3.473,0,0,0-3.482,3.5L2,31.75a3.488,3.488,0,0,0,3.5,3.5h28a3.488,3.488,0,0,0,3.5-3.5V12.5A3.488,3.488,0,0,0,33.5,9ZM23,9H16V5.5h7Z"
+                  transform="translate(-2 -2)" fill="#208479"/>
+          </svg>
+        </div>
+        <div class="">
+          <span class="logoGreenDark ml-2">{{this.shareData.detailTour?.storage}}</span>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col text-center">
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="div">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}" viewBox="0 0 35 35">
+            <path id="ic_perm_identity_24px"
+                  d="M21.5,8.156a4.594,4.594,0,1,1-4.594,4.594A4.593,4.593,0,0,1,21.5,8.156m0,19.687c6.5,0,13.344,3.194,13.344,4.594v2.406H8.156V32.438c0-1.4,6.847-4.594,13.344-4.594M21.5,4a8.75,8.75,0,0,0,0,17.5,9.171,9.171,0,0,0,5.78-2.179,8.385,8.385,0,0,0,2.97-6.571A8.748,8.748,0,0,0,21.5,4Zm0,19.688c-5.841,0-17.5,2.931-17.5,8.75V39H39V32.438C39,26.619,27.341,23.688,21.5,23.688Z"
+                  transform="translate(-4 -4)" fill="#208479"/>
+          </svg>
+        </div>
+        <div class="">
+          <span class="logoGreenDark ml-2 h5"> {{this.shareData.detailTour?.seats}}</span>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+    <div class="col text-center ">
+
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}" viewBox="0 0 35 35">
+            <path id="ic_monetization_on_24px"
+                  d="M19.5,2A17.5,17.5,0,1,0,37,19.5,17.506,17.506,0,0,0,19.5,2Zm2.468,28.157V33.5H17.3V30.122c-2.993-.63-5.53-2.555-5.722-5.95H15c.175,1.838,1.435,3.273,4.637,3.273,3.43,0,4.2-1.715,4.2-2.782,0-1.453-.77-2.818-4.672-3.745-4.34-1.05-7.315-2.835-7.315-6.422,0-3.01,2.432-4.97,5.442-5.618V5.5h4.672V8.912a6.187,6.187,0,0,1,4.988,5.933h-3.43c-.088-1.943-1.12-3.273-3.885-3.273-2.625,0-4.2,1.19-4.2,2.87,0,1.47,1.138,2.432,4.673,3.342s7.315,2.433,7.315,6.842c-.018,3.2-2.415,4.953-5.46,5.53Z"
+                  transform="translate(-2 -2)" fill="#208479"/>
+          </svg>
+        </div>
+
+        <div class="div">
+          <span class="logoGreenDark ml-2 h5">{{this.shareData.detailTour?.price}}</span>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 
   <div class="row">
     <div class="col">
@@ -74,40 +148,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col text-center">
-
-      <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}" viewBox="0 0 35 33.25">
-        <path id="ic_work_24px" d="M33.5,9h-7V5.5A3.488,3.488,0,0,0,23,2H16a3.488,3.488,0,0,0-3.5,3.5V9h-7a3.473,3.473,0,0,0-3.482,3.5L2,31.75a3.488,3.488,0,0,0,3.5,3.5h28a3.488,3.488,0,0,0,3.5-3.5V12.5A3.488,3.488,0,0,0,33.5,9ZM23,9H16V5.5h7Z" transform="translate(-2 -2)" fill="#208479"/>
-      </svg>
-      <span class="logoGreenDark ml-1">{{this.shareData.detailTour?.storage}}</span>
-    </div>
-
-    <div class="col text-center">
-
-
-      <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}" viewBox="0 0 35 35">
-        <path id="ic_perm_identity_24px" d="M21.5,8.156a4.594,4.594,0,1,1-4.594,4.594A4.593,4.593,0,0,1,21.5,8.156m0,19.687c6.5,0,13.344,3.194,13.344,4.594v2.406H8.156V32.438c0-1.4,6.847-4.594,13.344-4.594M21.5,4a8.75,8.75,0,0,0,0,17.5,9.171,9.171,0,0,0,5.78-2.179,8.385,8.385,0,0,0,2.97-6.571A8.748,8.748,0,0,0,21.5,4Zm0,19.688c-5.841,0-17.5,2.931-17.5,8.75V39H39V32.438C39,26.619,27.341,23.688,21.5,23.688Z" transform="translate(-4 -4)" fill="#208479"/>
-      </svg>
-      <span class="logoGreenDark ml-1"> {{this.shareData.detailTour?.seats}}</span>
-    </div>
-
-    <div class="col text-center">
-
-
-      <svg xmlns="http://www.w3.org/2000/svg" style="width: {{iconSize}}"  viewBox="0 0 35 35">
-        <path id="ic_monetization_on_24px" d="M19.5,2A17.5,17.5,0,1,0,37,19.5,17.506,17.506,0,0,0,19.5,2Zm2.468,28.157V33.5H17.3V30.122c-2.993-.63-5.53-2.555-5.722-5.95H15c.175,1.838,1.435,3.273,4.637,3.273,3.43,0,4.2-1.715,4.2-2.782,0-1.453-.77-2.818-4.672-3.745-4.34-1.05-7.315-2.835-7.315-6.422,0-3.01,2.432-4.97,5.442-5.618V5.5h4.672V8.912a6.187,6.187,0,0,1,4.988,5.933h-3.43c-.088-1.943-1.12-3.273-3.885-3.273-2.625,0-4.2,1.19-4.2,2.87,0,1.47,1.138,2.432,4.673,3.342s7.315,2.433,7.315,6.842c-.018,3.2-2.415,4.953-5.46,5.53Z" transform="translate(-2 -2)" fill="#208479"/>
-      </svg>
-
-      <span class="logoGreenDark ml-1">{{this.shareData.detailTour?.price}}</span>
-    </div>
-  </div>
-
-
-
-
   <div class="row justify-content-center">
-    <div class="col-5 m-4">
+    <div class="col-5 mt-4 mb-2">
       <button class="btn btn-success btn-block"
               (click)="openTourBook()"
               [disabled]="this.bookedUp() || this.alreadyPassenger() || this.alreadyDriver()">
@@ -117,7 +159,7 @@
   </div>
 
   <div *ngIf="this.alreadyPassenger() || this.alreadyDriver()" class="row justify-content-center">
-    <div class="col-5 m-4">
+    <div class="col-5 m-2">
       <button class="btn btn-danger btn-block" (click)="cancelTour()">Stornieren</button>
     </div>
   </div>
