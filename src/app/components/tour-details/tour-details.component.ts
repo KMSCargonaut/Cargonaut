@@ -8,6 +8,8 @@ import {TourBookComponent} from "./tour-book/tour-book.component";
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {AlertService} from "../../services/alert.service";
+import {CarsService} from "../../services/cars.service";
+import {Car} from "../../models/Car";
 
 @Component({
   selector: 'app-tour-details',
@@ -20,15 +22,20 @@ export class TourDetailsComponent implements OnInit{
   iconSize = "2em"
   endTime = '';
   userName = '';
+  car: Car | null = null;
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
-              public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService) {
+              public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
+              public carData: CarsService) {
     console.log(this.shareData.detailTour?.date)
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.mergeDateAndTime = this.shareData.detailTour?.date + 'T' + this.shareData.detailTour?.startTime;
+    if (this.shareData.detailTour) {
+    this.car = await this.carData.getCarById(this.shareData.detailTour.car)
+    }
     this.calculateEndTime()
     this.changeUserName()
   }
