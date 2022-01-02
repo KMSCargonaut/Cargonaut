@@ -23,4 +23,43 @@ export class CarItemComponent implements OnInit{
     this.car = await this.carData.getCarById(this.carId);
   }
 
+
+
+  // PropertyBinding for outline color for wrong/no inputs
+  public wrongFahrzeugModel = '';
+  public wrongKennzeichen = '';
+  public wrongSitzplaze = '';
+  public wrongStauraum = '';
+
+
+
+  // Message for wrong/no inputs
+  public fahrzeugModelMessage = '';
+  public kennzeichenMessage = '';
+  public sitzplazeMessage = '';
+  public stauraumMessage = '';
+
+
+  public validFahrzeugModel(input: string): void {
+    if (input.trim().length >= 0) {
+      this.fahrzeugModelMessage = '';
+      this.wrongFahrzeugModel = '';
+    }
+  }
+
+  public validKennzeichen(input: string): void {
+    if (input.trim().length >= 0) {
+      this.kennzeichenMessage = '';
+      this.wrongKennzeichen = '';
+    }
+  }
+
+  public validSitzplaze(input: string): void {
+    if (input.trim().length >= 0) {
+      this.sitzplazeMessage = '';
+      this.wrongSitzplaze = '';
+    }
+  }
+
+
 }
