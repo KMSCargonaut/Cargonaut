@@ -23,6 +23,9 @@ button:hover{
 }
 
 table {
-  height: 300px;
   overflow-y: scroll;
+}
+
+button {
+  width: 50%;
 }

@@ -46,6 +46,10 @@ nav {
   width: 15em;
 }
 
+.logo:hover {
+  cursor: pointer;
+}
+
 /* Navigation on default */
 .primary-navigation {
   list-style: none;

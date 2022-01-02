@@ -39,6 +39,9 @@ button{
   background-color: #F3FBED;
 }
 
+.right-box {
+  flex: 1;
+}
 
 
 /* Tests */
