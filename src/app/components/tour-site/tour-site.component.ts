@@ -22,6 +22,7 @@ export class TourSiteComponent implements OnInit {
   leftTours: Tour[] = [];
   isOfferEmpty = false;
   isRequestEmpty = false;
+  firstSearch = false; //Diese Variable dient dazu abzubilden ob von der Startseite über "Mitfahrgelegenheiten" in der Navbar zu dieser Seite navigiert wurde.
 
   constructor(public tourService: TourService, public shareData: ShareDataService) {
 
@@ -34,7 +35,8 @@ export class TourSiteComponent implements OnInit {
   }
 
  async ngOnInit() {
-    this.resetSearch()
+    await this.resetSearch();
+    this.firstSearch = true;
   }
 
   async resetSearch() {
@@ -51,6 +53,7 @@ export class TourSiteComponent implements OnInit {
     } else {
       this.isRequestEmpty = false
     }
+    this.firstSearch = false;
   }
 
 
