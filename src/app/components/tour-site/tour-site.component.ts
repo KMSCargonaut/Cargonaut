@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
+import {isEmpty} from "rxjs/operators";
 
 @Component({
   selector: 'app-tour-site',
@@ -19,6 +20,8 @@ export class TourSiteComponent implements OnInit {
   isHorizontal: boolean = false;
   rightTours: Tour[] = []
   leftTours: Tour[] = [];
+  isOfferEmpty = false;
+  isRequestEmpty = false;
 
   constructor(public tourService: TourService, public shareData: ShareDataService) {
 
@@ -31,13 +34,23 @@ export class TourSiteComponent implements OnInit {
   }
 
  async ngOnInit() {
-    await this.setTours();
-    await this.fillList();
+    this.resetSearch()
   }
 
   async resetSearch() {
     await this.setTours();
     await this.fillList();
+    if (this.offerTours.length === 0) {
+      this.isOfferEmpty = true
+    } else {
+      this.isOfferEmpty = false
+    }
+
+    if (this.requestTours.length === 0) {
+      this.isRequestEmpty = true
+    } else {
+      this.isRequestEmpty = false
+    }
   }
 
 

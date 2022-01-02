@@ -4,9 +4,18 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-12" *ngIf="isOfferEmpty">
+      <div class="center m-5" *ngIf="isOffer;">
+        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Fahrt zwischen diesen Städten</h1>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="isRequestEmpty">
+      <div class="center m-5" *ngIf="!isOffer;">
+        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Anfrage zwischen diesen Städten</h1>
+      </div>
+    </div>
     <div class="col">
       <app-tour-list  [usedList]="leftTours" [isHorizontal]="isHorizontal"></app-tour-list>
-
     </div>
     <div class="col">
       <app-tour-list [usedList]="rightTours" [isHorizontal]="isHorizontal"></app-tour-list>
