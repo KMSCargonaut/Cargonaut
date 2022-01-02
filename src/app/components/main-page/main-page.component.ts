@@ -14,9 +14,9 @@ export class MainPageComponent{
   ]
 
   infoTexts = [
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es relativ günstig ist, mit uns zu fahren!",
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es einfach und unkompliziert ist, mit uns zu fahren!",
-    "Hier steht ein Beispieltext zum anlocken von neuen Nutzern durch unser Feature, dass es sorglos, durch Nutzerbewertung, ist, mit uns zu fahren!"
+    "Anstatt sich teure Tickets für Bus und Bahn zu besorgen, oder einen Lieferdienst zu bezahlen, lassen sie sich von anderen Nutzern für wenig Geld helfen!",
+    "Mit uns können sie einfach durch angebotene Fahrten von weiteren Nutzern stöbern oder selbst eine Anfrage stellen und sich somit schnell und unkompliziert helfen lassen!",
+    "Bewerten Sie andere Nutzer nach Abschluss einer Fahrt und sehen sie Bewertungen weiterer Nutzer ein und tragen sie so zu einem sicheren und verlässlichen Umgang unserer Möglichkeiten zu!"
   ]
 
   imagePaths = [
