@@ -3,7 +3,9 @@ import { UserService } from './user.service';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Subject} from "rxjs";
 import {MockProvider} from "ng-mocks";
-import {PROVIDED_FIREBASE_APPS} from "@angular/fire/app/app.module";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../../environments/environment";
+//import {PROVIDED_FIREBASE_APPS} from "@angular/fire/app/app.module";
 
 describe('UserService', () => {
   let service: UserService;
@@ -11,10 +13,13 @@ describe('UserService', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
+      imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig)
+      ],
       providers: [
         UserService,
-        MockProvider(AngularFireAuth),
-        MockProvider(PROVIDED_FIREBASE_APPS)
+        MockProvider(AngularFireAuth)
+        //MockProvider(PROVIDED_FIREBASE_APPS)
       ]
     }).compileComponents();
     service = TestBed.inject(UserService);
@@ -22,14 +27,14 @@ describe('UserService', () => {
   });
 
   it('should executed login method with success', fakeAsync(() => {
-    const googleSignInMethod = spyOn(fireAuthService, 'signInWithPopup');
-    googleSignInMethod.and.returnValue(Promise.resolve({
+    const signInMethod = spyOn(fireAuthService, 'signInWithEmailAndPassword');
+    signInMethod.and.returnValue(Promise.resolve({
       credential: null,
       user: null,
     }));
 
-    service.login().subscribe((data) => {
-      expect(googleSignInMethod).toHaveBeenCalled();
+    service.login('test@mail.de', 'test123').then((data) => {
+      expect(signInMethod).toHaveBeenCalled();
     });
   }));
 });
