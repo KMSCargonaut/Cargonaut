@@ -1,10 +1,13 @@
 <div class="card" style="width: 18rem;">
+  <div class="col-12 justify-content-center">
+    <div class="modal-title text-center h4 mx-auto logoGreenDark">Fahrzeug</div>
+  </div>
   <div class="card-body" *ngIf="car">
     <h5 class="card-title">{{car.model}}</h5>
     <p class="card-text">{{car.mark}}</p>
     <p class=" card text">{{car.seats}} Plätze</p>
     <p class="card text" >{{car.storage}} </p>
-<!--    <a class="btn btn-primary btn-light mr-1" (click)="editEvent.emit()">Edit</a>-->
-    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Delete</a>
+   <a class="btn btn-primary  btn-success mr-5">Speichern</a>
+    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löchen</a>
   </div>
 </div>
