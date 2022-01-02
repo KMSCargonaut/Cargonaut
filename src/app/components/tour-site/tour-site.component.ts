@@ -36,7 +36,9 @@ export class TourSiteComponent implements OnInit {
 
  async ngOnInit() {
     await this.resetSearch();
-    this.firstSearch = true;
+    if (!this.shareData.tourSearch) {
+      this.firstSearch = true;
+    }
   }
 
   async resetSearch() {
