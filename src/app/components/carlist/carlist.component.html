@@ -91,6 +91,7 @@
         <div *ngFor="let car of userService.currUser.car; let i = index">
           <div class="ml-3 mr-3">
             <app-car-item [carId]="car" (deleteEvent)="this.deleteCar(car)"></app-car-item>
+
           </div>
         </div>
       </div>

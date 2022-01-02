@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {Car} from "../models/Car";
+import {UserCargo} from "../models/UserCargo";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import {Car} from "../models/Car";
 export class CarsService {
 
   private carCollection: AngularFirestoreCollection<Car>;
+
+
 
   constructor(private afs: AngularFirestore) {
     this.carCollection = afs.collection<Car>('Cars');

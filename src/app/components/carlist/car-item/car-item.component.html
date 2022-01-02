@@ -55,7 +55,7 @@
         <div *ngIf="stauraumMessage !== ''" class="text-danger">{{stauraumMessage}}</div>
       </div>
     </div>
-    <a class="btn btn-primary  btn-success mr-5">Speichern</a>
+    <a class="btn btn-primary  btn-success mr-5" (click)="updateEvent.emit()">Speichern</a>
     <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löschen</a>
    <!-- <h5 class="card-title">{{car.model}}</h5>
     <p class="card-text">{{car.mark}}</p>
