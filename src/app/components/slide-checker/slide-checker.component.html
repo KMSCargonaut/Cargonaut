@@ -4,7 +4,7 @@
       <div class="logoGreenDark mr-3"><h5>Angebote</h5></div>
       <div>
         <label class="switch">
-          <input type="checkbox" (click)="changeState.emit()">
+          <input type="checkbox" [(ngModel)]="checkedChecker" (click)="changeState.emit()">
           <span class="slider round"></span>
         </label>
       </div>
