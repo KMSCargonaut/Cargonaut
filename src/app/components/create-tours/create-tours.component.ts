@@ -98,7 +98,6 @@ export class CreateToursComponent {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
       }
     }
-
   }
 
   async addOffer(tour: Tour, user: UserCargo) {
