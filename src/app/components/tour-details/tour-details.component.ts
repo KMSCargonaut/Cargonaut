@@ -17,7 +17,7 @@ import {Passenger} from "../../models/Passenger";
   templateUrl: './tour-details.component.html',
   styleUrls: ['./tour-details.component.css']
 })
-export class TourDetailsComponent implements OnInit{
+export class TourDetailsComponent implements OnInit {
 
   mergeDateAndTime = ''
   iconSize = "2em"
@@ -36,27 +36,32 @@ export class TourDetailsComponent implements OnInit{
 
 
   async ngOnInit() {
+    console.log('ngOnInit tour-details: ', this.shareData.detailTour);
     this.mergeDateAndTime = this.shareData.detailTour?.date + 'T' + this.shareData.detailTour?.startTime;
     if (this.shareData.detailTour) {
-    this.car = await this.carData.getCarById(this.shareData.detailTour.car);
-    this.passengers = this.shareData.detailTour.passengers;
-    const currDriverId= this.shareData.detailTour.driver;
-    const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
-    if (driver) {
-      this.driver = driver.username;
-    }
-    if (this.passengers.length !== 0) {
-      let currArr = [];
-      for (let passenger of this.passengers) {
-        const user = await this.userService.getUser(passenger.id);
-        const name = (user) ? user.username : '';
-        currArr.push(name);
+      this.car = await this.carData.getCarById(this.shareData.detailTour.car);
+      this.passengers = this.shareData.detailTour.passengers;
+      const currDriverId = this.shareData.detailTour.driver;
+      const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
+      if (driver) {
+        this.driver = driver.username;
       }
-      this.passengersName = [...currArr];
-    }
+      if (this.passengers.length !== 0) {
+        await this.fillPassengersName(this.passengers)
+      }
     }
     this.calculateEndTime()
     this.changeUserName()
+  }
+
+  async fillPassengersName(arr: Passenger[]) {
+    let currArr = [];
+    for (let passenger of this.passengers) {
+      const user = await this.userService.getUser(passenger.id);
+      const name = (user) ? user.username : '';
+      currArr.push(name);
+    }
+    this.passengersName = [...currArr];
   }
 
 
@@ -67,7 +72,7 @@ export class TourDetailsComponent implements OnInit{
 
   }
 
-  changeUserName(){
+  changeUserName() {
     if (this.shareData.detailTour?.passengers[0] || this.shareData.detailTour?.driver && this.shareData.detailTour?.isOffer) {
       this.userService.getUser(this.shareData.detailTour?.creatorID).then(
         (user) => {
@@ -104,7 +109,7 @@ export class TourDetailsComponent implements OnInit{
     return alreadyPass;
   }
 
-  alreadyDriver(): boolean  {
+  alreadyDriver(): boolean {
     let tour = this.shareData.detailTour;
     let user = this.userService.currUser;
     if (tour && user) {
@@ -128,7 +133,8 @@ export class TourDetailsComponent implements OnInit{
     let uid = (this.userService.currUser) ? this.userService.currUser.uid : '';
     for (let i = 0; i < tour.passengers.length; i++) {
       if (tour.passengers[i].id === uid) {
-        tour.passengers.splice(i,1);
+        tour.passengers.splice(i, 1);
+        this.passengers.splice(i, 1);
         break;
       }
     }
@@ -138,7 +144,7 @@ export class TourDetailsComponent implements OnInit{
       tour.isStorageFullyLoaded = false;
       tour.areSeatsOccupied = false;
     } else {
-      let seats:number = 0;
+      let seats: number = 0;
       for (const passenger of tour.passengers) {
         seats += passenger.seats
       }
@@ -162,6 +168,7 @@ export class TourDetailsComponent implements OnInit{
   }
 
   async cancelIfNoOffer(tour: Tour) {
+    this.driver = '';
     tour.car = '';
     tour.driver = '';
     tour.isBooked = false;
@@ -178,7 +185,17 @@ export class TourDetailsComponent implements OnInit{
       animation: true,
       centered: true,
     });
-
+    modalRef.dismissed.toPromise().then(async (tour) => {
+      // window.location.reload();
+      console.log('onDissmiss', tour);
+      this.passengers = [...tour.passengers];
+      this.fillPassengersName(tour.passengers);
+      if (tour.driver.trim().length > 0) {
+        const currDriver = await this.userService.getUser(tour.driver);
+        this.driver = (currDriver)? currDriver.username : '';
+        this.car = await this.carData.getCarById(tour.car);
+      }
+    })
     modalRef.componentInstance.passedData = this.shareData.detailTour;
   }
 

@@ -77,7 +77,9 @@ export class TourBookComponent implements OnInit {
  async bookIfNoOffer(carId: string) {
     if (carId.trim().length <= 0) {
       this.alertData.showAlert({type: 'danger', message: 'Sie müssen ein Auto auswählen'})
-    } else {
+    }
+    // Frische Daten aus der FB ziehen und vergleichen
+    else {
       if (this.tour && this.userData.currUser) {
         this.tour.car = carId;
         this.tour.driver = this.userData.currUser.uid;
@@ -86,7 +88,7 @@ export class TourBookComponent implements OnInit {
         this.tour.isStorageFullyLoaded = true;
         await this.updateTour();
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss();
+        this.activeModal.dismiss(this.tour);
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
@@ -96,7 +98,9 @@ export class TourBookComponent implements OnInit {
  async bookIfOffer(seats: string, storage: string) {
     if (Number.parseInt(seats) === 0 && Number.parseInt(storage) === 0) {
       this.alertData.showAlert({type: 'danger', message: 'Sie können keine Fahrt mit 0 Sitzplätzen und Stauraum buchen'})
-    } else {
+    }
+    // Frische Daten aus der FB ziehen und vergleichen
+    else {
       if (this.tour && this.userData.currUser) {
         this.tour.passengers
           .push(
@@ -111,7 +115,7 @@ export class TourBookComponent implements OnInit {
         }
         await this.updateTour()
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss();
+        this.activeModal.dismiss(this.tour);
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
