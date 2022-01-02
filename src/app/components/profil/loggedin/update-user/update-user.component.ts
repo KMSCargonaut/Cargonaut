@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {UserService} from "../../../../services/user.service";
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from "@angular/router";
-import {UserCargo} from "../../../../models/UserCargo";
-import {getAuth} from "firebase/auth";
-import { time } from 'console';
 
 
 @Component({
@@ -37,7 +33,7 @@ export class UpdateUserComponent{
   public genderMessage = '';
   public passwordRepeatMessage = '';
 
-  constructor(public activeModal: NgbActiveModal, private router: Router, public userData: UserService) { }
+  constructor(public activeModal: NgbActiveModal, public userData: UserService) { }
 
   public async updateUser(){
     if(this.userData.currUser){
@@ -98,7 +94,6 @@ export class UpdateUserComponent{
   }
 
   public validBirthday(input: string): void {
-    console.log(input)
     if (input.trim().length >= 0) {
       this.birthdayMessage = '';
       this.wrongBirthday = '';
@@ -106,7 +101,6 @@ export class UpdateUserComponent{
   }
 
   public validGender(input: string) {
-    console.log(input)
     if (input.trim().length >= 0) {
       this.genderMessage = '';
       this.wrongGender = '';

@@ -72,7 +72,6 @@ export class TourEditComponent implements OnInit {
   fillFields() {
     if(this.shareData.detailTour) {
       this.isOffer = this.shareData.detailTour.isOffer
-      console.log("Ist es ein Angebot: " + this.isOffer)
       this.startCity = this.shareData.detailTour.startCity
       this.endCity = this.shareData.detailTour.endCity
       this.startTime = this.shareData.detailTour.startTime

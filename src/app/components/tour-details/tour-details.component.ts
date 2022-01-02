@@ -32,21 +32,21 @@ export class TourDetailsComponent implements OnInit {
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
               public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
-              public carData: CarsService) {
-    console.log(this.shareData.detailTour?.date)
-  }
+              public carData: CarsService) {}
 
 
   async ngOnInit() {
-    console.log('ngOnInit tour-details: ', this.shareData.detailTour);
     this.mergeDateAndTime = this.shareData.detailTour?.date + 'T' + this.shareData.detailTour?.startTime;
     if (this.shareData.detailTour) {
-      this.car = await this.carData.getCarById(this.shareData.detailTour.car);
+      const carId = this.shareData.detailTour.car;
+      if (carId.trim().length > 0) {
+        this.car = await this.carData.getCarById(carId);
+      }
       this.passengers = this.shareData.detailTour.passengers;
-      const currDriverId = this.shareData.detailTour.driver;
-      const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
       this.freeStorage = this.shareData.detailTour.storage;
       this.freeSeats = this.shareData.detailTour.seats;
+      const currDriverId = this.shareData.detailTour.driver;
+      const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
       if (driver) {
         this.driver = driver.username;
       }
@@ -185,7 +185,6 @@ export class TourDetailsComponent implements OnInit {
     }
 
     await this.tourData.updateTour(tour);
-    console.log('canceled offer tour')
     this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
   }
 
@@ -197,9 +196,7 @@ export class TourDetailsComponent implements OnInit {
     tour.areSeatsOccupied = false;
     tour.isStorageFullyLoaded = false;
     await this.tourData.updateTour(tour);
-    console.log('canceled no offer tour')
     this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
-
   }
 
   openTourBook() {
@@ -208,8 +205,6 @@ export class TourDetailsComponent implements OnInit {
       centered: true,
     });
     modalRef.dismissed.toPromise().then(async (tour) => {
-      // window.location.reload();
-      console.log('onDissmiss', tour);
       if (tour) {
         this.passengers = [...tour.passengers];
         await this.fillPassengersName();
@@ -220,7 +215,6 @@ export class TourDetailsComponent implements OnInit {
           this.car = await this.carData.getCarById(tour.car);
         }
       }
-
     })
     modalRef.componentInstance.passedData = this.shareData.detailTour;
   }

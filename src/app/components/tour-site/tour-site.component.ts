@@ -52,7 +52,6 @@ export class TourSiteComponent implements OnInit {
   async setTours(){
     if (this.shareData.tourSearch !== null) {
       this.offerTours = this.shareData.tourSearch.filter(tour => tour.isOffer);
-      console.log(this.offerTours)
       this.requestTours = this.shareData.tourSearch.filter(tour => !tour.isOffer);
     }
   }

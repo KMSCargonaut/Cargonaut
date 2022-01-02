@@ -25,8 +25,13 @@ export class TourCardComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     let tour = changes.tour.currentValue;
-    this.freeSeats = tour.seats - this.countFreeSeats(tour.passengers);
-    this.freeStorage = tour.storage - this.countFreeStorage(tour.passengers);
+    if (tour.isOffer) {
+      this.freeSeats = tour.seats - this.countFreeSeats(tour.passengers);
+      this.freeStorage = tour.storage - this.countFreeStorage(tour.passengers);
+    } else {
+      this.freeSeats = tour.seats;
+      this.freeStorage = tour.storage;
+    }
   }
 
   ngOnInit(){

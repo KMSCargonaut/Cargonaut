@@ -151,7 +151,6 @@ export class RegistrationComponent {
   }
 
   public validBirthday(input: string): void {
-    console.log(input)
     if (input.trim().length >= 0) {
       this.birthdayMessage = '';
       this.wrongBirthday = '';
@@ -166,7 +165,6 @@ export class RegistrationComponent {
   }
 
   public validGender(input: string) {
-    console.log(input)
     if (input.trim().length >= 0) {
       this.genderMessage = '';
       this.wrongGender = '';
