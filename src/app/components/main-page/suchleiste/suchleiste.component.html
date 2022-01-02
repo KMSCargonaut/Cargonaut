@@ -3,23 +3,23 @@
        <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren,<br class="smallscreen"> du sparst!</h1>
 
       <form class="defaultscreen">
-        <div class="form-row form-row-style form-control-lg">
+        <div class="form-row form-row-style form-control-lg-costum">
           <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
           <div class="col-2 colpad">
-            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
+            <input type="text" class="form-control text-opaque form-control-lg-costum" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
           </div>
           <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
           <div class="col-2 colpad">
-            <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
+            <input type="text" class="form-control text-opaque form-control-lg-costum" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
           </div>
           <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
           <div class="col-2 colpad">
-            <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum" name="date" [(ngModel)]="date">
+            <input type="date" class="form-control text-opaque form-control-lg-costum" placeholder="Datum" name="date" [(ngModel)]="date">
           </div>
           <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
-            <select class="form-control text-opaque form-control-lg" name="passengers" [(ngModel)]="passengers">
+            <select class="form-control text-opaque form-control-lg-costum" name="passengers" [(ngModel)]="passengers">
               <option value="0" style="color: black">0</option>
               <option value="1" style="color: black">1</option>
               <option value="2" style="color: black">2</option>
@@ -34,7 +34,7 @@
           <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
-            <select class="form-control text-opaque form-control-lg" name="storage" [(ngModel)]="storage">
+            <select class="form-control text-opaque form-control-lg-costum" name="storage" [(ngModel)]="storage">
               <option value="0" style="color: black">0</option>
               <option value="1" style="color: black">1</option>
               <option value="2" style="color: black">2</option>
