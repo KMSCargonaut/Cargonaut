@@ -214,13 +214,13 @@
     <div class="col-5 mt-4 mb-2">
       <button class="btn btn-success btn-block"
               (click)="openTourBook()"
-              [disabled]="this.bookedUp() || this.alreadyPassenger() || this.alreadyDriver()">
+              [disabled]="this.bookedUp() || this.alreadyPassenger() || this.alreadyDriver() || this.afterModal">
         Buchen
       </button>
     </div>
   </div>
 
-  <div *ngIf="this.alreadyPassenger() || this.alreadyDriver()" class="row justify-content-center">
+  <div *ngIf="this.alreadyPassenger() || this.alreadyDriver() || this.afterModal" class="row justify-content-center">
     <div class="col-5 m-2">
       <button class="btn btn-danger btn-block" (click)="cancelTour()">Stornieren</button>
     </div>

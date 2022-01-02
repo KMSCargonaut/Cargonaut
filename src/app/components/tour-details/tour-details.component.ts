@@ -28,11 +28,13 @@ export class TourDetailsComponent implements OnInit {
   driver: string = '';
   freeSeats: number = 0;
   freeStorage: number = 0;
+  afterModal: boolean = false;
 
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
               public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
-              public carData: CarsService) {}
+              public carData: CarsService) {
+  }
 
 
   async ngOnInit() {
@@ -52,8 +54,11 @@ export class TourDetailsComponent implements OnInit {
       }
       if (this.passengers.length !== 0) {
         await this.fillPassengersName()
-        this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
-        this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
+        if (this.shareData.detailTour.isOffer) {
+          this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
+          this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
+        }
+
       }
     }
     this.calculateEndTime()
@@ -152,6 +157,7 @@ export class TourDetailsComponent implements OnInit {
   }
 
   async cancelIfOffer(tour: Tour) {
+    this.afterModal = false;
     let uid = (this.userService.currUser) ? this.userService.currUser.uid : '';
     for (let i = 0; i < tour.passengers.length; i++) {
       if (tour.passengers[i].id === uid) {
@@ -159,6 +165,15 @@ export class TourDetailsComponent implements OnInit {
         this.passengers.splice(i, 1);
         break;
       }
+    }
+
+    if (tour.passengers.length !== 0) {
+      await this.fillPassengersName()
+      this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
+      this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
+    } else {
+      this.freeSeats = tour.seats;
+      this.freeStorage = tour.storage;
     }
 
     if (tour.passengers.length === 0) {
@@ -196,6 +211,7 @@ export class TourDetailsComponent implements OnInit {
     tour.areSeatsOccupied = false;
     tour.isStorageFullyLoaded = false;
     await this.tourData.updateTour(tour);
+    this.afterModal = false;
     this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
   }
 
@@ -204,16 +220,31 @@ export class TourDetailsComponent implements OnInit {
       animation: true,
       centered: true,
     });
-    modalRef.dismissed.toPromise().then(async (tour) => {
+    modalRef.dismissed.toPromise().then(async (arr) => {
+      const tour = arr[0];
+      this.afterModal = arr[1];
+      console.log(this.afterModal);
       if (tour) {
         this.passengers = [...tour.passengers];
         await this.fillPassengersName();
+
+        if (tour.isOffer) {
+          if (tour.passengers.length !== 0) {
+            await this.fillPassengersName()
+            this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
+            this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
+          } else {
+            this.freeSeats = tour.seats;
+            this.freeStorage = tour.storage;
+          }
+        }
 
         if (tour.driver.trim().length > 0) {
           const currDriver = await this.userService.getUser(tour.driver);
           this.driver = (currDriver) ? currDriver.username : '';
           this.car = await this.carData.getCarById(tour.car);
         }
+
       }
     })
     modalRef.componentInstance.passedData = this.shareData.detailTour;

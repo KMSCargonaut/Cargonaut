@@ -51,7 +51,6 @@ export class TourBookComponent implements OnInit {
           maxSeats = maxSeats - passenger.seats;
         }
       }
-
       for (let i = 0; i <= maxSeats; i++) {
         this.seats.push(i);
       }
@@ -60,13 +59,12 @@ export class TourBookComponent implements OnInit {
 
   fillStorage() {
     if (this.tour != null) {
-      let maxStorage = this.tour.seats;
+      let maxStorage = this.tour.storage;
       if (this.tour.passengers.length > 0) {
         for (const passenger of this.tour.passengers) {
           maxStorage = maxStorage - passenger.storage;
         }
       }
-
       for (let i = 0; i <= maxStorage; i++) {
         this.storage.push(i);
       }
@@ -88,7 +86,7 @@ export class TourBookComponent implements OnInit {
         this.tour.isStorageFullyLoaded = true;
         await this.updateTour();
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss(this.tour);
+        this.activeModal.dismiss([this.tour, true]);
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
@@ -115,7 +113,7 @@ export class TourBookComponent implements OnInit {
         }
         await this.updateTour()
         this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss(this.tour);
+        this.activeModal.dismiss([this.tour, true]);
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
