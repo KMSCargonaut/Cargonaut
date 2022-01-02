@@ -6,16 +6,57 @@
     <div class="row">
       <div class="form-group col-md-12">
 
-        <input #mail
+        <input #FahrzeugModel
                type="text"
                class="form-control "
-               id="inputEmail"
+               id="inputFahrzeugModel"
                placeholder=""
-
-               [(ngModel)]="car.mark">
-
+               (keydown)="validFahrzeugModel(FahrzeugModel.value)"
+               [(ngModel)]="car.model">
+        <div *ngIf="fahrzeugModelMessage !== ''" class="text-danger">{{fahrzeugModelMessage}}</div>
       </div>
     </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+
+        <input #kennzeichen
+               type="text"
+               class="form-control "
+               id="inputkennzeichen"
+               placeholder=""
+               (keydown)="validFahrzeugModel(kennzeichen.value)"
+               [(ngModel)]="car.mark">
+        <div *ngIf="kennzeichenMessage !== ''" class="text-danger">{{kennzeichenMessage}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+
+        <input #sitzplatze
+               type="number"
+               class="form-control "
+               id="inputsitzplatze"
+               placeholder=""
+               (keydown)="validFahrzeugModel(sitzplatze.value)"
+               [(ngModel)]="car.seats">
+        <div *ngIf="sitzplazeMessage !== ''" class="text-danger">{{sitzplazeMessage}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+
+        <input #stauraum
+               type="number"
+               class="form-control "
+               id="inputstauraum"
+               placeholder=""
+               (keydown)="validFahrzeugModel(stauraum.value)"
+               [(ngModel)]="car.storage">
+        <div *ngIf="stauraumMessage !== ''" class="text-danger">{{stauraumMessage}}</div>
+      </div>
+    </div>
+    <a class="btn btn-primary  btn-success mr-5">Speichern</a>
+    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löschen</a>
    <!-- <h5 class="card-title">{{car.model}}</h5>
     <p class="card-text">{{car.mark}}</p>
     <p class=" card text">{{car.seats}} Plätze</p>
