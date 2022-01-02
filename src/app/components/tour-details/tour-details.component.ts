@@ -10,6 +10,7 @@ import {TourService} from "../../services/tour.service";
 import {AlertService} from "../../services/alert.service";
 import {CarsService} from "../../services/cars.service";
 import {Car} from "../../models/Car";
+import {Passenger} from "../../models/Passenger";
 
 @Component({
   selector: 'app-tour-details',
@@ -23,6 +24,9 @@ export class TourDetailsComponent implements OnInit{
   endTime = '';
   userName = '';
   car: Car | null = null;
+  passengers: Passenger[] = [];
+  passengersName: string[] = [];
+  driver: string = '';
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
               public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
@@ -34,11 +38,27 @@ export class TourDetailsComponent implements OnInit{
   async ngOnInit() {
     this.mergeDateAndTime = this.shareData.detailTour?.date + 'T' + this.shareData.detailTour?.startTime;
     if (this.shareData.detailTour) {
-    this.car = await this.carData.getCarById(this.shareData.detailTour.car)
+    this.car = await this.carData.getCarById(this.shareData.detailTour.car);
+    this.passengers = this.shareData.detailTour.passengers;
+    const currDriverId= this.shareData.detailTour.driver;
+    const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
+    if (driver) {
+      this.driver = driver.username;
+    }
+    if (this.passengers.length !== 0) {
+      let currArr = [];
+      for (let passenger of this.passengers) {
+        const user = await this.userService.getUser(passenger.id);
+        const name = (user) ? user.username : '';
+        currArr.push(name);
+      }
+      this.passengersName = [...currArr];
+    }
     }
     this.calculateEndTime()
     this.changeUserName()
   }
+
 
   calculateEndTime() {
     if (this.shareData.detailTour?.startTime && this.shareData.detailTour?.duration && this.shareData.detailTour?.date) {
