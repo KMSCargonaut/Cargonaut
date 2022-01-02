@@ -15,8 +15,8 @@ export class SuchleisteComponent{
   startCity = '';
   endCity = '';
   date = '';
-  passengers = '';
-  storage = '';
+  passengers = '0';
+  storage = '0';
   @Output() newSearchEvent = new EventEmitter<null>();
 
   addNewSearch() {

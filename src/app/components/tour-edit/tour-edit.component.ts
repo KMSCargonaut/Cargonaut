@@ -92,6 +92,7 @@ export class TourEditComponent implements OnInit {
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
+    this.alert.showAlert({type: 'success', message: (this.isOffer)? 'Deine Anfrage wird zu einem Angebot geändert' : 'Dein Angebot wird zu einer Anfrage geändert'});
   }
 
 
@@ -138,6 +139,7 @@ export class TourEditComponent implements OnInit {
   }
 
   async tourUpdate(tour: Tour) {
+
     await this.tourData.updateTour(tour);
     this.alert.showAlert({type: 'success', message: 'Tour bearbeitet!'});
   }
