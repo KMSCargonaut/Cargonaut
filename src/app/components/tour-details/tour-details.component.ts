@@ -20,13 +20,15 @@ import {Passenger} from "../../models/Passenger";
 export class TourDetailsComponent implements OnInit {
 
   mergeDateAndTime = ''
-  iconSize = "2em"
   endTime = '';
   userName = '';
   car: Car | null = null;
   passengers: Passenger[] = [];
   passengersName: string[] = [];
   driver: string = '';
+  freeSeats: number = 0;
+  freeStorage: number = 0;
+
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
               public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
@@ -43,18 +45,38 @@ export class TourDetailsComponent implements OnInit {
       this.passengers = this.shareData.detailTour.passengers;
       const currDriverId = this.shareData.detailTour.driver;
       const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
+      this.freeStorage = this.shareData.detailTour.storage;
+      this.freeSeats = this.shareData.detailTour.seats;
       if (driver) {
         this.driver = driver.username;
       }
       if (this.passengers.length !== 0) {
-        await this.fillPassengersName(this.passengers)
+        await this.fillPassengersName()
+        this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
+        this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
       }
     }
     this.calculateEndTime()
     this.changeUserName()
   }
 
-  async fillPassengersName(arr: Passenger[]) {
+  countFreeStorage(passengers: Passenger[]): number {
+    let storage = 0;
+    for (const passenger of passengers) {
+      storage += passenger.storage;
+    }
+    return storage;
+  }
+
+  countFreeSeats(passengers: Passenger[]): number {
+    let seats = 0;
+    for (const passenger of passengers) {
+      seats += passenger.seats;
+    }
+    return seats;
+  }
+
+  async fillPassengersName() {
     let currArr = [];
     for (let passenger of this.passengers) {
       const user = await this.userService.getUser(passenger.id);
@@ -188,13 +210,17 @@ export class TourDetailsComponent implements OnInit {
     modalRef.dismissed.toPromise().then(async (tour) => {
       // window.location.reload();
       console.log('onDissmiss', tour);
-      this.passengers = [...tour.passengers];
-      this.fillPassengersName(tour.passengers);
-      if (tour.driver.trim().length > 0) {
-        const currDriver = await this.userService.getUser(tour.driver);
-        this.driver = (currDriver)? currDriver.username : '';
-        this.car = await this.carData.getCarById(tour.car);
+      if (tour) {
+        this.passengers = [...tour.passengers];
+        await this.fillPassengersName();
+
+        if (tour.driver.trim().length > 0) {
+          const currDriver = await this.userService.getUser(tour.driver);
+          this.driver = (currDriver) ? currDriver.username : '';
+          this.car = await this.carData.getCarById(tour.car);
+        }
       }
+
     })
     modalRef.componentInstance.passedData = this.shareData.detailTour;
   }
