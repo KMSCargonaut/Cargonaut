@@ -60,6 +60,12 @@ export class CarItemComponent implements OnInit{
       this.wrongSitzplaze = '';
     }
   }
+  public validStauraum(input: string): void {
+    if (input.trim().length >= 0) {
+      this.sitzplazeMessage = '';
+      this.wrongSitzplaze = '';
+    }
+  }
 
 
 }

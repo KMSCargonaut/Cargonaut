@@ -24,7 +24,7 @@
                class="form-control "
                id="inputkennzeichen"
                placeholder=""
-               (keydown)="validFahrzeugModel(kennzeichen.value)"
+               (keydown)="validKennzeichen(kennzeichen.value)"
                [(ngModel)]="car.mark">
         <div *ngIf="kennzeichenMessage !== ''" class="text-danger">{{kennzeichenMessage}}</div>
       </div>
@@ -37,7 +37,7 @@
                class="form-control "
                id="inputsitzplatze"
                placeholder=""
-               (keydown)="validFahrzeugModel(sitzplatze.value)"
+               (keydown)="validSitzplaze(sitzplatze.value)"
                [(ngModel)]="car.seats">
         <div *ngIf="sitzplazeMessage !== ''" class="text-danger">{{sitzplazeMessage}}</div>
       </div>
@@ -50,7 +50,7 @@
                class="form-control "
                id="inputstauraum"
                placeholder=""
-               (keydown)="validFahrzeugModel(stauraum.value)"
+               (keydown)="validStauraum(stauraum.value)"
                [(ngModel)]="car.storage">
         <div *ngIf="stauraumMessage !== ''" class="text-danger">{{stauraumMessage}}</div>
       </div>
