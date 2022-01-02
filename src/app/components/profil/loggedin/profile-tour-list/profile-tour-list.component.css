@@ -27,5 +27,11 @@ table {
 }
 
 button {
-  width: 50%;
+  min-width: 50%;
+}
+
+@media (max-width: 1310px) {
+  button {
+    width: 100%;
+  }
 }

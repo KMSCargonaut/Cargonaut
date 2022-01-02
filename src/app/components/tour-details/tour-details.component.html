@@ -163,7 +163,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="this.passengers.length !== 0">
+  <div class="row" *ngIf="this.driver.trim().length !== 0">
     <div class="col">
       <hr/>
     </div>
@@ -177,7 +177,7 @@
           <div>Mitfahrer:</div>
         </div>
       </div>
-      <div class="row" *ngFor="let passenger of passengers; let i = index">
+      <div class="row mb-2" *ngFor="let passenger of passengers; let i = index">
         <div class="col d-flex align-items-center justify-content-around">
           <div class="text-center" style="width: 25%">
             <svg class="profil hover" xmlns="http://www.w3.org/2000/svg" width="3em" viewBox="0 0 65 65">
