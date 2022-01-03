@@ -4,6 +4,7 @@ import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
+import {Status} from "../../models/Status";
 
 @Component({
   selector: 'app-tour-table',
@@ -13,6 +14,7 @@ import {Router} from "@angular/router";
 export class TourTableComponent {
 
   @Input() usedList: Tour[] = [];
+  status: number = 0;
 
   constructor(public tourService: TourService, public shareData: ShareDataService, public userService: UserService,
               public router: Router) {
@@ -35,5 +37,21 @@ export class TourTableComponent {
     } else {
       this.router.navigate(["/tour-details"])
     }
+  }
+
+  switchStatus(tour: Tour): number {
+    switch (tour.status) {
+      case Status.NOSTARTEDYET: return 0;
+      case Status.ONTHEWAY: return  1;
+      case Status.ARRIVED: return 2;
+    }
+  }
+
+  isCreator(tour: Tour): boolean {
+    return tour.creatorID === this.userService.currUser?.uid;
+  }
+
+  userIsPassenger(tour: Tour): boolean {
+    return tour.passengers.some(passenger => passenger.id === this.userService.currUser?.uid);
   }
 }
