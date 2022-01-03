@@ -43,7 +43,7 @@ export class CreateToursComponent {
           await this.fillCars(tempCargoUser);
         }
       }
-    })
+    });
   }
 
 
@@ -59,7 +59,6 @@ export class CreateToursComponent {
       this.userCars = [...cars]
     }
   }
-
 
   navigateToProfil() {
     this.router.navigate(['/profil']);

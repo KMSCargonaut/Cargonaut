@@ -18,8 +18,7 @@ export class AddMoneyComponent{
   chosenAmount = 0;
 
 
-  constructor(public activeModal: NgbActiveModal, private router: Router,
-              public userData: UserService, public alert: AlertService) { }
+  constructor(public activeModal: NgbActiveModal, public userData: UserService, public alert: AlertService) { }
 
   newAmountValue(amount: number) {
     this.chosenAmount = amount;
