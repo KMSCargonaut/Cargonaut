@@ -1,16 +1,16 @@
 import {Component, Input} from '@angular/core';
-import {Tour} from "../../../../models/Tour";
-import {TourService} from "../../../../services/tour.service";
-import {ShareDataService} from "../../../../services/share-data.service";
-import {UserService} from "../../../../services/user.service";
+import {Tour} from "../../models/Tour";
+import {TourService} from "../../services/tour.service";
+import {ShareDataService} from "../../services/share-data.service";
+import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-profile-tour-list',
-  templateUrl: './profile-tour-list.component.html',
-  styleUrls: ['./profile-tour-list.component.css']
+  selector: 'app-tour-table',
+  templateUrl: './tour-table.component.html',
+  styleUrls: ['./tour-table.component.css']
 })
-export class ProfileTourListComponent{
+export class TourTableComponent {
 
   @Input() usedList: Tour[] = [];
 
@@ -27,7 +27,7 @@ export class ProfileTourListComponent{
     }
 
     if (this.userService.currUser) {
-      if (this.userService.currUser.uid === tour.creatorID){
+      if (this.userService.currUser.uid === tour.creatorID) {
         this.router.navigate(["/editTour"])
       } else {
         this.router.navigate(["/tour-details"])
@@ -35,7 +35,5 @@ export class ProfileTourListComponent{
     } else {
       this.router.navigate(["/tour-details"])
     }
-
   }
-
 }

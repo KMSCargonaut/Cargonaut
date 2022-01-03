@@ -51,7 +51,6 @@ export class TourBookComponent implements OnInit {
           maxSeats = maxSeats - passenger.seats;
         }
       }
-
       for (let i = 0; i <= maxSeats; i++) {
         this.seats.push(i);
       }
@@ -60,13 +59,12 @@ export class TourBookComponent implements OnInit {
 
   fillStorage() {
     if (this.tour != null) {
-      let maxStorage = this.tour.seats;
+      let maxStorage = this.tour.storage;
       if (this.tour.passengers.length > 0) {
         for (const passenger of this.tour.passengers) {
           maxStorage = maxStorage - passenger.storage;
         }
       }
-
       for (let i = 0; i <= maxStorage; i++) {
         this.storage.push(i);
       }
@@ -81,14 +79,21 @@ export class TourBookComponent implements OnInit {
     // Frische Daten aus der FB ziehen und vergleichen
     else {
       if (this.tour && this.userData.currUser) {
-        this.tour.car = carId;
-        this.tour.driver = this.userData.currUser.uid;
-        this.tour.isBooked = true;
-        this.tour.areSeatsOccupied = true;
-        this.tour.isStorageFullyLoaded = true;
-        await this.updateTour();
-        this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss(this.tour);
+        const tempId = (this.tour.dID) ? this.tour.dID : '';
+        const tempTour = await this.tourData.getTour(tempId);
+        const tour = (tempTour) ? tempTour : null;
+        if (tour && tour.driver.trim().length === 0) {
+          this.tour.car = carId;
+          this.tour.driver = this.userData.currUser.uid;
+          this.tour.isBooked = true;
+          this.tour.areSeatsOccupied = true;
+          this.tour.isStorageFullyLoaded = true;
+          await this.updateTour();
+          this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
+          this.activeModal.dismiss([this.tour, true]);
+        } else {
+          this.alertData.showAlert({type: 'danger', message: 'Diese Fahrt ist bereits ausgebucht!'})
+        }
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }
@@ -99,23 +104,30 @@ export class TourBookComponent implements OnInit {
     if (Number.parseInt(seats) === 0 && Number.parseInt(storage) === 0) {
       this.alertData.showAlert({type: 'danger', message: 'Sie können keine Fahrt mit 0 Sitzplätzen und Stauraum buchen'})
     }
-    // Frische Daten aus der FB ziehen und vergleichen
     else {
       if (this.tour && this.userData.currUser) {
-        this.tour.passengers
-          .push(
-            new Passenger(this.userData.currUser.uid, Number.parseInt(seats), Number.parseInt(storage))
-          );
-        this.tour.isBooked = true;
-        if (this.tour.seats === this.passengerSeats()) {
-          this.tour.areSeatsOccupied = true;
+        const tempId = (this.tour.dID) ? this.tour.dID : '';
+        const tempTour = await this.tourData.getTour(tempId);
+        const tour = (tempTour) ? tempTour : null;
+
+        if (tour && (!tour.areSeatsOccupied || !tour.isStorageFullyLoaded)) {
+          this.tour.passengers
+            .push(
+              new Passenger(this.userData.currUser.uid, Number.parseInt(seats), Number.parseInt(storage))
+            );
+          this.tour.isBooked = true;
+          if (this.tour.seats === this.passengerSeats()) {
+            this.tour.areSeatsOccupied = true;
+          }
+          if (this.tour.storage === this.passengerStorage()) {
+            this.tour.isStorageFullyLoaded = true;
+          }
+          await this.updateTour()
+          this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
+          this.activeModal.dismiss([this.tour, true]);
+        } else {
+          this.alertData.showAlert({type: 'danger', message: 'Diese Fahrt ist ausgebucht!'})
         }
-        if (this.tour.storage === this.passengerStorage()) {
-          this.tour.isStorageFullyLoaded = true;
-        }
-        await this.updateTour()
-        this.alertData.showAlert({type: 'success', message: 'Buchung war erfolgreich!'});
-        this.activeModal.dismiss(this.tour);
       } else {
         this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
       }

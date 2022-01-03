@@ -9,7 +9,7 @@ export class InfoboxComponent{
 
   @Input() boxTitle = '';
   @Input() infoText = '';
-  @Input() imagePath = '';
+  @Input() imagePath = 0;
   constructor() { }
 
 }
