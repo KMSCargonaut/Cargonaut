@@ -1,0 +1,58 @@
+<!--  Modal Header -->
+<div class="modal-header border-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 justify-content-center">
+        <div class="modal-title text-center h4 mx-auto logoGreenDark">Bewertung abgeben</div>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-1 p-0">
+        <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                (click)="activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-body border-0">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label for="inputGroupSelect01" class="input-group-text logoGreenDark h5">Sterne</label>
+          </div>
+          <select #selectedList class="custom-select" id="inputGroupSelect01">
+            <option value="1">1 Stern</option>
+            <option value="2">2 Sterne</option>
+            <option value="3">3 Sterne</option>
+            <option value="4">4 Sterne</option>
+            <option value="5">5 Sterne</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+
+  <div class="container ">
+    <div class="row justify-content-center">
+      <div class="col-6 ">
+        <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                (click)="evaluate(selectedList.value)">Bewerten
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -26,11 +26,11 @@
       </div>
 
       <div class="">
-        <app-vote-stars [currentRate]="this.userData.currUser.evaluation"></app-vote-stars>
+        <app-vote-stars [currentRate]="this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter"></app-vote-stars>
       </div>
 
       <div class="mt-1 logoGreenDark">
-        <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation}} </span>
+        <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter}} </span>
         <span *ngIf="this.userData.currUser.evaluation === -1">0 </span>
         von {{this.userData.currUser.evaluationCounter}} Nutzern
       </div>

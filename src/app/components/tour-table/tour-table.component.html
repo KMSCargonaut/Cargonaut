@@ -69,7 +69,8 @@
         </button>
 
         <button *ngIf="switchStatus(tour) === 2 && userIsPassenger(tour) && !isCreator(tour)"
-                class="btn btn-outline-warning btn-sm mx-auto mt-2 evaluation">
+                class="btn btn-outline-warning btn-sm mx-auto mt-2 evaluation"
+                (click)="openEvaluation(tour)">
           <a>Bewerten</a>
         </button>
 
