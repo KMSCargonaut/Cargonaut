@@ -20,7 +20,7 @@ export class MainPageComponent{
   ]
 
   imagePaths = [
-    "../../assets/img/Icons/money_icon.svg", // TODO Serag - Entweder die svgs hier verlinken oder direkt verwenden
+    "../../assets/img/Icons/money_icon.svg",
     "../../assets/img/Icons/transporter_icon.svg",
     "../../assets/img/Icons/thumbs_icon.svg"
   ]
