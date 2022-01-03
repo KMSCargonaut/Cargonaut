@@ -3,7 +3,7 @@ import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {UserService} from "../../services/user.service";
 import {UserCargo} from "../../models/UserCargo";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Passenger} from "../../models/Passenger";
 
 @Component({
@@ -16,7 +16,7 @@ export class TourListGenericComponent implements OnInit {
   list: Tour[] = [];
   user: UserCargo | null = null;
 
-  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute) {
+  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute, public router: Router) {
   }
 
   async ngOnInit() {
@@ -69,6 +69,10 @@ export class TourListGenericComponent implements OnInit {
 
 
     }
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profil']);
   }
 
 
