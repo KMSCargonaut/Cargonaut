@@ -76,8 +76,7 @@
     <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du fährst</h3>
       <div>
-        <app-profile-tour-list *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-profile-tour-list>
-
+        <app-tour-table *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-tour-table>
         <div class="container">
           <div class="row">
             <!--  falls noch keine Fahrt vorhanden  -->
@@ -97,7 +96,7 @@
     <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
       <div>
-        <app-profile-tour-list *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-profile-tour-list>
+        <app-tour-table *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-tour-table>
         <div class="container">
           <div class="row">
             <!--  falls noch keine Fahrt vorhanden  -->

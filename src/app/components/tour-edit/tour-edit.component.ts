@@ -11,6 +11,7 @@ import {CarsService} from "../../services/cars.service";
 import {Tour} from "../../models/Tour";
 import {Passenger} from "../../models/Passenger";
 import {TourService} from "../../services/tour.service";
+import {Status} from "../../models/Status";
 
 @Component({
   selector: 'app-tour-edit',
@@ -34,6 +35,7 @@ export class TourEditComponent implements OnInit {
   description = '';
   chosenCar = '';
   tour: Tour | null = null;
+  status: string = '0';
 
   constructor(public tourData: TourService, public shareData: ShareDataService, public userData: UserService, public alert: AlertService,
               private router: Router, private calcService: CalculateService, public auth: AngularFireAuth, public carData: CarsService) {
@@ -82,6 +84,7 @@ export class TourEditComponent implements OnInit {
       this.price = this.shareData.detailTour.price.toString()
       this.description = this.shareData.detailTour.description
       this.chosenCar = this.shareData.detailTour.car
+      this.status = this.shareData.detailTour.status.toString()
     }
   }
 
@@ -126,6 +129,10 @@ export class TourEditComponent implements OnInit {
     }
   }
 
+  changeStatus(status: string){
+    this.status = status;
+  }
+
   async addOffer(tour: Tour, user: UserCargo) {
     tour.driver = user.uid;
     tour.car = this.chosenCar;
@@ -164,6 +171,7 @@ export class TourEditComponent implements OnInit {
       this.shareData.detailTour.price = Number.parseInt(this.price)
       this.shareData.detailTour.description = this.description
       this.shareData.detailTour.car = this.chosenCar
+      this.shareData.detailTour.status = Number.parseInt(this.status)
     }
   }
 }
