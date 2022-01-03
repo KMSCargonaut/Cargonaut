@@ -1,22 +1,38 @@
 <header class="masthead">
     <div class="center">
-       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 20px">Wir fahren,<br class="smallscreen"> du sparst!</h1>
+       <h1 style="font-size: 4em; color: #005B51; text-align: center; margin-bottom: 50px">Wir fahren,<br class="smallscreen"> du sparst!</h1>
 
       <form class="defaultscreen">
         <div class="form-row form-row-style form-control-lg-costum">
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg"  class="iconsize" viewBox="0 0 28 40">
+              <path id="ic_pin_drop_24px" d="M31,14A12,12,0,0,0,7,14c0,9,12,22,12,22S31,23,31,14ZM15,14a4,4,0,1,1,4,4A4.012,4.012,0,0,1,15,14ZM5,38v4H33V38Z" transform="translate(-5 -2)" fill="#fff"/>
+            </svg>
+         </span>
           <div class="col-2 colpad">
             <input type="text" class="form-control text-opaque form-control-lg-costum" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
           </div>
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 40">
+              <path id="ic_place_24px" d="M19,2A13.99,13.99,0,0,0,5,16C5,26.5,19,42,19,42S33,26.5,33,16A13.99,13.99,0,0,0,19,2Zm0,19a5,5,0,1,1,5-5A5,5,0,0,1,19,21Z" transform="translate(-5 -2)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col-2 colpad">
             <input type="text" class="form-control text-opaque form-control-lg-costum" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
           </div>
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 31.111">
+              <path id="ic_event_24px" d="M24.778,18.111H17v7.778h7.778ZM23.222,1V4.111H10.778V1H7.667V4.111H6.111a3.1,3.1,0,0,0-3.1,3.111L3,29a3.11,3.11,0,0,0,3.111,3.111H27.889A3.12,3.12,0,0,0,31,29V7.222a3.12,3.12,0,0,0-3.111-3.111H26.333V1Zm4.667,28H6.111V11.889H27.889Z" transform="translate(-3 -1)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col-2 colpad">
             <input type="date" class="form-control text-opaque form-control-lg-costum" placeholder="Datum" name="date" [(ngModel)]="date">
           </div>
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 28">
+              <path id="ic_perm_identity_24px" d="M18,7.325A3.675,3.675,0,1,1,14.325,11,3.675,3.675,0,0,1,18,7.325m0,15.75c5.2,0,10.675,2.555,10.675,3.675v1.925H7.325V26.75c0-1.12,5.478-3.675,10.675-3.675M18,4a7,7,0,0,0,0,14,7.337,7.337,0,0,0,4.624-1.743A6.708,6.708,0,0,0,25,11,7,7,0,0,0,18,4Zm0,15.75c-4.673,0-14,2.345-14,7V32H32V26.75C32,22.1,22.673,19.75,18,19.75Z" transform="translate(-4 -4)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
             <select class="form-control text-opaque form-control-lg-costum" name="passengers" [(ngModel)]="passengers">
@@ -31,7 +47,11 @@
               <option value="8" style="color: black">8</option>
             </select>
           </div>
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 26.6">
+              <path id="ic_work_24px" d="M27.2,7.6H21.6V4.8A2.79,2.79,0,0,0,18.8,2H13.2a2.79,2.79,0,0,0-2.8,2.8V7.6H4.8a2.778,2.778,0,0,0-2.786,2.8L2,25.8a2.79,2.79,0,0,0,2.8,2.8H27.2A2.79,2.79,0,0,0,30,25.8V10.4A2.79,2.79,0,0,0,27.2,7.6Zm-8.4,0H13.2V4.8h5.6Z" transform="translate(-2 -2)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
             <select class="form-control text-opaque form-control-lg-costum" name="storage" [(ngModel)]="storage">
@@ -58,28 +78,44 @@
       <form class="smallscreen">
         <div class="col form-row-style">
           <div class="row row-margin">
-            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/von_icon.png"/> </span>
+            <span class="input-group-text input-opaque" >
+              <svg xmlns="http://www.w3.org/2000/svg"  class="iconsize" style="margin-left: 6px" viewBox="0 0 28 40">
+                <path id="ic_pin_drop_24px" d="M31,14A12,12,0,0,0,7,14c0,9,12,22,12,22S31,23,31,14ZM15,14a4,4,0,1,1,4,4A4.012,4.012,0,0,1,15,14ZM5,38v4H33V38Z" transform="translate(-5 -2)" fill="#fff"/>
+              </svg>
+            </span>
             <div class="col colpad">
               <input type="text" class="form-control text-opaque form-control-lg" placeholder="Von..." name="startCity" [(ngModel)]="startCity">
             </div>
           </div>
           <div class="border-bottom"></div>
           <div class="row row-margin">
-            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/nach_icon.png"/> </span>
+            <span class="input-group-text input-opaque" >
+              <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" style="margin-left: 6px" viewBox="0 0 28 40">
+                <path id="ic_place_24px" d="M19,2A13.99,13.99,0,0,0,5,16C5,26.5,19,42,19,42S33,26.5,33,16A13.99,13.99,0,0,0,19,2Zm0,19a5,5,0,1,1,5-5A5,5,0,0,1,19,21Z" transform="translate(-5 -2)" fill="#fff"/>
+              </svg>
+            </span>
             <div class="col colpad">
               <input type="text" class="form-control text-opaque form-control-lg" placeholder="Nach..." name="endCity" [(ngModel)]="endCity">
             </div>
           </div>
           <div class="border-bottom"></div>
           <div class="row row-margin">
-            <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/kalender_icon.png"/> </span>
+            <span class="input-group-text input-opaque" >
+              <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" style="height: 25px; margin-left: 5px" viewBox="0 0 28 31.111">
+                <path id="ic_event_24px" d="M24.778,18.111H17v7.778h7.778ZM23.222,1V4.111H10.778V1H7.667V4.111H6.111a3.1,3.1,0,0,0-3.1,3.111L3,29a3.11,3.11,0,0,0,3.111,3.111H27.889A3.12,3.12,0,0,0,31,29V7.222a3.12,3.12,0,0,0-3.111-3.111H26.333V1Zm4.667,28H6.111V11.889H27.889Z" transform="translate(-3 -1)" fill="#fff"/>
+              </svg>
+            </span>
             <div class="col colpad">
               <input type="date" class="form-control text-opaque form-control-lg" placeholder="Datum" name="date" [(ngModel)]="date">
             </div>
           </div>
           <div class="border-bottom"></div>
           <div class="row row-margin">
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/mitfahrer_icon_white.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 28">
+              <path id="ic_perm_identity_24px" d="M18,7.325A3.675,3.675,0,1,1,14.325,11,3.675,3.675,0,0,1,18,7.325m0,15.75c5.2,0,10.675,2.555,10.675,3.675v1.925H7.325V26.75c0-1.12,5.478-3.675,10.675-3.675M18,4a7,7,0,0,0,0,14,7.337,7.337,0,0,0,4.624-1.743A6.708,6.708,0,0,0,25,11,7,7,0,0,0,18,4Zm0,15.75c-4.673,0-14,2.345-14,7V32H32V26.75C32,22.1,22.673,19.75,18,19.75Z" transform="translate(-4 -4)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Mitfahrer">-->
             <select class="form-control text-opaque form-control-lg" name="passengers" [(ngModel)]="passengers">
@@ -94,7 +130,11 @@
               <option value="8" style="color: black">8</option>
             </select>
           </div>
-          <span class="input-group-text input-opaque" ><img class="iconsize" src="../../../../assets/img/Icons/koffer_icon_white.png"/> </span>
+          <span class="input-group-text input-opaque" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="iconsize" viewBox="0 0 28 26.6">
+              <path id="ic_work_24px" d="M27.2,7.6H21.6V4.8A2.79,2.79,0,0,0,18.8,2H13.2a2.79,2.79,0,0,0-2.8,2.8V7.6H4.8a2.778,2.778,0,0,0-2.786,2.8L2,25.8a2.79,2.79,0,0,0,2.8,2.8H27.2A2.79,2.79,0,0,0,30,25.8V10.4A2.79,2.79,0,0,0,27.2,7.6Zm-8.4,0H13.2V4.8h5.6Z" transform="translate(-2 -2)" fill="#fff"/>
+            </svg>
+          </span>
           <div class="col colpad">
             <!--<input type="number" class="form-control text-opaque" placeholder="Gepäck">-->
             <select class="form-control text-opaque form-control-lg" name="storage" [(ngModel)]="storage">
