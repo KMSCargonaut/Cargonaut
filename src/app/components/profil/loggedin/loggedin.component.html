@@ -32,7 +32,7 @@
       <div class="mt-1 logoGreenDark">
         <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter}} </span>
         <span *ngIf="this.userData.currUser.evaluation === -1">0 </span>
-        von {{this.userData.currUser.evaluationCounter}} Nutzern
+        {{((this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter) === 1) ? 'Stern ' : 'Sterne ' }}von {{this.userData.currUser.evaluationCounter}} Nutzer
       </div>
 
     </div>
