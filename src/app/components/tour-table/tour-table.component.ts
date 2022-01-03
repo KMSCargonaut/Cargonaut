@@ -43,9 +43,12 @@ export class TourTableComponent {
 
   switchStatus(tour: Tour): number {
     switch (tour.status) {
-      case Status.NOSTARTEDYET: return 0;
-      case Status.ONTHEWAY: return  1;
-      case Status.ARRIVED: return 2;
+      case Status.NOSTARTEDYET:
+        return 0;
+      case Status.ONTHEWAY:
+        return 1;
+      case Status.ARRIVED:
+        return 2;
     }
   }
 
@@ -57,11 +60,21 @@ export class TourTableComponent {
     return tour.passengers.some(passenger => passenger.id === this.userService.currUser?.uid);
   }
 
-  openEvaluation() {
+  openEvaluation(tour: Tour) {
     const modalRef = this.modal.open(AddEvaluationComponent, {
       animation: true,
       centered: true
     });
-    modalRef.dismissed.toPromise().then(result => console.log(result))
+    modalRef.dismissed.toPromise().then(result => {
+      console.log(result);
+      if (result) {
+        let passenger = tour.passengers.find(passenger => passenger.id === this.userService.currUser?.uid);
+        if (passenger) {
+          passenger.evaluated = result;
+          // tour updaten und creatorID die Bewertung hinzufügen
+        }
+      }
+    })
+
   }
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-add-evaluation',
@@ -8,10 +9,12 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class AddEvaluationComponent {
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, public userData: UserService) {
+  }
 
-  evaluate(stars: string) {
+  async evaluate(stars: string) {
     console.log(stars);
+    this.activeModal.dismiss(stars);
   }
 
 }
