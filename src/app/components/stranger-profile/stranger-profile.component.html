@@ -12,9 +12,9 @@
       <div class="logoGreenDark"><span class="mr-1">{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
       <div class="logoGreenDark">{{this.age}}</div>
       <div class="logoGreenDark">{{this.gender}}</div>
-      <app-vote-stars [currentRate]="this.evaluation"></app-vote-stars>
+      <app-vote-stars [currentRate]="this.evaluation / this.evaluationCounter"></app-vote-stars>
       <div class="logoGreenDark">
-        <span *ngIf="this.evaluation !== -1">{{this.evaluation}} </span>
+        <span *ngIf="this.evaluation !== -1">{{this.evaluation / this.evaluationCounter}} </span>
         <span *ngIf="this.evaluation === -1">0 </span>
         von {{this.evaluationCounter}} Nutzern
       </div>

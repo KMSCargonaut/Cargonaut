@@ -65,13 +65,38 @@ export class TourTableComponent {
       animation: true,
       centered: true
     });
-    modalRef.dismissed.toPromise().then(result => {
+    modalRef.dismissed.toPromise().then(async result => {
       console.log(result);
       if (result) {
+        let stars = Number.parseInt(result);
         let passenger = tour.passengers.find(passenger => passenger.id === this.userService.currUser?.uid);
-        if (passenger) {
-          passenger.evaluated = result;
-          // tour updaten und creatorID die Bewertung hinzufügen
+
+        if (passenger && passenger.evaluated === -1) {
+          passenger.evaluated = stars;
+          console.log(passenger)
+          await this.tourService.updateTour(tour);
+          let user = await this.userService.getUser(tour.creatorID);
+          if (user) {
+            if (user.evaluation === -1) {
+              user.evaluation += 1;
+            }
+            user.evaluation += stars;
+            user.evaluationCounter += 1;
+            await this.userService.updateUser(user);
+            console.log(user);
+          }
+        } else if (passenger && passenger.evaluated >= 0) {
+          let tempEva = passenger.evaluated;
+          passenger.evaluated = stars;
+          console.log(passenger)
+          await this.tourService.updateTour(tour)
+          let user = await this.userService.getUser(tour.creatorID);
+          if (user) {
+            user.evaluation -= tempEva;
+            user.evaluation += stars
+            await this.userService.updateUser(user);
+            console.log(user);
+          }
         }
       }
     })
