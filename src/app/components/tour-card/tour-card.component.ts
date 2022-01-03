@@ -1,29 +1,58 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
+import {Passenger} from "../../models/Passenger";
 
 @Component({
   selector: 'app-tour-card',
   templateUrl: './tour-card.component.html',
   styleUrls: ['./tour-card.component.css']
 })
-export class TourCardComponent implements OnInit{
+export class TourCardComponent implements OnInit, OnChanges{
 
-  @Input()
-  tour: Tour = new Tour('',false, '','','',0,'',0,0,0,'',);
+  @Input() tour: Tour = new Tour('',false, '','','',0,'',0,0,0,'',);
   mergeDateAndTime = ''
   userName = '';
+  freeSeats = 0;
+  freeStorage = 0;
 
   constructor(public userService: UserService, private router: Router, public tourService: TourService,
               public shareData: ShareDataService) {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    let tour = changes.tour.currentValue;
+    if (tour.isOffer) {
+      this.freeSeats = tour.seats - this.countFreeSeats(tour.passengers);
+      this.freeStorage = tour.storage - this.countFreeStorage(tour.passengers);
+    } else {
+      this.freeSeats = tour.seats;
+      this.freeStorage = tour.storage;
+    }
+  }
+
   ngOnInit(){
     this.mergeDateAndTime = this.tour.date + 'T' + this.tour.startTime;
-    this.changeUserName()
+    this.changeUserName();
+  }
+
+  countFreeStorage(passengers: Passenger[]): number {
+    let storage = 0;
+    for (const passenger of passengers) {
+      storage += passenger.storage;
+    }
+    return storage;
+  }
+
+  countFreeSeats(passengers: Passenger[]): number {
+    let seats = 0;
+    for (const passenger of passengers) {
+      seats += passenger.seats;
+    }
+    return seats;
   }
 
   async navigateToDetailsOrEdit() {

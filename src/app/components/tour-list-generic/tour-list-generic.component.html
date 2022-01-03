@@ -1,0 +1,35 @@
+<div class="container title-background mw-100">
+  <div class="row ">
+    <div class="col text-center">
+      <div class="h2 logoGreenDark m-3">Generische Tabelle</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-4">
+
+  <div class="row">
+    <div class="col-3 ml-auto mb-2">
+      <div class="input-group">
+        <select #selectedList class="custom-select" id="inputGroupSelect01" (change)="fillList(selectedList.value)">
+          <option value="0" selected>Eigene Anfragen</option>
+          <option value="1">Eigene Angebote</option>
+          <option value="2">Gebuchte Anfragen</option>
+          <option value="3">Gebuchte Angebote</option>
+        </select>
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Filter</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col text-center">
+      <app-tour-table [usedList]="this.list"></app-tour-table>
+
+    </div>
+  </div>
+</div>

@@ -19,11 +19,6 @@ export class MainPageComponent{
     "Bewerten Sie andere Nutzer nach Abschluss einer Fahrt und sehen sie Bewertungen weiterer Nutzer ein und tragen sie so zu einem sicheren und verlässlichen Umgang unserer Möglichkeiten zu!"
   ]
 
-  imagePaths = [
-    "../../assets/img/Icons/money_icon.png",
-    "../../assets/img/Icons/transporter_icon.png",
-    "../../assets/img/Icons/thumbs_icon.png"
-  ]
 
   constructor() { }
 

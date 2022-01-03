@@ -49,14 +49,12 @@ export class LoggedinComponent implements OnInit {
       futureTours = futureTours
         .filter(tour => this.bookedToursInFuture(new Date(tour.date)))
         .filter(tour => tour.driver === user.uid || this.isPassenger(tour, user.uid));
-      console.log('Future Tours: ', futureTours);
       if (futureTours.length <= 0) {
         try {
           await this.userData.deleteAccount();
           await this.userData.deleteUser(user);
           userTours = await this.tourData.getAllToursFromUser(user.uid);
           userTours = userTours.filter(tour => !tour.isBooked);
-          console.log('user tours: ', userTours)
           for (const tour of userTours) {
             await this.tourData.deleteTour(tour);
           }
@@ -73,7 +71,6 @@ export class LoggedinComponent implements OnInit {
             await this.logout()
           } else {
             this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
-            console.log(e);
           }
         }
       } else {
@@ -85,9 +82,7 @@ export class LoggedinComponent implements OnInit {
   }
 
   bookedToursInFuture(date: Date): boolean {
-    const tempBol = (new Date().getTime() - date.getTime()) < 0;
-    console.log(tempBol)
-    return tempBol;
+    return (new Date().getTime() - date.getTime()) < 0;
   }
 
   openUpdateModal(): void {
@@ -121,14 +116,4 @@ export class LoggedinComponent implements OnInit {
     }
     return false;
   }
-
-  // Test
-  /*onWheel(event: WheelEvent) {
-    console.log(event.deltaY)
-    if(event.deltaY > 0) {
-      // @ts-ignore
-      (<Element>event.target).parentElement.scrollLeft += event.deltaY;
-      event.preventDefault();
-    }
-  }*/
 }

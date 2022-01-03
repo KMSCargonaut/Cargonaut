@@ -1,0 +1,35 @@
+<table class="table p-4" *ngIf="userService.currUser">
+  <thead class="thead-cargo">
+  <tr>
+    <th class="text-center">Von</th>
+    <th class="text-center">Nach</th>
+    <th class="text-center">Wann?</th>
+    <th class="text-center">Um?</th>
+    <th class="text-center">Dauer</th>
+    <th class="text-center">Stauraum</th>
+    <th class="text-center">Sitze</th>
+    <th class="text-center">Preis</th>
+    <th class="text-center"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let tour of usedList">
+    <td>{{tour.startCity}}</td>
+    <td>{{tour.endCity}}</td>
+    <td>{{tour.date}}</td>
+    <td>{{tour.startTime}}</td>
+    <td>{{tour.duration}}h</td>
+    <td>{{tour.storage}}</td>
+    <td>{{tour.seats}}</td>
+    <td>{{tour.price}}</td>
+    <td>
+      <button class="btn btn-outline-dark btn-sm mr-4" (click)="navigateToDetailsOrEdit(tour)">
+        <a *ngIf="userService.currUser.uid === tour.creatorID">Bearbeiten</a>
+        <a *ngIf="userService.currUser.uid !== tour.creatorID">Details</a>
+      </button>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+
