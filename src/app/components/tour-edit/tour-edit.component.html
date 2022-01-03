@@ -128,16 +128,29 @@
         <label for="exampleFormControlTextarea1" class="form-label logoGreenDark">Beschreibung</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="description"></textarea>
       </div>
-      <div class="col" *ngIf="this.isOffer">
-        <div class="form-group">
-          <label for="cars" class="logoGreenDark">Fahrzeug</label>
-          <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
-            <option value="{{car.dId}}" *ngFor="let car of this.userCars; let i = index">
-              {{car.model}} {{car.mark}},
-              Sitze: {{car.seats}}
-              Stauraum: {{car.storage}}qm
-            </option>
-          </select>
+      <div class="col">
+        <div class="row" *ngIf="this.isOffer">
+          <div class="form-group">
+            <label for="cars" class="logoGreenDark">Fahrzeug</label>
+            <select name="" id="cars" class="form-control" [(ngModel)]="chosenCar">
+              <option value="{{car.dId}}" *ngFor="let car of this.userCars; let i = index">
+                {{car.model}} {{car.mark}},
+                Sitze: {{car.seats}}
+                Stauraum: {{car.storage}}qm
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row" *ngIf="tour?.driver === userData.currUser.uid">
+          <div class="form-group">
+            <label for="state" class="logoGreenDark">Status</label>
+            <select name="" id="state" class="form-control" [(ngModel)]="state">
+              <option value="{{state}}">{{state}}</option>
+              <option value="0">Noch nicht losgefahren!</option>
+              <option value="1">Auf dem Weg!</option>
+              <option value="2">Bei ihnen angekommen!</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
