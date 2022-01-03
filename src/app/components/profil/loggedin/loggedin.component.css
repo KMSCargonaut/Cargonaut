@@ -42,7 +42,3 @@ button{
 .right-box {
   flex: 1;
 }
-
-app-profile-tour-list {
-  overflow-y: auto;
-}

@@ -73,9 +73,9 @@
   <div class="flex column right-box">
 
     <!--        1. Item       -->
-    <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
+    <div class="mt-3">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du fährst</h3>
-      <div>
+      <div style="height: 40vh; overflow: auto">
         <app-tour-table *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-tour-table>
         <div class="container">
           <div class="row">
@@ -93,7 +93,7 @@
 
 
     <!--        2. Item       -->
-    <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
+    <div class="mt-3" style="height: 40vh; overflow: auto;">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
       <div>
         <app-tour-table *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-tour-table>
