@@ -16,22 +16,14 @@
   gap: .3rem;
 }
 
-
-.scrolling-wrapper{
-  overflow-x: auto;
-}
-
-html {
-  overflow: scroll;
-  overflow-x: hidden;
-}
-::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
-}
-
 .tours {
-  margin-left: 20%;
+  margin-inline: 10%;
   margin-top: 1em;
 }
+
+app-tour-table {
+  overflow-y: auto;
+}
+
+
 
