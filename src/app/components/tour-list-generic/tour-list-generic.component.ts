@@ -34,6 +34,7 @@ export class TourListGenericComponent implements OnInit {
         case 0: {
           this.list = await this.tourData.getAllToursFromUser(this.user.uid);
           this.list = this.list.filter(tour => !tour.isOffer)
+          console.log(this.list)
           break;
         }
         case 1: {
@@ -46,26 +47,20 @@ export class TourListGenericComponent implements OnInit {
           const listAsDriver = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => tour.driver === this.user?.uid);
           })
-          const listAsPassenger = await this.tourData.getAllBookedTours().then(tours => {
-            return tours.filter(tour => this.isPassenger(tour.passengers));
-          })
-          this.list = listAsDriver.concat(listAsPassenger)
+          this.list = listAsDriver
             .filter(tour => !tour.isOffer)
             .filter(tour => tour.creatorID != this.user?.uid);
           console.log('list case 2: ', this.list);
           break;
         }
         case 3: {
-          const listAsDriver = await this.tourData.getAllBookedTours().then(tours => {
-            return tours.filter(tour => tour.driver === this.user?.uid);
-          })
           const listAsPassenger = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => this.isPassenger(tour.passengers));
           })
-          this.list = listAsDriver.concat(listAsPassenger)
+          this.list = listAsPassenger
             .filter(tour => tour.isOffer)
             .filter(tour => tour.creatorID != this.user?.uid);
-          console.log('list case 2: ', this.list);
+          console.log('list case 3: ', this.list);
           break;
         }
 
