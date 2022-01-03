@@ -38,6 +38,7 @@ import { TourBookComponent } from './components/tour-details/tour-book/tour-book
 import { EditAccountComponent } from './components/edit-account/edit-account.component';
 import { TourTableComponent } from './components/tour-table/tour-table.component';
 import { TourListGenericComponent } from './components/tour-list-generic/tour-list-generic.component';
+import { AddEvaluationComponent } from './components/add-evaluation/add-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { TourListGenericComponent } from './components/tour-list-generic/tour-li
     EditAccountComponent,
     TourTableComponent,
     TourListGenericComponent,
+    AddEvaluationComponent,
    ],
     imports: [
         BrowserModule,

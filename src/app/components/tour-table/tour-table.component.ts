@@ -5,6 +5,8 @@ import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {Status} from "../../models/Status";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddEvaluationComponent} from "../add-evaluation/add-evaluation.component";
 
 @Component({
   selector: 'app-tour-table',
@@ -17,7 +19,7 @@ export class TourTableComponent {
   status: number = 0;
 
   constructor(public tourService: TourService, public shareData: ShareDataService, public userService: UserService,
-              public router: Router) {
+              public router: Router, public modal: NgbModal) {
 
   }
 
@@ -53,5 +55,13 @@ export class TourTableComponent {
 
   userIsPassenger(tour: Tour): boolean {
     return tour.passengers.some(passenger => passenger.id === this.userService.currUser?.uid);
+  }
+
+  openEvaluation() {
+    const modalRef = this.modal.open(AddEvaluationComponent, {
+      animation: true,
+      centered: true
+    });
+    modalRef.dismissed.toPromise().then(result => console.log(result))
   }
 }
