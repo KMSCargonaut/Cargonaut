@@ -144,7 +144,8 @@
         <div class="row" *ngIf="tour?.driver === userData.currUser.uid">
           <div class="form-group">
             <label for="state" class="logoGreenDark">Status</label>
-            <select #status name="" id="state" class="form-control" (change)="changeStatus(status.value)">
+            <select #Selectstatus name="" id="state" class="form-control" (change)="changeStatus(Selectstatus.value)">
+              <option selected>{{(this.status === "0") ? "Noch nicht losgefahren!": (this.status === "1") ? "Auf dem Weg!": "Bei ihnen angekommen!" }}</option>
               <option value="0">Noch nicht losgefahren!</option>
               <option value="1">Auf dem Weg!</option>
               <option value="2">Bei ihnen angekommen!</option>
