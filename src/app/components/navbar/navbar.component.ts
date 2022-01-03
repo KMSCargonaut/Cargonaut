@@ -9,7 +9,7 @@ import {UserService} from "../../services/user.service";
 })
 export class NavbarComponent {
 
-  constructor(private router: Router, private authData: UserService) {
+  constructor(private router: Router, private userData: UserService) {
   }
 
 
@@ -22,6 +22,11 @@ export class NavbarComponent {
       nav.setAttribute('data-visible', false)
       mobile.setAttribute('aria-expanded', false)
     }
+  }
+
+  navigateToTourTable() {
+    const user = this.userData.currUser;
+    this.router.navigate([`/genericTable/${user?.uid}`]);
   }
 
   navigateToUser() {

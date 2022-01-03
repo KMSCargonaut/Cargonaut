@@ -4,7 +4,7 @@
 <nav class="d-flex justify-content-between navbar-light bg-light">
     <div class="d-inline-flex align-items-center">
       <button (click)="navigateToMainPage()" class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink"
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
              viewBox="0 0 309 90">
           <defs>
             <clipPath id="clip-path">
@@ -53,7 +53,7 @@
         </svg>
       </button>
       <button class="h5 logoGreenDark pl-0 m-2" (click)="navigateToTours()">Mitfahrgelegenheit</button>
-      <button class="h5 logoGreenDark m-2">Meine Angebote & Anfragen</button>
+      <button class="h5 logoGreenDark m-2" (click)="navigateToTourTable()">Meine Angebote & Anfragen</button>
     </div>
 
     <div class="d-inline-flex align-items-center">
@@ -84,7 +84,6 @@
 
     <div>
       <svg (click)="navigateToMainPage()" class="logo" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-           xmlns:xlink="http://www.w3.org/1999/xlink"
            viewBox="0 0 309 90">
         <defs>
           <clipPath id="clip-path">
@@ -152,7 +151,7 @@
           <a class="buttons" (click)="navigateToTours(); mobileToggle(primaryNavigation, mobile)">Mitfahrgelegenheiten</a>
         </li>
         <li>
-          <a  class="buttons" href="">Meine Angebote und Anfragen</a>
+          <a  class="buttons" (click)="navigateToTourTable(); mobileToggle(primaryNavigation, mobile);">Meine Angebote und Anfragen</a>
         </li>
         <li>
           <a  class="buttons" (click)="navigateToCreateTourPage(); mobileToggle(primaryNavigation, mobile)">Angebote und Anfragen erstellen</a>
