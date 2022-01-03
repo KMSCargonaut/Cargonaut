@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {Status} from "../../models/Status";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddEvaluationComponent} from "../add-evaluation/add-evaluation.component";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-tour-table',
@@ -19,7 +20,7 @@ export class TourTableComponent {
   status: number = 0;
 
   constructor(public tourService: TourService, public shareData: ShareDataService, public userService: UserService,
-              public router: Router, public modal: NgbModal) {
+              public router: Router, public modal: NgbModal, public alertData: AlertService) {
 
   }
 
@@ -84,6 +85,7 @@ export class TourTableComponent {
             user.evaluationCounter += 1;
             await this.userService.updateUser(user);
             console.log(user);
+            this.alertData.showAlert({type: 'success', message: 'Erfolgreich bewertet!'})
           }
         } else if (passenger && passenger.evaluated >= 0) {
           let tempEva = passenger.evaluated;
@@ -96,6 +98,7 @@ export class TourTableComponent {
             user.evaluation += stars
             await this.userService.updateUser(user);
             console.log(user);
+            this.alertData.showAlert({type: 'success', message: 'Erfolgreich Bewertung geändert!'})
           }
         }
       }
