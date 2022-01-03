@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Passenger} from "../models/Passenger";
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,21 @@ export class CalculateService {
       endTime += startTime.substr(2, 3);
     }
     return endTime;
+  }
+
+  countFreeStorage(passengers: Passenger[]): number {
+    let storage = 0;
+    for (const passenger of passengers) {
+      storage += passenger.storage;
+    }
+    return storage;
+  }
+
+  countFreeSeats(passengers: Passenger[]): number {
+    let seats = 0;
+    for (const passenger of passengers) {
+      seats += passenger.seats;
+    }
+    return seats;
   }
 }

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
+import {Passenger} from "../../models/Passenger";
+import {CalculateService} from "../../services/calculate.service";
 
 @Component({
   selector: 'app-tour-site',
@@ -23,7 +25,7 @@ export class TourSiteComponent implements OnInit {
   isRequestEmpty = false;
   firstSearch = false; //Diese Variable dient dazu abzubilden ob von der Startseite über "Mitfahrgelegenheiten" in der Navbar zu dieser Seite navigiert wurde.
 
-  constructor(public tourService: TourService, public shareData: ShareDataService) {
+  constructor(public tourService: TourService, public shareData: ShareDataService, private calcService: CalculateService) {
 
   }
 
@@ -51,10 +53,22 @@ export class TourSiteComponent implements OnInit {
 
   async setTours(){
     if (this.shareData.tourSearch !== null) {
-      this.offerTours = this.shareData.tourSearch.filter(tour => tour.isOffer);
+      console.log(this.shareData.searchSeats)
+      //Hierhin
+      this.offerTours = [];
+      this.shareData.tourSearch.forEach((element) => {
+        if ((element.seats - this.calcService.countFreeSeats(element.passengers) >= this.shareData.searchSeats) &&
+          (element.storage - this.calcService.countFreeStorage(element.passengers) >= this.shareData.searchStorage) && element.isOffer) {
+
+          /*this.offerTours = this.shareData.tourSearch.filter(tour => tour.isOffer);*/ //TODO ersetzen
+          this.offerTours.push(element)
+        }
+      })
+
       this.requestTours = this.shareData.tourSearch.filter(tour => !tour.isOffer);
     }
   }
+
 
   async fillList() {
     if (this.isOffer) {
