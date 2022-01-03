@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
-import {isEmpty} from "rxjs/operators";
 
 @Component({
   selector: 'app-tour-site',
@@ -44,17 +43,8 @@ export class TourSiteComponent implements OnInit {
   async resetSearch() {
     await this.setTours();
     await this.fillList();
-    if (this.offerTours.length === 0) {
-      this.isOfferEmpty = true
-    } else {
-      this.isOfferEmpty = false
-    }
-
-    if (this.requestTours.length === 0) {
-      this.isRequestEmpty = true
-    } else {
-      this.isRequestEmpty = false
-    }
+    this.isOfferEmpty = this.offerTours.length === 0;
+    this.isRequestEmpty = this.requestTours.length === 0;
     this.firstSearch = false;
   }
 

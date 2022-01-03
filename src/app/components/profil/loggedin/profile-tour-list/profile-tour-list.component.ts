@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Tour} from "../../../../models/Tour";
 import {TourService} from "../../../../services/tour.service";
 import {ShareDataService} from "../../../../services/share-data.service";

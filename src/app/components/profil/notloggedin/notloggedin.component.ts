@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../../../services/user.service";
-import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {RegistrationComponent} from "../../registration/registration.component";
 
@@ -54,7 +53,6 @@ export class NotloggedinComponent {
   async login() {
     this.userData.login(this.email, this.password).then(() => {
     }).catch((err) => {
-      console.log(err);
       if (err.code === 'auth/invalid-email') {
         this.emailMessage = 'E-Mail falsch formatiert';
         this.wrongEmail = 'border-danger';
