@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {Car} from "../../models/Car";
@@ -12,16 +12,16 @@ import {CarsService} from "../../services/cars.service";
 })
 
 export class CarlistComponent {
-  public fahrzeugModel?: string;
-  public fahrzeugKennzeichen?: string;
-  public fahrzeugSitzplaetze?: number;
-  public fahrzeugStauraum?: number;
+  public carModel?: string;
+  public carMark?: string;
+  public carSeats?: number;
+  public carStorage?: number;
 
   form = new FormGroup({
-    fahrzeugModel: new FormControl(),
-    fahrzeugKennzeichen: new FormControl(),
-    fahrzeugSitzplaetze: new FormControl(),
-    fahrzeugStauraum: new FormControl()
+    carModel: new FormControl(),
+    carMark: new FormControl(),
+    carSeats: new FormControl(),
+    carStorage: new FormControl()
   });
 
   constructor(public userService: UserService, private router: Router, public carData: CarsService) {
@@ -36,14 +36,14 @@ export class CarlistComponent {
   }
 
   onSubmit(){
-     this.fahrzeugModel = this.form.controls['fahrzeugModel'].value;
-     this.fahrzeugKennzeichen = this.form.controls['fahrzeugKennzeichen'].value;
-     this.fahrzeugSitzplaetze = this.form.controls['fahrzeugSitzplaetze'].value;
-     this.fahrzeugStauraum = this.form.controls['fahrzeugStauraum'].value;
+     this.carModel = this.form.controls['carModel'].value;
+     this.carMark = this.form.controls['carMark'].value;
+     this.carSeats = this.form.controls['carSeats'].value;
+     this.carStorage = this.form.controls['carStorage'].value;
 
-     if (this.fahrzeugModel && this.fahrzeugKennzeichen && this.fahrzeugSitzplaetze && this.fahrzeugStauraum) {
+     if (this.carModel && this.carMark && this.carSeats && this.carStorage) {
 
-       let newCar = new Car(this.fahrzeugModel, this.fahrzeugKennzeichen, this.fahrzeugSitzplaetze, this.fahrzeugStauraum);
+       let newCar = new Car(this.carModel, this.carMark, this.carSeats, this.carStorage);
 
        if(this.userService.currUser){
          this.carData.addCar(newCar).then(async (id) => {

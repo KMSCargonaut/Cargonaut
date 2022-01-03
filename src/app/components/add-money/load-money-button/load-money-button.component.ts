@@ -10,9 +10,9 @@ export class LoadMoneyButtonComponent{
   constructor() { }
 
   @Input() amount: number = 0;
-  @Output() chosedAmount = new EventEmitter<number>();
+  @Output() chosenAmount = new EventEmitter<number>();
 
-  chosedMe(amount: number) {
-    this.chosedAmount.emit(amount)
+  chosenMe(amount: number) {
+    this.chosenAmount.emit(amount)
   }
 }

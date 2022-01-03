@@ -75,10 +75,9 @@ export class TourListGenericComponent implements OnInit {
     this.router.navigate(['/profil']);
   }
 
-
-  wasTourInPast(date: string): boolean {
+ /* wasTourInPast(date: string): boolean {
     return (new Date().getTime() - new Date(date).getTime()) > 0;
-  }
+  }*/
 
   isPassenger(passengers: Passenger[]): boolean {
     return passengers.some(passenger => passenger.id === this.user?.uid);

@@ -28,10 +28,10 @@ export class StrangerProfileComponent {
 
   constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService) {
     this.user = this.shareData.detailUser;
-    this.test().then();
+    this.fillValues().then();
   }
 
-  async test() {
+  async fillValues() {
     if (this.user != null) {
       this.firstname = this.user.firstname;
       this.lastname = this.user.lastname;
