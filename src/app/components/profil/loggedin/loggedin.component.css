@@ -43,44 +43,6 @@ button{
   flex: 1;
 }
 
-
-/* Tests */
-/*
-
-.scrollmenu {
-  overflow: auto !important;
-  white-space: nowrap;
+app-profile-tour-list {
+  overflow-y: auto;
 }
-
-.scrollmenu div {
-  display: inline-block;
-  padding: 14px;
-  float: none;
-}
-
-
-.test > .row {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.test > .row > .col-4 {
-  display: inline-block;
-}
-
-.width {
-  width: 100em;
-}
-
-.test > .row > .inline {
-  display: inline-block;
-}
-
-.test {
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-top: 0;
-  margin-right: 0;
-}
-*/

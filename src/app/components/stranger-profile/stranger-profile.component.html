@@ -11,7 +11,8 @@
       <div class="h5 logoGreenDark">{{this.username}}</div>
       <div class="logoGreenDark"><span class="mr-1">{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
       <div class="logoGreenDark">{{this.age}}</div>
-      <div class="logoGreenDark">{{this.gender}}</div>
+      <div
+        class="logoGreenDark">{{(this.gender === 'MALE') ? 'Männlich' : (this.gender === 'FEMALE') ? 'Weiblich' : (this.gender) ? 'Divers' : ''}}</div>
       <app-vote-stars [currentRate]="this.evaluation / this.evaluationCounter"></app-vote-stars>
       <div class="logoGreenDark">
         <span *ngIf="this.evaluation !== -1">{{this.evaluation / this.evaluationCounter}} </span>
@@ -32,46 +33,23 @@
 </div>
 
 
-<div class="tours">
+<div class="tours d-flex flex-column" style="height: 22em">
 
 
-  <div class="">
-    <h2 class="logoGreenDark">Offene Angebote von {{this.username}}</h2>
-  </div>
+  <h2 class="logoGreenDark">Offene Angebote von {{this.username}}</h2>
+  <app-tour-table [usedList]="offerTours"></app-tour-table>
 
-  <app-tour-table *ngIf="offerTours.length > 0; else noOffers" [usedList]="offerTours"></app-tour-table>
-
-  <ng-template #noOffers>
-    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
-      <div class="row">
-        <div class="col text-center mt-3 h2 logoGreenDark">
-          Melde dich an, um eine Tour zu erstellen!
-        </div>
-      </div>
-    </div>
-  </ng-template>
 
 </div>
 
 
-<div class="tours">
+<div class="tours d-flex flex-column" style="height: 22em">
 
 
-  <div class="">
-    <h2 class="logoGreenDark">Offene Anfragen von {{this.username}}</h2>
-  </div>
+  <h2 class="logoGreenDark">Offene Anfragen von {{this.username}}</h2>
 
-  <app-tour-table *ngIf="this.noOfferTours.length > 0; else noNoOffers" [usedList]="noOfferTours"></app-tour-table>
+  <app-tour-table [usedList]="noOfferTours"></app-tour-table>
 
-  <ng-template #noNoOffers>
-    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
-      <div class="row">
-        <div class="col text-center mt-3 h2 logoGreenDark">
-          Melde dich an, um eine Tour zu erstellen!
-        </div>
-      </div>
-    </div>
-  </ng-template>
 
 </div>
 
