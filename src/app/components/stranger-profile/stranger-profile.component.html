@@ -36,11 +36,10 @@
 
 
   <div class="">
-    <h2 class="logoGreenDark">{{this.username}}'s Angebote</h2>
+    <h2 class="logoGreenDark">Offene Angebote von {{this.username}}</h2>
   </div>
 
-  <app-tour-list *ngIf="this.offerTours.length > 0; else noOffers" [isHorizontal]="true"
-                 [usedList]="offerTours"></app-tour-list>
+  <app-tour-table *ngIf="offerTours.length > 0; else noOffers" [usedList]="offerTours"></app-tour-table>
 
   <ng-template #noOffers>
     <div class="container rounded shadow container bg-white border-0" style="width: 700px">
@@ -59,11 +58,11 @@
 
 
   <div class="">
-    <h2 class="logoGreenDark">{{this.username}}'s Anfragen</h2>
+    <h2 class="logoGreenDark">Offene Anfragen von {{this.username}}</h2>
   </div>
 
-  <app-tour-list *ngIf="this.noOfferTours.length > 0; else noNoOffers" [isHorizontal]="true"
-                 [usedList]="noOfferTours"></app-tour-list>
+  <app-tour-table *ngIf="this.noOfferTours.length > 0; else noNoOffers" [usedList]="noOfferTours"></app-tour-table>
+
   <ng-template #noNoOffers>
     <div class="container rounded shadow container bg-white border-0" style="width: 700px">
       <div class="row">
