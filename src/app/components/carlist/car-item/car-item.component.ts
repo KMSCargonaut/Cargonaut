@@ -49,6 +49,7 @@ export class CarItemComponent implements OnInit{
     if(this.carData){
      // await this.carData.updateCar(this.car);
     }
+
   }
 
   public async inputCheck() {
