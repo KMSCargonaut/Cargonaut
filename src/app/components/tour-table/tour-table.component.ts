@@ -25,20 +25,16 @@ export class TourTableComponent {
   }
 
   async navigateToDetailsOrEdit(tour: Tour) {
-    this.shareData.detailTour = tour;
     const user = await this.userService.getUser(tour.creatorID);
-    if (user) {
-      this.shareData.detailUser = user;
-    }
 
     if (this.userService.currUser) {
       if (this.userService.currUser.uid === tour.creatorID) {
-        this.router.navigate(["/editTour"])
+        this.router.navigate([`/editTour/${tour.dID}/${user?.uid}`])
       } else {
-        this.router.navigate(["/tour-details"])
+        this.router.navigate([`/tour-details/${tour.dID}/${user?.uid}`])
       }
     } else {
-      this.router.navigate(["/tour-details"])
+      this.router.navigate([`/tour-details/${tour.dID}/${user?.uid}`])
     }
   }
 

@@ -1,18 +1,19 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserCargo} from "../../models/UserCargo";
 import {UserService} from "../../services/user.service";
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-stranger-profile',
   templateUrl: './stranger-profile.component.html',
   styleUrls: ['./stranger-profile.component.css']
 })
-export class StrangerProfileComponent {
+export class StrangerProfileComponent implements OnInit{
 
-  user: UserCargo | null;
+  user: UserCargo | null = null;
   firstname = '';
   lastname = '';
   username = '';
@@ -26,9 +27,17 @@ export class StrangerProfileComponent {
   goneWithNumber = 0;
 
 
-  constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService) {
-    this.user = this.shareData.detailUser;
+  constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService, public route: ActivatedRoute) {
     this.fillValues().then();
+  }
+
+  async ngOnInit() {
+    const uid =  this.route.snapshot.paramMap.get('uid');
+    if (uid) {
+      const tempUser = await this.userData.getUser(uid);
+      this.user = (tempUser) ? tempUser : null;
+    }
+    await this.fillValues()
   }
 
   async fillValues() {

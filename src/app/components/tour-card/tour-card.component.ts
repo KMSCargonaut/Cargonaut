@@ -3,8 +3,6 @@ import {Tour} from "../../models/Tour";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
-import {ShareDataService} from "../../services/share-data.service";
-import {Passenger} from "../../models/Passenger";
 import {CalculateService} from "../../services/calculate.service";
 
 @Component({
@@ -20,8 +18,7 @@ export class TourCardComponent implements OnInit, OnChanges{
   freeSeats = 0;
   freeStorage = 0;
 
-  constructor(public userService: UserService, private router: Router, public tourService: TourService,
-              public shareData: ShareDataService, private calcService: CalculateService) {
+  constructor(public userService: UserService, private router: Router, public tourService: TourService, private calcService: CalculateService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -44,20 +41,16 @@ export class TourCardComponent implements OnInit, OnChanges{
 
 
   async navigateToDetailsOrEdit() {
-    this.shareData.detailTour = this.tour;
     const user = await this.userService.getUser(this.tour.creatorID);
-    if (user) {
-      this.shareData.detailUser = user;
-    }
 
     if (this.userService.currUser) {
       if (this.userService.currUser.uid === this.tour.creatorID){
-        this.router.navigate(["/editTour"])
+        this.router.navigate([`/editTour/${this.tour.dID}/${user?.uid}`])
       } else {
-        this.router.navigate(["/tour-details"])
+        this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}`])
       }
     } else {
-      this.router.navigate(["/tour-details"])
+      this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}`])
     }
 
   }

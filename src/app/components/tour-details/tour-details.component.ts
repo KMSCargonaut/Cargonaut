@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CalculateService} from "../../services/calculate.service";
 import {UserService} from "../../services/user.service";
 import {ShareDataService} from "../../services/share-data.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TourBookComponent} from "./tour-book/tour-book.component";
 import {Tour} from "../../models/Tour";
@@ -11,6 +11,7 @@ import {AlertService} from "../../services/alert.service";
 import {CarsService} from "../../services/cars.service";
 import {Car} from "../../models/Car";
 import {Passenger} from "../../models/Passenger";
+import {UserCargo} from "../../models/UserCargo";
 
 @Component({
   selector: 'app-tour-details',
@@ -29,32 +30,43 @@ export class TourDetailsComponent implements OnInit {
   freeSeats: number = 0;
   freeStorage: number = 0;
   afterModal: boolean = false;
+  ultimateTour: Tour | null = null;
+  ultimateUser: UserCargo | null = null;
 
 
   constructor(public shareData: ShareDataService, private calcService: CalculateService, public userService: UserService,
               public router: Router, public modalService: NgbModal, public tourData: TourService, public alertData: AlertService,
-              public carData: CarsService) {
+              public carData: CarsService, public route: ActivatedRoute) {
   }
 
 
   async ngOnInit() {
-    this.mergeDateAndTime = this.shareData.detailTour?.date + 'T' + this.shareData.detailTour?.startTime;
-    if (this.shareData.detailTour) {
-      const carId = this.shareData.detailTour.car;
+    const did =  this.route.snapshot.paramMap.get('did');
+    const uid =  this.route.snapshot.paramMap.get('uid');
+    if (did && uid) {
+      const tempTour = await this.tourData.getTour(did);
+      const tempUser = await this.userService.getUser(uid);
+      this.ultimateTour = (tempTour) ? tempTour : null;
+      this.ultimateUser = (tempUser) ? tempUser : null;
+      console.log('TOUR IN TOUR DETAILS: ', this.ultimateTour, tempUser);
+    }
+    this.mergeDateAndTime = this.ultimateTour?.date + 'T' + this.ultimateTour?.startTime;
+    if (this.ultimateTour) {
+      const carId = this.ultimateTour.car;
       if (carId.trim().length > 0) {
         this.car = await this.carData.getCarById(carId);
       }
-      this.passengers = this.shareData.detailTour.passengers;
-      this.freeStorage = this.shareData.detailTour.storage;
-      this.freeSeats = this.shareData.detailTour.seats;
-      const currDriverId = this.shareData.detailTour.driver;
+      this.passengers = this.ultimateTour.passengers;
+      this.freeStorage = this.ultimateTour.storage;
+      this.freeSeats = this.ultimateTour.seats;
+      const currDriverId = this.ultimateTour.driver;
       const driver = (currDriverId.trim().length > 0) ? await this.userService.getUser(currDriverId) : null;
       if (driver) {
         this.driver = driver.username;
       }
       if (this.passengers.length !== 0) {
         await this.fillPassengersName()
-        if (this.shareData.detailTour.isOffer) {
+        if (this.ultimateTour.isOffer) {
           this.freeSeats = this.freeSeats - this.countFreeSeats(this.passengers);
           this.freeStorage = this.freeStorage - this.countFreeStorage(this.passengers);
         }
@@ -93,15 +105,15 @@ export class TourDetailsComponent implements OnInit {
 
 
   calculateEndTime() {
-    if (this.shareData.detailTour?.startTime && this.shareData.detailTour?.duration && this.shareData.detailTour?.date) {
-      this.endTime = this.calcService.arrivalTime(this.shareData.detailTour?.startTime, this.shareData.detailTour?.duration.toString(), this.shareData.detailTour?.date)
+    if (this.ultimateTour?.startTime && this.ultimateTour?.duration && this.ultimateTour?.date) {
+      this.endTime = this.calcService.arrivalTime(this.ultimateTour?.startTime, this.ultimateTour?.duration.toString(), this.ultimateTour?.date)
     }
 
   }
 
   changeUserName() {
-    if (this.shareData.detailTour?.passengers[0] || this.shareData.detailTour?.driver && this.shareData.detailTour?.isOffer) {
-      this.userService.getUser(this.shareData.detailTour?.creatorID).then(
+    if (this.ultimateTour?.passengers[0] || this.ultimateTour?.driver && this.ultimateTour?.isOffer) {
+      this.userService.getUser(this.ultimateTour?.creatorID).then(
         (user) => {
           if (user) {
             this.userName = user.username
@@ -114,7 +126,7 @@ export class TourDetailsComponent implements OnInit {
   }
 
   bookedUp(): boolean {
-    let tour = this.shareData.detailTour;
+    let tour = this.ultimateTour;
     if (tour) {
       return tour.isStorageFullyLoaded && tour.areSeatsOccupied;
     } else {
@@ -123,7 +135,7 @@ export class TourDetailsComponent implements OnInit {
   }
 
   alreadyPassenger(): boolean {
-    let tour = this.shareData.detailTour;
+    let tour = this.ultimateTour;
     let user = this.userService.currUser;
     let alreadyPass = false;
     if (tour && user) {
@@ -137,7 +149,7 @@ export class TourDetailsComponent implements OnInit {
   }
 
   alreadyDriver(): boolean {
-    let tour = this.shareData.detailTour;
+    let tour = this.ultimateTour;
     let user = this.userService.currUser;
     if (tour && user) {
       return tour.driver === user.uid;
@@ -146,7 +158,7 @@ export class TourDetailsComponent implements OnInit {
   }
 
   cancelTour() {
-    let tour = this.shareData.detailTour;
+    let tour = this.ultimateTour;
     if (tour) {
       if (tour.isOffer) {
         this.cancelIfOffer(tour);
@@ -247,11 +259,11 @@ export class TourDetailsComponent implements OnInit {
 
       }
     })
-    modalRef.componentInstance.passedData = this.shareData.detailTour;
+    modalRef.componentInstance.passedData = this.ultimateTour;
   }
 
   navigateToUser() {
-    this.router.navigate(['/exprofile']);
+    this.router.navigate([`/exprofile//${this.ultimateUser?.uid}`]);
   }
 
 }

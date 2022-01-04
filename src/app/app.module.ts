@@ -33,7 +33,6 @@ import {AddMoneyComponent} from "./components/add-money/add-money.component";
 import {LoadMoneyButtonComponent} from "./components/add-money/load-money-button/load-money-button.component";
 import { VoteStarsComponent } from './components/profil/vote-stars/vote-stars.component';
 import { TourEditComponent } from './components/tour-edit/tour-edit.component';
-import { ProfileTourListComponent } from './components/profil/loggedin/profile-tour-list/profile-tour-list.component';
 import { TourBookComponent } from './components/tour-details/tour-book/tour-book.component';
 import { EditAccountComponent } from './components/edit-account/edit-account.component';
 import { TourTableComponent } from './components/tour-table/tour-table.component';
@@ -69,7 +68,6 @@ import { AddEvaluationComponent } from './components/add-evaluation/add-evaluati
     LoadMoneyButtonComponent,
     VoteStarsComponent,
     TourEditComponent,
-    ProfileTourListComponent,
     TourBookComponent,
     EditAccountComponent,
     TourTableComponent,
