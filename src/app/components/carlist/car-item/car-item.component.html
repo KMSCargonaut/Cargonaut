@@ -11,9 +11,9 @@
                class="form-control "
                id="inputFahrzeugModel"
                placeholder=""
-               (keydown)="validFahrzeugModel(FahrzeugModel.value)"
+
                [(ngModel)]="car.model">
-        <div *ngIf="fahrzeugModelMessage !== ''" class="text-danger">{{fahrzeugModelMessage}}</div>
+
       </div>
     </div>
     <div class="row">
@@ -24,9 +24,9 @@
                class="form-control "
                id="inputkennzeichen"
                placeholder=""
-               (keydown)="validKennzeichen(kennzeichen.value)"
+
                [(ngModel)]="car.mark">
-        <div *ngIf="kennzeichenMessage !== ''" class="text-danger">{{kennzeichenMessage}}</div>
+
       </div>
     </div>
     <div class="row">
@@ -37,9 +37,9 @@
                class="form-control "
                id="inputsitzplatze"
                placeholder=""
-               (keydown)="validSitzplaze(sitzplatze.value)"
+
                [(ngModel)]="car.seats">
-        <div *ngIf="sitzplazeMessage !== ''" class="text-danger">{{sitzplazeMessage}}</div>
+
       </div>
     </div>
     <div class="row">
@@ -50,18 +50,16 @@
                class="form-control "
                id="inputstauraum"
                placeholder=""
-               (keydown)="validStauraum(stauraum.value)"
-               [(ngModel)]="car.storage">
-        <div *ngIf="stauraumMessage !== ''" class="text-danger">{{stauraumMessage}}</div>
+
+               [(ngModel)]="car.storage" >
+        <div *ngIf="message !== ''" class="text-success  mr-1">{{message}}</div>
       </div>
+
+
     </div>
-    <a class="btn btn-primary  btn-success mr-5" (click)="updateEvent.emit()">Speichern</a>
+    <button class="btn btn-primary  btn-success mr-5"  (click)="updateCar()">Speichern</button>
+    <!--<a class="btn btn-primary  btn-success mr-5"   (click)="updateCar()">Speichern</a>-->
     <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löschen</a>
-   <!-- <h5 class="card-title">{{car.model}}</h5>
-    <p class="card-text">{{car.mark}}</p>
-    <p class=" card text">{{car.seats}} Plätze</p>
-    <p class="card text" >{{car.storage}} </p>
-   <a class="btn btn-primary  btn-success mr-5">Speichern</a>
-    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löschen</a>-->
+
   </div>
 </div>
