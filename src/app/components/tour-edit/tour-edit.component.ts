@@ -11,8 +11,6 @@ import {CarsService} from "../../services/cars.service";
 import {Tour} from "../../models/Tour";
 import {Passenger} from "../../models/Passenger";
 import {TourService} from "../../services/tour.service";
-import {Status} from "../../models/Status";
-import {TourBookComponent} from "../tour-details/tour-book/tour-book.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmDeletionComponent} from "./confirm-deletion/confirm-deletion.component";
 
@@ -46,7 +44,7 @@ export class TourEditComponent implements OnInit {
     this.auth.user.subscribe(async (user) => {
       if (user) {
         const tempCargoUser = await this.userData.getUser(user.uid);
-        if(tempCargoUser != undefined) {
+        if (tempCargoUser != undefined) {
           await this.fillCars(tempCargoUser);
         }
       }
@@ -67,8 +65,8 @@ export class TourEditComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const did =  this.route.snapshot.paramMap.get('did');
-    const uid =  this.route.snapshot.paramMap.get('uid');
+    const did = this.route.snapshot.paramMap.get('did');
+    const uid = this.route.snapshot.paramMap.get('uid');
     if (did && uid) {
       const tempTour = await this.tourData.getTour(did);
       const tempUser = await this.userData.getUser(uid);
@@ -81,7 +79,7 @@ export class TourEditComponent implements OnInit {
   }
 
   fillFields() {
-    if(this.tour) {
+    if (this.tour) {
       this.isOffer = this.tour.isOffer
       this.startCity = this.tour.startCity
       this.endCity = this.tour.endCity
@@ -103,7 +101,10 @@ export class TourEditComponent implements OnInit {
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
-    this.alert.showAlert({type: 'success', message: (this.isOffer)? 'Deine Anfrage wird zu einem Angebot geändert' : 'Dein Angebot wird zu einer Anfrage geändert'});
+    this.alert.showAlert({
+      type: 'success',
+      message: (this.isOffer) ? 'Deine Anfrage wird zu einem Angebot geändert' : 'Dein Angebot wird zu einer Anfrage geändert'
+    });
   }
 
 
@@ -127,7 +128,7 @@ export class TourEditComponent implements OnInit {
   async checkInput() {
     const currUser = this.userData.currUser;
     this.newTourParams()
-    if (currUser&& this.tour) {
+    if (currUser && this.tour) {
       if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
         await this.addOffer(this.tour, currUser);
       } else if (this.checkUniqueInputs() && !this.isOffer) {
@@ -138,7 +139,7 @@ export class TourEditComponent implements OnInit {
     }
   }
 
-  changeStatus(status: string){
+  changeStatus(status: string) {
     this.status = status;
   }
 
@@ -161,7 +162,7 @@ export class TourEditComponent implements OnInit {
 
   async deleteTour() {
     if (this.tour)
-    await this.tourData.deleteTour(this.tour);
+      await this.tourData.deleteTour(this.tour);
     this.router.navigate(["/profil"])
     this.alert.showAlert({type: 'danger', message: 'Tour gelöscht!'});
   }
@@ -171,14 +172,22 @@ export class TourEditComponent implements OnInit {
       animation: true,
       centered: true,
     });
+    modalRef.dismissed.toPromise().then(async (result) => {
+      console.log(result)
+      if (this.tour && result) {
+        await this.tourData.deleteTour(this.tour);
+        this.alert.showAlert({type: 'danger', message: 'Tour erfolgreich gelöscht'});
+        this.router.navigate(["/profil"]);
+      }
+    })
   }
 
 
   newTourParams() {
-    if(this.tour) {
+    if (this.tour) {
       this.tour.isOffer = this.isOffer
       this.tour.startCity = this.startCity
-      this.tour.endCity =  this.endCity
+      this.tour.endCity = this.endCity
       this.tour.startTime = this.startTime
       this.tour.duration = Number.parseInt(this.duration)
       this.tour.date = this.date
