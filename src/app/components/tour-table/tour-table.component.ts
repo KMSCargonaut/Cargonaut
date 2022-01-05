@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
-import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {Status} from "../../models/Status";
@@ -19,7 +18,7 @@ export class TourTableComponent {
   @Input() usedList: Tour[] = [];
   status: number = 0;
 
-  constructor(public tourService: TourService, public shareData: ShareDataService, public userService: UserService,
+  constructor(public tourService: TourService, public userService: UserService,
               public router: Router, public modal: NgbModal, public alertData: AlertService) {
 
   }

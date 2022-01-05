@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
-import {Passenger} from "../../models/Passenger";
 import {CalculateService} from "../../services/calculate.service";
 
 @Component({
@@ -36,6 +35,7 @@ export class TourSiteComponent implements OnInit {
   }
 
  async ngOnInit() {
+
     await this.resetSearch();
     if (!this.shareData.tourSearch) {
       this.firstSearch = true;
