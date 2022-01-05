@@ -9,6 +9,7 @@ import {AlertService} from "../../../services/alert.service";
 import {AddMoneyComponent} from "../../add-money/add-money.component";
 import {CarsService} from "../../../services/cars.service";
 import {EditAccountComponent} from "../../edit-account/edit-account.component";
+import {CalculateService} from "../../../services/calculate.service";
 
 @Component({
   selector: 'app-loggedin',
@@ -22,7 +23,7 @@ export class LoggedinComponent implements OnInit {
 
   constructor(
     public userData: UserService, private router: Router, public tourData: TourService, private modalService: NgbModal,
-    public alertData: AlertService, public carData: CarsService) {
+    public alertData: AlertService, public carData: CarsService, private calcService: CalculateService) {
   }
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class LoggedinComponent implements OnInit {
     if (user) {
       let futureTours = await this.tourData.getAllBookedTours();
       futureTours = futureTours
-        .filter(tour => this.bookedToursInFuture(new Date(tour.date)))
+        .filter(tour => this.calcService.wasInPast(new Date(tour.date)))
         .filter(tour => tour.driver === user.uid || this.isPassenger(tour, user.uid));
       if (futureTours.length <= 0) {
         try {
@@ -80,9 +81,7 @@ export class LoggedinComponent implements OnInit {
     }
   }
 
-  bookedToursInFuture(date: Date): boolean {
-    return (new Date().getTime() - date.getTime()) < 0;
-  }
+
 
   openUpdateModal(): void {
     this.modalService.open(UpdateUserComponent, {
