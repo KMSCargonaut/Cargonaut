@@ -81,7 +81,7 @@ export class CreateToursComponent {
       this.seats.trim().length > 0 &&
       this.storage.trim().length > 0 &&
       Number.parseInt(this.price) > 0 &&
-      Number.parseInt(this.seats) > 0 || Number.parseInt(this.storage) > 0;
+      (Number.parseInt(this.seats) > 0 || Number.parseInt(this.storage) > 0);
   }
 
 
