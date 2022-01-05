@@ -35,6 +35,7 @@ jobs:
     
   Deployment:
     runs-on: ubuntu-latest
+    needs: [build]
     #- name: Deploy to GitHub Pages
     steps:
       - uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
