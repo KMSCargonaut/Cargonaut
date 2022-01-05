@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Node.js CI
 
 on:
@@ -33,15 +30,19 @@ jobs:
     - name: Build
       run: npm run build
     #- name: Test
-     # run: npm run test:prod    ++Tests are still not running properly
+     # run: npm run test:prod    ++Tests are still not running properly with firebase
     - run: npm run lint
-    - name: Deploy to GitHub Pages
-      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
-      with:
-        github_access_token: ${{ secrets.ACCESS_TOKEN }}
-        base_href: /Cargonaut/
-        deploy_branch: gh-pages
-        angular_dist_build_folder: dist/Cargonaut
+    
+  Deployment:
+    runs-on: ubuntu-latest
+    #- name: Deploy to GitHub Pages
+    steps:
+      - uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
+        with:
+          github_access_token: ${{ secrets.ACCESS_TOKEN }}
+          base_href: /Cargonaut/
+          deploy_branch: gh-pages
+          angular_dist_build_folder: dist/Cargonaut
         
   code-analyzis:
       runs-on: ubuntu-latest
