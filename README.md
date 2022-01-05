@@ -6,3 +6,13 @@
 [![Code Size](https://img.shields.io/github/languages/code-size/KMSCargonaut/Cargonaut)](https://github.com/KMSCargonaut/Cargonaut/)
 
 Cargonaut ist ein Projekt im Rahmen des Moduls *Konzepte moderner Softwareentwicklung* im WiSe21/22 der Technischen Hochschule Mittelhessen.
+
+## Verwendete Technologien
+
+-   [Angular](https://angular.io/)
+-   [Firebase](https://firebase.google.com/)
+-   [Bootstrap](https://getbootstrap.com/)
+
+## Entwicklung
+
+...
