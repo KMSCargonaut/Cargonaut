@@ -9,8 +9,21 @@ Cargonaut ist ein Projekt im Rahmen des Moduls *Konzepte moderner Softwareentwic
 
 ## Dokumentation
 
-Alle nötigen Informationen zu dem Ablauf des Projektes, den verwendeten Technologien, der Entwicklung und mehr finden Sie in unserem [Wiki](https://github.com/KMSCargonaut/Cargonaut/wiki)!
+Alle nötigen Informationen zu dem Ablauf des Projektes, den verwendeten Technologien, der Entwicklung und mehr finden Sie in unserem **[Wiki](https://github.com/KMSCargonaut/Cargonaut/wiki)**!
 
 ## Development-Guide
 
-...
+### Anwendung lokal starten
+
+- Um die Applikation lokal zu starten müssen sie sich zuerst dieses Repository clonen:
+  - `git clone`
+- Wechseln sie nun in den geclonten Ordner (`cd Cargonaut`) und installieren sie zunächst alle nötigen Abhängigkeiten
+  - `npm i`
+- Nun können sie mit `ng serve` die Anwendung starten
+  - Erreichbar unter `localhost:4200`
+
+### Deployte Anwendung
+
+Die Anwendung ist auch auf unserer eigenen GitHub-Pages Seite erreichbar:
+  - [Cargonaut](https://kmscargonaut.github.io/Cargonaut/)
+  
