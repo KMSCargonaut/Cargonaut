@@ -34,10 +34,10 @@ export class CarlistComponent {
     await this.userService.deleteCar(id);
     await this.carData.deleteCar(id);
   }
-  async updateCar(car: Car) {
 
+  /*async updateCar(car: Car) {
     await this.carData.updateCar(car);
-  }
+  }*/
 
   onSubmit(){
      this.fahrzeugModel = this.form.controls['fahrzeugModel'].value;

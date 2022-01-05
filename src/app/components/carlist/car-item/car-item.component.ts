@@ -13,10 +13,9 @@ export class CarItemComponent implements OnInit{
 
   @Input() carId: string = '';
   @Output() deleteEvent: EventEmitter<void> = new EventEmitter<void>();
-   @Output() updateEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() updateEvent: EventEmitter<void> = new EventEmitter<void>();
 
   car: Car | null = null
-
 
   constructor(public userService: UserService, public carData: CarsService) { }
 
@@ -24,17 +23,13 @@ export class CarItemComponent implements OnInit{
     this.car = await this.carData.getCarById(this.carId);
   }
 
-
-
   public message = '';
-
 
   public async updateCar(){
     if(this.car){
       await this.carData.updateCar(this.car);
     }
     this.message="Fahrzeug erfolgreich geändert"
-
   }
 
 
