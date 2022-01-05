@@ -7,12 +7,10 @@
 
 Cargonaut ist ein Projekt im Rahmen des Moduls *Konzepte moderner Softwareentwicklung* im WiSe21/22 der Technischen Hochschule Mittelhessen.
 
-## Verwendete Technologien
+## Dokumentation
 
--   [Angular](https://angular.io/)
--   [Firebase](https://firebase.google.com/)
--   [Bootstrap](https://getbootstrap.com/)
+Alle nötigen Informationen zu dem Ablauf des Projektes, den verwendeten Technologien, der Entwicklung und mehr finden Sie in unserem [Wiki](https://github.com/KMSCargonaut/Cargonaut/wiki)!
 
-## Entwicklung
+## Development-Guide
 
 ...
