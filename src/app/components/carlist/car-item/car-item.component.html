@@ -1,10 +1,65 @@
 <div class="card" style="width: 18rem;">
+  <div class="col-12 justify-content-center">
+    <div class="modal-title text-center h4 mx-auto logoGreenDark">Fahrzeug</div>
+  </div>
   <div class="card-body" *ngIf="car">
-    <h5 class="card-title">{{car.model}}</h5>
-    <p class="card-text">{{car.mark}}</p>
-    <p class=" card text">{{car.seats}} Plätze</p>
-    <p class="card text" >{{car.storage}} </p>
-<!--    <a class="btn btn-primary btn-light mr-1" (click)="editEvent.emit()">Edit</a>-->
-    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Delete</a>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a>Fahrzeug-Model</a>
+        <input #FahrzeugModel
+               type="text"
+               class="form-control "
+               id="inputFahrzeugModel"
+               placeholder=""
+
+               [(ngModel)]="car.model">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a>Kennzeichen</a>
+        <input #kennzeichen
+               type="text"
+               class="form-control "
+               id="inputkennzeichen"
+               placeholder=""
+
+               [(ngModel)]="car.mark">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a>Sitzplätze</a>
+        <input #sitzplatze
+               type="number"
+               class="form-control "
+               id="inputsitzplatze"
+               placeholder=""
+
+               [(ngModel)]="car.seats">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <a>Stauraum</a>
+        <input #stauraum
+               type="number"
+               class="form-control "
+               id="inputstauraum"
+               placeholder=""
+
+               [(ngModel)]="car.storage" >
+        <div *ngIf="message !== ''" class="text-success  mr-1">{{message}}</div>
+      </div>
+
+
+    </div>
+    <button class="btn btn-primary  btn-success mr-5"  (click)="updateCar()">Speichern</button>
+    <!--<a class="btn btn-primary  btn-success mr-5"   (click)="updateCar()">Speichern</a>-->
+    <a class="btn btn-primary btn-danger ml-1" (click)="deleteEvent.emit()">Löschen</a>
+
   </div>
 </div>
