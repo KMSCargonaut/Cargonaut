@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
+
 jobs:
   build:
 
@@ -39,3 +42,13 @@ jobs:
         base_href: /Cargonaut/
         deploy_branch: gh-pages
         angular_dist_build_folder: dist/Cargonaut
+        
+  code-analyzis:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install
+          run: curl -L "https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN" | sh
+        - name: Scan
+          run: $HOME/.spectral/spectral scan --ok
+      
