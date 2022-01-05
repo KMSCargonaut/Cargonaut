@@ -3,7 +3,7 @@ import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {UserService} from "../../services/user.service";
 import {UserCargo} from "../../models/UserCargo";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Passenger} from "../../models/Passenger";
 
 @Component({
@@ -16,7 +16,7 @@ export class TourListGenericComponent implements OnInit {
   list: Tour[] = [];
   user: UserCargo | null = null;
 
-  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute) {
+  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute, public router: Router) {
   }
 
   async ngOnInit() {
@@ -34,6 +34,7 @@ export class TourListGenericComponent implements OnInit {
         case 0: {
           this.list = await this.tourData.getAllToursFromUser(this.user.uid);
           this.list = this.list.filter(tour => !tour.isOffer)
+          console.log(this.list)
           break;
         }
         case 1: {
@@ -46,26 +47,20 @@ export class TourListGenericComponent implements OnInit {
           const listAsDriver = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => tour.driver === this.user?.uid);
           })
-          const listAsPassenger = await this.tourData.getAllBookedTours().then(tours => {
-            return tours.filter(tour => this.isPassenger(tour.passengers));
-          })
-          this.list = listAsDriver.concat(listAsPassenger)
+          this.list = listAsDriver
             .filter(tour => !tour.isOffer)
             .filter(tour => tour.creatorID != this.user?.uid);
           console.log('list case 2: ', this.list);
           break;
         }
         case 3: {
-          const listAsDriver = await this.tourData.getAllBookedTours().then(tours => {
-            return tours.filter(tour => tour.driver === this.user?.uid);
-          })
           const listAsPassenger = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => this.isPassenger(tour.passengers));
           })
-          this.list = listAsDriver.concat(listAsPassenger)
+          this.list = listAsPassenger
             .filter(tour => tour.isOffer)
             .filter(tour => tour.creatorID != this.user?.uid);
-          console.log('list case 2: ', this.list);
+          console.log('list case 3: ', this.list);
           break;
         }
 
@@ -76,10 +71,13 @@ export class TourListGenericComponent implements OnInit {
     }
   }
 
-
-  wasTourInPast(date: string): boolean {
-    return (new Date().getTime() - new Date(date).getTime()) > 0;
+  navigateToProfile() {
+    this.router.navigate(['/profil']);
   }
+
+ /* wasTourInPast(date: string): boolean {
+    return (new Date().getTime() - new Date(date).getTime()) > 0;
+  }*/
 
   isPassenger(passengers: Passenger[]): boolean {
     return passengers.some(passenger => passenger.id === this.user?.uid);

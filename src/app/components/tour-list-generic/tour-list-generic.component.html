@@ -6,8 +6,7 @@
   </div>
 </div>
 
-
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="userData.currUser; else notloggedin">
 
   <div class="row">
     <div class="col-3 ml-auto mb-2">
@@ -29,7 +28,24 @@
   <div class="row">
     <div class="col text-center">
       <app-tour-table [usedList]="this.list"></app-tour-table>
-
     </div>
   </div>
 </div>
+
+
+<ng-template #notloggedin>
+
+  <div class="container mt-5 rounded shadow container bg-white border-0" style="width: 700px">
+    <div class="row">
+      <div class="col text-center mt-3 h2 logoGreenDark">
+        Melde dich an, um deine Tours anzusehen!
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="col text-center">
+        <button class="btn btn-outline-success btn-lg m-3" (click)="navigateToProfile()">Anmelden</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

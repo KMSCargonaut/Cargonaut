@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TourService} from "../../../services/tour.service";
 import {ShareDataService} from "../../../services/share-data.service";
 import {Router} from "@angular/router";
@@ -33,9 +33,11 @@ export class SuchleisteComponent{
   }
 
   async searchButton() {
-    console.log(this.tourData.searchTours(/*true,*/ this.startCity, this.endCity, this.date, Number.parseInt(this.storage), Number.parseInt(this.passengers)));
+    console.log(this.tourData.searchTours(this.startCity, this.endCity, this.date, Number.parseInt(this.storage), Number.parseInt(this.passengers)));
     if (this.checkInput()) {
       this.shareData.tourSearch = await this.tourData.searchTours(/*true,*/ this.startCity, this.endCity, this.date, Number.parseInt(this.storage), Number.parseInt(this.passengers));
+      this.shareData.searchSeats = Number.parseInt(this.passengers);
+      this.shareData.searchStorage = Number.parseInt(this.storage);
       if (this.router.url === '/tours') {
         /*this.redirectTo('/tours')*/
         //Event von Child zu Parent pushen

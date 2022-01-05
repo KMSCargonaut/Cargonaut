@@ -26,13 +26,13 @@
       </div>
 
       <div class="">
-        <app-vote-stars [currentRate]="this.userData.currUser.evaluation"></app-vote-stars>
+        <app-vote-stars [currentRate]="this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter"></app-vote-stars>
       </div>
 
       <div class="mt-1 logoGreenDark">
-        <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation}} </span>
+        <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter}} </span>
         <span *ngIf="this.userData.currUser.evaluation === -1">0 </span>
-        von {{this.userData.currUser.evaluationCounter}} Nutzern
+        {{((this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter) === 1) ? 'Stern ' : 'Sterne ' }}von {{this.userData.currUser.evaluationCounter}} Nutzer
       </div>
 
     </div>
@@ -73,11 +73,10 @@
   <div class="flex column right-box">
 
     <!--        1. Item       -->
-    <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
+    <div class="mt-3">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du fährst</h3>
-      <div>
-        <app-profile-tour-list *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-profile-tour-list>
-
+      <div style="height: 40vh; overflow: auto">
+        <app-tour-table *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-tour-table>
         <div class="container">
           <div class="row">
             <!--  falls noch keine Fahrt vorhanden  -->
@@ -94,10 +93,10 @@
 
 
     <!--        2. Item       -->
-    <div class="mt-3" style="height: 40vh; overflow: scroll; overflow-x: hidden">
+    <div class="mt-3" style="height: 40vh; overflow: auto;">
       <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
       <div>
-        <app-profile-tour-list *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-profile-tour-list>
+        <app-tour-table *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-tour-table>
         <div class="container">
           <div class="row">
             <!--  falls noch keine Fahrt vorhanden  -->

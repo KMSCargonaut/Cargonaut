@@ -18,8 +18,13 @@ td
   vertical-align: middle;
 }
 
-button:hover{
+button.green:hover{
   background-color: #005B51;
+}
+
+button.evaluation:hover {
+  background-color: #FF9300;
+  color: white;
 }
 
 table {
@@ -35,3 +40,4 @@ button {
     width: 100%;
   }
 }
+

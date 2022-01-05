@@ -19,7 +19,6 @@ export class LoggedinComponent implements OnInit {
 
   ownOffers: Tour[] = []
   passengerTours: Tour[] = []
-  isHorizontal: boolean = true;
 
   constructor(
     public userData: UserService, private router: Router, public tourData: TourService, private modalService: NgbModal,

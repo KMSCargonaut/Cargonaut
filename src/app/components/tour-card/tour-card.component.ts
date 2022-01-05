@@ -5,6 +5,7 @@ import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {Passenger} from "../../models/Passenger";
+import {CalculateService} from "../../services/calculate.service";
 
 @Component({
   selector: 'app-tour-card',
@@ -20,14 +21,14 @@ export class TourCardComponent implements OnInit, OnChanges{
   freeStorage = 0;
 
   constructor(public userService: UserService, private router: Router, public tourService: TourService,
-              public shareData: ShareDataService) {
+              public shareData: ShareDataService, private calcService: CalculateService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     let tour = changes.tour.currentValue;
     if (tour.isOffer) {
-      this.freeSeats = tour.seats - this.countFreeSeats(tour.passengers);
-      this.freeStorage = tour.storage - this.countFreeStorage(tour.passengers);
+      this.freeSeats = tour.seats - this.calcService.countFreeSeats((tour.passengers));
+      this.freeStorage = tour.storage - this.calcService.countFreeStorage(tour.passengers);
     } else {
       this.freeSeats = tour.seats;
       this.freeStorage = tour.storage;
@@ -39,21 +40,8 @@ export class TourCardComponent implements OnInit, OnChanges{
     this.changeUserName();
   }
 
-  countFreeStorage(passengers: Passenger[]): number {
-    let storage = 0;
-    for (const passenger of passengers) {
-      storage += passenger.storage;
-    }
-    return storage;
-  }
 
-  countFreeSeats(passengers: Passenger[]): number {
-    let seats = 0;
-    for (const passenger of passengers) {
-      seats += passenger.seats;
-    }
-    return seats;
-  }
+
 
   async navigateToDetailsOrEdit() {
     this.shareData.detailTour = this.tour;

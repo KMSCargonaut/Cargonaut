@@ -28,10 +28,10 @@ export class StrangerProfileComponent {
 
   constructor(public userData: UserService, public tourData: TourService, public shareData: ShareDataService) {
     this.user = this.shareData.detailUser;
-    this.test().then();
+    this.fillValues().then();
   }
 
-  async test() {
+  async fillValues() {
     if (this.user != null) {
       this.firstname = this.user.firstname;
       this.lastname = this.user.lastname;
@@ -43,12 +43,10 @@ export class StrangerProfileComponent {
       this.evaluationCounter = this.user.evaluationCounter;
       this.tours = await this.tourData.getAllToursFromUser(this.user.uid)
       this.offerTours = this.tours.filter(tour => tour.isOffer)
-        .filter(tour => !tour.areSeatsOccupied)
-        .filter(tour => !tour.isStorageFullyLoaded)
+        .filter(tour => !tour.areSeatsOccupied || !tour.isStorageFullyLoaded)
         .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) < 0);
       this.noOfferTours = this.tours.filter(tour => !tour.isOffer)
-        .filter(tour => !tour.areSeatsOccupied)
-        .filter(tour => !tour.isStorageFullyLoaded)
+        .filter(tour => !tour.areSeatsOccupied || !tour.isStorageFullyLoaded)
         .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) < 0);
       await this.goneWith();
     }

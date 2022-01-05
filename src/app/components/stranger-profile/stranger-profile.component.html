@@ -11,10 +11,11 @@
       <div class="h5 logoGreenDark">{{this.username}}</div>
       <div class="logoGreenDark"><span class="mr-1">{{this.firstname}}</span> <span>{{this.lastname}}</span></div>
       <div class="logoGreenDark">{{this.age}}</div>
-      <div class="logoGreenDark">{{this.gender}}</div>
-      <app-vote-stars [currentRate]="this.evaluation"></app-vote-stars>
+      <div
+        class="logoGreenDark">{{(this.gender === 'MALE') ? 'Männlich' : (this.gender === 'FEMALE') ? 'Weiblich' : (this.gender) ? 'Divers' : ''}}</div>
+      <app-vote-stars [currentRate]="this.evaluation / this.evaluationCounter"></app-vote-stars>
       <div class="logoGreenDark">
-        <span *ngIf="this.evaluation !== -1">{{this.evaluation}} </span>
+        <span *ngIf="this.evaluation !== -1">{{this.evaluation / this.evaluationCounter}} </span>
         <span *ngIf="this.evaluation === -1">0 </span>
         von {{this.evaluationCounter}} Nutzern
       </div>
@@ -32,47 +33,23 @@
 </div>
 
 
-<div class="tours">
+<div class="tours d-flex flex-column" style="height: 22em">
 
 
-  <div class="">
-    <h2 class="logoGreenDark">{{this.username}}'s Angebote</h2>
-  </div>
+  <h2 class="logoGreenDark">Offene Angebote von {{this.username}}</h2>
+  <app-tour-table [usedList]="offerTours"></app-tour-table>
 
-  <app-tour-list *ngIf="this.offerTours.length > 0; else noOffers" [isHorizontal]="true"
-                 [usedList]="offerTours"></app-tour-list>
-
-  <ng-template #noOffers>
-    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
-      <div class="row">
-        <div class="col text-center mt-3 h2 logoGreenDark">
-          Melde dich an, um eine Tour zu erstellen!
-        </div>
-      </div>
-    </div>
-  </ng-template>
 
 </div>
 
 
-<div class="tours">
+<div class="tours d-flex flex-column" style="height: 22em">
 
 
-  <div class="">
-    <h2 class="logoGreenDark">{{this.username}}'s Anfragen</h2>
-  </div>
+  <h2 class="logoGreenDark">Offene Anfragen von {{this.username}}</h2>
 
-  <app-tour-list *ngIf="this.noOfferTours.length > 0; else noNoOffers" [isHorizontal]="true"
-                 [usedList]="noOfferTours"></app-tour-list>
-  <ng-template #noNoOffers>
-    <div class="container rounded shadow container bg-white border-0" style="width: 700px">
-      <div class="row">
-        <div class="col text-center mt-3 h2 logoGreenDark">
-          Melde dich an, um eine Tour zu erstellen!
-        </div>
-      </div>
-    </div>
-  </ng-template>
+  <app-tour-table [usedList]="noOfferTours"></app-tour-table>
+
 
 </div>
 

@@ -149,4 +149,14 @@ export class UserService {
       await this.updateUser(this.currUser)
     }
   }
+
+  // Evaluation Handler
+
+  async addEvaluation(stars: number) {
+    if (this.currUser) {
+      this.currUser.evaluation += stars;
+      this.currUser.evaluationCounter +=1;
+      await this.updateUser(this.currUser)
+    }
+  }
 }

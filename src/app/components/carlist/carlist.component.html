@@ -10,29 +10,29 @@
                   style="width: 60%; position: relative; margin-right: auto; margin-left: auto">Fahrzeug-Model</span>
           </div>
 
-          <input type="text" class="form-control"  style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="VW Touran, Porsche 911, ..." aria-label="Fahrzeug-Model"
-                 aria-describedby="add-fahrzeug-model" id="add-fahrzeug-model-input" formControlName="fahrzeugModel"
+          <input type="text" class="form-control"  style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="VW Touran, Porsche 911, ..." aria-label="Car-Model"
+                 aria-describedby="add-car-model" id="add-car-model-input" formControlName="carModel"
                  required>
           <div
-            *ngIf="this.form.controls['fahrzeugModel'].invalid && (this.form.controls['fahrzeugModel'].dirty || this.form.controls['fahrzeugModel'].touched)"
+            *ngIf="this.form.controls['carModel'].invalid && (this.form.controls['carModel'].dirty || this.form.controls['carModel'].touched)"
             class="alert-danger" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
-            <div *ngIf="this.form.controls['fahrzeugModel'].errors?.required">
+            <div *ngIf="this.form.controls['carModel'].errors?.required">
               bitte Fahrzeug-Model hinfügen.
             </div>
           </div>
         </div>
         <div class="form-group col-md-12">
           <div class="input-group-prepend">
-            <span class="input-group-text justify-content-center" id="add-fahrzeug-kennzeichen"
+            <span class="input-group-text justify-content-center" id="add-car-mark"
                   style="width: 60%; position: relative; margin-right: auto; margin-left: auto">Kennzeichen</span>
           </div>
-          <input type="text" class="form-control" style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Kennzeichen" aria-label="Kennzeichen"
-                 aria-describedby="add-fahrzeug-kennzeichen" id="add-fahrzeug-kennzeichen-input"
-                 formControlName="fahrzeugKennzeichen" required>
+          <input type="text" class="form-control" style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Kennzeichen" aria-label="car-mark"
+                 aria-describedby="add-car-mark" id="add-car-mark-input"
+                 formControlName="carMark" required>
           <div
-            *ngIf="this.form.controls['fahrzeugKennzeichen'].invalid && (this.form.controls['fahrzeugKennzeichen'].dirty || this.form.controls['fahrzeugKennzeichen'].touched)"
+            *ngIf="this.form.controls['carMark'].invalid && (this.form.controls['carMark'].dirty || this.form.controls['carMark'].touched)"
             class="alert-danger" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
-            <div *ngIf="this.form.controls['fahrzeugKennzeichen'].errors?.required">
+            <div *ngIf="this.form.controls['carMark'].errors?.required">
               bitte Kennzeichen hinfügen.
             </div>
           </div>
@@ -43,31 +43,31 @@
       <div class="row m-2">
         <div class="form-group col-md-12">
           <div class="input-group-prepend">
-            <span class="input-group-text justify-content-center" id="add-fahrzeug-Sitzplaetze"
+            <span class="input-group-text justify-content-center" id="add-car-Seats"
                   style="width: 60%; position: relative; margin-right: auto; margin-left: auto">Sitzplätze</span>
           </div>
-          <input type="number" class="form-control"  style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Sitzplätze" aria-label="Sitzplaetze"
-                 aria-describedby="add-fahrzeug-sitzplaetze" id="add-fahrzeug-sitzplaetze-input"
-                 formControlName="fahrzeugSitzplaetze" required>
+          <input type="number" class="form-control"  style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Sitzplaetze" aria-label="carSeats"
+                 aria-describedby="add-car-seats" id="add-car-seats-input"
+                 formControlName="carSeats" required>
           <div
-            *ngIf="this.form.controls['fahrzeugSitzplaetze'].invalid && (this.form.controls['fahrzeugSitzplaetze'].dirty || this.form.controls['fahrzeugSitzplaetze'].touched)"
+            *ngIf="this.form.controls['carSeats'].invalid && (this.form.controls['carSeats'].dirty || this.form.controls['carSeats'].touched)"
             class="alert-danger" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
-            <div *ngIf="this.form.controls['fahrzeugSitzplaetze'].errors?.required">
+            <div *ngIf="this.form.controls['carSeats'].errors?.required">
               bitte Sitzplaetze hinfügen.
             </div>
           </div>
         </div>
         <div class="form-group col-md-12">
           <div class="input-group-prepend">
-            <span class="input-group-text justify-content-center" id="add-Stauraum"
+            <span class="input-group-text justify-content-center" id="add-Storage"
                   style="width: 60%; position: relative; margin-right: auto; margin-left: auto">Stauraum</span>
           </div>
-          <input type="number" class="form-control" style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Stauraum in ㎥" aria-label="Stauraum"
-                 aria-describedby="add-stauraum" id="add-stauraum-input" formControlName="fahrzeugStauraum" required>
+          <input type="number" class="form-control" style="width: 60%; position: relative; margin-right: auto; margin-left: auto" placeholder="Stauraum in ㎥" aria-label="Storage"
+                 aria-describedby="add-storage" id="add-storage-input" formControlName="carStorage" required>
           <div
-            *ngIf="this.form.controls['fahrzeugStauraum'].invalid && (this.form.controls['fahrzeugStauraum'].dirty || this.form.controls['fahrzeugStauraum'].touched)"
+            *ngIf="this.form.controls['carStorage'].invalid && (this.form.controls['carStorage'].dirty || this.form.controls['carStorage'].touched)"
             class="alert-danger" style="width: 60%; position: relative; margin-right: auto; margin-left: auto">
-            <div *ngIf="this.form.controls['fahrzeugStauraum'].errors?.required">
+            <div *ngIf="this.form.controls['carStorage'].errors?.required">
               bitte Stauraum hinfügen.
             </div>
           </div>
