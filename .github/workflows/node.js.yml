@@ -35,9 +35,13 @@ jobs:
     
   Deployment:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     needs: [build]
     #- name: Deploy to GitHub Pages
     steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v2
+      - run: cd Cargonaut && npm ci && npm run build
       - uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
         with:
           github_access_token: ${{ secrets.ACCESS_TOKEN }}
