@@ -6,17 +6,17 @@
   <div class="row">
     <div class="col-12" *ngIf="isOfferEmpty && isRequestEmpty && firstSearch">
       <div class="center mt-5">
-        <h1 style="font-size: 2em; text-align: center;">Gib ein Startpunkt, ein Reiseziel und ein Datum an um Fahrten zu sehen</h1>
+        <h1 style="font-size: 2em; text-align: center;">Gib ein Startpunkt, ein Reiseziel und ein Datum an um Fahrten zu sehen!</h1>
       </div>
     </div>
     <div class="col-12" *ngIf="isOfferEmpty && !firstSearch">
       <div class="center m-5" *ngIf="isOffer;">
-        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Fahrt zwischen diesen Städten</h1>
+        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Fahrt zwischen diesen Städten!</h1>
       </div>
     </div>
     <div class="col-12" *ngIf="isRequestEmpty && !firstSearch">
       <div class="center m-5" *ngIf="!isOffer;">
-        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Anfrage zwischen diesen Städten</h1>
+        <h1 style="font-size: 2em; text-align: center;">Es gibt für dieses Datum noch keine Anfrage zwischen diesen Städten!</h1>
       </div>
     </div>
     <div class="col">
