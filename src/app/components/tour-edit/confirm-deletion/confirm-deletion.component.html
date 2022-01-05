@@ -8,7 +8,7 @@
       <div class="col-1"></div>
       <div class="col-1 p-0">
         <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
-                (click)="activeModal.dismiss()">
+                (click)="activeModal.dismiss(false)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -24,14 +24,14 @@
         <div class="row justify-content-center">
           <div class="col-6 ">
             <button type="button" class="btn btn-danger mx-auto m-3 btn-block"
-                    (click)="deleteTour()">Löschen
+                    (click)="activeModal.dismiss(true)">Löschen
             </button>
           </div>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-6">
-            <button type="button" class="btn mx-auto btn-block" style="background-color: lightgrey" (click)="activeModal.dismiss()">Abbrechen
+            <button type="button" class="btn mx-auto btn-block" style="background-color: lightgrey" (click)="activeModal.dismiss(false)">Abbrechen
             </button>
           </div>
         </div>

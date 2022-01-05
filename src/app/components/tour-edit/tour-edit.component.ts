@@ -3,7 +3,7 @@ import {Car} from "../../models/Car";
 import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
 import {AlertService} from "../../services/alert.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CalculateService} from "../../services/calculate.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {UserCargo} from "../../models/UserCargo";
@@ -11,8 +11,6 @@ import {CarsService} from "../../services/cars.service";
 import {Tour} from "../../models/Tour";
 import {Passenger} from "../../models/Passenger";
 import {TourService} from "../../services/tour.service";
-import {Status} from "../../models/Status";
-import {TourBookComponent} from "../tour-details/tour-book/tour-book.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConfirmDeletionComponent} from "./confirm-deletion/confirm-deletion.component";
 
@@ -24,7 +22,6 @@ import {ConfirmDeletionComponent} from "./confirm-deletion/confirm-deletion.comp
 export class TourEditComponent implements OnInit {
 
   userCars: Car[] = [];
-
   isOffer: boolean = true;
   startCity = '';
   endCity = '';
@@ -39,13 +36,15 @@ export class TourEditComponent implements OnInit {
   chosenCar = '';
   tour: Tour | null = null;
   status: string = '0';
+  user: UserCargo | null = null;
 
   constructor(public tourData: TourService, public shareData: ShareDataService, public userData: UserService, public alert: AlertService,
-              private router: Router, private calcService: CalculateService, public auth: AngularFireAuth, public carData: CarsService, public modalService: NgbModal) {
+              private router: Router, private calcService: CalculateService, public auth: AngularFireAuth, public carData: CarsService,
+              public route: ActivatedRoute, public modalService: NgbModal) {
     this.auth.user.subscribe(async (user) => {
       if (user) {
         const tempCargoUser = await this.userData.getUser(user.uid);
-        if(tempCargoUser != undefined) {
+        if (tempCargoUser != undefined) {
           await this.fillCars(tempCargoUser);
         }
       }
@@ -65,29 +64,34 @@ export class TourEditComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    if(this.shareData.detailTour) {
-      this.fillFields()
-      this.tour = this.shareData.detailTour
+  async ngOnInit() {
+    const did = this.route.snapshot.paramMap.get('did');
+    const uid = this.route.snapshot.paramMap.get('uid');
+    if (did && uid) {
+      const tempTour = await this.tourData.getTour(did);
+      const tempUser = await this.userData.getUser(uid);
+      this.tour = (tempTour) ? tempTour : null;
+      this.user = (tempUser) ? tempUser : null;
+      this.fillFields();
     }
 
     this.endTime = this.calcService.arrivalTime(this.startTime, this.duration, this.date)
   }
 
   fillFields() {
-    if(this.shareData.detailTour) {
-      this.isOffer = this.shareData.detailTour.isOffer
-      this.startCity = this.shareData.detailTour.startCity
-      this.endCity = this.shareData.detailTour.endCity
-      this.startTime = this.shareData.detailTour.startTime
-      this.duration = this.shareData.detailTour.duration.toString()
-      this.date = this.shareData.detailTour.date
-      this.seats = this.shareData.detailTour.seats.toString()
-      this.storage = this.shareData.detailTour.storage.toString()
-      this.price = this.shareData.detailTour.price.toString()
-      this.description = this.shareData.detailTour.description
-      this.chosenCar = this.shareData.detailTour.car
-      this.status = this.shareData.detailTour.status.toString()
+    if (this.tour) {
+      this.isOffer = this.tour.isOffer
+      this.startCity = this.tour.startCity
+      this.endCity = this.tour.endCity
+      this.startTime = this.tour.startTime
+      this.duration = this.tour.duration.toString()
+      this.date = this.tour.date
+      this.seats = this.tour.seats.toString()
+      this.storage = this.tour.storage.toString()
+      this.price = this.tour.price.toString()
+      this.description = this.tour.description
+      this.chosenCar = this.tour.car
+      this.status = this.tour.status.toString()
     }
   }
 
@@ -97,7 +101,10 @@ export class TourEditComponent implements OnInit {
 
   offerOnOff() {
     this.isOffer = !this.isOffer;
-    this.alert.showAlert({type: 'success', message: (this.isOffer)? 'Deine Anfrage wird zu einem Angebot geändert' : 'Dein Angebot wird zu einer Anfrage geändert'});
+    this.alert.showAlert({
+      type: 'success',
+      message: (this.isOffer) ? 'Deine Anfrage wird zu einem Angebot geändert' : 'Dein Angebot wird zu einer Anfrage geändert'
+    });
   }
 
 
@@ -121,18 +128,18 @@ export class TourEditComponent implements OnInit {
   async checkInput() {
     const currUser = this.userData.currUser;
     this.newTourParams()
-    if (currUser&& this.shareData.detailTour) {
+    if (currUser && this.tour) {
       if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
-        await this.addOffer(this.shareData.detailTour, currUser);
+        await this.addOffer(this.tour, currUser);
       } else if (this.checkUniqueInputs() && !this.isOffer) {
-        await this.addNoOffer(this.shareData.detailTour, currUser);
+        await this.addNoOffer(this.tour, currUser);
       } else {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
       }
     }
   }
 
-  changeStatus(status: string){
+  changeStatus(status: string) {
     this.status = status;
   }
 
@@ -154,8 +161,8 @@ export class TourEditComponent implements OnInit {
   }
 
   async deleteTour() {
-    if (this.shareData.detailTour)
-    await this.tourData.deleteTour(this.shareData.detailTour);
+    if (this.tour)
+      await this.tourData.deleteTour(this.tour);
     this.router.navigate(["/profil"])
     this.alert.showAlert({type: 'danger', message: 'Tour gelöscht!'});
   }
@@ -165,23 +172,31 @@ export class TourEditComponent implements OnInit {
       animation: true,
       centered: true,
     });
+    modalRef.dismissed.toPromise().then(async (result) => {
+      console.log(result)
+      if (this.tour && result) {
+        await this.tourData.deleteTour(this.tour);
+        this.alert.showAlert({type: 'danger', message: 'Tour erfolgreich gelöscht'});
+        this.router.navigate(["/profil"]);
+      }
+    })
   }
 
 
   newTourParams() {
-    if(this.shareData.detailTour) {
-      this.shareData.detailTour.isOffer = this.isOffer
-      this.shareData.detailTour.startCity = this.startCity
-      this.shareData.detailTour.endCity =  this.endCity
-      this.shareData.detailTour.startTime = this.startTime
-      this.shareData.detailTour.duration = Number.parseInt(this.duration)
-      this.shareData.detailTour.date = this.date
-      this.shareData.detailTour.seats = Number.parseInt(this.seats)
-      this.shareData.detailTour.storage = Number.parseInt(this.storage)
-      this.shareData.detailTour.price = Number.parseInt(this.price)
-      this.shareData.detailTour.description = this.description
-      this.shareData.detailTour.car = this.chosenCar
-      this.shareData.detailTour.status = Number.parseInt(this.status)
+    if (this.tour) {
+      this.tour.isOffer = this.isOffer
+      this.tour.startCity = this.startCity
+      this.tour.endCity = this.endCity
+      this.tour.startTime = this.startTime
+      this.tour.duration = Number.parseInt(this.duration)
+      this.tour.date = this.date
+      this.tour.seats = Number.parseInt(this.seats)
+      this.tour.storage = Number.parseInt(this.storage)
+      this.tour.price = Number.parseInt(this.price)
+      this.tour.description = this.description
+      this.tour.car = this.chosenCar
+      this.tour.status = Number.parseInt(this.status)
     }
   }
 }
