@@ -10,6 +10,9 @@
 # dependencies
 /node_modules
 
+#firebase-log
+firestore-debug.log
+
 # profiling files
 chrome-profiler-events*.json
 

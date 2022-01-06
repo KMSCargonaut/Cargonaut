@@ -29,6 +29,10 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run build
+    - run: npm i start-server-and-test
+    - run: npm i angular-http-server
+    - name: e2e Tests
+      run: npm run run-e2e-tests
     #- name: Test
      # run: npm run test:prod    ++Tests are still not running properly with firebase
     - run: npm run lint
