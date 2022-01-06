@@ -82,7 +82,10 @@
 
     <hr>
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" *ngIf="alreadyPaid">
+      <div class="text-center font-weight-bold h5">Sie haben bereits gezahlt!</div>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="!alreadyPaid">
       <input #i1 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos1" (keydown)="validInput(i1.value)">
       <input #i2 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos2" (keydown)="validInput(i2.value)">
       <input #i3 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos3" (keydown)="validInput(i3.value)">
@@ -102,7 +105,7 @@
     <div class="container ">
       <div class="row justify-content-center">
         <div class="col-6 ">
-          <button type="button" class="btn btn-success mx-auto m-3 btn-block" (click)="confirmCode()">Bestätigen
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block" [disabled]="alreadyPaid" (click)="confirmCode()">Bestätigen
           </button>
         </div>
       </div>

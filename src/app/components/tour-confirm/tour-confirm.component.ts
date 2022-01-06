@@ -18,6 +18,7 @@ export class TourConfirmComponent implements OnInit {
 
   code: string = '';
   alreadyCreated = false;
+  alreadyPaid = false;
   pos1: string = '';
   pos2: string = '';
   pos3: string = '';
@@ -40,6 +41,13 @@ export class TourConfirmComponent implements OnInit {
       if (confirm && confirm.length != 0) {
         this.alreadyCreated = true;
         this.code = confirm[0].code;
+      }
+    const passenger = tour.passengers.find(passenger => passenger.id === this.userData.currUser?.uid);
+      if (passenger) {
+        if (passenger.payed) {
+          console.log(passenger);
+          this.alreadyPaid = true;
+        }
       }
     }
   }
