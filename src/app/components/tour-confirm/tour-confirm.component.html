@@ -55,7 +55,7 @@
 
 <div *ngIf="!shareData.isUserDriver">
   <!--  Modal Header -->
-  <div class="modal-header border-0">
+  <div class="modal-header border-0 pb-0">
     <div class="container">
       <div class="row">
         <div class="col-2"></div>
@@ -74,19 +74,26 @@
     </div>
   </div>
 
-  <div class="modal-body border-0">
+  <div class="modal-body border-0 pt-2">
+
+    <div class="d-flex justify-content-center mb-2">
+      <div class="text-center">Geben Sie den Code des Fahrers ein, um die Fahrt final abzuweckeln und zu bezahlen!</div>
+    </div>
+
+    <hr>
 
     <div class="d-flex justify-content-center">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos1">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos2">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos3">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos4">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos5">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos6">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos7">
-      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos8">
+      <input #i1 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos1" (keydown)="validInput(i1.value)">
+      <input #i2 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos2" (keydown)="validInput(i2.value)">
+      <input #i3 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos3" (keydown)="validInput(i3.value)">
+      <input #i4 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos4" (keydown)="validInput(i4.value)">
+      <input #i5 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos5" (keydown)="validInput(i5.value)">
+      <input #i6 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos6" (keydown)="validInput(i6.value)">
+      <input #i7 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos7" (keydown)="validInput(i7.value)">
+      <input #i8 type="text" min="0" max="9" maxlength="1" class="form-control text-center {{wrongInput}}" [(ngModel)]="pos8" (keydown)="validInput(i8.value)">
 
     </div>
+    <div *ngIf="inputMessage !== ''" class="text-danger text-center mt-1">{{inputMessage}}</div>
   </div>
 
   <!-- Modal Footer -->

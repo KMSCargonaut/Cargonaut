@@ -25,6 +25,8 @@ export class TourConfirmComponent implements OnInit {
   pos6: string = '';
   pos7: string = '';
   pos8: string = '';
+  wrongInput = '';
+  inputMessage = '';
 
   constructor(public activeModal: NgbActiveModal, public shareData: ShareDataService, public confirmData: ConfirmService,
               public userData: UserService, public alertData: AlertService) {
@@ -44,6 +46,13 @@ export class TourConfirmComponent implements OnInit {
   async randomizedCode() {
     this.code = this.makeid(8)
     console.log(this.code)
+  }
+
+  validInput(input: string) {
+    if (input.trim().length >= 0) {
+      this.inputMessage = '';
+      this.wrongInput = '';
+    }
   }
 
   getRandomInt(max: number) {
@@ -71,8 +80,13 @@ export class TourConfirmComponent implements OnInit {
           await this.purchase(tour)
         } else {
           // TODO: input färben
+          this.wrongInput = 'border-danger';
+          this.inputMessage = 'Der Code ist nicht richtig'
           this.alertData.showAlert({type: 'danger', message: 'Code ist nicht richtig!'})
         }
+      } else {
+        this.activeModal.dismiss();
+        this.alertData.showAlert({type: 'danger', message: 'Der Code wurde noch nicht erstellt!'})
       }
     }
   }
