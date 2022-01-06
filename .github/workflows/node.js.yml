@@ -31,6 +31,8 @@ jobs:
       run: npm run build
     - run: npm i start-server-and-test
     - run: npm i angular-http-server
+    - run : ng add @cypress/schematic
+    #- run : npx cypress verify
     - name: cypress-run-headless
       run: cypress run --headless --browser chrome
     - name: start-server:ci
