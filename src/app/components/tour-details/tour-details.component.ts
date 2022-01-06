@@ -41,8 +41,8 @@ export class TourDetailsComponent implements OnInit {
 
 
   async ngOnInit() {
-    const did =  this.route.snapshot.paramMap.get('did');
-    const uid =  this.route.snapshot.paramMap.get('uid');
+    const did = this.route.snapshot.paramMap.get('did');
+    const uid = this.route.snapshot.paramMap.get('uid');
     if (did && uid) {
       const tempTour = await this.tourData.getTour(did);
       const tempUser = await this.userService.getUser(uid);
@@ -263,7 +263,15 @@ export class TourDetailsComponent implements OnInit {
   }
 
   navigateToUser() {
-    this.router.navigate([`/exprofile//${this.ultimateUser?.uid}`]);
+    if (this.userService.currUser) {
+      if (this.ultimateTour?.creatorID === this.userService.currUser.uid) {
+        this.router.navigate([`/profil`])
+      } else {
+        this.router.navigate([`/exprofile//${this.ultimateUser?.uid}`]);
+      }
+    } else {
+      this.router.navigate([`/exprofile//${this.ultimateUser?.uid}`]);
+    }
   }
 
 }
