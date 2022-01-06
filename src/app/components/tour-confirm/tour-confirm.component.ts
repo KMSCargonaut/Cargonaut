@@ -57,7 +57,18 @@ export class TourConfirmComponent implements OnInit{
   }
 
   async confirmCode() {
-
+    const tour = this.shareData.confirmTour
+    if ( tour && tour.dID) {
+      const confirm = await this.confirmData.findConfirmationByTourId(tour.dID)
+      if (confirm && confirm.length != 0) {
+       const inputCode = this.pos1 + this.pos2 + this.pos3 + this.pos4 + this.pos5 + this.pos6 + this.pos7 + this.pos8;
+       if(confirm[0].code === inputCode) {
+         //Todo: Buchung
+       } else {
+         // Todo: Code nicht korrekt
+       }
+      }
+    }
   }
 
  async createCode() {
@@ -67,6 +78,10 @@ export class TourConfirmComponent implements OnInit{
       await this.confirmData.addConfirm(new Confirm(tour.dID, this.code))
       this.alreadyCreated = true;
     }
+  }
+
+  async purchase() {
+
   }
 
 }
