@@ -93,6 +93,9 @@ export class CreateToursComponent {
       if (this.isOffer && this.checkUniqueInputs() && this.calcService.wasInPast(startPointDate) && this.chosenCar.trim().length > 0) {
         await this.addOffer(tempTour, currUser);
       } else if (this.checkUniqueInputs() && this.calcService.wasInPast(startPointDate) && !this.isOffer) {
+
+        // Todo: Credit überprüfen und den User warnen, dass es kein Angebot ad offerendum ist
+        // Todo: Wenn ein Angebot gebucht wird, dann muss der Creator der Tour den Fahrer bestätigen
         await this.addNoOffer(tempTour, currUser);
       } else if (!this.checkUniqueInputs()) {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});

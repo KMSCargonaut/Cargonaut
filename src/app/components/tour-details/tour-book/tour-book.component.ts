@@ -183,6 +183,8 @@ export class TourBookComponent implements OnInit {
   async purchaseIfOffer(driver: UserCargo, passenger: Passenger, tour: Tour) {
     const cost = (passenger.seats + passenger.storage) * tour.price
     const customer = await this.userData.getUser(passenger.id)
+
+    // Todo: If-Case kommt auch in creat-tours
     if (customer) {
       const value = customer.money - cost;
       if (value < 0) {
@@ -195,6 +197,7 @@ export class TourBookComponent implements OnInit {
           type: 'danger',
           message: 'Bezahlung war nicht erfolgreich! Laden Sie Ihr Guthaben auf!'
         })
+        // Todo: Else-Case bleibt
       } else {
         customer.money = value;
         driver.money += cost;
