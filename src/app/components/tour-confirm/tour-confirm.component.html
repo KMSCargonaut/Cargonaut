@@ -1,0 +1,106 @@
+<div *ngIf="shareData.isUserDriver">
+  <!--  Modal Header -->
+  <div class="modal-header border-0 pb-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 justify-content-center">
+          <div class="modal-title text-center h4 mx-auto logoGreenDark">Fahrt bestätigen</div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1 p-0">
+          <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                  (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body border-0 pt-2">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center"><div>Erstellen Sie den Code, um die Fahrt von den Mitfahrern bestätigen zu können</div></div>
+      </div>
+          <hr>
+      <div class="row justify-content-center">
+        <div class="col text-center">
+          <h4 class="h4">{{this.code}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-6 ">
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block"
+                  (click)="this.createCode()" [disabled]="this.alreadyCreated">Code erstellen
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+
+<div *ngIf="!shareData.isUserDriver">
+  <!--  Modal Header -->
+  <div class="modal-header border-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 justify-content-center">
+          <div class="modal-title text-center h4 mx-auto logoGreenDark">Fahrt bestätigen</div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1 p-0">
+          <button type="button" class="close logoGreenDark" aria-label="Close" style="position: absolute"
+                  (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body border-0">
+
+    <div class="d-flex justify-content-center">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos1">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos2">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos3">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos4">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos5">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos6">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos7">
+      <input type="text" min="0" max="9" maxlength="1" class="form-control text-center" [(ngModel)]="pos8">
+
+    </div>
+  </div>
+
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-6 ">
+          <button type="button" class="btn btn-success mx-auto m-3 btn-block" (click)="confirmCode()">Bestätigen
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

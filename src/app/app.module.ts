@@ -39,6 +39,7 @@ import { TourTableComponent } from './components/tour-table/tour-table.component
 import { TourListGenericComponent } from './components/tour-list-generic/tour-list-generic.component';
 import { AddEvaluationComponent } from './components/add-evaluation/add-evaluation.component';
 import { ConfirmDeletionComponent } from './components/tour-edit/confirm-deletion/confirm-deletion.component';
+import { TourConfirmComponent } from './components/tour-confirm/tour-confirm.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ConfirmDeletionComponent } from './components/tour-edit/confirm-deletio
     TourListGenericComponent,
     AddEvaluationComponent,
     ConfirmDeletionComponent,
+    TourConfirmComponent,
    ],
     imports: [
         BrowserModule,

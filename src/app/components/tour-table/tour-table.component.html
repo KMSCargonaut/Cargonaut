@@ -73,6 +73,7 @@
           <div ngbDropdownMenu class="dropdown-menu">
             <button ngbDropdownItem (click)="navigateToDetails(tour)">Details</button>
             <button ngbDropdownItem (click)="navigateToEdit(tour)">Bearbeiten</button>
+            <button ngbDropdownItem (click)="openTourCode(tour)">Fahrt bestätigen</button>
             <button ngbDropdownItem
                     *ngIf="switchStatus(tour) === 2 && userIsPassenger(tour) && !isCreator(tour)"
                     (click)="openEvaluation(tour)">Bewerten</button>
