@@ -22,6 +22,7 @@ export class CalculateService {
           endDay = "0" + endDay;
         }
         endHours = endHours % 24;
+
       }
 
       if (endHours < 10) {
