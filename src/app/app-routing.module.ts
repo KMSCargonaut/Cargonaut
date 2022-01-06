@@ -26,6 +26,10 @@ const routes: Routes = [
     component: MainPageComponent
   },
   {
+    path: 'tours/:startCity/:endCity/:date/:passengers/:storage',
+    component: TourSiteComponent
+  },
+  {
     path: 'tours',
     component: TourSiteComponent
   },

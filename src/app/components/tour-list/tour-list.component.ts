@@ -8,7 +8,7 @@ import {ShareDataService} from "../../services/share-data.service";
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.css']
 })
-export class TourListComponent implements OnInit {
+export class TourListComponent  {
 
   @Input() usedList: Tour[] | null = [];
   @Input() isHorizontal: boolean = false;
@@ -17,9 +17,7 @@ export class TourListComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.usedList = this.shareData.tourSearch;
-  }
+
 
 
 
