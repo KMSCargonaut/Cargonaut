@@ -73,7 +73,7 @@ export class CreateToursComponent {
   }
 
   checkUniqueInputs(): boolean {
-    return this.startTime.trim().length > 0 &&
+    return this.startCity.trim().length > 0 &&
       this.endCity.trim().length > 0 &&
       this.startTime.trim().length > 0 &&
       this.duration.trim().length > 0 &&
@@ -81,20 +81,23 @@ export class CreateToursComponent {
       this.seats.trim().length > 0 &&
       this.storage.trim().length > 0 &&
       Number.parseInt(this.price) > 0 &&
-      Number.parseInt(this.seats) > 0 || Number.parseInt(this.storage) > 0;
+      (Number.parseInt(this.seats) > 0 || Number.parseInt(this.storage) > 0);
   }
 
 
   async checkInput() {
     const currUser = this.userData.currUser;
     let tempTour = this.newTour();
+    let startPointDate = new Date(this.date.substr(0, 4) + '/' + this.date.substr(5, 2) + '/' + this.date.substr(8, 2) + ' ' + this.startTime)
     if (currUser) {
-      if (this.isOffer && this.checkUniqueInputs() && this.chosenCar.trim().length > 0) {
+      if (this.isOffer && this.checkUniqueInputs() && this.calcService.wasInPast(startPointDate) && this.chosenCar.trim().length > 0) {
         await this.addOffer(tempTour, currUser);
-      } else if (this.checkUniqueInputs() && !this.isOffer) {
+      } else if (this.checkUniqueInputs() && this.calcService.wasInPast(startPointDate) && !this.isOffer) {
         await this.addNoOffer(tempTour, currUser);
-      } else {
+      } else if (!this.checkUniqueInputs()) {
         this.alert.showAlert({type: 'danger', message: 'Alle Felder ausfüllen!'});
+      } else {
+        this.alert.showAlert({type: 'danger', message: 'Der Abfahrtszeitpunkt darf nicht in der Vergangenheit liegen'});
       }
     }
   }
