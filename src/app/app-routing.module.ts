@@ -19,7 +19,6 @@ const routes: Routes = [
   {
     path: 'carList',
     component: CarlistComponent
-
   },
   {
     path: '',

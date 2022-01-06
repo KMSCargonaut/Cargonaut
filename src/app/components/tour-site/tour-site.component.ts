@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {Passenger} from "../../models/Passenger";
 import {CalculateService} from "../../services/calculate.service";
 import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-tour-site',
@@ -13,7 +14,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 //TODO Niklas Thy - Lesbarkeit verbessern
-export class TourSiteComponent implements OnInit {
+export class TourSiteComponent implements OnInit, AfterViewInit {
 
   searchbarheigth = "5em";
   isOffer: boolean = true;
@@ -25,8 +26,11 @@ export class TourSiteComponent implements OnInit {
   isOfferEmpty = false;
   isRequestEmpty = false;
   firstSearch = false; //Diese Variable dient dazu abzubilden ob von der Startseite über "Mitfahrgelegenheiten" in der Navbar zu dieser Seite navigiert wurde.
+  @ViewChild('ergebnis') el: ElementRef | undefined
 
-  constructor(public tourData: TourService, public tourService: TourService, public shareData: ShareDataService, private calcService: CalculateService, public route: ActivatedRoute) {
+  constructor(public tourData: TourService, public tourService: TourService,
+              public shareData: ShareDataService, private calcService: CalculateService,
+              public route: ActivatedRoute) {
 
   }
 
@@ -36,11 +40,22 @@ export class TourSiteComponent implements OnInit {
     this.fillList().then();
   }
 
- async ngOnInit() {
+  ngAfterViewInit() {
+    if (this.el) {
+      this.el.nativeElement.innerHTML;
+    }
+    console.log(this.el)
+  }
+
+  async ngOnInit() {
    await this.resetSearch()
    if (!this.route.snapshot.paramMap.get('startCity')) {
      this.firstSearch = true;
    }
+  }
+
+  scroll(el: HTMLElement){
+    el.scrollIntoView({behavior: "smooth"});
   }
 
   async resetSearch() {
@@ -57,6 +72,8 @@ export class TourSiteComponent implements OnInit {
     this.isOfferEmpty = this.offerTours.length === 0;
     this.isRequestEmpty = this.requestTours.length === 0;
     this.firstSearch = false;
+
+   
   }
 
 

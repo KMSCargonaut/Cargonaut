@@ -2,7 +2,7 @@
 
 <app-slide-checker (changeState)="offerOnOff()"></app-slide-checker>
 
-<div class="container">
+<div class="container" #ergebnis>
   <div class="row">
     <div class="col-12" *ngIf="isOfferEmpty && isRequestEmpty && firstSearch">
       <div class="center mt-5">
