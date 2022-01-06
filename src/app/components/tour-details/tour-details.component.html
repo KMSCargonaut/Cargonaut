@@ -1,9 +1,9 @@
 <div class="container d-flex title-background mw-100 justify-content-center">
-  <div class="row align-self-center" *ngIf="this.shareData.detailTour">
-    <div class="col h2 logoGreenDark text-center" *ngIf="this.shareData.detailTour.isOffer">Das ist ein Angebot - Sie
+  <div class="row align-self-center">
+    <div class="col h2 logoGreenDark text-center" *ngIf="this.ultimateTour?.isOffer">Das ist ein Angebot - Sie
       würden mitfahren
     </div>
-    <div class="col h2 logoGreenDark text-center" *ngIf="!this.shareData.detailTour.isOffer">Das ist eine Anfrage - Sie
+    <div class="col h2 logoGreenDark text-center" *ngIf="!this.ultimateTour?.isOffer">Das ist eine Anfrage - Sie
       wären der Fahrer
     </div>
   </div>
@@ -13,18 +13,18 @@
   <div class="row">
     <div class="col-4">
       <label for="startCity" class="logoGreenDark mr-1">Von:</label>
-      <div id="startCity" class="h5">{{this.shareData.detailTour?.startCity}}</div>
+      <div id="startCity" class="h5">{{this.ultimateTour?.startCity}}</div>
     </div>
 
     <div class="col-4">
       <label for="endCity" class="logoGreenDark mr-1">Nach:</label>
-      <div id="endCity" class="h5">{{this.shareData.detailTour?.endCity}}</div>
+      <div id="endCity" class="h5">{{this.ultimateTour?.endCity}}</div>
     </div>
 
 
     <div class="col-4">
       <div class="text-right">
-        <span class="mr-2 logoGreenDark hover" (click)="navigateToUser()">{{this.shareData.detailUser?.username}}</span>
+        <span class="mr-2 logoGreenDark hover" (click)="navigateToUser()">{{this.ultimateUser?.username}}</span>
         <svg class="profil hover" xmlns="http://www.w3.org/2000/svg" width="3em" viewBox="0 0 65 65"
              (click)="navigateToUser()">
           <path id="ic_account_circle_24px"
@@ -51,7 +51,7 @@
 
         <div class="form-group">
           <label class="logoGreenDark" for="duration">Dauer</label>
-          <div id="duration">{{this.shareData.detailTour?.duration}} Stunden</div>
+          <div id="duration">{{this.ultimateTour?.duration}} Stunden</div>
         </div>
 
         <div class="form-group">
@@ -67,7 +67,7 @@
         <div class="row">
           <div class="col">
             <label class="logoGreenDark">Beschreibung</label>
-            <div>{{this.shareData.detailTour?.description}}</div>
+            <div>{{this.ultimateTour?.description}}</div>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="div">
-          <span class="logoGreenDark ml-2 h5">{{this.shareData.detailTour?.price}}</span>
+          <span class="logoGreenDark ml-2 h5">{{this.ultimateTour?.price}}</span>
         </div>
       </div>
 

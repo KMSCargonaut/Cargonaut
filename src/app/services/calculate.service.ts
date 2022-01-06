@@ -49,4 +49,8 @@ export class CalculateService {
     }
     return seats;
   }
+
+  wasInPast(toBeCheckedDate: Date) { //berechnet ob übergebener Zeitpunkt in der Vergangenheit war
+    return toBeCheckedDate.getTime() > new Date().getTime()
+  }
 }

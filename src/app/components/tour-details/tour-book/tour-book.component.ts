@@ -137,14 +137,7 @@ export class TourBookComponent implements OnInit {
   async updateTour() {
     if (this.tour) {
       await this.tourData.updateTour(this.tour);
-      if (this.tour.dID) {
-        let tempTour = await this.tourData.getTour(this.tour.dID);
-        if (tempTour != undefined) {
-          this.shareData.detailTour = tempTour;
-        }
-      }
     }
-
   }
 
   passengerSeats(): number {

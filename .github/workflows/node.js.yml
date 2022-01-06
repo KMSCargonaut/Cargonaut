@@ -1,13 +1,13 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
+name: Cargonaut CI/CD and Analyzis
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+env:
+  SPECTRAL_DSN: ${{ secrets.SPECTRAL_DSN }}
 
 jobs:
   build:
@@ -30,12 +30,29 @@ jobs:
     - name: Build
       run: npm run build
     #- name: Test
-     # run: npm run test:prod    ++Tests are still not running properly
+     # run: npm run test:prod    ++Tests are still not running properly with firebase
     - run: npm run lint
-    - name: Deploy to GitHub Pages
-      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
-      with:
-        github_access_token: ${{ secrets.ACCESS_TOKEN }}
-        base_href: /Cargonaut/
-        deploy_branch: gh-pages
-        angular_dist_build_folder: dist/Cargonaut
+    
+  Deployment:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Repo Checkout
+        uses: actions/checkout@v2
+      #- run: npm ci && npm run build
+      - uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2
+        with:
+          github_access_token: ${{ secrets.ACCESS_TOKEN }}
+          base_href: /Cargonaut/
+          deploy_branch: gh-pages
+          angular_dist_build_folder: dist/Cargonaut
+        
+  code-analyzis:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install
+          run: curl -L "https://get.spectralops.io/latest/x/sh?dsn=$SPECTRAL_DSN" | sh
+        - name: Scan
+          run: $HOME/.spectral/spectral scan --ok
+      

@@ -18,15 +18,6 @@ td
   vertical-align: middle;
 }
 
-button.green:hover{
-  background-color: #005B51;
-}
-
-button.evaluation:hover {
-  background-color: #FF9300;
-  color: white;
-}
-
 table {
   overflow-y: scroll;
 }
@@ -39,5 +30,13 @@ button {
   button {
     width: 100%;
   }
+}
+
+.dropdown-toggle::after {
+  display:none;
+}
+
+.dropdown-menu > button:hover {
+background-color: #F3FBED;
 }
 

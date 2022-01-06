@@ -24,22 +24,15 @@ export class TourTableComponent {
 
   }
 
-  async navigateToDetailsOrEdit(tour: Tour) {
-    this.shareData.detailTour = tour;
+  async navigateToDetails(tour: Tour) {
     const user = await this.userService.getUser(tour.creatorID);
-    if (user) {
-      this.shareData.detailUser = user;
-    }
+    this.router.navigate([`/tour-details/${tour.dID}/${user?.uid}`])
 
-    if (this.userService.currUser) {
-      if (this.userService.currUser.uid === tour.creatorID) {
-        this.router.navigate(["/editTour"])
-      } else {
-        this.router.navigate(["/tour-details"])
-      }
-    } else {
-      this.router.navigate(["/tour-details"])
-    }
+  }
+
+  async navigateToEdit(tour: Tour) {
+    const user = await this.userService.getUser(tour.creatorID);
+    this.router.navigate([`/editTour/${tour.dID}/${user?.uid}`])
   }
 
   switchStatus(tour: Tour): number {

@@ -3,3 +3,7 @@
   width: 100vw;
   background-color: #F3FBED;
 }
+
+.generic-table {
+  min-width: 80%;
+}

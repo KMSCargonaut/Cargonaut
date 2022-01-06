@@ -34,18 +34,18 @@ const routes: Routes = [
     component: CreateToursComponent
   },
   {
-    path: 'tour-details',
+    path: 'tour-details/:did/:uid',
     component: TourDetailsComponent
   },
   {
-    path: 'exprofile',
+    path: 'exprofile/:uid',
     component: StrangerProfileComponent,
   },
   {
-    path: 'editTour',
+    path: 'editTour/:did/:uid',
     component: TourEditComponent,
   }, {
-    path: 'genericTable/:id',
+    path: 'genericTable/:uid',
     component: TourListGenericComponent,
   }
 ];

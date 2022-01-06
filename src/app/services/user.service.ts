@@ -3,7 +3,7 @@ import {UserCargo} from "../models/UserCargo";
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import firebase from "firebase/compat/app";
-import {updateEmail, updatePassword } from "firebase/auth";
+import {updateEmail, updatePassword, getAuth } from "firebase/auth";
 import User = firebase.User;
 
 @Injectable({
@@ -24,6 +24,11 @@ export class UserService {
         await this.userNotExist();
       }
     })
+  }
+
+  async checkLogin() {
+    let user = getAuth().currentUser
+    console.log(user);
   }
 
   // User-Handler

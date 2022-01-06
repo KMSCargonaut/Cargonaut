@@ -35,6 +35,10 @@ export class CarlistComponent {
     await this.carData.deleteCar(id);
   }
 
+  /*async updateCar(car: Car) {
+    await this.carData.updateCar(car);
+  }*/
+
   onSubmit(){
      this.carModel = this.form.controls['carModel'].value;
      this.carMark = this.form.controls['carMark'].value;

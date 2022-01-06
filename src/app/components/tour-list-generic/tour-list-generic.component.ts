@@ -20,7 +20,7 @@ export class TourListGenericComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('id');
+    const userId = this.route.snapshot.paramMap.get('uid');
     const tempUser = (userId) ? await this.userData.getUser(userId) : null;
     this.user = (tempUser) ? tempUser : null;
     await this.fillList('0');
