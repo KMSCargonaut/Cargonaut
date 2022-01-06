@@ -3,6 +3,7 @@ export class Passenger {
   seats: number;
   storage: number;
   evaluated: number;
+  payed: boolean;
 
 
   constructor(id: string, seats: number, storage: number) {
@@ -10,5 +11,6 @@ export class Passenger {
     this.seats = seats;
     this.storage = storage;
     this.evaluated = -1;
+    this.payed = false;
   }
 }

@@ -6,6 +6,7 @@ import {Confirm} from "../../models/Confirm";
 import {Tour} from "../../models/Tour";
 import {UserService} from "../../services/user.service";
 import {AlertService} from "../../services/alert.service";
+import {TourService} from "../../services/tour.service";
 
 @Component({
   selector: 'app-tour-confirm',
@@ -29,7 +30,7 @@ export class TourConfirmComponent implements OnInit {
   inputMessage = '';
 
   constructor(public activeModal: NgbActiveModal, public shareData: ShareDataService, public confirmData: ConfirmService,
-              public userData: UserService, public alertData: AlertService) {
+              public userData: UserService, public alertData: AlertService, public tourData: TourService) {
   }
 
   async ngOnInit() {
@@ -79,7 +80,6 @@ export class TourConfirmComponent implements OnInit {
         if (confirm[0].code === inputCode) {
           await this.purchase(tour)
         } else {
-          // TODO: input färben
           this.wrongInput = 'border-danger';
           this.inputMessage = 'Der Code ist nicht richtig'
           this.alertData.showAlert({type: 'danger', message: 'Code ist nicht richtig!'})
@@ -110,6 +110,7 @@ export class TourConfirmComponent implements OnInit {
           const costs = (currPassenger.seats + currPassenger.storage) * tour.price;
           const credit = currUser.money - costs;
           if (credit < 0) {
+            this.activeModal.dismiss();
             this.alertData.showAlert({
               type: 'danger',
               message: 'Bezahlung war nicht erfolgreich! Laden Sie Ihr Guthaben auf!'
@@ -122,8 +123,14 @@ export class TourConfirmComponent implements OnInit {
             if (driver) {
               currUser.money = credit;
               driver.money += costs;
+              const tempPassenger = tour.passengers.find(passenger => passenger.id === currUser.uid);
+              if (tempPassenger) {
+                tempPassenger.payed = true;
+                await this.tourData.updateTour(tour);
+              }
               await this.userData.updateUser(currUser)
               await this.userData.updateUser(driver)
+              this.activeModal.dismiss();
               this.alertData.showAlert({type: 'success', message: 'Bezahlung war erfolgreich!'})
             }
           }
