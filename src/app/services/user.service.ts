@@ -89,6 +89,7 @@ export class UserService {
 
   async login(email: string, password: string) {
     await this.auth.signInWithEmailAndPassword(email, password);
+
   }
 
   async logout() {
