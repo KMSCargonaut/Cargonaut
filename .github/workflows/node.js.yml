@@ -29,6 +29,14 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run build
+    - run: npm i start-server-and-test
+    - run: npm i angular-http-server
+    - name: cypress-run-headless
+      run: cypress run --headless --browser chrome
+    - name: start-server:ci
+      run: angular-http-server --path ./dist/myCargonaut -p 4200
+    - name: run-tests
+      run: start-server-and-test start-server:ci 4200 cypress-run-headless
     #- name: Test
      # run: npm run test:prod    ++Tests are still not running properly with firebase
     - run: npm run lint
