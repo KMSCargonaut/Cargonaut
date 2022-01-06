@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tour of usedList">
+    <tr *ngFor="let tour of usedList" class="hovertable" (click)="navigateToDetails(tour); $event.stopPropagation()">
       <td>{{(tour.isOffer) ? 'Angebot' : 'Anfrage'}}</td>
       <td *ngIf="!tour.isBooked">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
@@ -63,16 +63,16 @@
       <td>{{tour.price}}</td>
       <td class="overflow-hidden">
 
-        <div ngbDropdown container="body" placement="bottom-left">
+        <div ngbDropdown container="body" placement="bottom-right" (click)="$event.stopPropagation()">
           <button class="btn btn-sm" ngbDropdownToggle>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4">
               <path id="ic_more_horiz_24px" d="M6,10a2,2,0,1,0,2,2A2.006,2.006,0,0,0,6,10Zm12,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,18,10Zm-6,0a2,2,0,1,0,2,2A2.006,2.006,0,0,0,12,10Z" transform="translate(-4 -10)"/>
             </svg>
 
           </button>
-          <div ngbDropdownMenu class="dropdown-menu">
-            <button ngbDropdownItem (click)="navigateToDetails(tour)">Details</button>
+          <div ngbDropdownMenu class="dropdown-menu" (click)="$event.stopPropagation();">
             <button ngbDropdownItem (click)="navigateToEdit(tour)">Bearbeiten</button>
+            <button ngbDropdownItem (click)="openTourCode(tour)">Fahrt bestätigen</button>
             <button ngbDropdownItem
                     *ngIf="switchStatus(tour) === 2 && userIsPassenger(tour) && !isCreator(tour)"
                     (click)="openEvaluation(tour)">Bewerten</button>

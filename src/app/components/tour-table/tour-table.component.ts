@@ -8,6 +8,7 @@ import {Status} from "../../models/Status";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddEvaluationComponent} from "../add-evaluation/add-evaluation.component";
 import {AlertService} from "../../services/alert.service";
+import {TourConfirmComponent} from "../tour-confirm/tour-confirm.component";
 
 @Component({
   selector: 'app-tour-table',
@@ -19,8 +20,8 @@ export class TourTableComponent {
   @Input() usedList: Tour[] = [];
   status: number = 0;
 
-  constructor(public tourService: TourService, public shareData: ShareDataService, public userService: UserService,
-              public router: Router, public modal: NgbModal, public alertData: AlertService) {
+  constructor(public tourService: TourService, public userService: UserService,
+              public router: Router, public modal: NgbModal, public alertData: AlertService, public shareData: ShareDataService) {
 
   }
 
@@ -52,6 +53,22 @@ export class TourTableComponent {
 
   userIsPassenger(tour: Tour): boolean {
     return tour.passengers.some(passenger => passenger.id === this.userService.currUser?.uid);
+  }
+
+  openTourCode(tour: Tour) {
+    if (this.userService.currUser) {
+      this.shareData.isUserDriver = this.userService.currUser.uid === tour.driver;
+      this.shareData.confirmTour = tour;
+    }
+    const modalRef = this.modal.open(TourConfirmComponent, {
+      animation: true,
+      centered: true
+    });
+
+
+    modalRef.dismissed.toPromise().then(async result => {
+      console.log(result, tour);
+    })
   }
 
   openEvaluation(tour: Tour) {
@@ -98,4 +115,5 @@ export class TourTableComponent {
     })
 
   }
+
 }
