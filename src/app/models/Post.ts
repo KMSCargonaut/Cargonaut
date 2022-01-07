@@ -1,4 +1,5 @@
 export class Post{
+  dId?: string;
   author: string;
   tourID: string;
   message: string;
