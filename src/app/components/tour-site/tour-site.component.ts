@@ -4,6 +4,7 @@ import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {Passenger} from "../../models/Passenger";
 import {CalculateService} from "../../services/calculate.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tour-site',
@@ -25,7 +26,7 @@ export class TourSiteComponent implements OnInit {
   isRequestEmpty = false;
   firstSearch = false; //Diese Variable dient dazu abzubilden ob von der Startseite über "Mitfahrgelegenheiten" in der Navbar zu dieser Seite navigiert wurde.
 
-  constructor(public tourService: TourService, public shareData: ShareDataService, private calcService: CalculateService) {
+  constructor(public tourData: TourService, public tourService: TourService, public shareData: ShareDataService, private calcService: CalculateService, public route: ActivatedRoute) {
 
   }
 
@@ -36,37 +37,42 @@ export class TourSiteComponent implements OnInit {
   }
 
  async ngOnInit() {
-    await this.resetSearch();
-    if (!this.shareData.tourSearch) {
-      this.firstSearch = true;
-    }
+   await this.resetSearch()
+   if (!this.route.snapshot.paramMap.get('startCity')) {
+     this.firstSearch = true;
+   }
   }
 
   async resetSearch() {
-    await this.setTours();
-    await this.fillList();
+    const startCity = this.route.snapshot.paramMap.get('startCity');
+    const endCity = this.route.snapshot.paramMap.get('endCity');
+    const date = this.route.snapshot.paramMap.get('date');
+    const passengers = this.route.snapshot.paramMap.get('passengers');
+    const storage = this.route.snapshot.paramMap.get('storage');
+
+    if (startCity && endCity && date && passengers && storage) {
+      await this.setTours(startCity, endCity, date, passengers, storage);
+      await this.fillList();
+    }
     this.isOfferEmpty = this.offerTours.length === 0;
     this.isRequestEmpty = this.requestTours.length === 0;
     this.firstSearch = false;
   }
 
 
-  async setTours(){
-    if (this.shareData.tourSearch !== null) {
-      console.log(this.shareData.searchSeats)
-      //Hierhin
+  async setTours(startCity : string, endCity : string, date : string, passengers : string, storage : string){
       this.offerTours = [];
-      this.shareData.tourSearch.forEach((element) => {
-        if ((element.seats - this.calcService.countFreeSeats(element.passengers) >= this.shareData.searchSeats) &&
-          (element.storage - this.calcService.countFreeStorage(element.passengers) >= this.shareData.searchStorage) && element.isOffer) {
-
-          /*this.offerTours = this.shareData.tourSearch.filter(tour => tour.isOffer);*/ //TODO ersetzen
+      this.requestTours = [];
+      (await this.tourData.searchTours(startCity, endCity, date, Number.parseInt(storage), Number.parseInt(passengers))).forEach((element) => {
+        if ((element.seats - this.calcService.countFreeSeats(element.passengers) >= Number.parseInt(passengers)) &&
+          (element.storage - this.calcService.countFreeStorage(element.passengers) >= Number.parseInt(storage) && element.isOffer)) {
           this.offerTours.push(element)
+        }
+        if (!element.isOffer) {
+          this.requestTours.push(element)
         }
       })
 
-      this.requestTours = this.shareData.tourSearch.filter(tour => !tour.isOffer);
-    }
   }
 
 
