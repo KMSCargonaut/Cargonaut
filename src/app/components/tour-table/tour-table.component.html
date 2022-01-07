@@ -9,8 +9,8 @@
       <th class="text-center">Status</th>
       <th class="text-center">Von</th>
       <th class="text-center">Nach</th>
-      <th class="text-center">Wann?</th>
-      <th class="text-center">Um?</th>
+      <th class="text-center">Wann</th>
+      <th class="text-center">Um</th>
       <th class="text-center">Dauer</th>
       <th class="text-center">Stauraum</th>
       <th class="text-center">Sitze</th>
@@ -55,7 +55,7 @@
       </td>
       <td>{{tour.startCity}}</td>
       <td>{{tour.endCity}}</td>
-      <td>{{tour.date}}</td>
+      <td>{{tour.date | date : 'dd. MMM YYYY'}}</td>
       <td>{{tour.startTime}}</td>
       <td>{{tour.duration}}h</td>
       <td>{{tour.storage}}</td>
