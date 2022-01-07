@@ -3,7 +3,7 @@ import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Status} from "../../models/Status";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddEvaluationComponent} from "../add-evaluation/add-evaluation.component";
@@ -21,7 +21,8 @@ export class TourTableComponent {
   status: number = 0;
 
   constructor(public tourService: TourService, public userService: UserService,
-              public router: Router, public modal: NgbModal, public alertData: AlertService, public shareData: ShareDataService) {
+              public router: Router, public modal: NgbModal, public alertData: AlertService,
+              public shareData: ShareDataService, public route: ActivatedRoute) {
 
   }
 
@@ -33,7 +34,8 @@ export class TourTableComponent {
 
   async navigateToEdit(tour: Tour) {
     const user = await this.userService.getUser(tour.creatorID);
-    this.router.navigate([`/editTour/${tour.dID}/${user?.uid}`])
+    const root = this.route.snapshot.url[0].path;
+    this.router.navigate([`/editTour/${tour.dID}/${user?.uid}/${root}`])
   }
 
   switchStatus(tour: Tour): number {

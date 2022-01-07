@@ -46,7 +46,7 @@ const routes: Routes = [
     component: StrangerProfileComponent,
   },
   {
-    path: 'editTour/:did/:uid',
+    path: 'editTour/:did/:uid/:root',
     component: TourEditComponent,
   }, {
     path: 'genericTable/:uid',
