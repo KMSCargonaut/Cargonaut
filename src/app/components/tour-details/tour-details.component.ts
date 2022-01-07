@@ -157,6 +157,20 @@ export class TourDetailsComponent implements OnInit {
     return false;
   }
 
+  isCreator(): boolean {
+    const tour = this.ultimateTour;
+    const user = this.userService.currUser;
+    if (tour && user) {
+      return tour.creatorID === user.uid;
+    }
+    return false;
+  }
+
+  navigateToEdit() {
+    const root = this.route.snapshot.url[0].path;
+    this.router.navigate([`editTour/${this.ultimateTour?.dID}/${this.userService.currUser?.uid}/${root}`])
+  }
+
   cancelTour() {
     let tour = this.ultimateTour;
     if (tour) {
