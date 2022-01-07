@@ -37,6 +37,7 @@ export class TourEditComponent implements OnInit {
   tour: Tour | null = null;
   status: string = '0';
   user: UserCargo | null = null;
+  root: string = '';
 
   constructor(public tourData: TourService, public shareData: ShareDataService, public userData: UserService, public alert: AlertService,
               private router: Router, private calcService: CalculateService, public auth: AngularFireAuth, public carData: CarsService,
@@ -67,6 +68,8 @@ export class TourEditComponent implements OnInit {
   async ngOnInit() {
     const did = this.route.snapshot.paramMap.get('did');
     const uid = this.route.snapshot.paramMap.get('uid');
+    const root = this.route.snapshot.paramMap.get('root');
+    this.root = (root) ? root : '';
     if (did && uid) {
       const tempTour = await this.tourData.getTour(did);
       const tempUser = await this.userData.getUser(uid);
@@ -163,7 +166,12 @@ export class TourEditComponent implements OnInit {
   async deleteTour() {
     if (this.tour)
       await this.tourData.deleteTour(this.tour);
+    if (this.root === 'profil') {
     this.router.navigate(["/profil"])
+    } else {
+      const user = this.userData.currUser;
+      this.router.navigate([`/genericTable/${user?.uid}`]);
+    }
     this.alert.showAlert({type: 'danger', message: 'Tour gelöscht!'});
   }
 
@@ -173,11 +181,8 @@ export class TourEditComponent implements OnInit {
       centered: true,
     });
     modalRef.dismissed.toPromise().then(async (result) => {
-      console.log(result)
       if (this.tour && result) {
-        await this.tourData.deleteTour(this.tour);
-        this.alert.showAlert({type: 'danger', message: 'Tour erfolgreich gelöscht'});
-        this.router.navigate(["/profil"]);
+        await this.deleteTour()
       }
     })
   }
