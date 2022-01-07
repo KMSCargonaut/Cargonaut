@@ -1,0 +1,12 @@
+.second {
+  width: 350px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 10px 10px 5px #aaaaaa
+}
+
+.text1 {
+  font-size: 13px;
+  font-weight: 500;
+  color: #56575b
+}
