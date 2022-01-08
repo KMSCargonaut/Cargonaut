@@ -65,7 +65,7 @@ export class RegistrationComponent {
         this.emailMessage = 'E-Mail ist nicht richtig formatiert';
         this.wrongEmailClass = 'border-danger';
       } else if (err.code === 'auth/weak-password') {
-        this.passwordMessage = 'Das Passwort ist nicht korrekt';
+        this.passwordMessage = 'Das Passwort ist zu kurz';
         this.wrongPasswordClass = 'border-danger';
       }
     }
@@ -79,7 +79,9 @@ export class RegistrationComponent {
       this.gender.trim().length > 0 &&
       this.username.trim().length > 0 &&
       this.birthday != undefined &&
+      this.birthday.toString().trim().length > 0 &&
       this.password === this.repeatPassword) {
+      console.log('Typ von Date: ', typeof this.birthday, 'Date: ', this.birthday)
       await this.register()
     } else {
       if (this.email.trim().length === 0) {
@@ -114,7 +116,7 @@ export class RegistrationComponent {
         this.genderMessage = 'Geben Sie Ihr Geschlecht an';
         this.wrongGender = 'border-danger';
       }
-      if (this.birthday === undefined) {
+      if (this.birthday === undefined || this.birthday.toString().trim().length == 0) {
         this.birthdayMessage = 'Geben Sie Ihren Geburtstag an';
         this.wrongBirthday = 'border-danger';
       }
