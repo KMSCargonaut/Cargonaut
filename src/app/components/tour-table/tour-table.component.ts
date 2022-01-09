@@ -82,9 +82,11 @@ export class TourTableComponent {
       console.log(result);
       if (result) {
         let stars = Number.parseInt(result);
+        console.log(stars)
         let passenger = tour.passengers.find(passenger => passenger.id === this.userService.currUser?.uid);
 
         if (passenger && passenger.evaluated === -1) {
+          console.log(passenger)
           passenger.evaluated = stars;
           console.log(passenger)
           await this.tourService.updateTour(tour);
@@ -103,6 +105,7 @@ export class TourTableComponent {
           let tempEva = passenger.evaluated;
           passenger.evaluated = stars;
           console.log(passenger)
+          console.log(tour)
           await this.tourService.updateTour(tour)
           let user = await this.userService.getUser(tour.creatorID);
           if (user) {

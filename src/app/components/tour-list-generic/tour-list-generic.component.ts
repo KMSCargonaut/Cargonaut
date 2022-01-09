@@ -40,6 +40,7 @@ export class TourListGenericComponent implements OnInit {
         }
         case 1: {
           this.list = await this.tourData.getAllBookedTours().then(tours => {
+            console.log(tours)
             return tours
               .filter(tour => (tour.driver === this.user?.uid || this.isPassenger(tour.passengers)) && tour.creatorID != this.user?.uid);
           })
