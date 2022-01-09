@@ -1,0 +1,41 @@
+body {
+  background-color: #fff
+}
+
+.container {
+  background-color: #fff;
+}
+
+.addtxt {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  font-size: 13px;
+  width: 100vw;
+  background-color: #e5e8ed;
+  font-weight: 500
+}
+
+.form-control:focus {
+  color: #000
+}
+
+.second {
+  width: 350px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 10px 10px 5px #aaaaaa
+}
+
+.text1 {
+  font-size: 13px;
+  font-weight: 500;
+  color: #56575b
+}
+
+
+
+
+
+
+
