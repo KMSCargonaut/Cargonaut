@@ -3,6 +3,7 @@ import {PostService} from "../../../services/post.service";
 import {Post} from "../../../models/Post";
 import {Tour} from "../../../models/Tour";
 import {UserService} from "../../../services/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-post-list',
@@ -11,32 +12,27 @@ import {UserService} from "../../../services/user.service";
 })
 export class PostListComponent implements OnChanges{
 
-  posts: Post[] = []
+  posts: Observable<Post[]> | undefined;
   @Input() tour: Tour | null = null;
 
   constructor(public postService: PostService, public userService: UserService) {
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  async ngOnChanges(changes: SimpleChanges){
     this.tour = changes.tour.currentValue;
     console.log(this.tour);
-    this.getPosts().then();
+    if(this.tour?.dID){
+      this.posts = await this.postService.getObservablePost(this.tour.dID)
+      console.log(this.posts)
+    }
   }
 
   async addPost(message: string) {
-    if(this.tour?.dID && this.userService.currUser?.uid){
+    if(this.tour?.dID && this.userService.currUser?.uid && message.trim().length > 0){
       await this.postService.addPost(new Post(this.userService.currUser.uid, this.tour.dID, message, new Date().toString()));
     }
-    this.getPosts().then();
   }
 
-  async getPosts() {
-    if(this.tour?.dID){
-      this.posts = await this.postService.getPostsByTourId(this.tour.dID);
-      return this.posts;
-    }
-    return this.posts;
-  }
 
   async updatePosts() {
     const posts = await this.postService.getAllPosts();

@@ -4,7 +4,7 @@
     <textarea #message placeholder="+ Kommentiere diese Tour" class="form-control addtxt"></textarea>
     <button (click)="addPost(message.value); message.value = ''" class="btn btn-success ml-1">Kommentieren</button>
   </div>
-  <div class="d-flex justify-content-center py-2" *ngFor="let post of posts">
+  <div class="d-flex justify-content-center py-2" *ngFor="let post of posts | async">
     <div *ngIf="userService.currUser?.uid === post.author" class="ml-auto">
       <app-post-card [post]="post"></app-post-card>
     </div>
