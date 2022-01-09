@@ -1,8 +1,15 @@
-<div class="container justify-content-center mt-5 border-left border-right mw-100 ">
+<div class="container rounded mt-4 shadow bg-white border-0 p-4 ">
+  <div id="communicationTitle" class="h4">Unterhaltung zu dieser Tour!</div>
   <div class="d-flex justify-content-center pt-3 pb-2">
-    <input type="text" name="text" placeholder="+ Kommentiere diese Tour" class="form-control addtxt">
+    <textarea #message placeholder="+ Kommentiere diese Tour" class="form-control addtxt"></textarea>
+    <button (click)="addPost(message.value); message.value = ''" class="btn btn-success ml-1">Kommentieren</button>
   </div>
   <div class="d-flex justify-content-center py-2" *ngFor="let post of posts">
-    <app-post-card [post]="post"></app-post-card>
+    <div *ngIf="userService.currUser?.uid === post.author" class="ml-auto">
+      <app-post-card [post]="post"></app-post-card>
+    </div>
+    <div *ngIf="userService.currUser?.uid !== post.author" class="mr-auto">
+      <app-post-card [post]="post"></app-post-card>
+    </div>
   </div>
 </div>

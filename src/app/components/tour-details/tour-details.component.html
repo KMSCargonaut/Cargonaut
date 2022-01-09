@@ -227,4 +227,5 @@
   </div>
 </div>
 
-<app-post-list></app-post-list>
+<app-post-list *ngIf="alreadyDriver() || alreadyPassenger()" [tour]="this.ultimateTour"></app-post-list>
+

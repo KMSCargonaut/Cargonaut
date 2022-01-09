@@ -1,27 +1,40 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {PostService} from "../../../services/post.service";
 import {Post} from "../../../models/Post";
+import {Tour} from "../../../models/Tour";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent{
+export class PostListComponent implements OnChanges{
 
   posts: Post[] = []
+  @Input() tour: Tour | null = null;
 
-  constructor(public postService: PostService) {
+  constructor(public postService: PostService, public userService: UserService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    this.tour = changes.tour.currentValue;
+    console.log(this.tour);
     this.getPosts().then();
   }
 
-  async addPost() {
-    await this.postService.addPost( new Post('Autor', 'Tour', 'Ich bin ein Test', new Date().toString()));
+  async addPost(message: string) {
+    if(this.tour?.dID && this.userService.currUser?.uid){
+      await this.postService.addPost(new Post(this.userService.currUser.uid, this.tour.dID, message, new Date().toString()));
+    }
+    this.getPosts().then();
   }
 
   async getPosts() {
-    this.posts = await this.postService.getAllPosts();
-    console.log('Get: ', this.posts);
+    if(this.tour?.dID){
+      this.posts = await this.postService.getPostsByTourId(this.tour.dID);
+      return this.posts;
+    }
     return this.posts;
   }
 
