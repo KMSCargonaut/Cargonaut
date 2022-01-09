@@ -13,6 +13,7 @@ export class ConfirmService {
   }
 
   copyAndPrepareConfirm(confirm: Confirm) {
+    delete confirm.dId;
     return {...confirm};
   }
 

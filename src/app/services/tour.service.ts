@@ -16,6 +16,7 @@ export class TourService {
   }
 
   copyAndPrepareTour(tour: Tour): Tour {
+    delete tour.dID;
     return {...tour};
   }
 
