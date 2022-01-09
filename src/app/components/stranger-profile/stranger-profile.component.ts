@@ -51,6 +51,8 @@ export class StrangerProfileComponent implements OnInit{
       this.evaluation = this.user.evaluation;
       this.evaluationCounter = this.user.evaluationCounter;
       this.tours = await this.tourData.getAllToursFromUser(this.user.uid)
+      console.log(this.user.uid)
+      console.log(this.tours)
       this.offerTours = this.tours.filter(tour => tour.isOffer)
         .filter(tour => !tour.areSeatsOccupied || !tour.isStorageFullyLoaded)
         .filter(tour => (new Date().getTime() - new Date(tour.date).getTime()) < 0);
