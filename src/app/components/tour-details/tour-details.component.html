@@ -222,7 +222,7 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" *ngIf="!this.userService.currUser">
     <div class="col-5 m-2">
       <button class="btn btn-outline-success btn-block" (click)="navigateToProfile()">Anmelden</button>
     </div>
