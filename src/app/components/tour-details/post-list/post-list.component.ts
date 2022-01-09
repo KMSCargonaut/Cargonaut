@@ -29,7 +29,7 @@ export class PostListComponent implements OnChanges{
 
   async addPost(message: string) {
     if(this.tour?.dID && this.userService.currUser?.uid && message.trim().length > 0){
-      await this.postService.addPost(new Post(this.userService.currUser.uid, this.tour.dID, message, new Date().toString()));
+      await this.postService.addPost(new Post(this.userService.currUser.uid, this.tour.dID, message, new Date().getTime()));
     }
   }
 

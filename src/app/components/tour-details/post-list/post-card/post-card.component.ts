@@ -11,7 +11,7 @@ import {UserCargo} from "../../../../models/UserCargo";
 })
 export class PostCardComponent implements OnChanges{
 
-  @Input() post: Post = new Post('', '', '', '');
+  @Input() post: Post = new Post('', '', '', 0);
   user: UserCargo | undefined = new UserCargo('', '', '', '', new Date(), '');
 
   constructor(public postService: PostService, public userService: UserService) {
