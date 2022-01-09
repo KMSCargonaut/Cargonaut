@@ -21,5 +21,8 @@ export class PostCardComponent implements OnChanges{
     this.user = await this.userService.getUser(changes.post.currentValue.author)
   }
 
+  async deletePost(post: Post){
+    await this.postService.deletePost(post);
+  }
 
 }

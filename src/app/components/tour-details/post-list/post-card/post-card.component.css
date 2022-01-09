@@ -1,12 +1,11 @@
 .second {
-  width: 350px;
+  width: 30em;
   background-color: white;
   border-radius: 4px;
-  box-shadow: 10px 10px 5px #aaaaaa
 }
 
 .text1 {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   color: #56575b
 }

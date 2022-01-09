@@ -34,7 +34,7 @@ export class PostListComponent implements OnChanges{
   }
 
 
-  async updatePosts() {
+  /*async updatePosts() {
     const posts = await this.postService.getAllPosts();
     for (let i = 0; i < posts.length; i++) {
       posts[i].author = `Autor${i}`;
@@ -46,11 +46,8 @@ export class PostListComponent implements OnChanges{
     console.log('Update: ', posts)
   }
 
-  async deletePost() {
-    const posts = await this.postService.getAllPosts();
-    for (let i = 0; i < posts.length; i++) {
-      await this.postService.deletePost(posts[i]);
-    }
-  }
+  async deletePost(post: Post) {
+    await this.postService.deletePost(post);
+  }*/
 
 }
