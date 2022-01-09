@@ -62,7 +62,7 @@ export class PostService {
   public async getObservablePost(tourID: string){
     return this.afs.collection<Post>('Posts', ref =>
     ref.where('tourID', '==', tourID)
-      .orderBy('sendDate', 'desc')
+      .orderBy('sendDate', 'asc')
     ).valueChanges({
       idField: 'dId'
     });
