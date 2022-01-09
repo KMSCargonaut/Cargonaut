@@ -9,8 +9,10 @@ import {Post} from "../../../models/Post";
 })
 export class PostListComponent{
 
+  posts: Post[] = []
+
   constructor(public postService: PostService) {
-    this.deletePost().then();
+    this.getPosts().then();
   }
 
   async addPost() {
@@ -18,7 +20,9 @@ export class PostListComponent{
   }
 
   async getPosts() {
-    console.log('Get: ', await this.postService.getAllPosts());
+    this.posts = await this.postService.getAllPosts();
+    console.log('Get: ', this.posts);
+    return this.posts;
   }
 
   async updatePosts() {

@@ -1,4 +1,6 @@
-import { Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {PostService} from "../../../../services/post.service";
+import {Post} from "../../../../models/Post";
 
 @Component({
   selector: 'app-post-card',
@@ -7,6 +9,10 @@ import { Component} from '@angular/core';
 })
 export class PostCardComponent{
 
-  constructor() { }
+  @Input() post: Post = new Post('', '', '', '');
+
+  constructor(public postService: PostService) {
+
+  }
 
 }
