@@ -288,4 +288,9 @@ export class TourDetailsComponent implements OnInit {
     }
   }
 
+  navigateToProfile() {
+    this.router.navigate([`/profil`])
+
+  }
+
 }

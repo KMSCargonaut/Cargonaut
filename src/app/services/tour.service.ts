@@ -16,7 +16,6 @@ export class TourService {
   }
 
   copyAndPrepareTour(tour: Tour): Tour {
-    delete tour.dID;
     return {...tour};
   }
 
@@ -41,6 +40,7 @@ export class TourService {
     for (let i = 0; i < tour.passengers.length; i++) {
       tour.passengers[i] = this.copyAndPreparePassenger(tour.passengers[i]);
     }
+    console.log('Service: ', tour)
     this.tourCollection.doc(tour.dID).update(this.copyAndPrepareTour(tour))
       .catch((err) => console.log(err))
   }
