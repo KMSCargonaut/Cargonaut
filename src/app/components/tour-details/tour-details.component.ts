@@ -45,7 +45,9 @@ export class TourDetailsComponent implements OnInit {
     const uid = this.route.snapshot.paramMap.get('uid');
     if (did && uid) {
       const tempTour = await this.tourData.getTour(did);
+      console.log('TOUR IN NGONINIT IN DETAILS: ', tempTour)
       const tempUser = await this.userService.getUser(uid);
+      console.log('USER IN NGONINIT IN DETAILS: ', tempUser)
       this.ultimateTour = (tempTour) ? tempTour : null;
       this.ultimateUser = (tempUser) ? tempUser : null;
       console.log('TOUR IN TOUR DETAILS: ', this.ultimateTour, tempUser);
@@ -225,7 +227,16 @@ export class TourDetailsComponent implements OnInit {
       }
     }
 
+    console.log('Tour in details: ', tour)
     await this.tourData.updateTour(tour);
+    if (tour && tour.dID) {
+      const tempTour = await this.tourData.getTour(tour.dID);
+      if (tempTour) {
+        this.ultimateTour = tempTour;
+        console.log('NEEEEEEEEW TOUR: ', this.ultimateTour)
+      }
+
+    }
     this.alertData.showAlert({type: 'success', message: 'Erfolgreich storniert'})
   }
 
@@ -273,6 +284,7 @@ export class TourDetailsComponent implements OnInit {
 
       }
     })
+    console.log('this.ultimateTour: ', this.ultimateTour)
     modalRef.componentInstance.passedData = this.ultimateTour;
   }
 

@@ -28,6 +28,7 @@ export class TourBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('passed Data: ', this.passedData);
     this.tour = {...this.passedData};
     this.fillSeats();
     this.fillStorage();
@@ -101,12 +102,15 @@ export class TourBookComponent implements OnInit {
   }
 
  async bookIfOffer(seats: string, storage: string) {
+    console.log('seats: ', seats, 'storage: ', storage);
     if (Number.parseInt(seats) === 0 && Number.parseInt(storage) === 0) {
       this.alertData.showAlert({type: 'danger', message: 'Sie können keine Fahrt mit 0 Sitzplätzen und Stauraum buchen'})
     }
     else {
       if (this.tour && this.userData.currUser) {
+        console.log('tour: ', this.tour)
         const tempId = (this.tour.dID) ? this.tour.dID : '';
+        console.log('tempID: ', tempId);
         const tempTour = await this.tourData.getTour(tempId);
         const tour = (tempTour) ? tempTour : null;
 
