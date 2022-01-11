@@ -27,13 +27,13 @@ export class TourTableComponent {
   }
 
   async navigateToDetails(tour: Tour) {
-    const user = await this.userService.getUser(tour.creatorID);
+    const user = await this.userService.getUser(tour.creator.uid);
     this.router.navigate([`/tour-details/${tour.dID}/${user?.uid}`])
 
   }
 
   async navigateToEdit(tour: Tour) {
-    const user = await this.userService.getUser(tour.creatorID);
+    const user = await this.userService.getUser(tour.creator.uid);
     const root = this.route.snapshot.url[0].path;
     this.router.navigate([`/editTour/${tour.dID}/${user?.uid}/${root}`])
   }
@@ -50,7 +50,7 @@ export class TourTableComponent {
   }
 
   isCreator(tour: Tour): boolean {
-    return tour.creatorID === this.userService.currUser?.uid;
+    return tour.creator.uid === this.userService.currUser?.uid;
   }
 
   userIsPassenger(tour: Tour): boolean {
@@ -90,7 +90,7 @@ export class TourTableComponent {
           passenger.evaluated = stars;
           console.log(passenger)
           await this.tourService.updateTour(tour);
-          let user = await this.userService.getUser(tour.creatorID);
+          let user = await this.userService.getUser(tour.creator.uid);
           if (user) {
             if (user.evaluation === -1) {
               user.evaluation += 1;
@@ -107,7 +107,7 @@ export class TourTableComponent {
           console.log(passenger)
           console.log(tour)
           await this.tourService.updateTour(tour)
-          let user = await this.userService.getUser(tour.creatorID);
+          let user = await this.userService.getUser(tour.creator.uid);
           if (user) {
             user.evaluation -= tempEva;
             user.evaluation += stars

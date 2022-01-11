@@ -113,7 +113,7 @@ export class TourDetailsComponent implements OnInit {
 
   changeUserName() {
     if (this.ultimateTour?.passengers[0] || this.ultimateTour?.driver && this.ultimateTour?.isOffer) {
-      this.userService.getUser(this.ultimateTour?.creatorID).then(
+      this.userService.getUser(this.ultimateTour?.creator.uid).then(
         (user) => {
           if (user) {
             this.userName = user.username
@@ -161,7 +161,7 @@ export class TourDetailsComponent implements OnInit {
     const tour = this.ultimateTour;
     const user = this.userService.currUser;
     if (tour && user) {
-      return tour.creatorID === user.uid;
+      return tour.creator.uid === user.uid;
     }
     return false;
   }
@@ -278,7 +278,7 @@ export class TourDetailsComponent implements OnInit {
 
   navigateToUser() {
     if (this.userService.currUser) {
-      if (this.ultimateTour?.creatorID === this.userService.currUser.uid) {
+      if (this.ultimateTour?.creator.uid === this.userService.currUser.uid) {
         this.router.navigate([`/profil`])
       } else {
         this.router.navigate([`/exprofile//${this.ultimateUser?.uid}`]);

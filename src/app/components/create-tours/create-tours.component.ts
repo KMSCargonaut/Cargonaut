@@ -122,7 +122,7 @@ export class CreateToursComponent {
 
   newTour() {
     return new Tour(
-      (this.userData.currUser) ? this.userData.currUser.uid : '',
+      (this.userData.currUser) ? this.userData.currUser : new UserCargo('','','','',new Date(), ''),
       this.isOffer,
       this.startCity,
       this.endCity,

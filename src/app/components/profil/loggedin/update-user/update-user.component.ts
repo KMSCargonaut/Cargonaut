@@ -37,6 +37,7 @@ export class UpdateUserComponent{
 
   public async updateUser(){
     if(this.userData.currUser){
+      console.log('current user: ', this.userData.currUser)
       await this.userData.updateUser(this.userData.currUser);
     }
   }
@@ -47,6 +48,7 @@ export class UpdateUserComponent{
       this.username.trim().length > 0 &&
       this.birthday != undefined) {
       await this.updateUser();
+      this.activeModal.dismiss();
     } else {
       if (this.firstname.trim().length === 0) {
         this.firstnameMessage = 'Geben Sie Ihren Vornamen an';

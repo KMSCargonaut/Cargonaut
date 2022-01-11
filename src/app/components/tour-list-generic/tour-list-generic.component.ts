@@ -5,6 +5,7 @@ import {UserService} from "../../services/user.service";
 import {UserCargo} from "../../models/UserCargo";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Passenger} from "../../models/Passenger";
+import {CalculateService} from "../../services/calculate.service";
 
 @Component({
   selector: 'app-tour-list-generic',
@@ -18,7 +19,7 @@ export class TourListGenericComponent implements OnInit {
   sortNum : string = '0';
   isReversed: boolean = false;
 
-  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute, public router: Router) {
+  constructor(public tourData: TourService, public userData: UserService, public route: ActivatedRoute, public router: Router, public calc: CalculateService) {
   }
 
   async ngOnInit() {
@@ -40,27 +41,33 @@ export class TourListGenericComponent implements OnInit {
         }
         case 1: {
           this.list = await this.tourData.getAllBookedTours().then(tours => {
-            console.log(tours)
             return tours
-              .filter(tour => (tour.driver === this.user?.uid || this.isPassenger(tour.passengers)) && tour.creatorID != this.user?.uid);
+              .filter(tour => (tour.driver === this.user?.uid || this.isPassenger(tour.passengers)) && tour.creator.uid != this.user?.uid);
           })
-          console.log('list case 1: ', this.list);
           break;
         }
         case 2: {
           this.list = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => tour.driver === this.user?.uid || this.isPassenger(tour.passengers));
           });
-          this.list = this.list.filter(tour => !this.wasTourInPast(tour.date))
-          console.log('list case 2: ', this.list);
+          this.list = this.list.filter(tour => !this.wasTourInPast(tour.date, tour.startTime))
           break;
         }
         case 3: {
           this.list = await this.tourData.getAllBookedTours().then(tours => {
             return tours.filter(tour => tour.driver === this.user?.uid || this.isPassenger(tour.passengers));
           })
-          this.list = this.list.filter(tour => this.wasTourInPast(tour.date))
-          console.log('list case 3: ', this.list);
+          this.list = this.list.filter(tour => this.wasTourInPast(tour.date, tour.startTime))
+          break;
+        }
+        case 4: {
+          this.list = await this.tourData.getAllBookedTours();
+          this.list = this.list.filter(tour => tour.driver === this.user?.uid);
+          break;
+        }
+        case 5: {
+          this.list = await this.tourData.getAllBookedTours();
+          this.list = this.list.filter(tour => this.isPassenger(tour.passengers));
           break;
         }
       }
@@ -81,6 +88,7 @@ export class TourListGenericComponent implements OnInit {
       case 7: this.list = this.tourData.sortStorage(this.list); break;
       case 8: this.list = this.tourData.sortSeats(this.list); break;
       case 9: this.list = this.tourData.sortPrice(this.list); break;
+      case 10: this.list = this.tourData.sortCreator(this.list); break
     }
   }
 
@@ -93,8 +101,13 @@ export class TourListGenericComponent implements OnInit {
     this.router.navigate(['/profil']);
   }
 
-  wasTourInPast(date: string): boolean {
-    return (new Date().getTime() - new Date(date).getTime()) > 0;
+  wasTourInPast(date: string, time: string): boolean {
+    const newDate = new Date().getTime();
+    const oldDate = new Date(this.calc.arrivalTime(time, '0', date));
+    console.log('new: ', newDate)
+    console.log('old: ', oldDate)
+    console.log('subtr: ', newDate - oldDate.getTime())
+    return (newDate - oldDate.getTime()) > 0;
   }
 
   isPassenger(passengers: Passenger[]): boolean {
