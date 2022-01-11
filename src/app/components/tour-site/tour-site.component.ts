@@ -27,6 +27,7 @@ export class TourSiteComponent implements OnInit, AfterViewInit {
   isRequestEmpty = false;
   firstSearch = false; //Diese Variable dient dazu abzubilden ob von der Startseite über "Mitfahrgelegenheiten" in der Navbar zu dieser Seite navigiert wurde.
   @ViewChild('ergebnis') el: ElementRef | undefined
+  @ViewChild("ergebnis") MyProp: ElementRef | undefined;
 
   constructor(public tourData: TourService, public tourService: TourService,
               public shareData: ShareDataService, private calcService: CalculateService,
@@ -52,6 +53,8 @@ export class TourSiteComponent implements OnInit, AfterViewInit {
    if (!this.route.snapshot.paramMap.get('startCity')) {
      this.firstSearch = true;
    }
+
+
   }
 
   scroll(el: HTMLElement){
@@ -73,7 +76,14 @@ export class TourSiteComponent implements OnInit, AfterViewInit {
     this.isRequestEmpty = this.requestTours.length === 0;
     this.firstSearch = false;
 
-   
+
+    setTimeout(() => {
+      if (this.MyProp) {
+        this.MyProp.nativeElement.scrollIntoView({behavior: "smooth", block: "start"});
+      } else {
+        console.log("MyProp ist Null")
+      }
+    }, 10)
   }
 
 
