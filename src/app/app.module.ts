@@ -42,6 +42,7 @@ import { ConfirmDeletionComponent } from './components/tour-edit/confirm-deletio
 import { TourConfirmComponent } from './components/tour-confirm/tour-confirm.component';
 import { PostListComponent } from './components/tour-details/post-list/post-list.component';
 import { PostCardComponent } from './components/tour-details/post-list/post-card/post-card.component';
+import { ConfirmDeleteAccountComponent } from './components/profil/loggedin/confirm-delete-account/confirm-delete-account.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { PostCardComponent } from './components/tour-details/post-list/post-card
     TourConfirmComponent,
     PostListComponent,
     PostCardComponent,
+    ConfirmDeleteAccountComponent,
    ],
     imports: [
         BrowserModule,
