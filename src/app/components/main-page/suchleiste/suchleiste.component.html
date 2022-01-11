@@ -75,6 +75,7 @@
 
 
 
+
       <form class="smallscreen">
         <div class="col form-row-style">
           <div class="row row-margin">
@@ -151,11 +152,12 @@
           </div>
           </div>
           <div class="col colpad">
-            <button type="button" class="btn  btn-block suchbutton" (click)="searchButton()"><span class="h5">Suchen</span></button>
+            <button type="button" class="btn  btn-block suchbutton" (click)="searchButton(); scroll(target)"><span class="h5">Suchen</span></button>
           </div>
         </div>
       </form>
     </div>
   <div style="height: 200px"></div>
-  <div #target></div>
+<!--  <div #target></div>-->
 </header>
+<div #target></div>
