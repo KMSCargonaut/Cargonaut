@@ -104,9 +104,6 @@ export class TourListGenericComponent implements OnInit {
   wasTourInPast(date: string, time: string): boolean {
     const newDate = new Date().getTime();
     const oldDate = new Date(this.calc.arrivalTime(time, '0', date));
-    console.log('new: ', newDate)
-    console.log('old: ', oldDate)
-    console.log('subtr: ', newDate - oldDate.getTime())
     return (newDate - oldDate.getTime()) > 0;
   }
 
