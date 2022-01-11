@@ -36,14 +36,14 @@ export class NotloggedinComponent {
     if (this.email.trim().length === 0 && this.password.trim().length === 0) {
       this.wrongEmail = 'border-danger';
       this.wrongPassword = 'border-danger';
-      this.passwordMessage = 'Please fill out your password';
-      this.emailMessage = 'Please fill out your email';
+      this.passwordMessage = 'Bitte Ihr Password angeben';
+      this.emailMessage = 'Bitte Ihre E-Mail angeben';
     } else if (this.email.trim().length === 0) {
-      this.emailMessage = 'Please fill out your email';
+      this.emailMessage = 'Bitte Ihre E-Mail angeben';
       this.wrongEmail = 'border-danger';
     } else if (this.password.trim().length === 0) {
       this.wrongPassword = 'border-danger';
-      this.passwordMessage = 'Please fill out your password';
+      this.passwordMessage = 'Bitte Ihr Password angeben';
     } else {
       this.wrongEmail = '';
       await this.login();
@@ -54,15 +54,15 @@ export class NotloggedinComponent {
     this.userData.login(this.email, this.password).then(() => {
     }).catch((err) => {
       if (err.code === 'auth/invalid-email') {
-        this.emailMessage = 'E-Mail falsch formatiert';
+        this.emailMessage = 'Ihre E-Mail ist falsch formatiert';
         this.wrongEmail = 'border-danger';
       }
       if (err.code === 'auth/wrong-password') {
-        this.passwordMessage = 'Falsches Passwort';
+        this.passwordMessage = 'Ihr Passwort ist falsch';
         this.wrongPassword = 'border-danger';
       }
       if (err.code === 'auth/user-not-found') {
-        this.emailMessage = 'Nutzer nicht gefunden';
+        this.emailMessage = 'Der Nutzer konnte nicht gefunden werden';
         this.wrongEmail = 'border-danger';
       }
     });
