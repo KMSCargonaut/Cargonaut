@@ -1,7 +1,7 @@
 <div class="table-responsive">
 
 
-  <table class="table p-4" *ngIf="userService.currUser">
+  <table class="table p-4">
     <thead class="thead-cargo">
     <tr>
       <th class="text-center">Art</th>
@@ -9,8 +9,8 @@
       <th class="text-center">Status</th>
       <th class="text-center">Von</th>
       <th class="text-center">Nach</th>
-      <th class="text-center">Wann?</th>
-      <th class="text-center">Um?</th>
+      <th class="text-center">Wann</th>
+      <th class="text-center">Um</th>
       <th class="text-center">Dauer</th>
       <th class="text-center">Stauraum</th>
       <th class="text-center">Sitze</th>
@@ -55,7 +55,7 @@
       </td>
       <td>{{tour.startCity}}</td>
       <td>{{tour.endCity}}</td>
-      <td>{{tour.date}}</td>
+      <td>{{tour.date | date : 'dd. MMM YYYY'}}</td>
       <td>{{tour.startTime}}</td>
       <td>{{tour.duration}}h</td>
       <td>{{tour.storage}}</td>
@@ -71,7 +71,7 @@
 
           </button>
           <div ngbDropdownMenu class="dropdown-menu" (click)="$event.stopPropagation();">
-            <button ngbDropdownItem (click)="navigateToEdit(tour)">Bearbeiten</button>
+            <button ngbDropdownItem (click)="navigateToEdit(tour)" *ngIf="isCreator(tour)">Bearbeiten</button>
             <button ngbDropdownItem (click)="openTourCode(tour)">Fahrt bestätigen</button>
             <button ngbDropdownItem
                     *ngIf="switchStatus(tour) === 2 && userIsPassenger(tour) && !isCreator(tour)"

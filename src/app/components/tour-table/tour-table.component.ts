@@ -3,7 +3,7 @@ import {Tour} from "../../models/Tour";
 import {TourService} from "../../services/tour.service";
 import {ShareDataService} from "../../services/share-data.service";
 import {UserService} from "../../services/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Status} from "../../models/Status";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddEvaluationComponent} from "../add-evaluation/add-evaluation.component";
@@ -21,7 +21,8 @@ export class TourTableComponent {
   status: number = 0;
 
   constructor(public tourService: TourService, public userService: UserService,
-              public router: Router, public modal: NgbModal, public alertData: AlertService, public shareData: ShareDataService) {
+              public router: Router, public modal: NgbModal, public alertData: AlertService,
+              public shareData: ShareDataService, public route: ActivatedRoute) {
 
   }
 
@@ -33,7 +34,8 @@ export class TourTableComponent {
 
   async navigateToEdit(tour: Tour) {
     const user = await this.userService.getUser(tour.creatorID);
-    this.router.navigate([`/editTour/${tour.dID}/${user?.uid}`])
+    const root = this.route.snapshot.url[0].path;
+    this.router.navigate([`/editTour/${tour.dID}/${user?.uid}/${root}`])
   }
 
   switchStatus(tour: Tour): number {
@@ -80,9 +82,11 @@ export class TourTableComponent {
       console.log(result);
       if (result) {
         let stars = Number.parseInt(result);
+        console.log(stars)
         let passenger = tour.passengers.find(passenger => passenger.id === this.userService.currUser?.uid);
 
         if (passenger && passenger.evaluated === -1) {
+          console.log(passenger)
           passenger.evaluated = stars;
           console.log(passenger)
           await this.tourService.updateTour(tour);
@@ -101,6 +105,7 @@ export class TourTableComponent {
           let tempEva = passenger.evaluated;
           passenger.evaluated = stars;
           console.log(passenger)
+          console.log(tour)
           await this.tourService.updateTour(tour)
           let user = await this.userService.getUser(tour.creatorID);
           if (user) {
@@ -113,7 +118,7 @@ export class TourTableComponent {
         }
       }
     })
-
   }
+
 
 }

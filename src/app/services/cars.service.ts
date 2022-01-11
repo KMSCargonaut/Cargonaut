@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {Car} from "../models/Car";
-import {UserCargo} from "../models/UserCargo";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,7 @@ export class CarsService {
   }
 
   copyAndPrepareCar(car: Car): Car {
+    delete car.dId;
     return {...car};
   }
 

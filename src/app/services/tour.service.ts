@@ -40,6 +40,7 @@ export class TourService {
     for (let i = 0; i < tour.passengers.length; i++) {
       tour.passengers[i] = this.copyAndPreparePassenger(tour.passengers[i]);
     }
+    console.log('Service: ', tour)
     this.tourCollection.doc(tour.dID).update(this.copyAndPrepareTour(tour))
       .catch((err) => console.log(err))
   }
@@ -139,19 +140,43 @@ export class TourService {
     return tours.sort((a, b) => this.compare(a.price, b.price));
   }
 
-  sortEva(tours: Tour []): Tour[] {
-    return tours.sort((a, b) => this.compare(a.price, b.price));
+  sortIsOffer(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.isOffer, b.isOffer))
+  }
+
+  sortIsBooked(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.isBooked, b.isBooked))
+  }
+
+  sortStatus(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.status, b.status));
+  }
+
+  sortStartCity(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.startCity.toLowerCase(), b.startCity.toLowerCase()));
+  }
+
+  sortEndCity(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.endCity.toLowerCase(), b.endCity.toLowerCase()));
+  }
+
+  sortDuration(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(a.duration, b.duration));
+  }
+
+  sortDate(tours: Tour[]): Tour[] {
+    return tours.sort((a, b) => this.compare(new Date(a.date).getTime(), new Date(b.date).getTime()));
   }
 
   sortStorage(tours: Tour[]): Tour[] {
-    return tours.sort((a, b) => this.compare(a.price, b.price));
+    return tours.sort((a, b) => this.compare(a.storage, b.storage));
   }
 
   sortSeats(tours: Tour[]): Tour[] {
-    return tours.sort((a, b) => this.compare(a.price, b.price));
+    return tours.sort((a, b) => this.compare(a.seats, b.seats));
   }
 
-  compare(a: number, b: number): number {
+  compare(a: any, b: any): number {
     return (a == b) ? 0 : (a > b) ? 1 : -1;
   }
 

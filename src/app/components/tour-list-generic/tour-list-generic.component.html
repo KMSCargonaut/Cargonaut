@@ -1,21 +1,45 @@
-<div class="container title-background mw-100">
-  <div class="row ">
-    <div class="col text-center">
-      <div class="h2 logoGreenDark m-3">Generische Tabelle</div>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-4 generic-table" *ngIf="userData.currUser; else notloggedin">
+<div class="container mt-5 generic-table" *ngIf="userData.currUser; else notloggedin">
 
   <div class="row">
+    <div class="col-3 mr-auto mb-2">
+
+      <div class="input-group">
+
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Sortieren</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect02" (change)="fillList(selectedList.value)" [(ngModel)]="sortNum">
+          <option value="0">Art</option>
+          <option value="1">Gebucht</option>
+          <option value="2">Stauts</option>
+          <option value="3">Von</option>
+          <option value="4">Nach</option>
+          <option value="5">Datum</option>
+          <option value="6">Dauer</option>
+          <option value="7">Stauraum</option>
+          <option value="8">Sitze</option>
+          <option value="9">Preis</option>
+        </select>
+        <div class="d-flex align-items-center ml-2 btn-hover justify-content-center" (click)="reverseList()">
+          <svg *ngIf="this.isReversed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+            <path id="ic_arrow_upward_24px" d="M4,12l1.41,1.41L11,7.83V20h2V7.83l5.58,5.59L20,12,12,4Z" transform="translate(-4 -4)"/>
+          </svg>
+
+          <svg *ngIf="!this.isReversed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+            <path id="ic_arrow_downward_24px" d="M20,12l-1.41-1.41L13,16.17V4H11V16.17L5.42,10.58,4,12l8,8Z" transform="translate(-4 -4)" fill="#010101"/>
+          </svg>
+
+        </div>
+      </div>
+
+    </div>
     <div class="col-3 ml-auto mb-2">
       <div class="input-group">
         <select #selectedList class="custom-select" id="inputGroupSelect01" (change)="fillList(selectedList.value)">
-          <option value="0" selected>Eigene Anfragen</option>
-          <option value="1">Eigene Angebote</option>
-          <option value="2">Gebuchte Anfragen</option>
-          <option value="3">Gebuchte Angebote</option>
+          <option value="0" selected>Eigene Fahrten</option>
+          <option value="1">Gebuchte Fahrten</option>
+          <option value="2">Bevorstehende Fahrten</option>
+          <option value="3">Abgelaufene Fahrten</option>
         </select>
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Filter</label>

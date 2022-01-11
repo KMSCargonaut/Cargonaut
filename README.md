@@ -1,27 +1,29 @@
 # Cargonaut
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
+[![Languages](https://img.shields.io/github/languages/top/KMSCargonaut/Cargonaut)]()
+[![Commit Activity](https://img.shields.io/github/commit-activity/w/KMSCargonaut/Cargonaut?color=pink)](https://github.com/KMSCargonaut/Cargonaut/graphs/contributors)
+[![Last Commit](https://img.shields.io/github/last-commit/KMSCargonaut/Cargonaut/master)](https://github.com/KMSCargonaut/Cargonaut/commits/master)
+[![Code Size](https://img.shields.io/github/languages/code-size/KMSCargonaut/Cargonaut)](https://github.com/KMSCargonaut/Cargonaut/)
 
-## Development server
+Cargonaut ist ein Projekt im Rahmen des Moduls *Konzepte moderner Softwareentwicklung* im WiSe21/22 der Technischen Hochschule Mittelhessen.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Dokumentation
 
-## Code scaffolding
+Alle nötigen Informationen zu dem Ablauf des Projektes, den verwendeten Technologien, der Entwicklung und mehr finden Sie in unserem **[Wiki](https://github.com/KMSCargonaut/Cargonaut/wiki)**!
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development-Guide
 
-## Build
+### Anwendung lokal starten
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Um die Applikation lokal zu starten müssen sie sich zuerst dieses Repository clonen:
+  - `git clone`
+- Wechseln sie nun in den geclonten Ordner (`cd Cargonaut`) und installieren sie zunächst alle nötigen Abhängigkeiten
+  - `npm i`
+- Nun können sie mit `ng serve` die Anwendung starten
+  - Erreichbar unter `localhost:4200`
 
-## Running unit tests
+### Deployte Anwendung
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Die Anwendung ist auch auf unserer eigenen GitHub-Pages Seite erreichbar:
+  - [Cargonaut](https://kmscargonaut.github.io/Cargonaut/)
+  
