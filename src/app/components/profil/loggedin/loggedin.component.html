@@ -26,13 +26,16 @@
       </div>
 
       <div class="">
-        <app-vote-stars [currentRate]="this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter"></app-vote-stars>
+        <app-vote-stars
+          [currentRate]="this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter"></app-vote-stars>
       </div>
 
       <div class="mt-1 logoGreenDark">
-        <span *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter}} </span>
+        <span
+          *ngIf="this.userData.currUser.evaluation !== -1">{{this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter}} </span>
         <span *ngIf="this.userData.currUser.evaluation === -1">0 </span>
-        {{((this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter) === 1) ? 'Stern ' : 'Sterne ' }}von {{this.userData.currUser.evaluationCounter}} Nutzer
+        {{((this.userData.currUser.evaluation / this.userData.currUser.evaluationCounter) === 1) ? 'Stern ' : 'Sterne ' }}
+        von {{this.userData.currUser.evaluationCounter}} Nutzer
       </div>
 
     </div>
@@ -69,189 +72,24 @@
   </div>
 
 
-
   <div class="flex column right-box">
 
     <!--        1. Item       -->
     <div class="mt-3">
-      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du fährst</h3>
+      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du fährst <span class="text-warning h4" *ngIf="ownOffers.length === 0">- noch keine Fahrt als Fahrer gebucht oder angeboten</span></h3>
       <div style="height: 40vh; overflow: auto">
-        <app-tour-table *ngIf="ownOffers.length > 0" [usedList]="ownOffers"></app-tour-table>
-        <div class="container">
-          <div class="row">
-            <!--  falls noch keine Fahrt vorhanden  -->
-            <div *ngIf="ownOffers.length === 0" class="card col-7 border-0 mb-3"
-                 style="max-width: 600px; height: 25vh">
-              <div class="card-body rounded shadow mt-4 bg-white border-0">
-                <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten erstellt!</h4>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-tour-table [usedList]="ownOffers"></app-tour-table>
       </div>
     </div>
 
 
     <!--        2. Item       -->
-    <div class="mt-3" style="height: 40vh; overflow: auto;">
-      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
+    <div class="mt-3 " style="height: 40vh; overflow: auto;">
+      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen <span class="text-warning h4" *ngIf="passengerTours.length === 0">- noch keine Fahrt als Mitfahrer gebucht oder angeboten</span></h3>
       <div>
-        <app-tour-table *ngIf="passengerTours.length > 0" [usedList]="passengerTours"></app-tour-table>
-        <div class="container">
-          <div class="row">
-            <!--  falls noch keine Fahrt vorhanden  -->
-            <div *ngIf="passengerTours.length === 0" class="card col-7 border-0 mb-3"
-                 style="max-width: 600px; height: 25vh">
-              <div class="card-body rounded shadow mt-4 bg-white border-0">
-                <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-tour-table [usedList]="passengerTours"></app-tour-table>
       </div>
     </div>
-
-
-    <!--  Tests  -->
-    <!--&lt;!&ndash;        3. Item       &ndash;&gt;
-    <div class="" style="height: 40vh">
-      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
-      <div>
-&lt;!&ndash;        <app-tour-list [isHorizontal]="isHorizontal" [usedList]="ownOffers"></app-tour-list>&ndash;&gt;
-        <div class="scrollmenu" (wheel)="onWheel($event)">
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div class="">
-            <app-tour-card></app-tour-card>
-          </div>
-
-          <div style="width: 2000px">
-            <app-tour-card></app-tour-card>
-          </div>
-        </div>
-
-
-        <div class="container">
-          <div class="row">
-            &lt;!&ndash;  falls noch keine Fahrt vorhanden  &ndash;&gt;
-            <div *ngIf="passengerTours.length === 0" class="card col-7 border-0 mb-3"
-                 style="max-width: 600px; height: 25vh">
-              <div class="card-body rounded shadow mt-4 bg-white border-0">
-                <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    &lt;!&ndash;        4. Item       &ndash;&gt;
-    <div class="" style="height: 40vh">
-      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
-      <div>
-        &lt;!&ndash;        <app-tour-list [isHorizontal]="isHorizontal" [usedList]="ownOffers"></app-tour-list>&ndash;&gt;
-        <div class="container test">
-          <div class="row">
-            <div class="col-4">
-              <app-tour-card></app-tour-card>
-            </div>
-
-            <div class="col-4">
-              <app-tour-card></app-tour-card>
-            </div>
-
-            <div class="col-4">
-              <app-tour-card></app-tour-card>
-            </div>
-
-            <div class="col-4">
-              <app-tour-card></app-tour-card>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="container">
-          <div class="row">
-            &lt;!&ndash;  falls noch keine Fahrt vorhanden  &ndash;&gt;
-            <div *ngIf="passengerTours.length === 0" class="card col-7 border-0 mb-3"
-                 style="max-width: 600px; height: 25vh">
-              <div class="card-body rounded shadow mt-4 bg-white border-0">
-                <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    &lt;!&ndash;        5. Item       &ndash;&gt;
-    <div class="" style="height: 40vh">
-      <h3 class="h3 font-weight-bold logoGreenDark ml-3">Du wirst mitgenommen</h3>
-      <div>
-        &lt;!&ndash;        <app-tour-list [isHorizontal]="isHorizontal" [usedList]="ownOffers"></app-tour-list>&ndash;&gt;
-        <div class="container test">
-          <div class="row width">
-            <div class=" width inline">
-              <app-tour-card></app-tour-card>
-            </div>
-
-            <div class="width inline">
-              <app-tour-card></app-tour-card>
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="container">
-          <div class="row">
-            &lt;!&ndash;  falls noch keine Fahrt vorhanden  &ndash;&gt;
-            <div *ngIf="passengerTours.length === 0" class="card col-7 border-0 mb-3"
-                 style="max-width: 600px; height: 25vh">
-              <div class="card-body rounded shadow mt-4 bg-white border-0">
-                <h4 class="h4 font-weight-bold logoGreenDark">Du hast noch keine Fahrten gebucht!</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
--->
 
   </div>
 </div>
