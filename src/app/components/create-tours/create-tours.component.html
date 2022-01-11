@@ -80,6 +80,25 @@
 
 
     <div class="row">
+
+      <div class="col-4">
+        <div class="form-group">
+          <label for="storage" class="logoGreenDark">Stauraum</label>
+          <select name="" id="storage" class="form-control" [(ngModel)]="storage">
+            <option value=""></option>
+            <option value="0">0m&#178;</option>
+            <option value="1">1m&#178;</option>
+            <option value="2">2m&#178;</option>
+            <option value="3">3m&#178;</option>
+            <option value="4">4m&#178;</option>
+            <option value="5">5m&#178;</option>
+            <option value="6">6m&#178;</option>
+            <option value="7">7m&#178;</option>
+            <option value="8">8m&#178;</option>
+          </select>
+        </div>
+      </div>
+
       <div class="col-4">
         <div class="form-group">
           <label for="seats" class="logoGreenDark">Sitzplätze</label>
@@ -97,26 +116,10 @@
           </select>
         </div>
       </div>
-      <div class="col-4">
-        <div class="form-group">
-          <label for="storage" class="logoGreenDark">Stauraum</label>
-          <select name="" id="storage" class="form-control" [(ngModel)]="storage">
-            <option value=""></option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-        </div>
 
-      </div>
+
       <div class="col-4">
-        <div><label for="customRange3" class="logoGreenDark">Preis: {{price}}</label></div>
+        <div><label for="customRange3" class="logoGreenDark">Preis: {{(this.price.length === 0) ? '0': price}}€</label></div>
         <div class="">
           <input type="range" class="form-range mt-2" min="0" max="500" id="customRange3" [(ngModel)]="price"
                  style="min-width: 100%; max-width: 100%">
