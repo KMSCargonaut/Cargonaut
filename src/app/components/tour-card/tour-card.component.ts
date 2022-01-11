@@ -11,9 +11,9 @@ import {UserCargo} from "../../models/UserCargo";
   templateUrl: './tour-card.component.html',
   styleUrls: ['./tour-card.component.css']
 })
-export class TourCardComponent implements OnInit, OnChanges{
+export class TourCardComponent implements OnInit, OnChanges {
 
-  @Input() tour: Tour = new Tour(new UserCargo('','','', '',new Date(), ''),false, '','','',0,'',0,0,0,'',);
+  @Input() tour: Tour = new Tour(new UserCargo('', '', '', '', new Date(), ''), false, '', '', '', 0, '', 0, 0, 0, '',);
   mergeDateAndTime = ''
   userName = '';
   freeSeats = 0;
@@ -33,35 +33,24 @@ export class TourCardComponent implements OnInit, OnChanges{
     }
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.mergeDateAndTime = this.tour.date + 'T' + this.tour.startTime;
     this.changeUserName();
   }
 
 
-
-
-  async navigateToDetailsOrEdit() {
+  async navigateToDetails() {
     const user = await this.userService.getUser(this.tour.creator.uid);
-
-    if (this.userService.currUser) {
-      if (this.userService.currUser.uid === this.tour.creator.uid){
-        this.router.navigate([`/editTour/${this.tour.dID}/${user?.uid}`])
-      } else {
-        this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}`])
-      }
-    } else {
-      this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}`])
-    }
+    this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}/`])
 
   }
 
-  changeUserName(){
+  changeUserName() {
     this.userService.getUser(this.tour.creator.uid).then(
       (user) => {
         if (user) {
           this.userName = user.username
-        }else{
+        } else {
           this.userName = "Kein User"
         }
       }
