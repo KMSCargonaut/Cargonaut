@@ -10,7 +10,7 @@ import {AddMoneyComponent} from "../../add-money/add-money.component";
 import {CarsService} from "../../../services/cars.service";
 import {EditAccountComponent} from "../../edit-account/edit-account.component";
 import {CalculateService} from "../../../services/calculate.service";
-import {ConfirmDeletionComponent} from "../../tour-edit/confirm-deletion/confirm-deletion.component";
+import {ConfirmDeleteAccountComponent} from "./confirm-delete-account/confirm-delete-account.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -48,7 +48,7 @@ export class LoggedinComponent implements OnInit {
   }
 
   async openDeleteModal() {
-    const modalRef = this.modal.open(ConfirmDeletionComponent, {
+    const modalRef = this.modal.open(ConfirmDeleteAccountComponent, {
       animation: true,
       centered: true,
     })
