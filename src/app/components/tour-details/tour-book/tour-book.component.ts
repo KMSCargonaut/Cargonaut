@@ -21,7 +21,8 @@ export class TourBookComponent implements OnInit {
   seats: number[] = [];
   storage: number[] = [];
   cars: Car[] = [];
-  tempCar = ''
+  tempCar = '';
+  price = 0;
 
   constructor(public activeModal: NgbActiveModal, public alertData: AlertService, public userData: UserService,
               public tourData: TourService, public carData: CarsService, public shareData: ShareDataService) {
@@ -33,7 +34,7 @@ export class TourBookComponent implements OnInit {
     this.fillSeats();
     this.fillStorage();
     if (this.userData.currUser) {
-    let cars = [...this.userData.currUser.car]
+      let cars = [...this.userData.currUser.car]
       for (const car of cars) {
         this.carData.getCarById(car).then((car) => {
           if (car) {
@@ -58,6 +59,14 @@ export class TourBookComponent implements OnInit {
     }
   }
 
+  calcPrice(seats: string, storages: string) {
+    const seat = Number.parseInt(seats);
+    const storage = Number.parseInt(storages);
+    if (this.tour) {
+      this.price = (seat + storage) * this.tour?.price;
+    }
+  }
+
   fillStorage() {
     if (this.tour != null) {
       let maxStorage = this.tour.storage;
@@ -73,7 +82,7 @@ export class TourBookComponent implements OnInit {
   }
 
 
- async bookIfNoOffer(carId: string) {
+  async bookIfNoOffer(carId: string) {
     if (carId.trim().length <= 0) {
       this.alertData.showAlert({type: 'danger', message: 'Sie müssen ein Auto auswählen'})
     }
@@ -96,17 +105,19 @@ export class TourBookComponent implements OnInit {
           this.alertData.showAlert({type: 'danger', message: 'Diese Fahrt ist bereits ausgebucht!'})
         }
       } else {
-        this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
+        this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
       }
     }
   }
 
- async bookIfOffer(seats: string, storage: string) {
+  async bookIfOffer(seats: string, storage: string) {
     console.log('seats: ', seats, 'storage: ', storage);
     if (Number.parseInt(seats) === 0 && Number.parseInt(storage) === 0) {
-      this.alertData.showAlert({type: 'danger', message: 'Sie können keine Fahrt mit 0 Sitzplätzen und Stauraum buchen'})
-    }
-    else {
+      this.alertData.showAlert({
+        type: 'danger',
+        message: 'Sie können keine Fahrt mit 0 Sitzplätzen und Stauraum buchen'
+      })
+    } else {
       if (this.tour && this.userData.currUser) {
         console.log('tour: ', this.tour)
         const tempId = (this.tour.dID) ? this.tour.dID : '';
@@ -133,7 +144,7 @@ export class TourBookComponent implements OnInit {
           this.alertData.showAlert({type: 'danger', message: 'Diese Fahrt ist ausgebucht!'})
         }
       } else {
-        this.alertData.showAlert({type:'danger', message: 'Etwas ist schief gelaufen'})
+        this.alertData.showAlert({type: 'danger', message: 'Etwas ist schief gelaufen'})
       }
     }
   }
