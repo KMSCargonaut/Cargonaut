@@ -9,3 +9,12 @@
   font-weight: 500;
   color: #56575b
 }
+
+.delete {
+  position: relative;
+  bottom: 5px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
