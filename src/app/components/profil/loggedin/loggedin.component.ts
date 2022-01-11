@@ -10,6 +10,7 @@ import {AddMoneyComponent} from "../../add-money/add-money.component";
 import {CarsService} from "../../../services/cars.service";
 import {EditAccountComponent} from "../../edit-account/edit-account.component";
 import {CalculateService} from "../../../services/calculate.service";
+import {ConfirmDeleteAccountComponent} from "./confirm-delete-account/confirm-delete-account.component";
 
 @Component({
   selector: 'app-loggedin',
@@ -23,7 +24,7 @@ export class LoggedinComponent implements OnInit {
 
   constructor(
     public userData: UserService, private router: Router, public tourData: TourService, private modalService: NgbModal,
-    public alertData: AlertService, public carData: CarsService, private calcService: CalculateService) {
+    public alertData: AlertService, public carData: CarsService, private calcService: CalculateService, public modal: NgbModal) {
   }
 
   ngOnInit() {
@@ -46,6 +47,18 @@ export class LoggedinComponent implements OnInit {
     await this.userData.logout();
   }
 
+  async openDeleteModal() {
+    const modalRef = this.modal.open(ConfirmDeleteAccountComponent, {
+      animation: true,
+      centered: true,
+    })
+
+    modalRef.dismissed.toPromise().then(async (result) => {
+      if (result) {
+        await this.deleteAccount();
+      }
+    })
+  }
 
   async deleteAccount(): Promise<void> {
     let userTours: Tour[];
