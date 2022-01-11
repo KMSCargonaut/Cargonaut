@@ -32,8 +32,14 @@ export class LoggedinComponent implements OnInit {
 
   async setTours() {
     this.ownOffers = await this.tourData.getAllTours().then();
-    this.passengerTours = this.ownOffers.filter(tour => this.isPassenger(tour, this.userData.currUser?.uid) && !tour.isOffer)
-    this.ownOffers = this.ownOffers.filter(tour => tour.driver === this.userData.currUser?.uid && tour.isOffer)
+    this.passengerTours = this.ownOffers
+      .filter(tour => this.isPassenger(tour, this.userData.currUser?.uid))
+      .filter(tour => !this.wasTourInPast(tour.date, tour.startTime))
+      .filter(tour => tour.isBooked);
+    this.ownOffers = this.ownOffers
+      .filter(tour => tour.driver === this.userData.currUser?.uid)
+      .filter(tour => !this.wasTourInPast(tour.date, tour.startTime))
+      .filter(tour => tour.isBooked);
   }
 
   async logout(): Promise<void> {
@@ -47,7 +53,7 @@ export class LoggedinComponent implements OnInit {
     if (user) {
       let futureTours = await this.tourData.getAllBookedTours();
       futureTours = futureTours
-        .filter(tour => this.calcService.wasInPast(new Date(tour.date)))
+        .filter(tour => this.wasTourInPast(tour.date, tour.startTime))
         .filter(tour => tour.driver === user.uid || this.isPassenger(tour, user.uid));
       if (futureTours.length <= 0) {
         try {
@@ -79,6 +85,12 @@ export class LoggedinComponent implements OnInit {
 
 
     }
+  }
+
+  wasTourInPast(date: string, time: string): boolean {
+    const newDate = new Date().getTime();
+    const oldDate = new Date(this.calcService.arrivalTime(time, '0', date));
+    return (newDate - oldDate.getTime()) > 0;
   }
 
 
