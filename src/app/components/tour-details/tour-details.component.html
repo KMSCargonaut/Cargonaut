@@ -200,7 +200,7 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" *ngIf="this.userService.currUser">
     <div class="col-5 mt-4 mb-2">
       <button class="btn btn-success btn-block"
               (click)="openTourBook()"
@@ -210,15 +210,21 @@
     </div>
   </div>
 
-  <div *ngIf="(this.alreadyPassenger() || this.alreadyDriver() || this.afterModal) && !this.isCreator()" class="row justify-content-center">
+  <div class="row justify-content-center" *ngIf="(this.alreadyPassenger() || this.alreadyDriver() || this.afterModal) && !this.isCreator() && this.userService.currUser">
     <div class="col-5 m-2">
       <button class="btn btn-danger btn-block" (click)="cancelTour()">Stornieren</button>
     </div>
   </div>
 
-  <div *ngIf="this.isCreator()" class="row justify-content-center">
+  <div *ngIf="this.isCreator() && this.userService.currUser" class="row justify-content-center">
     <div class="col-5 m-2">
       <button class="btn btn-outline-dark btn-block" (click)="navigateToEdit()">Bearbeiten</button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="!this.userService.currUser">
+    <div class="col-5 m-2">
+      <button class="btn btn-outline-success btn-block" (click)="navigateToProfile()">Anmelden</button>
     </div>
   </div>
 </div>

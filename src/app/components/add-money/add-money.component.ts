@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {AlertService} from "../../services/alert.service";
 
