@@ -15,11 +15,12 @@
       <th class="text-center">Stauraum</th>
       <th class="text-center">Sitze</th>
       <th class="text-center">Preis</th>
+      <th class="text-center">Ersteller</th>
       <th class="text-center"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let tour of usedList" class="hovertable" (click)="navigateToDetails(tour); $event.stopPropagation()">
+    <tr *ngFor="let tour of usedList; let i = index" class="hovertable" (click)="navigateToDetails(tour); $event.stopPropagation()">
       <td>{{(tour.isOffer) ? 'Angebot' : 'Anfrage'}}</td>
       <td *ngIf="!tour.isBooked">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
@@ -61,6 +62,7 @@
       <td>{{tour.storage}}</td>
       <td>{{tour.seats}}</td>
       <td>{{tour.price}}</td>
+      <td>{{tour.creator.username}}</td>
       <td class="overflow-hidden">
 
         <div ngbDropdown container="body" placement="bottom-right" (click)="$event.stopPropagation()">

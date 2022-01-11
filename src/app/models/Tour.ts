@@ -1,9 +1,10 @@
 import {Status} from "./Status";
 import {Passenger} from "./Passenger";
+import {UserCargo} from "./UserCargo";
 
 export class Tour {
   dID?: string;
-  creatorID: string
+  creator: UserCargo;
   isOffer: boolean;
   startCity: string;
   endCity: string;
@@ -23,10 +24,10 @@ export class Tour {
   car: string;
   evaluation: number;
 
-  constructor(creatorID:string, offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
+  constructor(creator: UserCargo, offer: boolean, startCity: string, endCity: string, startTime: string, duration: number, date: string,
               price: number, storage: number, seats: number, description?: string,
               driver?: string, passengers?: Passenger[], car?: string) {
-    this.creatorID = creatorID;
+    this.creator = creator;
     this.isOffer = offer;
     this.startCity = startCity;
     this.endCity = endCity;

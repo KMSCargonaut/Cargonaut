@@ -16,6 +16,8 @@ export class TourService {
   }
 
   copyAndPrepareTour(tour: Tour): Tour {
+    delete tour.dID;
+    tour.creator = {...tour.creator};
     return {...tour};
   }
 
@@ -69,7 +71,7 @@ export class TourService {
   async getAllToursFromUser(uid: string): Promise<Tour[]> {
     return this.afs.collection<Tour>('Tours', ref =>
       ref
-        .where('creatorID', '==', uid)
+        .where('creator.uid', '==', uid)
     ).get().toPromise().then(snapshot =>
       snapshot.docs.map(doc => {
         const tour: Tour = doc.data();
@@ -174,6 +176,10 @@ export class TourService {
 
   sortSeats(tours: Tour[]): Tour[] {
     return tours.sort((a, b) => this.compare(a.seats, b.seats));
+  }
+
+  sortCreator(tours: Tour[]): Tour[] {
+    return tours.sort((a,b) => this.compare(a.creator.username, b.creator.username))
   }
 
   compare(a: any, b: any): number {

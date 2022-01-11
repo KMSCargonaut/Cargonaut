@@ -73,6 +73,7 @@ export class UserService {
   }
 
   async updateUser(user: UserCargo) {
+    console.log(user)
     await this.userCollection.doc(user.dId).update(this.copyAndPrepareUser(user));
   }
 

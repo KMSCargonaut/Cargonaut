@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {TourService} from "../../services/tour.service";
 import {CalculateService} from "../../services/calculate.service";
+import {UserCargo} from "../../models/UserCargo";
 
 @Component({
   selector: 'app-tour-card',
@@ -12,7 +13,7 @@ import {CalculateService} from "../../services/calculate.service";
 })
 export class TourCardComponent implements OnInit, OnChanges{
 
-  @Input() tour: Tour = new Tour('',false, '','','',0,'',0,0,0,'',);
+  @Input() tour: Tour = new Tour(new UserCargo('','','', '',new Date(), ''),false, '','','',0,'',0,0,0,'',);
   mergeDateAndTime = ''
   userName = '';
   freeSeats = 0;
@@ -41,10 +42,10 @@ export class TourCardComponent implements OnInit, OnChanges{
 
 
   async navigateToDetailsOrEdit() {
-    const user = await this.userService.getUser(this.tour.creatorID);
+    const user = await this.userService.getUser(this.tour.creator.uid);
 
     if (this.userService.currUser) {
-      if (this.userService.currUser.uid === this.tour.creatorID){
+      if (this.userService.currUser.uid === this.tour.creator.uid){
         this.router.navigate([`/editTour/${this.tour.dID}/${user?.uid}`])
       } else {
         this.router.navigate([`/tour-details/${this.tour.dID}/${user?.uid}`])
@@ -56,7 +57,7 @@ export class TourCardComponent implements OnInit, OnChanges{
   }
 
   changeUserName(){
-    this.userService.getUser(this.tour.creatorID).then(
+    this.userService.getUser(this.tour.creator.uid).then(
       (user) => {
         if (user) {
           this.userName = user.username
