@@ -82,7 +82,6 @@ export class UserService {
   }
 
   copyAndPrepareUser(user: UserCargo): UserCargo {
-    delete user.dId;
     return {...user};
   }
 

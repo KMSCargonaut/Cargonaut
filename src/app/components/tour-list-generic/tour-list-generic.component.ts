@@ -61,12 +61,12 @@ export class TourListGenericComponent implements OnInit {
           break;
         }
         case 4: {
-          this.list = await this.tourData.getAllBookedTours();
+          this.list = await this.tourData.getAllTours();
           this.list = this.list.filter(tour => tour.driver === this.user?.uid);
           break;
         }
         case 5: {
-          this.list = await this.tourData.getAllBookedTours();
+          this.list = await this.tourData.getAllTours();
           this.list = this.list.filter(tour => this.isPassenger(tour.passengers));
           break;
         }

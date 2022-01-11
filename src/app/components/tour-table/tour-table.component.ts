@@ -35,6 +35,7 @@ export class TourTableComponent {
   async navigateToEdit(tour: Tour) {
     const user = await this.userService.getUser(tour.creator.uid);
     const root = this.route.snapshot.url[0].path;
+    console.log(root);
     this.router.navigate([`/editTour/${tour.dID}/${user?.uid}/${root}`])
   }
 

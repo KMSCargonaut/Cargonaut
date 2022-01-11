@@ -16,7 +16,6 @@ export class CarsService {
   }
 
   copyAndPrepareCar(car: Car): Car {
-    delete car.dId;
     return {...car};
   }
 
