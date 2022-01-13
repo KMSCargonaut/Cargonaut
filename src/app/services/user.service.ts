@@ -65,6 +65,12 @@ export class UserService {
     );
   }
 
+  async checkUsername(uName:string): Promise< boolean | undefined>  {
+    const uList = await this.getAllUser().then()
+    const count = uList.filter(user => user.username === uName).length
+    return count == 0
+  }
+
   async addUser(user: UserCargo) {
     const tempUser = this.copyAndPrepareUser(user);
     await this.userCollection.add(tempUser).then().catch((err) => {
@@ -147,7 +153,6 @@ export class UserService {
       await this.updateUser(this.currUser)
     }
   }
-
 
   async subMoney(amount: number){
     if(this.currUser) {
