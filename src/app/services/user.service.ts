@@ -148,7 +148,6 @@ export class UserService {
     }
   }
 
-
   async subMoney(amount: number){
     if(this.currUser) {
       this.currUser.money -= amount;
