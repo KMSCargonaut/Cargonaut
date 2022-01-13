@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {getAuth} from "firebase/auth";
 import {UserCargo} from "../../models/UserCargo";
+import { promises } from 'dns';
 
 @Component({
   selector: 'app-registration',
@@ -60,7 +61,7 @@ export class RegistrationComponent {
         );
       }
 
-    } catch (err) {
+    } catch (err: any) {
       if (err.code === 'auth/invalid-email') {
         this.emailMessage = 'E-Mail ist nicht richtig formatiert';
         this.wrongEmailClass = 'border-danger';
@@ -111,6 +112,9 @@ export class RegistrationComponent {
       if (this.username.trim().length === 0) {
         this.usernameMessage = 'Geben Sie einen Nutzername an';
         this.wrongUsername = 'border-danger';
+      }else if(!(await this.isNewUserName(this.username.trim()))){
+        this.usernameMessage = 'Diese Nutzername existiert schon';
+        this.wrongUsername = 'border-danger';
       }
       if (this.gender.trim().length === 0) {
         this.genderMessage = 'Geben Sie Ihr Geschlecht an';
@@ -150,6 +154,11 @@ export class RegistrationComponent {
       this.usernameMessage = '';
       this.wrongUsername = '';
     }
+  }
+
+  public async isNewUserName(uName: string): Promise<boolean | undefined>{
+    const bool = await this.userData.checkUsername(uName);
+    return bool
   }
 
   public validBirthday(input: string): void {
