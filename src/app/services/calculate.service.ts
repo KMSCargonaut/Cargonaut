@@ -22,10 +22,12 @@ export class CalculateService {
           endDay = "0" + endDay;
         }
         endHours = endHours % 24;
+
       }
 
       if (endHours < 10) {
-        endTime = date.substr(0, 8) + endDay + "T0" + endHours.toString();
+       // endTime = date.substr(0, 8) + endDay + "T0" + endHours.toString();
+        endTime = date.substr(0, 8) ;
       } else {
         endTime = date.substr(0, 8) + endDay + "T" + endHours.toString();
       }
